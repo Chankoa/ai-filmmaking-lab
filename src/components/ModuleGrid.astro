@@ -1,0 +1,38 @@
+---
+import { modules } from "../data/curriculum";
+
+interface Props {
+  compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
+---
+
+<section class={compact ? "module-grid compact" : "module-grid"} aria-label="Parcours pédagogique">
+  {
+    modules.map((module) => (
+      <article class="module-card" id={module.id}>
+        <div class="module-card__meta">
+          <span>{module.number}</span>
+          <span>{module.level}</span>
+        </div>
+        <h3>{module.title}</h3>
+        <p>{module.intent}</p>
+        {!compact && (
+          <>
+            <div class="module-card__pages">
+              {module.pages.slice(0, 4).map((page) => (
+                <span>{page}</span>
+              ))}
+            </div>
+            <ul>
+              {module.outcomes.map((outcome) => (
+                <li>{outcome}</li>
+              ))}
+            </ul>
+          </>
+        )}
+      </article>
+    ))
+  }
+</section>

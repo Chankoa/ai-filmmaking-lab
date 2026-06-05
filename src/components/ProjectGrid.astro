@@ -1,0 +1,27 @@
+---
+import { projects } from "../data/curriculum";
+---
+
+<section class="project-grid" aria-label="Études de cas">
+  {
+    projects.map((project) => (
+      <article class="project-card">
+        <img src={project.visual} alt={`Visuel schématique du projet ${project.title}`} loading="lazy" />
+        <div class="project-card__body">
+          <div class="project-card__meta">
+            <span>{project.type}</span>
+            <span>{project.level}</span>
+          </div>
+          <h3>{project.title}</h3>
+          <p>{project.summary}</p>
+          <div class="project-card__sections">
+            {project.sections.map((section) => (
+              <span>{section}</span>
+            ))}
+          </div>
+          <a href={project.source} target="_blank" rel="noreferrer">{project.status}</a>
+        </div>
+      </article>
+    ))
+  }
+</section>

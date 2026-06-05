@@ -1,0 +1,138 @@
+<!DOCTYPE html><html lang="fr" data-theme="light"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Bibliotheque de prompts filtrable et reutilisable pour images, personnages et videos IA."><meta id="meta-theme-color" name="theme-color" content="#f6efe6"><script>
+      (() => {
+        const storageKey = "afl-theme";
+        try {
+          const saved = window.localStorage.getItem(storageKey);
+          const theme =
+            saved === "dark" || saved === "light"
+              ? saved
+              : window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch {
+          document.documentElement.dataset.theme = "light";
+          document.documentElement.style.colorScheme = "light";
+        }
+      })();
+    </script><title>Prompts | AI Filmmaking Lab</title><link rel="stylesheet" href="/_astro/_slug_.MWGpjBIz.css"></head> <body> <a class="skip-link" href="#main-content">Aller au contenu</a> <div class="site-shell"> <header class="site-header"> <div class="site-header__inner"> <a class="brand" href="/" aria-label="AI Filmmaking Lab"> <span class="brand-mark" aria-hidden="true">AF</span> <span class="brand-copy"> <strong>AI Filmmaking Lab</strong> <small>Creative Production Wiki</small> </span> </a> <nav class="main-nav" aria-label="Navigation principale"> <a class href="/"> Accueil </a><a class href="/formation/"> Formation </a><a class="is-active" href="/prompts/"> Prompts </a><a class href="/references/"> References </a><a class href="/projects/"> Projets </a><a class href="/glossary/"> Glossaire </a><a class href="/resources/"> Ressources </a> </nav> <div class="site-header__actions"> <button class="theme-switch theme-switch--desktop" type="button" aria-label="Basculer le mode clair ou sombre" aria-pressed="false" data-theme-toggle-variant="desktop" data-theme-toggle> <span class="theme-switch__icon theme-switch__icon--sun" aria-hidden="true"> <svg viewBox="0 0 24 24" role="presentation"> <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.95 6.95-1.41-1.41M7.46 7.46 6.05 6.05m11.31 0-1.41 1.41M7.46 16.54l-1.41 1.41" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path> <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" fill="none"></circle> </svg> </span> <span class="theme-switch__icon theme-switch__icon--moon is-hidden" aria-hidden="true"> <svg viewBox="0 0 24 24" role="presentation"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path> </svg> </span> <span class="theme-switch__label">Mode clair</span> </button> <a class="site-header__cta" href="/formation/">Commencer</a> <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle> <span></span> <span></span> <span></span> </button> </div> </div> </header> <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu> <div class="mobile-menu__panel"> <div class="mobile-menu__top"> <span class="mobile-menu__eyebrow">Menu</span> <button class="mobile-menu__close" type="button" aria-label="Fermer le menu" data-menu-close> <svg viewBox="0 0 24 24" role="presentation" aria-hidden="true"> <path d="M6 6 18 18M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path> </svg> </button> </div> <div class="mobile-menu__intro"> <strong>AI Filmmaking Lab</strong> <p>
+Decouvrir les realisations, consulter les services, comprendre l'approche ou prendre
+              contact.
+</p> </div> <nav class="mobile-menu__nav" aria-label="Navigation mobile"> <a class href="/" data-menu-link> Accueil </a><a class href="/formation/" data-menu-link> Formation </a><a class="is-active" href="/prompts/" data-menu-link> Prompts </a><a class href="/references/" data-menu-link> References </a><a class href="/projects/" data-menu-link> Projets </a><a class href="/glossary/" data-menu-link> Glossaire </a><a class href="/resources/" data-menu-link> Ressources </a> </nav> <button class="theme-switch theme-switch--mobile" type="button" aria-label="Basculer le mode clair ou sombre" aria-pressed="false" data-theme-toggle-variant="mobile" data-theme-toggle> <span class="theme-switch__mobile-start"> <span class="theme-switch__mobile-target" data-theme-target>L</span> <span class="theme-switch__mobile-icon"> <span class="theme-switch__icon theme-switch__icon--sun" aria-hidden="true"> <svg viewBox="0 0 24 24" role="presentation"> <path d="M12 3v2m0 14v2m9-9h-2M5 12H3m14.95 6.95-1.41-1.41M7.46 7.46 6.05 6.05m11.31 0-1.41 1.41M7.46 16.54l-1.41 1.41" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path> <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8" fill="none"></circle> </svg> </span> <span class="theme-switch__icon theme-switch__icon--moon is-hidden" aria-hidden="true"> <svg viewBox="0 0 24 24" role="presentation"> <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"></path> </svg> </span> </span> </span> <span class="theme-switch__label">Clair</span> </button> </div> </div> <main id="main-content">  <section class="course-hero"> <div class="course-hero__content"> <span class="eyebrow">Prompt Library</span> <h1>Prompts comme fiches de production</h1> <p>Chaque prompt documente une intention, un outil, des variables, des contraintes negatives et un usage pedagogique.</p>  </div> <div class="course-hero__visual"> <img src="/assets/visuals/product-layers.svg" alt="Composition visuelle en couches pour construire un prompt"> </div> <dl class="hero-stats"> <div> <dt>Prompts</dt> <dd>3</dd> </div><div> <dt>Categories</dt> <dd>3</dd> </div><div> <dt>Usage</dt> <dd>Copiable</dd> </div> </dl> </section> <section class="tool-panel" aria-labelledby="prompt-list-title"> <div class="section-heading"> <span class="eyebrow">Bibliotheque</span> <h2 id="prompt-list-title">Prompts de demarrage</h2> </div> <div class="segmented-control" aria-label="Filtrer les prompts"> <button type="button" class="is-active" data-prompt-filter="all">Tous</button> <button type="button" data-prompt-filter="transition">transition</button><button type="button" data-prompt-filter="video">video</button><button type="button" data-prompt-filter="character">character</button> </div> <div class="prompt-grid"> <article class="prompt-card" data-prompt-card data-category="transition" data-tool="Hailuo"> <div class="card-meta"> <span>transition</span> <span>avance</span> </div> <div class="prompt-card__title"> <h3>Transition par reflet</h3> <span class="tool-badge" data-tool="hailuo">Hailuo</span> </div> <p>Transition cinematic match cut basee sur un reflet qui envahit le cadre.</p> <ul class="prompt-breakdown" aria-label="Variables du prompt"><li>reflection source</li><li>next scene</li><li>camera direction</li><li>color continuity</li></ul> <figure class="code-block"> <figcaption> <span>Prompt</span> <button type="button" class="copy-button" data-copy-text="A neon reflection in a puddle expands until it fills the frame, becoming the next scene. The camera glides downward into the reflective surface, cyan and amber light streaks stretch naturally, then resolve into a new cyberpunk street angle. Smooth match cut, realistic rain physics, cinematic continuity." aria-label="Copier Prompt" title="Copier Prompt"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2"></path> <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2"></path> </svg> <span class="sr-only">Copier Prompt</span> </button> <script type="module">const a=window;a.__aiFilmCopyButtonsReady||(a.__aiFilmCopyButtonsReady=!0,document.addEventListener("click",async e=>{const t=e.target instanceof Element?e.target.closest("[data-copy-text]"):null;if(!(t instanceof HTMLButtonElement))return;const o=t.dataset.copyText||"";try{await navigator.clipboard.writeText(o),t.dataset.copied="true",window.setTimeout(()=>{delete t.dataset.copied},1300)}catch{t.dataset.copyError="true",window.setTimeout(()=>{delete t.dataset.copyError},1300)}}));</script> </figcaption> <pre><code class="language-prompt">A neon reflection in a puddle expands until it fills the frame, becoming the next scene. The camera glides downward into the reflective surface, cyan and amber light streaks stretch naturally, then resolve into a new cyberpunk street angle. Smooth match cut, realistic rain physics, cinematic continuity.</code></pre> </figure> <details> <summary>Contraintes negatives</summary> <figure class="code-block"> <figcaption> <span>Negative prompt</span> <button type="button" class="copy-button" data-copy-text="no abstract swirl, no hard glitch, no unreadable blur, no sudden subject mutation" aria-label="Copier Negative prompt" title="Copier Negative prompt"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2"></path> <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2"></path> </svg> <span class="sr-only">Copier Negative prompt</span> </button>  </figcaption> <pre><code class="language-prompt">no abstract swirl, no hard glitch, no unreadable blur, no sudden subject mutation</code></pre> </figure> </details> </article><article class="prompt-card" data-prompt-card data-category="video" data-tool="Kling"> <div class="card-meta"> <span>video</span> <span>intermediaire</span> </div> <div class="prompt-card__title"> <h3>Dolly push-in controle</h3> <span class="tool-badge" data-tool="kling">Kling</span> </div> <p>Prompt video pour passer d&#39;un medium shot a un close shot sans deformation du visage.</p> <ul class="prompt-breakdown" aria-label="Variables du prompt"><li>start frame</li><li>end frame</li><li>camera speed</li><li>environment motion</li></ul> <figure class="code-block"> <figcaption> <span>Prompt</span> <button type="button" class="copy-button" data-copy-text="Starting from the reference image, Lyra Voss stands in a rain-soaked neon street at night. The camera performs a slow dolly push-in from a medium shot to a close shot. Lyra remains calm and still, only her wet hair and jacket move subtly with the rain and wind. Neon reflections ripple across the pavement, background signs flicker softly. Cinematic cyberpunk mood, restrained movement, realistic physics." aria-label="Copier Prompt" title="Copier Prompt"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2"></path> <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2"></path> </svg> <span class="sr-only">Copier Prompt</span> </button>  </figcaption> <pre><code class="language-prompt">Starting from the reference image, Lyra Voss stands in a rain-soaked neon street at night. The camera performs a slow dolly push-in from a medium shot to a close shot. Lyra remains calm and still, only her wet hair and jacket move subtly with the rain and wind. Neon reflections ripple across the pavement, background signs flicker softly. Cinematic cyberpunk mood, restrained movement, realistic physics.</code></pre> </figure> <details> <summary>Contraintes negatives</summary> <figure class="code-block"> <figcaption> <span>Negative prompt</span> <button type="button" class="copy-button" data-copy-text="no face deformation, no sudden camera shake, no outfit change, no extra characters, no warped hands" aria-label="Copier Negative prompt" title="Copier Negative prompt"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2"></path> <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2"></path> </svg> <span class="sr-only">Copier Negative prompt</span> </button>  </figcaption> <pre><code class="language-prompt">no face deformation, no sudden camera shake, no outfit change, no extra characters, no warped hands</code></pre> </figure> </details> </article><article class="prompt-card" data-prompt-card data-category="character" data-tool="Adobe Firefly"> <div class="card-meta"> <span>character</span> <span>intermediaire</span> </div> <div class="prompt-card__title"> <h3>Prompt maitre Lyra Voss</h3> <span class="tool-badge" data-tool="adobe-firefly">Adobe Firefly</span> </div> <p>Base personnage pour decliner portraits, plans et sequences sans perdre l&#39;identite.</p> <ul class="prompt-breakdown" aria-label="Variables du prompt"><li>shot scale</li><li>lighting palette</li><li>pose</li><li>background depth</li></ul> <figure class="code-block"> <figcaption> <span>Prompt</span> <button type="button" class="copy-button" data-copy-text="Lyra Voss, original cyberpunk female character, slender athletic build, sharp elegant facial features, calm intense green eyes, shoulder-length wet dark honey-brown hair, wearing a matte black tactical bodysuit with subtle panel detailing, standing in a rain-soaked neon alley at night, reflective pavement, cyan and magenta light, cinematic medium shot, shallow depth of field, grounded photorealism, realistic anatomy, restrained melancholy, high detail, 3:4 vertical frame." aria-label="Copier Prompt" title="Copier Prompt"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2"></path> <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2"></path> </svg> <span class="sr-only">Copier Prompt</span> </button>  </figcaption> <pre><code class="language-prompt">Lyra Voss, original cyberpunk female character, slender athletic build, sharp elegant facial features, calm intense green eyes, shoulder-length wet dark honey-brown hair, wearing a matte black tactical bodysuit with subtle panel detailing, standing in a rain-soaked neon alley at night, reflective pavement, cyan and magenta light, cinematic medium shot, shallow depth of field, grounded photorealism, realistic anatomy, restrained melancholy, high detail, 3:4 vertical frame.</code></pre> </figure> <details> <summary>Contraintes negatives</summary> <figure class="code-block"> <figcaption> <span>Negative prompt</span> <button type="button" class="copy-button" data-copy-text="no red hair, no copper hair, no glowing armor, no exaggerated sci-fi armor, no high heels, no plastic skin" aria-label="Copier Negative prompt" title="Copier Negative prompt"> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2"></path> <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2"></path> </svg> <span class="sr-only">Copier Negative prompt</span> </button>  </figcaption> <pre><code class="language-prompt">no red hair, no copper hair, no glowing armor, no exaggerated sci-fi armor, no high heels, no plastic skin</code></pre> </figure> </details> </article> </div> </section> <script type="module">const a=document.querySelectorAll("[data-prompt-filter]"),o=document.querySelectorAll("[data-prompt-card]");a.forEach(e=>{e.addEventListener("click",()=>{const r=e.getAttribute("data-prompt-filter");a.forEach(t=>t.classList.remove("is-active")),e.classList.add("is-active"),o.forEach(t=>{const c=t.getAttribute("data-category");t.toggleAttribute("hidden",r!=="all"&&c!==r)})})});</script>  </main> <footer class="site-footer"> <div class="site-footer__inner"> <p>AI Filmmaking Lab - Creative production wiki pour cadrer, boarder, prompt et documenter les sequences IA.</p> <div class="site-footer__meta" aria-label="Repères de la charte"> <span>Shots</span> <span>Boards</span> <span>Prompts</span> </div> </div> </footer> </div> <script>
+      (() => {
+        const root = document.documentElement;
+        const storageKey = "afl-theme";
+        const toggles = Array.from(document.querySelectorAll("[data-theme-toggle]")).filter(
+          (element) => element instanceof HTMLButtonElement,
+        );
+        const menu = document.querySelector("[data-mobile-menu]");
+        const menuToggle = document.querySelector("[data-menu-toggle]");
+        const menuClose = document.querySelector("[data-menu-close]");
+        const menuLinks = document.querySelectorAll("[data-menu-link]");
+        const meta = document.getElementById("meta-theme-color");
+
+        const syncToggle = (toggle, theme) => {
+          const sun = toggle.querySelector(".theme-switch__icon--sun");
+          const moon = toggle.querySelector(".theme-switch__icon--moon");
+          const label = toggle.querySelector(".theme-switch__label");
+          const target = toggle.querySelector("[data-theme-target]");
+          const variant = toggle.dataset.themeToggleVariant;
+
+          toggle.setAttribute("aria-pressed", String(theme === "dark"));
+          sun?.classList.toggle("is-hidden", theme === "dark");
+          moon?.classList.toggle("is-hidden", theme !== "dark");
+
+          if (label) {
+            label.textContent =
+              variant === "mobile"
+                ? theme === "dark"
+                  ? "Sombre"
+                  : "Clair"
+                : theme === "dark"
+                  ? "Mode sombre"
+                  : "Mode clair";
+          }
+
+          if (target) {
+            target.textContent = theme === "dark" ? "L" : "D";
+          }
+        };
+        const media = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+        const themeColors = {
+          light: "#f6efe6",
+          dark: "#05080a",
+        };
+
+        const applyTheme = (theme, persist = true) => {
+          const nextTheme = theme === "dark" ? "dark" : "light";
+          root.dataset.theme = nextTheme;
+          root.style.colorScheme = nextTheme;
+          toggles.forEach((toggle) => syncToggle(toggle, nextTheme));
+
+          if (meta instanceof HTMLMetaElement) {
+            meta.content = themeColors[nextTheme];
+          }
+
+          if (persist) {
+            window.localStorage.setItem(storageKey, nextTheme);
+          }
+        };
+
+        const saved = window.localStorage.getItem(storageKey);
+        const initialTheme =
+          saved === "dark" || saved === "light"
+            ? saved
+            : media?.matches
+              ? "dark"
+              : "light";
+
+        applyTheme(initialTheme, false);
+
+        toggles.forEach((toggle) => {
+          toggle.addEventListener("click", () => {
+            applyTheme(root.dataset.theme === "dark" ? "light" : "dark");
+          });
+        });
+
+        const setMenuOpen = (open) => {
+          if (!(menu instanceof HTMLElement) || !(menuToggle instanceof HTMLButtonElement)) return;
+
+          menu.hidden = !open;
+          document.body.classList.toggle("menu-open", open);
+          menuToggle.setAttribute("aria-expanded", String(open));
+        };
+
+        if (menuToggle instanceof HTMLButtonElement) {
+          menuToggle.addEventListener("click", () => {
+            setMenuOpen(menu instanceof HTMLElement ? menu.hidden : false);
+          });
+        }
+
+        if (menuClose instanceof HTMLButtonElement) {
+          menuClose.addEventListener("click", () => setMenuOpen(false));
+        }
+
+        menuLinks.forEach((link) => {
+          link.addEventListener("click", () => setMenuOpen(false));
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            setMenuOpen(false);
+          }
+        });
+
+        window.matchMedia?.("(min-width: 881px)").addEventListener?.("change", (event) => {
+          if (event.matches) {
+            setMenuOpen(false);
+          }
+        });
+
+        media?.addEventListener?.("change", (event) => {
+          if (!window.localStorage.getItem(storageKey)) {
+            applyTheme(event.matches ? "dark" : "light", false);
+          }
+        });
+      })();
+    </script> </body> </html>

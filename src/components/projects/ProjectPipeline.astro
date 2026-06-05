@@ -1,0 +1,20 @@
+---
+interface Props {
+  steps: string[];
+}
+
+const { steps } = Astro.props;
+---
+
+{
+  steps.length > 0 && (
+    <ol class="project-pipeline">
+      {steps.map((step, index) => (
+        <li>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          {step}
+        </li>
+      ))}
+    </ol>
+  )
+}

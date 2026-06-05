@@ -1,0 +1,24 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import ReferenceBoard from "../../components/references/ReferenceBoard.astro";
+
+const shots = await getCollection("camera-shots");
+---
+
+<BaseLayout title="Camera Shots" description="Guide visuel des types de plans, angles et usages narratifs pour prompts IA.">
+  <CourseHero
+    eyebrow="Camera Shots"
+    title="Guide visuel des plans"
+    description="Chaque fiche relie une echelle ou un angle a son effet narratif, son mouvement video et un prompt type."
+    image="/assets/visuals/camera-shots.svg"
+    imageAlt="Grille illustree des cadrages camera"
+    stats={[
+      { label: "Plans", value: String(shots.length) },
+      { label: "Usage", value: "Image + Video" },
+      { label: "Format", value: "Filtrable" },
+    ]}
+  />
+  <ReferenceBoard shots={shots} />
+</BaseLayout>

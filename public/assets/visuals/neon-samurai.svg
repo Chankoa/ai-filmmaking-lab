@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 760" role="img" aria-labelledby="title desc">
+  <title id="title">Neon Samurai</title>
+  <desc id="desc">Silhouette de samurai dans une scène néon pluvieuse.</desc>
+  <rect width="620" height="760" fill="#171615"/>
+  <rect x="48" y="48" width="524" height="664" fill="#201d1b" stroke="#f6f4ef" stroke-width="2"/>
+  <g opacity=".8">
+    <rect x="92" y="100" width="62" height="470" fill="#2e8aa0"/>
+    <rect x="444" y="84" width="72" height="510" fill="#6d4b77"/>
+    <rect x="160" y="140" width="36" height="380" fill="#d95d39"/>
+  </g>
+  <path d="M92 604h428" stroke="#f6f4ef" stroke-width="2"/>
+  <path d="M190 614c78-42 184-42 254 0" stroke="#2e8aa0" stroke-width="8" opacity=".8"/>
+  <path d="M318 185c58 0 92 44 92 108v242H226V293c0-64 34-108 92-108z" fill="#0f0f10"/>
+  <path d="M244 273h148l-28-72H272z" fill="#c98b24"/>
+  <path d="M250 535h136l30 98H220z" fill="#0f0f10"/>
+  <path d="M205 248l220 330" stroke="#f6f4ef" stroke-width="8"/>
+  <text x="86" y="672" font-family="Inter, Arial" font-size="24" font-weight="800" fill="#f6f4ef">Neon Samurai</text>
+</svg>

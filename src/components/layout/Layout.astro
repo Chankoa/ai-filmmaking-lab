@@ -1,0 +1,53 @@
+---
+import "../../styles/tailwind.css";
+import "../../styles/main.scss";
+import { siteConfig } from "../../data/site-config";
+import SiteHeader from "./SiteHeader.astro";
+import SiteFooter from "./SiteFooter.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
+const metaDescription = description ?? siteConfig.meta.description;
+const canonicalUrl = new URL(Astro.url.pathname, siteConfig.url).toString();
+---
+
+<html lang={siteConfig.lang} data-theme="blue-ocean">
+  <head>
+    <meta charset="utf-8" />
+    <title>{pageTitle}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonicalUrl} />
+    <script is:inline>
+      (() => {
+        const STORAGE_KEY = "preferred-theme";
+        const paletteAttr = document.documentElement.getAttribute("data-theme");
+        const basePalette = paletteAttr && paletteAttr !== "dark" ? paletteAttr : "default";
+        const saved = localStorage.getItem(STORAGE_KEY);
+        const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const initial = (() => {
+          if (saved === "dark") return "dark";
+          if (saved && saved !== "default") return saved;
+          if (saved === "default" && basePalette !== "default") return basePalette;
+          if (!saved && basePalette !== "default") return basePalette;
+          return prefersDark ? "dark" : "default";
+        })();
+
+        document.documentElement.dataset.theme = initial;
+        document.documentElement.dataset.baseTheme = basePalette;
+      })();
+    </script>
+  </head>
+  <body class="bg-[var(--surface-bg)] text-[var(--text-default)]">
+    <SiteHeader />
+    <main class="min-h-[70vh]">
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>

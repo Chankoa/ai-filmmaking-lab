@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+
+const terms = await getCollection("glossary");
+---
+
+<BaseLayout title="Glossary" description="Glossaire des notions cinema, image, video, prompts et workflows IA.">
+  <CourseHero
+    eyebrow="Glossary"
+    title="Vocabulaire de production"
+    description="Un glossaire evolutif pour relier les termes cinema, photo, prompt engineering et workflows IA."
+    stats={[
+      { label: "Termes", value: String(terms.length) },
+      { label: "Domaines", value: "Cinema / IA" },
+      { label: "Role", value: "Reference" },
+    ]}
+  />
+
+  <section class="definition-list" aria-label="Glossaire">
+    {
+      terms.map((entry) => (
+        <article>
+          <span class="card-kicker">{entry.data.category}</span>
+          <h2>{entry.data.term}</h2>
+          <p>{entry.data.definition}</p>
+          {entry.data.related.length > 0 && (
+            <ul class="tag-list">
+              {entry.data.related.map((term) => <li>{term}</li>)}
+            </ul>
+          )}
+        </article>
+      ))
+    }
+  </section>
+</BaseLayout>

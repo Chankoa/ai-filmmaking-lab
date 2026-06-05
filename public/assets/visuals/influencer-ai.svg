@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 760" role="img" aria-labelledby="title desc">
+  <title id="title">Influencer AI</title>
+  <desc id="desc">Planche de formats sociaux et persona pour influenceur IA.</desc>
+  <rect width="620" height="760" fill="#f1ece2"/>
+  <rect x="42" y="50" width="536" height="660" fill="#fffaf2" stroke="#171615" stroke-width="2"/>
+  <rect x="82" y="110" width="180" height="320" fill="#171615"/>
+  <circle cx="172" cy="218" r="48" fill="#d0a26a"/>
+  <path d="M112 306c36-54 86-64 120 0v124H112z" fill="#0e7c66"/>
+  <rect x="300" y="110" width="238" height="86" fill="#2e8aa0"/>
+  <rect x="300" y="220" width="238" height="86" fill="#c98b24"/>
+  <rect x="300" y="330" width="238" height="86" fill="#d95d39"/>
+  <g font-family="Inter, Arial" font-size="18" font-weight="800" fill="#fffaf2">
+    <text x="324" y="164">Short</text>
+    <text x="324" y="274">Portrait</text>
+    <text x="324" y="384">Behind the scenes</text>
+  </g>
+  <g transform="translate(82 500)" font-family="Inter, Arial" fill="#171615">
+    <text font-size="22" font-weight="800">Persona board</text>
+    <text y="38" font-size="15" fill="#66615a">formats · voix · cohérence visuelle · éthique</text>
+    <path d="M0 76h456" stroke="#d8d0c3" stroke-width="2"/>
+    <text y="116" font-size="15" fill="#66615a">Chaque contenu réutilise les mêmes traits, angles et contraintes.</text>
+  </g>
+</svg>

@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import CodeBlock from "../code/CodeBlock.astro";
+import ToolBadge from "../ui/ToolBadge.astro";
+import PromptBreakdown from "./PromptBreakdown.astro";
+
+interface Props {
+  prompt: CollectionEntry<"prompts">;
+}
+
+const { prompt } = Astro.props;
+const { data } = prompt;
+---
+
+<article class="prompt-card" data-prompt-card data-category={data.category} data-tool={data.tool}>
+  <div class="card-meta">
+    <span>{data.category}</span>
+    <span>{data.level}</span>
+  </div>
+  <div class="prompt-card__title">
+    <h3>{data.title}</h3>
+    <ToolBadge tool={data.tool} />
+  </div>
+  <p>{data.description}</p>
+  <PromptBreakdown variables={data.variables} />
+  <CodeBlock code={data.prompt} label="Prompt" />
+  {
+    data.negativePrompt && (
+      <details>
+        <summary>Contraintes negatives</summary>
+        <CodeBlock code={data.negativePrompt} label="Negative prompt" />
+      </details>
+    )
+  }
+</article>

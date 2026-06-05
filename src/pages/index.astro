@@ -1,0 +1,426 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const [lessons, prompts, projects] = await Promise.all([
+  getCollection("lessons"),
+  getCollection("prompts"),
+  getCollection("projects"),
+]);
+
+const heroBadges = ["Firefly", "Kling", "Hailuo", "Prompting", "Montage"];
+
+const heroStats = [
+  { label: "Modules", value: String(lessons.length).padStart(2, "0") },
+  { label: "Prompts", value: String(prompts.length).padStart(2, "0") },
+  { label: "Cases", value: String(projects.length).padStart(2, "0") },
+];
+
+const boardFrames = [
+  { label: "Frame 01", title: "Character read", note: "identity / emotion" },
+  { label: "Frame 02", title: "Board layer", note: "depth / references" },
+  { label: "Frame 03", title: "Edit beat", note: "motion / sequence" },
+];
+
+const boardBlocks = [
+  { label: "01", title: "Brief", note: "intent + mood", tone: "yellow" },
+  { label: "02", title: "Boards", note: "visual library", tone: "cyan" },
+  { label: "03", title: "Prompt", note: "shot logic", tone: "magenta" },
+  { label: "04", title: "Image", note: "variations", tone: "yellow" },
+  { label: "05", title: "Video", note: "motion + cut", tone: "cyan" },
+];
+
+const pipelineStages = [
+  {
+    number: "01",
+    title: "Voir",
+    description: "Lire la reference, la lumiere et l'intention de scene avant tout prompt.",
+  },
+  {
+    number: "02",
+    title: "Composer",
+    description: "Poser le sujet, l'axe, la focale, l'echelle et les couches visuelles.",
+  },
+  {
+    number: "03",
+    title: "Generer",
+    description: "Ecrire un prompt image clair, testable et suffisamment contraint.",
+  },
+  {
+    number: "04",
+    title: "Stabiliser",
+    description: "Fixer visage, silhouette, outfit et palette sur plusieurs iterations.",
+  },
+  {
+    number: "05",
+    title: "Mettre en scene",
+    description: "Donner une intention camera, une energie et une dramaturgie lisibles.",
+  },
+  {
+    number: "06",
+    title: "Animer",
+    description: "Passer a l'image-to-video sans casser l'identite ni la physique du plan.",
+  },
+  {
+    number: "07",
+    title: "Monter",
+    description: "Relier les plans, regler le rythme et preparer les transitions utiles.",
+  },
+  {
+    number: "08",
+    title: "Documenter",
+    description: "Archiver versions, boards, prompts, correctifs et retours de production.",
+  },
+];
+
+const pillars = [
+  {
+    number: "01",
+    title: "Camera Shots",
+    description: "Comprendre le cadre, l'echelle des plans, l'emotion et le mouvement.",
+    tags: ["Frame", "Camera", "Motion"],
+    href: "/references/camera-shots/",
+    tone: "cyan",
+  },
+  {
+    number: "02",
+    title: "Character Consistency",
+    description: "Creer des personnages stables, lisibles et reutilisables d'un plan a l'autre.",
+    tags: ["Character", "Identity", "Outfit"],
+    href: "/formation/character-consistency/",
+    tone: "magenta",
+  },
+  {
+    number: "03",
+    title: "Production Bible",
+    description: "Documenter prompts, references, tests, corrections et versions.",
+    tags: ["Workflow", "Prompt", "Project"],
+    href: "/resources/",
+    tone: "yellow",
+  },
+];
+
+const shotPreview = [
+  {
+    number: "01",
+    title: "Extreme Close Up",
+    use: "Isoler un detail narratif ou une tension intime.",
+  },
+  {
+    number: "02",
+    title: "Close Up",
+    use: "Lire une emotion et preserver la presence du personnage.",
+  },
+  {
+    number: "03",
+    title: "Medium Shot",
+    use: "Relier action, posture, visage et costume.",
+  },
+  {
+    number: "04",
+    title: "Full Shot",
+    use: "Presenter silhouette, tenue complete et stance.",
+  },
+  {
+    number: "05",
+    title: "Long Shot",
+    use: "Situer le sujet dans un decor et montrer l'echelle.",
+  },
+  {
+    number: "06",
+    title: "Low Angle",
+    use: "Renforcer puissance, menace ou heroisation.",
+  },
+];
+
+const caseStudies = [
+  {
+    number: "01",
+    title: "Lyra Voss",
+    label: "Character Bible",
+    description: "Stabiliser visage, tenue, palette et logique de sequence dans un meme dossier.",
+    href: "/projects/lyra-voss/",
+    image: "/assets/visuals/lyra-board.svg",
+    imageAlt: "Board de Lyra Voss avec references personnage et structure de production.",
+    tags: ["Character", "Consistency", "Video"],
+    tone: "yellow",
+    featured: true,
+  },
+  {
+    number: "02",
+    title: "Neon Samurai",
+    label: "World Building",
+    description: "Travailler silhouette, decor nocturne et transitions dans une ambiance forte.",
+    href: "/projects/neon-samurai/",
+    image: "/assets/visuals/neon-samurai.svg",
+    imageAlt: "Board Neon Samurai avec silhouette dramatique et composition neon.",
+    tags: ["Mood", "Camera", "Transitions"],
+    tone: "cyan",
+  },
+  {
+    number: "03",
+    title: "Product Scene with Layers",
+    label: "Composition Study",
+    description: "Documenter premier plan, sujet, props, lumiere et lisibilite d'une scene produit.",
+    href: "/projects/",
+    image: "/assets/visuals/product-layers.svg",
+    imageAlt: "Scene produit construite en couches visuelles pour l'analyse de composition.",
+    tags: ["Layers", "Lighting", "Workflow"],
+    tone: "magenta",
+  },
+];
+
+const promptSystemCards = [
+  {
+    id: "SYS-01",
+    title: "Image Prompt",
+    note: "Base image",
+    tone: "yellow",
+    prompt:
+      "Cinematic still, rain-soaked alley, grounded photorealism, amber backlight, cyan reflections, readable silhouette.",
+  },
+  {
+    id: "SYS-02",
+    title: "Video Prompt",
+    note: "Motion",
+    tone: "cyan",
+    prompt:
+      "Slow dolly push-in, stable identity, subtle wind, restrained motion, cinematic continuity, realistic camera behavior.",
+  },
+  {
+    id: "SYS-03",
+    title: "Negative Prompt",
+    note: "Safeguards",
+    tone: "magenta",
+    prompt:
+      "no face drift, no extra limbs, no costume change, no warped hands, no aggressive flicker, no camera shake.",
+  },
+  {
+    id: "SYS-04",
+    title: "Prompt Fix",
+    note: "Repair",
+    tone: "cyan",
+    prompt:
+      "Keep the same face, same outfit, same lens logic; reduce motion, simplify the background, preserve framing.",
+  },
+];
+---
+
+<BaseLayout
+  title="Hub"
+  description="Creative Production Wiki pour composer des images, stabiliser des personnages, generer des plans et construire des univers narratifs avec l'IA."
+>
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero__content">
+      <span class="home-kicker">Creative Production Wiki</span>
+      <h1 id="home-title">AI Filmmaking Lab</h1>
+      <p>
+        Une documentation creative pour composer des images, stabiliser des personnages, generer
+        des plans et construire des univers narratifs avec l'IA.
+      </p>
+
+      <div class="home-actions" aria-label="Actions principales">
+        <a class="home-button home-button--primary" href="/formation/">Commencer le parcours</a>
+        <a class="home-button" href="/references/">Explorer les references</a>
+      </div>
+
+      <ul class="home-tool-list" aria-label="Outils et focus">
+        {
+          heroBadges.map((badge) => (
+            <li>{badge}</li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="home-hero__board" aria-label="Production board du lab">
+      <div class="home-production-board">
+        <div class="home-board-topline">
+          <span>Production dossier</span>
+          <span>Creative sync / live</span>
+        </div>
+
+        <div class="home-board-hero-slot">
+          <article class="home-board-poster">
+            <span class="home-panel-label">Future hero still</span>
+            <strong>/public/images/hero/</strong>
+            <p>Emplacement pret pour un futur still, frame cle ou poster de sequence.</p>
+          </article>
+
+          <dl class="home-board-stats" aria-label="Etat du wiki">
+            {
+              heroStats.map((stat) => (
+                <div>
+                  <dt>{stat.label}</dt>
+                  <dd>{stat.value}</dd>
+                </div>
+              ))
+            }
+          </dl>
+        </div>
+
+        <div class="home-board-frames" aria-label="Mini frames de production">
+          {
+            boardFrames.map((frame) => (
+              <article class="home-board-frame">
+                <span>{frame.label}</span>
+                <strong>{frame.title}</strong>
+                <p>{frame.note}</p>
+              </article>
+            ))
+          }
+        </div>
+
+        <div class="home-board-track" aria-label="Timeline de production">
+          {
+            boardBlocks.map((block) => (
+              <article class={`home-board-track__item home-board-track__item--${block.tone}`}>
+                <span>{block.label}</span>
+                <strong>{block.title}</strong>
+                <p>{block.note}</p>
+              </article>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="home-section home-section--pipeline" aria-labelledby="pipeline-title">
+    <div class="home-section__header">
+      <span class="home-kicker">Creative Pipeline</span>
+      <h2 id="pipeline-title">Du regard au dossier de production.</h2>
+      <p>
+        Chaque etape isole une decision concrete et documentable pour garder la logique de cadre,
+        de prompt, de mouvement et de correction.
+      </p>
+    </div>
+
+    <ol class="home-pipeline-grid">
+      {
+        pipelineStages.map((stage) => (
+          <li class="home-pipeline-card">
+            <span class="home-pipeline-card__number">{stage.number}</span>
+            <h3>{stage.title}</h3>
+            <p>{stage.description}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <section class="home-section" aria-labelledby="pillars-title">
+    <div class="home-section__header home-section__header--inline">
+      <div>
+        <span class="home-kicker">Trois piliers</span>
+        <h2 id="pillars-title">Trois modules pour structurer un projet cinematographique IA.</h2>
+      </div>
+      <a class="home-text-link" href="/formation/">Voir tout le parcours</a>
+    </div>
+
+    <div class="home-pillar-grid" aria-label="Piliers du lab">
+      {
+        pillars.map((pillar) => (
+          <a class={`home-pillar-card home-pillar-card--${pillar.tone}`} href={pillar.href}>
+            <div class="home-pillar-card__top">
+              <span>{pillar.number}</span>
+              <span>Module cle</span>
+            </div>
+            <h3>{pillar.title}</h3>
+            <p>{pillar.description}</p>
+            <ul>
+              {pillar.tags.map((tag) => <li>{tag}</li>)}
+            </ul>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="shots-preview-title">
+    <div class="home-section__header home-section__header--inline">
+      <div>
+        <span class="home-kicker">Camera Shots Preview</span>
+        <h2 id="shots-preview-title">Un shot sheet compact pour choisir vite le bon cadre.</h2>
+      </div>
+      <a class="home-text-link" href="/references/camera-shots/">Voir la librairie complete</a>
+    </div>
+
+    <div class="home-shot-grid">
+      {
+        shotPreview.map((shot) => (
+          <article class="home-shot-card">
+            <div class="home-shot-card__header">
+              <span class="home-shot-card__number">{shot.number}</span>
+              <span class="home-shot-card__badge">Frame</span>
+            </div>
+            <h3>{shot.title}</h3>
+            <p>{shot.use}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="case-studies-title">
+    <div class="home-section__header home-section__header--inline">
+      <div>
+        <span class="home-kicker">Case Studies Preview</span>
+        <h2 id="case-studies-title">Des etudes de cas pensees comme des dossiers vivants.</h2>
+      </div>
+      <a class="home-text-link" href="/projects/">Voir tous les cas</a>
+    </div>
+
+    <div class="home-case-grid" aria-label="Etudes de cas en avant">
+      {
+        caseStudies.map((study) => (
+          <a class={`home-case-card home-case-card--${study.tone}${study.featured ? " is-featured" : ""}`} href={study.href}>
+            <div class="home-case-card__media">
+              <img src={study.image} alt={study.imageAlt} loading="lazy" />
+            </div>
+            <div class="home-case-card__body">
+              <div class="home-case-card__meta">
+                <span>{study.number}</span>
+                <span>{study.label}</span>
+              </div>
+              <h3>{study.title}</h3>
+              <p>{study.description}</p>
+              <ul>
+                {study.tags.map((tag) => <li>{tag}</li>)}
+              </ul>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="home-section" aria-labelledby="prompt-system-title">
+    <div class="home-section__header home-section__header--inline">
+      <div>
+        <span class="home-kicker">Prompt System Preview</span>
+        <h2 id="prompt-system-title">Des briques de prompt pour generer, controler et corriger.</h2>
+      </div>
+      <a class="home-text-link" href="/prompts/">Ouvrir la bibliotheque</a>
+    </div>
+
+    <div class="home-prompt-grid" aria-label="Systeme de prompts">
+      {
+        promptSystemCards.map((card) => (
+          <article class={`home-prompt-card home-prompt-card--${card.tone}`}>
+            <div class="home-prompt-card__meta">
+              <span>{card.id}</span>
+              <span>{card.note}</span>
+            </div>
+            <h3>{card.title}</h3>
+            <pre><code>{card.prompt}</code></pre>
+            <div class="home-prompt-card__footer">
+              <span>Prompt block</span>
+              <button type="button" class="home-prompt-copy">Copy</button>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

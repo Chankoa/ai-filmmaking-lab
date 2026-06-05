@@ -1,0 +1,17 @@
+---
+interface Props {
+  variables: string[];
+}
+
+const { variables } = Astro.props;
+---
+
+{
+  variables.length > 0 && (
+    <ul class="prompt-breakdown" aria-label="Variables du prompt">
+      {variables.map((variable) => (
+        <li>{variable}</li>
+      ))}
+    </ul>
+  )
+}

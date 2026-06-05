@@ -1,0 +1,44 @@
+{
+  "$ref": "#/definitions/glossary",
+  "definitions": {
+    "glossary": {
+      "type": "object",
+      "properties": {
+        "term": {
+          "type": "string"
+        },
+        "definition": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "cinema",
+            "image",
+            "video",
+            "prompt",
+            "workflow",
+            "tool"
+          ]
+        },
+        "related": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "term",
+        "definition",
+        "category"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

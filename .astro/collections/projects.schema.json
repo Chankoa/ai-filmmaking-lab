@@ -1,0 +1,87 @@
+{
+  "$ref": "#/definitions/projects",
+  "definitions": {
+    "projects": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "draft",
+            "active",
+            "reference"
+          ],
+          "default": "draft"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "debutant",
+            "intermediaire",
+            "avance"
+          ]
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Adobe Firefly",
+              "Kling",
+              "Hailuo",
+              "Runway",
+              "Midjourney",
+              "Photoshop",
+              "Premiere",
+              "Notion",
+              "Generic workflow"
+            ]
+          },
+          "default": [
+            "Generic workflow"
+          ]
+        },
+        "heroImage": {
+          "type": "string"
+        },
+        "pipeline": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "outputs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "level"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

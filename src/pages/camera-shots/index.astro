@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import ReferenceBoard from "../../components/references/ReferenceBoard.astro";
+
+const shots = await getCollection("camera-shots");
+---
+
+<BaseLayout title="Plans camera" description="Alias de la page Camera Shots du wiki de references.">
+  <CourseHero
+    eyebrow="Camera Shots"
+    title="Guide visuel des plans"
+    description="Cette route conserve l'ancien chemin et utilise le nouveau board de references."
+    image="/assets/visuals/camera-shots.svg"
+    imageAlt="Grille illustree des plans camera"
+    actions={[{ label: "Voir dans References", href: "/references/camera-shots/", variant: "primary" }]}
+    stats={[
+      { label: "Plans", value: String(shots.length) },
+      { label: "Route", value: "Alias" },
+      { label: "Format", value: "Filtrable" },
+    ]}
+  />
+  <ReferenceBoard shots={shots} />
+</BaseLayout>

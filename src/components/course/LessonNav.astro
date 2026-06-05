@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  lessons: CollectionEntry<"lessons">[];
+  currentId?: string;
+}
+
+const { lessons, currentId } = Astro.props;
+const sortedLessons = [...lessons].sort((a, b) => a.data.order - b.data.order);
+---
+
+<nav class="lesson-nav" aria-label="Navigation des lecons">
+  <strong>Parcours</strong>
+  <ol>
+    {
+      sortedLessons.map((lesson) => (
+        <li>
+          <a class={lesson.id === currentId ? "is-active" : ""} href={`/formation/${lesson.id}/`}>
+            <span>{lesson.data.stage}</span>
+            {lesson.data.title}
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+</nav>

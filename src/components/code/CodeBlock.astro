@@ -1,0 +1,22 @@
+---
+import CopyPromptButton from "../prompts/CopyPromptButton.astro";
+
+interface Props {
+  code: string;
+  label?: string;
+  language?: string;
+  copy?: boolean;
+}
+
+const { code, label, language = "prompt", copy = true } = Astro.props;
+---
+
+<figure class="code-block">
+  {(label || copy) && (
+    <figcaption>
+      {label && <span>{label}</span>}
+      {copy && <CopyPromptButton text={code} label={label ? `Copier ${label}` : "Copier le prompt"} />}
+    </figcaption>
+  )}
+  <pre><code class={`language-${language}`}>{code}</code></pre>
+</figure>

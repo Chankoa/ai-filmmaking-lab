@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" role="img" aria-labelledby="title desc">
+  <title id="title">Guide des plans caméra</title>
+  <desc id="desc">Grille de cadres illustrant plusieurs distances de plans.</desc>
+  <rect width="760" height="520" fill="#f1ece2"/>
+  <g transform="translate(34 34)" fill="#fffaf2" stroke="#171615" stroke-width="2">
+    <rect width="210" height="132"/>
+    <rect x="242" width="210" height="132"/>
+    <rect x="484" width="210" height="132"/>
+    <rect y="164" width="210" height="132"/>
+    <rect x="242" y="164" width="210" height="132"/>
+    <rect x="484" y="164" width="210" height="132"/>
+    <rect y="328" width="210" height="132"/>
+    <rect x="242" y="328" width="210" height="132"/>
+    <rect x="484" y="328" width="210" height="132"/>
+  </g>
+  <g fill="#171615">
+    <circle cx="139" cy="100" r="54"/>
+    <circle cx="381" cy="86" r="35"/>
+    <path d="M366 123h30v42h-30z"/>
+    <circle cx="623" cy="78" r="22"/>
+    <path d="M598 104h50v62h-50z"/>
+    <circle cx="139" cy="248" r="18"/>
+    <path d="M116 270h46v58h-46z"/>
+    <circle cx="381" cy="240" r="16"/>
+    <path d="M362 260h38v82h-38z"/>
+    <circle cx="623" cy="236" r="12"/>
+    <path d="M609 252h28v92h-28z"/>
+    <circle cx="139" cy="402" r="10"/>
+    <path d="M126 416h26v78h-26z"/>
+    <path d="M348 462l66-90 66 90z"/>
+    <path d="M586 398h86v68h-86z"/>
+  </g>
+  <g font-family="Inter, Arial" font-size="13" font-weight="800" fill="#66615a">
+    <text x="52" y="53">ECU</text>
+    <text x="294" y="53">CU</text>
+    <text x="536" y="53">MCU</text>
+    <text x="52" y="217">MS</text>
+    <text x="294" y="217">FS</text>
+    <text x="536" y="217">LS</text>
+    <text x="52" y="381">HIGH</text>
+    <text x="294" y="381">LOW</text>
+    <text x="536" y="381">INSERT</text>
+  </g>
+</svg>

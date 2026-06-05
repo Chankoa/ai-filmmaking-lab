@@ -1,0 +1,93 @@
+---
+import { cameraShots } from "../data/curriculum";
+---
+
+<section class="tool-panel shot-tool" aria-labelledby="shot-library-title">
+  <div class="section-heading">
+    <span class="eyebrow">Camera Shots</span>
+    <h2 id="shot-library-title">Guide visuel des plans</h2>
+    <p>Filtre les plans par distance et par effet émotionnel, puis récupère le prompt type.</p>
+  </div>
+
+  <div class="filter-row" aria-label="Filtres de plans">
+    <label>
+      Distance
+      <select data-shot-distance>
+        <option value="all">Toutes</option>
+        <option value="proche">Proche</option>
+        <option value="moyen">Moyen</option>
+        <option value="large">Large</option>
+      </select>
+    </label>
+    <label>
+      Émotion
+      <select data-shot-emotion>
+        <option value="all">Toutes</option>
+        <option value="tension">Tension</option>
+        <option value="intimité">Intimité</option>
+        <option value="présence">Présence</option>
+        <option value="action">Action</option>
+        <option value="silhouette">Silhouette</option>
+        <option value="isolement">Isolement</option>
+        <option value="puissance">Puissance</option>
+        <option value="vulnérabilité">Vulnérabilité</option>
+        <option value="relation">Relation</option>
+        <option value="indice">Indice</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="shot-grid">
+    {
+      cameraShots.map((shot, index) => (
+        <article class="shot-card" data-shot-card data-distance={shot.distance} data-emotion={shot.emotion}>
+          <div class="shot-frame" data-shot-index={index + 1}>
+            <span></span>
+          </div>
+          <div class="shot-card__body">
+            <div class="shot-card__meta">
+              <span>{shot.distance}</span>
+              <span>{shot.emotion}</span>
+            </div>
+            <h3>{shot.name}</h3>
+            <p>{shot.use}</p>
+            <dl>
+              <div>
+                <dt>Mouvement</dt>
+                <dd>{shot.movement}</dd>
+              </div>
+              <div>
+                <dt>À éviter</dt>
+                <dd>{shot.avoid}</dd>
+              </div>
+            </dl>
+            <details>
+              <summary>Prompt type</summary>
+              <pre><code>{shot.prompt}</code></pre>
+            </details>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const distanceSelect = document.querySelector("[data-shot-distance]");
+  const emotionSelect = document.querySelector("[data-shot-emotion]");
+  const shotCards = document.querySelectorAll("[data-shot-card]");
+
+  function updateShotFilters() {
+    const distance = distanceSelect?.value || "all";
+    const emotion = emotionSelect?.value || "all";
+
+    shotCards.forEach((card) => {
+      const distanceMatch = distance === "all" || card.getAttribute("data-distance") === distance;
+      const emotionMatch = emotion === "all" || card.getAttribute("data-emotion") === emotion;
+      card.toggleAttribute("hidden", !distanceMatch || !emotionMatch);
+    });
+  }
+
+  distanceSelect?.addEventListener("change", updateShotFilters);
+  emotionSelect?.addEventListener("change", updateShotFilters);
+</script>

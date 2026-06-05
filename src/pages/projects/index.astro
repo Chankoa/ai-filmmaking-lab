@@ -1,0 +1,37 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import MediaCard from "../../components/media/MediaCard.astro";
+
+const projects = await getCollection("projects");
+---
+
+<BaseLayout title="Projects" description="Etudes de cas de production IA : personnages, univers, prompts, videos et documentation.">
+  <CourseHero
+    eyebrow="Case Studies"
+    title="Projets documentes"
+    description="Les projets transforment les exercices en etudes de production : brief, references, prompt maitre, frames, animation, montage et critique."
+    image="/assets/visuals/production-board.svg"
+    imageAlt="Board de production creative"
+    stats={[
+      { label: "Projets", value: String(projects.length) },
+      { label: "Statut", value: "V1" },
+      { label: "Sortie", value: "Production bible" },
+    ]}
+  />
+
+  <section class="content-grid" aria-label="Etudes de cas">
+    {
+      projects.map((project) => (
+        <MediaCard
+          title={project.data.title}
+          description={project.data.description}
+          image={project.data.heroImage}
+          href={`/projects/${project.id}/`}
+          meta={project.data.status}
+        />
+      ))
+    }
+  </section>
+</BaseLayout>

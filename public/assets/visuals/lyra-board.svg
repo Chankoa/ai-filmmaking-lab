@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 760" role="img" aria-labelledby="title desc">
+  <title id="title">Character board Lyra Voss</title>
+  <desc id="desc">Planche personnage schématique avec portrait, silhouette, palette et contraintes.</desc>
+  <rect width="620" height="760" fill="#f1ece2"/>
+  <rect x="32" y="32" width="556" height="696" fill="#fffaf2" stroke="#171615" stroke-width="2"/>
+  <text x="58" y="82" font-family="Inter, Arial" font-size="28" font-weight="800" fill="#171615">Lyra Voss</text>
+  <text x="58" y="110" font-family="Inter, Arial" font-size="14" fill="#66615a">Character bible · traits constants · prompt négatif</text>
+  <rect x="58" y="146" width="238" height="304" fill="#171615"/>
+  <circle cx="177" cy="245" r="58" fill="#d0a26a"/>
+  <path d="M118 237c10-58 104-72 122 8-30-24-74-24-122-8z" fill="#34241d"/>
+  <path d="M128 313h98c36 42 48 88 58 137H72c10-49 22-95 56-137z" fill="#0e0f10"/>
+  <path d="M147 260h60" stroke="#0e7c66" stroke-width="5"/>
+  <rect x="326" y="146" width="206" height="304" fill="#e8dccb" stroke="#171615"/>
+  <path d="M430 179c38 0 54 34 54 78v154h-108V257c0-44 16-78 54-78z" fill="#171615"/>
+  <circle cx="430" cy="162" r="28" fill="#d0a26a" stroke="#171615" stroke-width="2"/>
+  <g transform="translate(58 488)">
+    <text font-family="Inter, Arial" font-size="16" font-weight="800" fill="#171615">Palette</text>
+    <rect y="24" width="76" height="48" fill="#171615"/>
+    <rect x="88" y="24" width="76" height="48" fill="#0e7c66"/>
+    <rect x="176" y="24" width="76" height="48" fill="#2e8aa0"/>
+    <rect x="264" y="24" width="76" height="48" fill="#d0a26a"/>
+    <rect x="352" y="24" width="76" height="48" fill="#d95d39"/>
+  </g>
+  <g transform="translate(58 604)" font-family="Inter, Arial">
+    <text font-size="16" font-weight="800" fill="#171615">Contraintes</text>
+    <text y="34" font-size="14" fill="#66615a">no red hair · no glowing armor · no high heels</text>
+    <text y="58" font-size="14" fill="#66615a">stable face · matte black tactical outfit · realistic anatomy</text>
+  </g>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 760" role="img" aria-labelledby="title desc">
+  <title id="title">Cinematic transition prompt</title>
+  <desc id="desc">Storyboard de transition entre deux plans par reflet.</desc>
+  <rect width="620" height="760" fill="#171615"/>
+  <rect x="46" y="52" width="528" height="656" fill="#201d1b" stroke="#f6f4ef" stroke-width="2"/>
+  <g transform="translate(84 118)">
+    <rect width="452" height="126" fill="#f6f4ef"/>
+    <rect x="18" y="20" width="134" height="86" fill="#2e8aa0"/>
+    <rect x="160" y="20" width="134" height="86" fill="#c98b24"/>
+    <rect x="302" y="20" width="134" height="86" fill="#d95d39"/>
+  </g>
+  <g transform="translate(84 306)">
+    <rect width="452" height="126" fill="#f6f4ef"/>
+    <path d="M20 72c100-66 302-66 412 0" stroke="#2e8aa0" stroke-width="16" fill="none"/>
+    <path d="M20 96c126-52 278-52 412 0" stroke="#d95d39" stroke-width="10" fill="none"/>
+  </g>
+  <g transform="translate(84 494)">
+    <rect width="452" height="126" fill="#f6f4ef"/>
+    <rect x="24" y="20" width="104" height="86" fill="#6d4b77"/>
+    <circle cx="226" cy="64" r="38" fill="#171615"/>
+    <rect x="324" y="20" width="104" height="86" fill="#0e7c66"/>
+  </g>
+  <path d="M310 254v36M310 442v36" stroke="#f6f4ef" stroke-width="8"/>
+  <text x="84" y="674" font-family="Inter, Arial" font-size="22" font-weight="800" fill="#f6f4ef">Reflet → Match cut → Nouvelle scène</text>
+</svg>

@@ -1,0 +1,20 @@
+/* Cards: elevated surfaces for grouped content. */
+
+.doc-card {
+  background: var(--surface-card);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-4);
+  /* Prevent children (code, long tokens) from forcing page-wide overflow */
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.card-elevated {
+  border-radius: var(--radius-lg);
+  background: var(--color-bg-alt);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--color-border);
+  padding: var(--space-4);
+}

@@ -1,0 +1,73 @@
+{
+  "$ref": "#/definitions/camera-shots",
+  "definitions": {
+    "camera-shots": {
+      "type": "object",
+      "properties": {
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "family": {
+            "type": "string",
+            "enum": [
+              "scale",
+              "angle",
+              "movement",
+              "detail"
+            ]
+          },
+          "distance": {
+            "type": "string",
+            "enum": [
+              "proche",
+              "moyen",
+              "large",
+              "variable"
+            ]
+          },
+          "emotion": {
+            "type": "string"
+          },
+          "use": {
+            "type": "string"
+          },
+          "movement": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "avoid": {
+            "type": "string"
+          },
+          "toolNotes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "family",
+          "distance",
+          "emotion",
+          "use",
+          "movement",
+          "prompt",
+          "avoid"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

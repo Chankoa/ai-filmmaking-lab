@@ -1,0 +1,21 @@
+---
+import { sourceLinks } from "../data/curriculum";
+---
+
+<aside class="source-panel" aria-labelledby="source-title">
+  <div class="section-heading">
+    <span class="eyebrow">Sources</span>
+    <h2 id="source-title">État des contenus</h2>
+  </div>
+  <div class="source-list">
+    {
+      sourceLinks.map((source) => (
+        <a href={source.href} target={source.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+          <span>{source.status}</span>
+          <strong>{source.title}</strong>
+          <small>{source.note}</small>
+        </a>
+      ))
+    }
+  </div>
+</aside>

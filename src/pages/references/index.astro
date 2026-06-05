@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import MediaCard from "../../components/media/MediaCard.astro";
+
+const shots = await getCollection("camera-shots");
+---
+
+<BaseLayout title="References" description="Boards, guides visuels et references de production pour l'AI filmmaking.">
+  <CourseHero
+    eyebrow="References visuelles"
+    title="Guides pour voir et cadrer"
+    description="Cette section regroupe les references qui aident a nommer un plan, choisir une intention et preparer une generation plus controlee."
+    image="/assets/visuals/camera-shots.svg"
+    imageAlt="Guide visuel des plans camera"
+    stats={[
+      { label: "Plans", value: String(shots.length) },
+      { label: "Familles", value: "Scale / Angle" },
+      { label: "Usage", value: "Prompt-ready" },
+    ]}
+  />
+
+  <section class="content-grid content-grid--three" aria-label="Boards de reference">
+    <MediaCard
+      title="Camera Shots"
+      description="Types de plans, angles, usages narratifs, mouvements et prompts types."
+      image="/assets/visuals/camera-shots.svg"
+      href="/references/camera-shots/"
+      meta="Guide prioritaire"
+    />
+    <MediaCard
+      title="Moodboards"
+      description="Structure future pour univers, palettes, lieux, outfits et references style."
+      image="/assets/visuals/production-board.svg"
+      href="/resources/"
+      meta="A construire"
+    />
+    <MediaCard
+      title="Reference Boards"
+      description="Support futur pour personnages, objets, decors et continuity checks."
+      image="/assets/visuals/lyra-board.svg"
+      href="/projects/lyra-voss/"
+      meta="Case study"
+    />
+  </section>
+</BaseLayout>

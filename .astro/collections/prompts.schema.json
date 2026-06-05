@@ -1,0 +1,82 @@
+{
+  "$ref": "#/definitions/prompts",
+  "definitions": {
+    "prompts": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string",
+          "enum": [
+            "image",
+            "video",
+            "character",
+            "camera",
+            "transition",
+            "workflow"
+          ]
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "debutant",
+            "intermediaire",
+            "avance"
+          ]
+        },
+        "tool": {
+          "type": "string",
+          "enum": [
+            "Adobe Firefly",
+            "Kling",
+            "Hailuo",
+            "Runway",
+            "Midjourney",
+            "Photoshop",
+            "Premiere",
+            "Notion",
+            "Generic workflow"
+          ],
+          "default": "Generic workflow"
+        },
+        "prompt": {
+          "type": "string"
+        },
+        "negativePrompt": {
+          "type": "string"
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "category",
+        "level",
+        "prompt"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}

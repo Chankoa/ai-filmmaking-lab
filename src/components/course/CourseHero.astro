@@ -1,0 +1,62 @@
+---
+interface Action {
+  label: string;
+  href: string;
+  variant?: "primary" | "secondary";
+}
+
+interface Stat {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  eyebrow?: string;
+  title: string;
+  description: string;
+  image?: string;
+  imageAlt?: string;
+  actions?: Action[];
+  stats?: Stat[];
+}
+
+const { eyebrow, title, description, image, imageAlt = "", actions = [], stats = [] } = Astro.props;
+---
+
+<section class="course-hero">
+  <div class="course-hero__content">
+    {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+    <h1>{title}</h1>
+    <p>{description}</p>
+    {
+      actions.length > 0 && (
+        <div class="hero-actions" aria-label="Actions principales">
+          {actions.map((action) => (
+            <a class={`button ${action.variant ?? "secondary"}`} href={action.href}>
+              {action.label}
+            </a>
+          ))}
+        </div>
+      )
+    }
+  </div>
+  {
+    image && (
+      <div class="course-hero__visual">
+        <img src={image} alt={imageAlt} />
+      </div>
+    )
+  }
+  {
+    stats.length > 0 && (
+      <dl class="hero-stats">
+        {stats.map((stat) => (
+          <div>
+            <dt>{stat.label}</dt>
+            <dd>{stat.value}</dd>
+          </div>
+        ))}
+      </dl>
+    )
+  }
+</section>

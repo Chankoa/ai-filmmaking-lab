@@ -1,0 +1,21 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  href?: string;
+  meta?: string;
+}
+
+const { title, description, image, href, meta } = Astro.props;
+const Tag = href ? "a" : "article";
+---
+
+<Tag class="media-card" href={href}>
+  {image && <img src={image} alt="" loading="lazy" />}
+  <div>
+    {meta && <span class="card-kicker">{meta}</span>}
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+</Tag>

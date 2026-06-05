@@ -1,0 +1,66 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ShotCard from "./ShotCard.astro";
+
+interface Props {
+  shots: CollectionEntry<"camera-shots">[];
+  title?: string;
+  description?: string;
+}
+
+const {
+  shots,
+  title = "Camera Shots",
+  description = "Guide visuel des plans, angles et usages narratifs.",
+} = Astro.props;
+
+const distances = [...new Set(shots.map((shot) => shot.data.distance))];
+const families = [...new Set(shots.map((shot) => shot.data.family))];
+---
+
+<section class="reference-board" aria-labelledby="reference-board-title">
+  <div class="section-heading">
+    <span class="eyebrow">References</span>
+    <h2 id="reference-board-title">{title}</h2>
+    <p>{description}</p>
+  </div>
+
+  <div class="filter-row" aria-label="Filtres des references">
+    <label>
+      Distance
+      <select data-reference-filter="distance">
+        <option value="all">Toutes</option>
+        {distances.map((distance) => <option value={distance}>{distance}</option>)}
+      </select>
+    </label>
+    <label>
+      Famille
+      <select data-reference-filter="family">
+        <option value="all">Toutes</option>
+        {families.map((family) => <option value={family}>{family}</option>)}
+      </select>
+    </label>
+  </div>
+
+  <div class="shot-grid">
+    {shots.map((shot, index) => <ShotCard shot={shot} index={index + 1} />)}
+  </div>
+</section>
+
+<script>
+  const referenceFilters = document.querySelectorAll("[data-reference-filter]");
+  const referenceCards = document.querySelectorAll("[data-shot-card]");
+
+  function updateReferenceFilters() {
+    const distance = document.querySelector<HTMLSelectElement>('[data-reference-filter="distance"]')?.value || "all";
+    const family = document.querySelector<HTMLSelectElement>('[data-reference-filter="family"]')?.value || "all";
+
+    referenceCards.forEach((card) => {
+      const distanceMatch = distance === "all" || card.getAttribute("data-distance") === distance;
+      const familyMatch = family === "all" || card.getAttribute("data-family") === family;
+      card.toggleAttribute("hidden", !distanceMatch || !familyMatch);
+    });
+  }
+
+  referenceFilters.forEach((filter) => filter.addEventListener("change", updateReferenceFilters));
+</script>

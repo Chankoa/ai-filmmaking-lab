@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from "astro:content";
+import CodeBlock from "../code/CodeBlock.astro";
+
+interface Props {
+  shot: CollectionEntry<"camera-shots">;
+  index?: number;
+}
+
+const { shot, index = 1 } = Astro.props;
+const { data } = shot;
+---
+
+<article
+  class="shot-card"
+  data-shot-card
+  data-distance={data.distance}
+  data-family={data.family}
+  data-emotion={data.emotion}
+>
+  <div class="shot-frame" data-shot-index={String(index).padStart(2, "0")} data-shot-family={data.family}>
+    <span></span>
+  </div>
+  <div class="shot-card__body">
+    <div class="card-meta">
+      <span>{data.distance}</span>
+      <span>{data.emotion}</span>
+    </div>
+    <h3>{data.name}</h3>
+    <p>{data.use}</p>
+    <dl>
+      <div>
+        <dt>Mouvement</dt>
+        <dd>{data.movement}</dd>
+      </div>
+      <div>
+        <dt>A eviter</dt>
+        <dd>{data.avoid}</dd>
+      </div>
+    </dl>
+    {data.toolNotes && <p class="fine-note">{data.toolNotes}</p>}
+    <details>
+      <summary>Prompt type</summary>
+      <CodeBlock code={data.prompt} label={data.name} />
+    </details>
+  </div>
+</article>

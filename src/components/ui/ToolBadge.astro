@@ -1,0 +1,10 @@
+---
+interface Props {
+  tool: string;
+}
+
+const { tool } = Astro.props;
+const key = tool.toLowerCase().replaceAll(" ", "-");
+---
+
+<span class="tool-badge" data-tool={key}>{tool}</span>

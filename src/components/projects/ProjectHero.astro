@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+import ToolBadge from "../ui/ToolBadge.astro";
+
+interface Props {
+  project: CollectionEntry<"projects">;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+---
+
+<header class="project-hero">
+  <div>
+    <span class="eyebrow">Etude de cas</span>
+    <h1>{data.title}</h1>
+    <p>{data.description}</p>
+    <div class="tool-row">
+      {data.tools.map((tool) => <ToolBadge tool={tool} />)}
+    </div>
+  </div>
+  {data.heroImage && <img src={data.heroImage} alt="" />}
+</header>

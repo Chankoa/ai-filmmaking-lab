@@ -1,0 +1,231 @@
+/* Inline code minimal chips */
+code:not([class*="language-"]) {
+  background: rgba(15, 23, 42, 0.08);
+  color: var(--text-strong);
+  padding: calc(var(--space-1) * 0.6) calc(var(--space-2) * 0.7);
+  border-radius: 0.35rem;
+  font-size: 0.85em;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  /* Allow long tokens (e.g. class lists) to wrap instead of overflowing */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+:root[data-theme="dark"] code:not([class*="language-"]) {
+  background: rgba(255, 255, 255, 0.06);
+  color: #e5e7eb;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Code block chrome */
+.code-block {
+  background: var(--surface-card);
+  border: 1px solid var(--border-soft);
+  border-radius: 0.9rem;
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+.code-block__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: var(--space-2) calc(var(--space-3) * 1.13);
+  background: var(--surface-muted);
+  border-bottom: 1px solid var(--border-soft);
+  font-size:var(--text-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.code-block__lang {
+  font-weight: 700;
+  font-size: var(--text-xs);
+}
+.code-block__copy {
+  border: 1px solid var(--border-soft);
+  background: var(--surface-card);
+  color: var(--text-strong);
+  font-weight: 600;
+  font-size: 0.75rem;
+  padding: calc(var(--space-1) * 1.2) calc(var(--space-3) * 0.93);
+  border-radius: 999px;
+  transition: all 0.18s var(--ease-standard);
+  cursor: pointer;
+}
+.code-block__copy:hover {
+  background: var(--surface-muted);
+}
+.code-block__copy.is-success {
+  color: #16a34a;
+  border-color: rgba(22, 163, 74, 0.35);
+  background: rgba(22, 163, 74, 0.08);
+}
+.code-block__copy.is-error {
+  color: #e11d48;
+  border-color: rgba(225, 29, 72, 0.35);
+  background: rgba(225, 29, 72, 0.08);
+}
+
+/* Language accents */
+.code-block--html .code-block__lang { color: #f97316; }
+.code-block--css .code-block__lang { color: #3b82f6; }
+.code-block--scss .code-block__lang { color: #ec4899; }
+.code-block--js .code-block__lang { color: #eab308; }
+.code-block--ts .code-block__lang { color: #38bdf8; }
+.code-block--json .code-block__lang { color: #22c55e; }
+
+/* Line highlighting */
+.code-line {
+  display: block;
+  padding-inline: 0;
+  min-height: 1.2em;
+}
+.code-line.is-highlighted {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent-primary) 22%, transparent),
+    color-mix(in srgb, var(--accent-primary) 10%, transparent)
+  );
+  border-left: 4px solid color-mix(in srgb, var(--accent-primary) 75%, transparent);
+}
+
+:root[data-theme="dark"] .code-line.is-highlighted {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent-primary) 22%, transparent),
+    color-mix(in srgb, var(--accent-primary) 10%, transparent)
+  );
+  border-color: color-mix(in srgb, var(--accent-primary) 70%, transparent);
+}
+
+/* Dark mode chrome */
+:root[data-theme="dark"] .code-block {
+  background: #0b1321;
+  border-color: rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow-soft);
+}
+:root[data-theme="dark"] .code-block__header {
+  background: #0f172a;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+}
+:root[data-theme="dark"] .code-block__copy {
+  background: #111c30;
+  color: #e5e7eb;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+:root[data-theme="dark"] .code-block__copy:hover {
+  background: #17233a;
+}
+:root[data-theme="dark"] .code-block__copy.is-success {
+  color: #4ade80;
+  border-color: rgba(74, 222, 128, 0.35);
+  background: rgba(74, 222, 128, 0.1);
+}
+:root[data-theme="dark"] .code-block__copy.is-error {
+  color: #f43f5e;
+  border-color: rgba(244, 63, 94, 0.35);
+  background: rgba(244, 63, 94, 0.1);
+}
+
+/* Expressive Code (Astro integration) */
+.expressive-code {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0;
+  overflow-x: auto;
+
+  /* Drive EC's internal styling via CSS variables so it still applies
+     even when EC injects its stylesheet in the page body. */
+  --code-accent: var(--accent-primary);
+  --ec-frm-frameBoxShdCssVal: var(--shadow-soft);
+
+  /* Near-black code block surface in light mode */
+  --ec-codeBg: color-mix(in srgb, var(--text-strong) 92%, var(--surface-bg) 8%);
+  --ec-frm-edBg: var(--ec-codeBg);
+  --ec-codeFg: var(--text-inverse);
+
+  /* Frame borders derived from the block surface (independent of language) */
+  --ec-brdCol: color-mix(in srgb, var(--ec-codeBg) 82%, var(--text-inverse) 18%);
+  --ec-brdWd: 1px;
+  --ec-brdRad: 0.9rem;
+
+  /* Header (tab bar) */
+  /* One unified background per theme (light/dark), independent of language */
+  --ec-frm-edTabBarBg: color-mix(in srgb, var(--ec-codeBg) 88%, var(--surface-muted) 12%);
+  --ec-frm-edTabBarBrdCol: var(--ec-brdCol);
+  --ec-frm-edTabBarBrdBtmCol: var(--ec-brdCol);
+
+  /* Title tab + indicator */
+  /* Keep the title text colored, but remove any tab background/pseudo visuals */
+  --ec-frm-edActTabBg: transparent;
+  --ec-frm-edActTabFg: var(--code-accent);
+  --ec-frm-edActTabBrdCol: transparent;
+  /* Remove the extra indicator stripes so the header stays visually unified */
+  --ec-frm-edActTabIndHt: 0px;
+  --ec-frm-edActTabIndTopCol: transparent;
+  --ec-frm-edActTabIndBtmCol: transparent;
+}
+
+:root[data-theme="dark"] .expressive-code {
+  /* Near-black code block surface in dark mode */
+  --ec-codeBg: color-mix(in srgb, var(--surface-bg) 78%, var(--surface-card) 22%);
+  --ec-frm-edBg: var(--ec-codeBg);
+  --ec-codeFg: var(--text-strong);
+
+  --ec-brdCol: color-mix(in srgb, var(--ec-codeBg) 80%, var(--text-strong) 20%);
+  --ec-frm-edTabBarBg: color-mix(in srgb, var(--ec-codeBg) 86%, var(--surface-muted) 14%);
+}
+
+/* Expressive Code line highlighting (if enabled via plugins/meta) */
+.expressive-code .ec-line.is-highlighted .code {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--code-accent) 26%, transparent),
+    color-mix(in srgb, var(--code-accent) 12%, transparent)
+  );
+  border-left: 3px solid color-mix(in srgb, var(--code-accent) 70%, transparent);
+  padding-left: calc(var(--space-2) * 0.75);
+  /* Avoid negative margins that can cause page-level horizontal overflow on small screens.
+     Use !important to override Expressive Code's injected stylesheet. */
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-right: calc(var(--space-2) * 0.75);
+}
+
+/* Contextual highlight based on language */
+.expressive-code[data-lang="html"] { --code-accent: var(--accent-secondary); }
+.expressive-code[data-lang="css"] { --code-accent: var(--status-info); }
+.expressive-code[data-lang="scss"] { --code-accent: var(--status-warning); }
+.expressive-code[data-lang="js"] { --code-accent: var(--status-warning); }
+.expressive-code[data-lang="ts"] { --code-accent: var(--status-info); }
+.expressive-code[data-lang="json"] { --code-accent: var(--status-success); }
+.expressive-code[data-lang="text"] { --code-accent: var(--text-muted); }
+
+/* Light mode: ensure header language labels keep enough contrast on near-black header */
+:root:not([data-theme="dark"]) .expressive-code[data-lang="html"] {
+  --code-accent: color-mix(in srgb, var(--text-inverse) 78%, var(--status-warning) 22%);
+}
+
+:root:not([data-theme="dark"]) .expressive-code[data-lang="text"] {
+  --code-accent: var(--text-inverse);
+}
+
+/* Ensure long lines don't force the grid wider */
+.expressive-code pre {
+  max-width: 100%;
+  overflow-x: auto !important;
+}
+
+/* Extra containment: prevent inner frames from forcing the layout wider */
+.expressive-code,
+.expressive-code .frame {
+  max-width: 100% !important;
+  min-width: 0;
+}
+
+.expressive-code .frame {
+  width: 100% !important;
+}
+

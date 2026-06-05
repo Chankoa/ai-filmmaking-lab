@@ -1,0 +1,75 @@
+---
+import { promptCards } from "../data/curriculum";
+---
+
+<section class="tool-panel prompt-tool" aria-labelledby="prompt-library-title">
+  <div class="section-heading">
+    <span class="eyebrow">Bibliothèque</span>
+    <h2 id="prompt-library-title">Prompts de production</h2>
+    <p>Des prompts documentés avec intention, contraintes négatives et usage pédagogique.</p>
+  </div>
+
+  <div class="segmented-control" aria-label="Filtrer les prompts">
+    <button type="button" class="is-active" data-prompt-filter="all">Tous</button>
+    <button type="button" data-prompt-filter="image">Image</button>
+    <button type="button" data-prompt-filter="video">Vidéo</button>
+    <button type="button" data-prompt-filter="character">Personnage</button>
+    <button type="button" data-prompt-filter="camera">Caméra</button>
+    <button type="button" data-prompt-filter="transition">Transition</button>
+  </div>
+
+  <div class="prompt-grid">
+    {
+      promptCards.map((card) => (
+        <article class="prompt-card" data-prompt-card data-category={card.category}>
+          <div class="prompt-card__header">
+            <span>{card.category}</span>
+            <span>{card.level}</span>
+          </div>
+          <h3>{card.title}</h3>
+          <p>{card.focus}</p>
+          <pre><code>{card.prompt}</code></pre>
+          <details>
+            <summary>Contraintes négatives</summary>
+            <p>{card.negative}</p>
+          </details>
+          <div class="prompt-card__footer">
+            <small>{card.notes}</small>
+            <button type="button" class="icon-button" data-copy-prompt={card.prompt} aria-label={`Copier ${card.title}`}>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2" />
+                <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2" />
+              </svg>
+            </button>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const promptButtons = document.querySelectorAll("[data-prompt-filter]");
+  const promptCards = document.querySelectorAll("[data-prompt-card]");
+
+  promptButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.getAttribute("data-prompt-filter");
+      promptButtons.forEach((item) => item.classList.remove("is-active"));
+      button.classList.add("is-active");
+      promptCards.forEach((card) => {
+        const category = card.getAttribute("data-category");
+        card.toggleAttribute("hidden", filter !== "all" && category !== filter);
+      });
+    });
+  });
+
+  document.querySelectorAll("[data-copy-prompt]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      const text = button.getAttribute("data-copy-prompt") || "";
+      await navigator.clipboard.writeText(text);
+      button.classList.add("is-copied");
+      window.setTimeout(() => button.classList.remove("is-copied"), 1200);
+    });
+  });
+</script>

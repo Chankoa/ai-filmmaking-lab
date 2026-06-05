@@ -1,0 +1,43 @@
+---
+interface Props {
+  text: string;
+  label?: string;
+}
+
+const { text, label = "Copier" } = Astro.props;
+---
+
+<button type="button" class="copy-button" data-copy-text={text} aria-label={label} title={label}>
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2" />
+    <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2" />
+  </svg>
+  <span class="sr-only">{label}</span>
+</button>
+
+<script>
+  const copyWindow = window as Window & { __aiFilmCopyButtonsReady?: boolean };
+
+  if (!copyWindow.__aiFilmCopyButtonsReady) {
+    copyWindow.__aiFilmCopyButtonsReady = true;
+
+    document.addEventListener("click", async (event) => {
+      const target = event.target instanceof Element ? event.target.closest("[data-copy-text]") : null;
+      if (!(target instanceof HTMLButtonElement)) return;
+
+      const text = target.dataset.copyText || "";
+      try {
+        await navigator.clipboard.writeText(text);
+        target.dataset.copied = "true";
+        window.setTimeout(() => {
+          delete target.dataset.copied;
+        }, 1300);
+      } catch {
+        target.dataset.copyError = "true";
+        window.setTimeout(() => {
+          delete target.dataset.copyError;
+        }, 1300);
+      }
+    });
+  }
+</script>

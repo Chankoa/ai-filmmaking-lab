@@ -1,0 +1,189 @@
+---
+import ThemeToggle from "./ThemeToggle.astro";
+import { siteConfig } from "../../data/site-config";
+import "../../styles/components/navigation.scss";
+import "../../styles/components/site-header.scss";
+---
+
+<header class="sticky top-0 z-30 backdrop-blur bg-[color-mix(in_srgb,var(--color-bg)_80%,white_20%)] border-b border-[var(--color-border)]">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+    <a href="/" class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-xs font-bold text-white shadow-md">
+        {siteConfig.name.charAt(0)}
+      </div>
+      <div class="flex flex-col leading-tight">
+        <span class="text-sm font-semibold">{siteConfig.name}</span>
+        <span class="text-xs text-[var(--color-muted)] hidden sm:inline">
+          {siteConfig.baseline}
+        </span>
+      </div>
+    </a>
+
+    <nav class="desktop-nav nav items-center gap-4 text-sm text-[var(--text-muted)]">
+      {siteConfig.navigation.map((item) => (
+        <a
+          href={item.href}
+          class="nav-link px-3 py-1 rounded-full transition-colors"
+        >
+          {item.label}
+        </a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-2">
+  
+      <ThemeToggle />
+
+      <button
+        id="drawer-open"
+        class="drawer-toggle inline-flex items-center justify-center text-[var(--text-strong)]"
+        aria-label="Ouvrir le menu"
+        type="button"
+      >
+        ☰
+      </button>
+    </div>
+  </div>
+</header>
+
+<div
+  id="drawer-backdrop"
+  class="fixed inset-0 bg-black/40 opacity-0 pointer-events-none transition z-40"
+></div>
+
+<aside
+  id="mobile-drawer"
+  class="drawer fixed inset-y-0 left-0 w-72 max-w-[80vw] bg-[var(--surface-card)] border-r border-[var(--border-soft)] shadow-2xl z-50 flex flex-col p-6 gap-6"
+  aria-label="Menu mobile"
+>
+  <div class="flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <div class="w-8 h-8 rounded-full bg-[var(--color-accent)] flex items-center justify-center text-xs font-bold text-white shadow-md">
+        {siteConfig.name.charAt(0)}
+      </div>
+      <div class="flex flex-col leading-tight">
+        <span class="text-sm font-semibold text-[var(--text-strong)]">{siteConfig.name}</span>
+        <span class="text-xs text-[var(--text-muted)]">{siteConfig.baseline}</span>
+      </div>
+    </div>
+    <button
+      id="drawer-close"
+      class="inline-flex items-center justify-center w-10 h-10 rounded-full text-[var(--text-strong)]"
+      aria-label="Fermer le menu"
+      type="button"
+    >
+      ✕
+    </button>
+  </div>
+
+  <nav class="flex flex-col gap-2 text-sm text-[var(--text-muted)] nav nav--stacked">
+    {siteConfig.navigation.map((item) => (
+      <a
+        href={item.href}
+        class="nav-link px-3 py-2 rounded-md transition-colors hover:bg-[var(--surface-muted)] hover:text-[var(--text-strong)]"
+      >
+        {item.label}
+      </a>
+    ))}
+  </nav>
+
+  <div class="border-t border-[var(--border-soft)] pt-4">
+    <button
+      id="theme-toggle-mobile"
+      class="w-full inline-flex items-center justify-center gap-2 rounded-full border border-[var(--border-soft)] bg-[var(--surface-muted)] px-3 py-2 text-sm font-semibold text-[var(--text-strong)] shadow-sm hover:bg-[var(--surface-card)]"
+      aria-label="Basculer le thème"
+      type="button"
+    >
+      <span id="icon-sun-mobile" class="inline-flex">☀️</span>
+      <span id="icon-moon-mobile" class="hidden">🌙</span>
+      <span id="theme-label-mobile">Mode clair</span>
+    </button>
+  </div>
+</aside>
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const STORAGE_KEY = "preferred-theme";
+    const baseTheme = root.dataset.baseTheme || root.getAttribute("data-theme") || "default";
+    let palette = baseTheme === "dark" ? "default" : baseTheme;
+
+    const sun = document.getElementById("icon-sun");
+    const moon = document.getElementById("icon-moon");
+    const label = document.getElementById("theme-label");
+    const sunM = document.getElementById("icon-sun-mobile");
+    const moonM = document.getElementById("icon-moon-mobile");
+    const labelM = document.getElementById("theme-label-mobile");
+
+    const applyTheme = (mode) => {
+      const target = mode === "dark" ? "dark" : palette;
+      root.dataset.theme = target;
+      root.dataset.baseTheme = palette;
+      localStorage.setItem(STORAGE_KEY, target === "dark" ? "dark" : palette);
+      const isDark = target === "dark";
+      if (sun && moon) {
+        sun.classList.toggle("hidden", isDark);
+        moon.classList.toggle("hidden", !isDark);
+      }
+      if (label) label.textContent = isDark ? "Mode sombre" : "Mode clair";
+      if (sunM && moonM) {
+        sunM.classList.toggle("hidden", isDark);
+        moonM.classList.toggle("hidden", !isDark);
+      }
+      if (labelM) labelM.textContent = isDark ? "Mode sombre" : "Mode clair";
+    };
+
+    const initTheme = () => {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const initial = (() => {
+        if (saved === "dark") return "dark";
+        if (saved && saved !== "default") {
+          palette = saved;
+          return palette;
+        }
+        if (saved === "default") return palette;
+        if (!saved && palette !== "default") return palette;
+        return prefersDark ? "dark" : palette;
+      })();
+      applyTheme(initial);
+    };
+    initTheme();
+
+    const desktopToggle = document.getElementById("theme-toggle");
+    const mobileToggle = document.getElementById("theme-toggle-mobile");
+    const toggleHandler = () => {
+      const isDark = root.dataset.theme === "dark";
+      applyTheme(isDark ? palette : "dark");
+    };
+    desktopToggle?.addEventListener("click", toggleHandler);
+    mobileToggle?.addEventListener("click", toggleHandler);
+
+    const drawer = document.getElementById("mobile-drawer");
+    const backdrop = document.getElementById("drawer-backdrop");
+    const openBtn = document.getElementById("drawer-open");
+    const closeBtn = document.getElementById("drawer-close");
+    const drawerLinks = drawer?.querySelectorAll("a");
+
+    const setDrawer = (open) => {
+      if (drawer) {
+        drawer.style.transform = open ? "translateX(0)" : "translateX(-100%)";
+        drawer.classList.toggle("is-open", open);
+      }
+      if (backdrop) {
+        backdrop.style.opacity = open ? "1" : "0";
+        backdrop.style.pointerEvents = open ? "auto" : "none";
+        backdrop.classList.toggle("is-open", open);
+      }
+      document.body.classList.toggle("overflow-hidden", open);
+    };
+
+    openBtn?.addEventListener("click", () => setDrawer(true));
+    closeBtn?.addEventListener("click", () => setDrawer(false));
+    backdrop?.addEventListener("click", () => setDrawer(false));
+    drawerLinks?.forEach((link) => link.addEventListener("click", () => setDrawer(false)));
+
+    // Initialize closed state
+    setDrawer(false);
+  })();
+</script>

@@ -1,0 +1,93 @@
+{
+  "$ref": "#/definitions/lessons",
+  "definitions": {
+    "lessons": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "module": {
+          "type": "string"
+        },
+        "order": {
+          "type": "number"
+        },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "voir",
+            "composer",
+            "generer",
+            "stabiliser",
+            "mettre-en-scene",
+            "animer",
+            "monter",
+            "documenter"
+          ]
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "debutant",
+            "intermediaire",
+            "avance"
+          ]
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "Adobe Firefly",
+              "Kling",
+              "Hailuo",
+              "Runway",
+              "Midjourney",
+              "Photoshop",
+              "Premiere",
+              "Notion",
+              "Generic workflow"
+            ]
+          },
+          "default": [
+            "Generic workflow"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
+        "heroImage": {
+          "type": "string"
+        },
+        "estimatedTime": {
+          "type": "string"
+        },
+        "draft": {
+          "type": "boolean",
+          "default": false
+        },
+        "$schema": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "description",
+        "module",
+        "order",
+        "stage",
+        "level"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "$schema": "http://json-schema.org/draft-07/schema#"
+}
