@@ -23,7 +23,7 @@ interface Props {
 const { eyebrow, title, description, image, imageAlt = "", actions = [], stats = [] } = Astro.props;
 ---
 
-<section class="course-hero">
+<section class:list={["course-hero", { "course-hero--no-visual": !image }]}>
   <div class="course-hero__content">
     {eyebrow && <span class="eyebrow">{eyebrow}</span>}
     <h1>{title}</h1>

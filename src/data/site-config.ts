@@ -18,10 +18,9 @@ export const siteConfig = {
     linkedin: "",
   },
   navigation: [
-    { label: "Accueil", href: "/" },
-    { label: "Formation", href: "/formation/" },
+    { label: "Formation", href: "/" },
     { label: "Prompts", href: "/prompts/" },
-    { label: "References", href: "/references/" },
+    { label: "Références", href: "/references/" },
     { label: "Projets", href: "/projects/" },
     { label: "Glossaire", href: "/glossary/" },
     { label: "Ressources", href: "/resources/" },
