@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ToolBadge from "../components/ui/ToolBadge.astro";
+import { formatLevelLabel, formatStageLabel, formatStatusLabel } from "../data/content-labels";
 
 const [lessonEntries, prompts, projects, shots, resources] = await Promise.all([
   getCollection("lessons"),
@@ -106,8 +107,8 @@ const highlights = [
       </div>
       <div class="hub-feature__meta">
         <span>{featuredLesson.data.estimatedTime}</span>
-        <span>{featuredLesson.data.level}</span>
-        <span>{featuredLesson.data.stage}</span>
+        <span>{formatLevelLabel(featuredLesson.data.level)}</span>
+        <span>{formatStageLabel(featuredLesson.data.stage)}</span>
       </div>
       <a class="button primary" href={`/formation/${featuredLesson.id}/`}>
         Démarrer la première leçon
@@ -178,8 +179,8 @@ const highlights = [
             <div class="catalogue-card__number">{String(index + 1).padStart(2, "0")}</div>
             <div class="catalogue-card__content">
               <div class="card-meta">
-                <span>{lesson.data.stage}</span>
-                <span>{lesson.data.level}</span>
+                <span>{formatStageLabel(lesson.data.stage)}</span>
+                <span>{formatLevelLabel(lesson.data.level)}</span>
               </div>
               <h3>{lesson.data.title}</h3>
               <p>{lesson.data.description}</p>
@@ -230,7 +231,7 @@ const highlights = [
             <a class="project-preview" href={`/projects/${project.id}/`}>
               {project.data.heroImage && <img src={project.data.heroImage} alt="" loading="lazy" />}
               <div>
-                <span class="card-kicker">{project.data.status}</span>
+                <span class="card-kicker">{formatStatusLabel(project.data.status)}</span>
                 <h3>{project.data.title}</h3>
                 <span class="text-link">Voir le projet →</span>
               </div>

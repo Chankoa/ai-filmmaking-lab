@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import ShotCard from "./ShotCard.astro";
+import { formatCameraShotFamilyLabel } from "../../data/content-labels";
 
 interface Props {
   shots: CollectionEntry<"camera-shots">[];
@@ -10,7 +11,7 @@ interface Props {
 
 const {
   shots,
-  title = "Camera Shots",
+  title = "Plans caméra",
   description = "Guide visuel des plans, angles et usages narratifs.",
 } = Astro.props;
 
@@ -20,12 +21,12 @@ const families = [...new Set(shots.map((shot) => shot.data.family))];
 
 <section class="reference-board" aria-labelledby="reference-board-title">
   <div class="section-heading">
-    <span class="eyebrow">References</span>
+    <span class="eyebrow">Références</span>
     <h2 id="reference-board-title">{title}</h2>
     <p>{description}</p>
   </div>
 
-  <div class="filter-row" aria-label="Filtres des references">
+  <div class="filter-row" aria-label="Filtres des références">
     <label>
       Distance
       <select data-reference-filter="distance">
@@ -37,7 +38,7 @@ const families = [...new Set(shots.map((shot) => shot.data.family))];
       Famille
       <select data-reference-filter="family">
         <option value="all">Toutes</option>
-        {families.map((family) => <option value={family}>{family}</option>)}
+        {families.map((family) => <option value={family}>{formatCameraShotFamilyLabel(family)}</option>)}
       </select>
     </label>
   </div>

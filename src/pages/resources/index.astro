@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CourseHero from "../../components/course/CourseHero.astro";
 import ToolBadge from "../../components/ui/ToolBadge.astro";
+import { formatResourceTypeLabel, formatStatusLabel } from "../../data/content-labels";
 
 const resources = await getCollection("resources");
 ---
@@ -11,12 +12,12 @@ const resources = await getCollection("resources");
   <CourseHero
     eyebrow="Resources"
     title="Templates et checklists"
-    description="La section ressources preparera les supports reutilisables : production bible, shot-list, prompt packs, grilles d'analyse et workflows."
+    description="La section ressources préparera les supports réutilisables : production bible, shot-list, prompt packs, grilles d'analyse et workflows."
     image="/assets/visuals/pipeline-board.svg"
     imageAlt="Pipeline de ressources de production"
     stats={[
       { label: "Ressources", value: String(resources.length) },
-      { label: "Format", value: "Evolutif" },
+      { label: "Format", value: "Évolutif" },
       { label: "Usage", value: "Documentation" },
     ]}
   />
@@ -26,8 +27,8 @@ const resources = await getCollection("resources");
       resources.map((resource) => (
         <article class="resource-card">
           <div class="card-meta">
-            <span>{resource.data.type}</span>
-            <span>{resource.data.status}</span>
+            <span>{formatResourceTypeLabel(resource.data.type)}</span>
+            <span>{formatStatusLabel(resource.data.status)}</span>
           </div>
           <h3>{resource.data.title}</h3>
           <p>{resource.data.description}</p>

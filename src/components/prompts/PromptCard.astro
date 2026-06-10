@@ -3,6 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import CodeBlock from "../code/CodeBlock.astro";
 import ToolBadge from "../ui/ToolBadge.astro";
 import PromptBreakdown from "./PromptBreakdown.astro";
+import { formatLevelLabel, formatPromptCategoryLabel } from "../../data/content-labels";
 
 interface Props {
   prompt: CollectionEntry<"prompts">;
@@ -14,8 +15,8 @@ const { data } = prompt;
 
 <article class="prompt-card" data-prompt-card data-category={data.category} data-tool={data.tool}>
   <div class="card-meta">
-    <span>{data.category}</span>
-    <span>{data.level}</span>
+    <span>{formatPromptCategoryLabel(data.category)}</span>
+    <span>{formatLevelLabel(data.level)}</span>
   </div>
   <div class="prompt-card__title">
     <h3>{data.title}</h3>
@@ -27,7 +28,7 @@ const { data } = prompt;
   {
     data.negativePrompt && (
       <details>
-        <summary>Contraintes negatives</summary>
+        <summary>Contraintes négatives</summary>
         <CodeBlock code={data.negativePrompt} label="Negative prompt" />
       </details>
     )

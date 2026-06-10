@@ -1,6 +1,6 @@
 ---
-title: "Prompt maitre Lyra Voss"
-description: "Base personnage pour decliner portraits, plans et sequences sans perdre l'identite."
+title: "Prompt maître Lyra Voss"
+description: "Base personnage pour décliner portraits, plans et séquences sans perdre l'identité."
 category: "character"
 level: "intermediaire"
 tool: "Adobe Firefly"
@@ -10,4 +10,4 @@ variables: ["shot scale", "lighting palette", "pose", "background depth"]
 tags: ["character", "cyberpunk", "consistency"]
 ---
 
-Utiliser ce prompt comme base stable avant d'ajouter une action ou un mouvement camera.
+Utiliser ce prompt comme base stable avant d'ajouter une action ou un mouvement caméra.

@@ -1,6 +1,6 @@
 ---
-title: "Dolly push-in controle"
-description: "Prompt video pour passer d'un medium shot a un close shot sans deformation du visage."
+title: "Dolly push-in contrôlé"
+description: "Prompt vidéo pour passer d'un medium shot à un close shot sans déformation du visage."
 category: "video"
 level: "intermediaire"
 tool: "Kling"
@@ -10,4 +10,4 @@ variables: ["start frame", "end frame", "camera speed", "environment motion"]
 tags: ["image-to-video", "camera movement", "character"]
 ---
 
-Le mouvement doit rester suffisamment sobre pour proteger l'identite du personnage.
+Le mouvement doit rester suffisamment sobre pour protéger l'identité du personnage.

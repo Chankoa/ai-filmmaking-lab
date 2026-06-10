@@ -5,7 +5,7 @@ export const siteConfig = {
   url: "https://master-ai-filmmaking.local",
   meta: {
     description:
-      "Documentation creative pour apprendre a concevoir, generer, stabiliser et monter des images et videos avec l'IA.",
+      "Documentation créative pour apprendre à concevoir, générer, stabiliser et monter des images et vidéos avec l'IA.",
   },
   contact: {
     phone: "",

@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import { formatStageLabel } from "../../data/content-labels";
 
 interface Props {
   lessons: CollectionEntry<"lessons">[];
@@ -10,14 +11,14 @@ const { lessons, currentId } = Astro.props;
 const sortedLessons = [...lessons].sort((a, b) => a.data.order - b.data.order);
 ---
 
-<nav class="lesson-nav" aria-label="Navigation des lecons">
+<nav class="lesson-nav" aria-label="Navigation des leçons">
   <strong>Parcours</strong>
   <ol>
     {
       sortedLessons.map((lesson) => (
         <li>
           <a class={lesson.id === currentId ? "is-active" : ""} href={`/formation/${lesson.id}/`}>
-            <span>{lesson.data.stage}</span>
+            <span>{formatStageLabel(lesson.data.stage)}</span>
             {lesson.data.title}
           </a>
         </li>

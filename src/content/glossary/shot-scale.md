@@ -1,8 +1,8 @@
 ---
-term: "Echelle de plan"
-definition: "Distance apparente entre la camera et le sujet, utilisee pour doser emotion, information et lisibilite."
+term: "Échelle de plan"
+definition: "Distance apparente entre la caméra et le sujet, utilisée pour doser émotion, information et lisibilité."
 category: "cinema"
 related: ["cadrage", "composition", "shot list"]
 ---
 
-Dans un workflow IA, l'echelle de plan doit etre nommee explicitement pour eviter les recadrages aleatoires.
+Dans un workflow IA, l'échelle de plan doit être nommée explicitement pour éviter les recadrages aléatoires.

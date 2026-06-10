@@ -5,23 +5,23 @@
     "family": "scale",
     "distance": "proche",
     "emotion": "tension",
-    "use": "Isoler un detail narratif : regard, larme, texture, reflet.",
+    "use": "Isoler un détail narratif : regard, larme, texture, reflet.",
     "movement": "Micro push-in avec focus shift sur le reflet.",
     "prompt": "Extreme close-up of Lyra Voss' eye, rain droplets on skin, neon reflections inside the iris, cinematic cyberpunk lighting, shallow depth of field, realistic skin texture.",
-    "avoid": "Ne pas generer un portrait recadre ; le detail doit porter une information.",
-    "toolNotes": "Limiter les variations de visage avec une reference forte."
+    "avoid": "Ne pas générer un portrait recadré ; le détail doit porter une information.",
+    "toolNotes": "Limiter les variations de visage avec une référence forte."
   },
   {
     "id": "close-up",
     "name": "Close-Up",
     "family": "scale",
     "distance": "proche",
-    "emotion": "intimite",
-    "use": "Lire une emotion et garder la presence du personnage.",
-    "movement": "Leger push-in, respiration subtile, arriere-plan mouvant.",
+    "emotion": "intimité",
+    "use": "Lire une émotion et garder la présence du personnage.",
+    "movement": "Léger push-in, respiration subtile, arrière-plan mouvant.",
     "prompt": "Close-up portrait of Lyra Voss under soft rain, calm intense eyes, wet dark honey-brown hair, cyan and magenta city light, grounded photorealism.",
-    "avoid": "Eviter les changements de visage entre deux plans.",
-    "toolNotes": "Bon plan de controle pour tester la consistance."
+    "avoid": "Éviter les changements de visage entre deux plans.",
+    "toolNotes": "Bon plan de contrôle pour tester la consistance."
   },
   {
     "id": "medium-shot",
@@ -30,9 +30,9 @@
     "distance": "moyen",
     "emotion": "action",
     "use": "Montrer une action claire sans perdre le personnage.",
-    "movement": "Tracking lateral lent, cheveux et pluie en mouvement.",
+    "movement": "Tracking latéral lent, cheveux et pluie en mouvement.",
     "prompt": "Medium shot of Lyra Voss turning toward the camera in a neon alley, reflective pavement, tactical outfit, readable silhouette, cinematic realism.",
-    "avoid": "Eviter les bras ou mains flous qui cassent la lisibilite."
+    "avoid": "Éviter les bras ou mains flous qui cassent la lisibilité."
   },
   {
     "id": "full-shot",
@@ -40,8 +40,8 @@
     "family": "scale",
     "distance": "large",
     "emotion": "silhouette",
-    "use": "Presenter silhouette, tenue complete et posture.",
-    "movement": "Dolly back tres leger pour reveler l'environnement.",
+    "use": "Présenter silhouette, tenue complète et posture.",
+    "movement": "Dolly back très léger pour révéler l'environnement.",
     "prompt": "Full body shot of Lyra Voss standing in a rain-soaked cyberpunk street, matte black outfit, no high heels, balanced stance, neon signs, realistic proportions.",
     "avoid": "Ne pas perdre les constantes physiques du personnage."
   },
@@ -51,10 +51,10 @@
     "family": "angle",
     "distance": "moyen",
     "emotion": "puissance",
-    "use": "Donner autorite, menace ou heroisation.",
-    "movement": "Tilt up controle, verticalite du decor.",
+    "use": "Donner autorité, menace ou héroïsation.",
+    "movement": "Tilt up contrôlé, verticalité du décor.",
     "prompt": "Low-angle medium shot of Lyra Voss under neon rain, city towers above her, calm powerful stance, realistic camera perspective, cinematic contrast.",
-    "avoid": "Ne pas exagerer les proportions du corps."
+    "avoid": "Ne pas exagérer les proportions du corps."
   },
   {
     "id": "over-the-shoulder",
@@ -62,8 +62,8 @@
     "family": "angle",
     "distance": "moyen",
     "emotion": "relation",
-    "use": "Creer tension ou dialogue entre sujet et cible.",
-    "movement": "Rack focus entre l'epaule et la cible.",
+    "use": "Créer tension ou dialogue entre sujet et cible.",
+    "movement": "Rack focus entre l'épaule et la cible.",
     "prompt": "Over-the-shoulder shot from behind Lyra Voss looking toward a neon samurai silhouette in the rain, strong foreground shoulder, cinematic depth.",
     "avoid": "Ne pas cacher l'information principale avec le premier plan."
   }

@@ -1,6 +1,6 @@
 ---
 title: "Transition par reflet"
-description: "Transition cinematic match cut basee sur un reflet qui envahit le cadre."
+description: "Transition cinematic match cut basée sur un reflet qui envahit le cadre."
 category: "transition"
 level: "avance"
 tool: "Hailuo"
@@ -10,4 +10,4 @@ variables: ["reflection source", "next scene", "camera direction", "color contin
 tags: ["transition", "continuity", "video"]
 ---
 
-Cette transition fonctionne quand les deux plans partagent deja une palette et une logique de mouvement.
+Cette transition fonctionne quand les deux plans partagent déjà une palette et une logique de mouvement.

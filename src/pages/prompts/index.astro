@@ -3,33 +3,34 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CourseHero from "../../components/course/CourseHero.astro";
 import PromptCard from "../../components/prompts/PromptCard.astro";
+import { formatPromptCategoryLabel } from "../../data/content-labels";
 
 const prompts = await getCollection("prompts");
 const categories = [...new Set(prompts.map((entry) => entry.data.category))];
 ---
 
-<BaseLayout title="Prompts" description="Bibliotheque de prompts filtrable et reutilisable pour images, personnages et videos IA.">
+<BaseLayout title="Prompts" description="Bibliothèque de prompts filtrable et réutilisable pour images, personnages et vidéos IA.">
   <CourseHero
     eyebrow="Prompt Library"
     title="Prompts comme fiches de production"
-    description="Chaque prompt documente une intention, un outil, des variables, des contraintes negatives et un usage pedagogique."
+    description="Chaque prompt documente une intention, un outil, des variables, des contraintes négatives et un usage pédagogique."
     image="/assets/visuals/product-layers.svg"
     imageAlt="Composition visuelle en couches pour construire un prompt"
     stats={[
       { label: "Prompts", value: String(prompts.length) },
-      { label: "Categories", value: String(categories.length) },
+      { label: "Catégories", value: String(categories.length) },
       { label: "Usage", value: "Copiable" },
     ]}
   />
 
   <section class="tool-panel" aria-labelledby="prompt-list-title">
     <div class="section-heading">
-      <span class="eyebrow">Bibliotheque</span>
-      <h2 id="prompt-list-title">Prompts de demarrage</h2>
+      <span class="eyebrow">Bibliothèque</span>
+      <h2 id="prompt-list-title">Prompts de démarrage</h2>
     </div>
     <div class="segmented-control" aria-label="Filtrer les prompts">
       <button type="button" class="is-active" data-prompt-filter="all">Tous</button>
-      {categories.map((category) => <button type="button" data-prompt-filter={category}>{category}</button>)}
+      {categories.map((category) => <button type="button" data-prompt-filter={category}>{formatPromptCategoryLabel(category)}</button>)}
     </div>
     <div class="prompt-grid">
       {prompts.map((prompt) => <PromptCard prompt={prompt} />)}

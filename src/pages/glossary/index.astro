@@ -2,19 +2,20 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CourseHero from "../../components/course/CourseHero.astro";
+import { formatGlossaryCategoryLabel } from "../../data/content-labels";
 
 const terms = await getCollection("glossary");
 ---
 
-<BaseLayout title="Glossary" description="Glossaire des notions cinema, image, video, prompts et workflows IA.">
+<BaseLayout title="Glossary" description="Glossaire des notions de cinéma, image, vidéo, prompts et workflows IA.">
   <CourseHero
     eyebrow="Glossary"
     title="Vocabulaire de production"
-    description="Un glossaire evolutif pour relier les termes cinema, photo, prompt engineering et workflows IA."
+    description="Un glossaire évolutif pour relier les termes cinéma, photo, prompt engineering et workflows IA."
     stats={[
       { label: "Termes", value: String(terms.length) },
-      { label: "Domaines", value: "Cinema / IA" },
-      { label: "Role", value: "Reference" },
+      { label: "Domaines", value: "Cinéma / IA" },
+      { label: "Rôle", value: "Référence" },
     ]}
   />
 
@@ -22,7 +23,7 @@ const terms = await getCollection("glossary");
     {
       terms.map((entry) => (
         <article>
-          <span class="card-kicker">{entry.data.category}</span>
+          <span class="card-kicker">{formatGlossaryCategoryLabel(entry.data.category)}</span>
           <h2>{entry.data.term}</h2>
           <p>{entry.data.definition}</p>
           {entry.data.related.length > 0 && (

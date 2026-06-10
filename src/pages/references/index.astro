@@ -7,13 +7,13 @@ import MediaCard from "../../components/media/MediaCard.astro";
 const shots = await getCollection("camera-shots");
 ---
 
-<BaseLayout title="References" description="Boards, guides visuels et references de production pour l'AI filmmaking.">
+<BaseLayout title="Références" description="Boards, guides visuels et références de production pour l'AI filmmaking.">
   <CourseHero
-    eyebrow="References visuelles"
+    eyebrow="Références visuelles"
     title="Guides pour voir et cadrer"
-    description="Cette section regroupe les references qui aident a nommer un plan, choisir une intention et preparer une generation plus controlee."
+    description="Cette section regroupe les références qui aident à nommer un plan, choisir une intention et préparer une génération plus contrôlée."
     image="/assets/visuals/camera-shots.svg"
-    imageAlt="Guide visuel des plans camera"
+    imageAlt="Guide visuel des plans caméra"
     stats={[
       { label: "Plans", value: String(shots.length) },
       { label: "Familles", value: "Scale / Angle" },
@@ -21,7 +21,7 @@ const shots = await getCollection("camera-shots");
     ]}
   />
 
-  <section class="content-grid content-grid--three" aria-label="Boards de reference">
+  <section class="content-grid content-grid--three" aria-label="Boards de référence">
     <MediaCard
       title="Camera Shots"
       description="Types de plans, angles, usages narratifs, mouvements et prompts types."
@@ -31,14 +31,14 @@ const shots = await getCollection("camera-shots");
     />
     <MediaCard
       title="Moodboards"
-      description="Structure future pour univers, palettes, lieux, outfits et references style."
+      description="Structure future pour univers, palettes, lieux, outfits et références style."
       image="/assets/visuals/production-board.svg"
       href="/resources/"
-      meta="A construire"
+      meta="À construire"
     />
     <MediaCard
       title="Reference Boards"
-      description="Support futur pour personnages, objets, decors et continuity checks."
+      description="Support futur pour personnages, objets, décors et continuity checks."
       image="/assets/visuals/lyra-board.svg"
       href="/projects/lyra-voss/"
       meta="Case study"

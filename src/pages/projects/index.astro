@@ -3,17 +3,18 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CourseHero from "../../components/course/CourseHero.astro";
 import MediaCard from "../../components/media/MediaCard.astro";
+import { formatStatusLabel } from "../../data/content-labels";
 
 const projects = await getCollection("projects");
 ---
 
-<BaseLayout title="Projects" description="Etudes de cas de production IA : personnages, univers, prompts, videos et documentation.">
+<BaseLayout title="Projects" description="Études de cas de production IA : personnages, univers, prompts, vidéos et documentation.">
   <CourseHero
     eyebrow="Case Studies"
-    title="Projets documentes"
-    description="Les projets transforment les exercices en etudes de production : brief, references, prompt maitre, frames, animation, montage et critique."
+    title="Projets documentés"
+    description="Les projets transforment les exercices en études de production : brief, références, prompt maître, frames, animation, montage et critique."
     image="/assets/visuals/production-board.svg"
-    imageAlt="Board de production creative"
+    imageAlt="Board de production créative"
     stats={[
       { label: "Projets", value: String(projects.length) },
       { label: "Statut", value: "V1" },
@@ -21,7 +22,7 @@ const projects = await getCollection("projects");
     ]}
   />
 
-  <section class="content-grid" aria-label="Etudes de cas">
+  <section class="content-grid" aria-label="Études de cas">
     {
       projects.map((project) => (
         <MediaCard
@@ -29,7 +30,7 @@ const projects = await getCollection("projects");
           description={project.data.description}
           image={project.data.heroImage}
           href={`/projects/${project.id}/`}
-          meta={project.data.status}
+          meta={formatStatusLabel(project.data.status)}
         />
       ))
     }
