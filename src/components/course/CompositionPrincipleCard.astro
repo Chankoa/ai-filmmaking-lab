@@ -1,0 +1,56 @@
+---
+import type { CompositionPrinciple } from "../../data/composition-principles";
+import PromptExampleCard from "../prompts/PromptExampleCard.astro";
+import CompositionDiagram from "./CompositionDiagram.astro";
+
+interface Props {
+  principle: CompositionPrinciple;
+  showPrompt?: boolean;
+  compact?: boolean;
+}
+
+const { principle, showPrompt = false, compact = false } = Astro.props;
+---
+
+<article
+  class:list={["composition-principle", { "composition-principle--expanded": showPrompt, "is-compact": compact }]}
+  id={principle.id}
+>
+  <CompositionDiagram type={principle.diagram} title={principle.title} compact={compact} />
+  <div class="composition-principle__body">
+    <div class="composition-principle__meta">
+      <span>{principle.number}</span>
+      <span>{principle.englishName}</span>
+    </div>
+    <h3>{principle.title}</h3>
+    <p>{principle.definition}</p>
+    <dl>
+      <div>
+        <dt>Effet narratif</dt>
+        <dd>{principle.narrativeEffect}</dd>
+      </div>
+      <div>
+        <dt>Usage AI filmmaking</dt>
+        <dd>{principle.filmmakingUse}</dd>
+      </div>
+      <div>
+        <dt>Prompt pattern</dt>
+        <dd><code>{principle.promptPattern}</code></dd>
+      </div>
+    </dl>
+    {
+      showPrompt && (
+        <details class="composition-principle__prompt">
+          <summary>Voir le prompt complet</summary>
+          <PromptExampleCard
+            title={`Vertical Silence · ${principle.title}`}
+            prompt={principle.prompt}
+            negativePrompt={principle.negativePrompt}
+            variables={principle.tags}
+            compact
+          />
+        </details>
+      )
+    }
+  </div>
+</article>

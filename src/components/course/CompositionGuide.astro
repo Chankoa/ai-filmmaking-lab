@@ -1,0 +1,174 @@
+---
+import Callout from "../ui/Callout.astro";
+import CodeBlock from "../code/CodeBlock.astro";
+import CompositionPrincipleCard from "./CompositionPrincipleCard.astro";
+import PromptRecipe from "./PromptRecipe.astro";
+import {
+  compositionCases,
+  compositionChecklist,
+  compositionPrompt,
+  featuredCompositionPrinciples,
+  promptLayers,
+} from "../../data/composition";
+
+const method = [
+  ["Voir", "Repérer le sujet, le contexte et l'émotion."],
+  ["Composer", "Organiser le regard et la profondeur."],
+  ["Générer", "Traduire les décisions dans le prompt."],
+  ["Stabiliser", "Verrouiller les éléments qui doivent rester."],
+  ["Mettre en scène", "Relier la frame au plan suivant."],
+];
+---
+
+<div class="composition-guide">
+  <section class="composition-opening" aria-labelledby="composition-title">
+    <div class="composition-opening__copy">
+      <span class="lesson-kicker">Module Composition</span>
+      <h2 id="composition-title">Composer, c'est décider où va le regard.</h2>
+      <p>
+        L'IA remplit volontiers le cadre. Votre rôle consiste à hiérarchiser : une information
+        principale, des éléments de soutien et assez d'espace pour que le plan puisse vivre.
+      </p>
+    </div>
+
+    <div class="composition-opening__frame" aria-label="Lecture simplifiée d'un cadre cinématographique">
+      <span class="composition-opening__label composition-opening__label--subject">Sujet</span>
+      <span class="composition-opening__label composition-opening__label--space">Direction</span>
+      <span class="composition-opening__person" aria-hidden="true"></span>
+      <span class="composition-opening__look" aria-hidden="true"></span>
+      <span class="composition-opening__foreground" aria-hidden="true"></span>
+      <span class="composition-opening__grid" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <ol class="composition-method" aria-label="Place de la composition dans la méthode">
+    {
+      method.map(([label, description], index) => (
+        <li class={label === "Composer" ? "is-current" : ""}>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <strong>{label}</strong>
+          <p>{description}</p>
+        </li>
+      ))
+    }
+  </ol>
+
+  <section class="composition-section" aria-labelledby="principles-title">
+    <div class="composition-section__heading">
+      <div>
+        <span class="lesson-kicker">Six repères</span>
+        <h2 id="principles-title">Des principes à combiner, jamais des recettes rigides.</h2>
+      </div>
+      <p>
+        Commencez avec un seul principe dominant. Ajoutez-en un second uniquement s'il renforce
+        l'intention narrative ou prépare un mouvement.
+      </p>
+    </div>
+
+    <div class="composition-principles">
+      {
+        featuredCompositionPrinciples.map((principle) => (
+          <CompositionPrincipleCard principle={principle} />
+        ))
+      }
+    </div>
+  </section>
+
+  <PromptRecipe layers={promptLayers} prompt={compositionPrompt} />
+
+  <Callout title="Test de lisibilité" tone="method">
+    <p>
+      Réduisez votre image à la taille d'une vignette. Si le sujet, la direction du regard et les
+      grandes masses ne sont plus lisibles, le prompt contient probablement trop d'informations concurrentes.
+    </p>
+  </Callout>
+
+  <section class="composition-section" aria-labelledby="cases-title">
+    <div class="composition-section__heading">
+      <div>
+        <span class="lesson-kicker">Cas d'usage</span>
+        <h2 id="cases-title">Composer pour ce qui arrive après la génération.</h2>
+      </div>
+      <p>
+        Une frame de production doit anticiper le raccord, le mouvement de caméra et la stabilité
+        des éléments importants.
+      </p>
+    </div>
+
+    <div class="composition-cases">
+      {
+        compositionCases.map((item, index) => (
+          <article>
+            <div class="composition-cases__topline">
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <span>{item.label}</span>
+            </div>
+            <h3>{item.title}</h3>
+            <p class="composition-cases__setup">{item.setup}</p>
+            <p>{item.decision}</p>
+            <CodeBlock code={item.prompt} label="Direction de prompt" />
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="sequence-board" aria-labelledby="sequence-title">
+    <div class="sequence-board__heading">
+      <span class="lesson-kicker">Mini-séquence</span>
+      <h2 id="sequence-title">Un cadre n'existe jamais seul.</h2>
+      <p>Composez trois plans avec une information différente, mais un même axe de lecture.</p>
+    </div>
+    <div class="sequence-board__shots">
+      <article>
+        <div class="sequence-frame sequence-frame--wide">
+          <span class="sequence-frame__subject"></span>
+          <span class="sequence-frame__light"></span>
+        </div>
+        <span>Plan 01 · Situer</span>
+        <strong>Le décor domine, le personnage entre dans l'espace.</strong>
+      </article>
+      <article>
+        <div class="sequence-frame sequence-frame--medium">
+          <span class="sequence-frame__subject"></span>
+          <span class="sequence-frame__light"></span>
+        </div>
+        <span>Plan 02 · Orienter</span>
+        <strong>Le regard prépare l'information hors champ.</strong>
+      </article>
+      <article>
+        <div class="sequence-frame sequence-frame--detail">
+          <span class="sequence-frame__subject"></span>
+          <span class="sequence-frame__light"></span>
+        </div>
+        <span>Plan 03 · Révéler</span>
+        <strong>Le détail devient le nouveau point focal.</strong>
+      </article>
+    </div>
+  </section>
+
+  <section class="composition-practice" aria-labelledby="practice-title">
+    <div>
+      <span class="lesson-kicker">Exercice guidé · 20 min</span>
+      <h2 id="practice-title">Créer une frame prête à animer.</h2>
+      <p>
+        Choisissez une action simple : attendre, découvrir, traverser ou observer. Produisez trois
+        variantes en ne changeant qu'un principe de composition à la fois.
+      </p>
+      <ol>
+        <li>Écrivez l'intention du plan en une phrase.</li>
+        <li>Dessinez trois masses : sujet, décor, espace libre.</li>
+        <li>Choisissez un principe dominant parmi les six.</li>
+        <li>Rédigez le prompt avec les huit couches proposées.</li>
+        <li>Comparez les variantes à taille de vignette.</li>
+        <li>Ajoutez le mouvement de caméra seulement après validation de la frame.</li>
+      </ol>
+    </div>
+    <aside>
+      <strong>Checklist avant validation</strong>
+      <ul>
+        {compositionChecklist.map((item) => <li>{item}</li>)}
+      </ul>
+    </aside>
+  </section>
+</div>

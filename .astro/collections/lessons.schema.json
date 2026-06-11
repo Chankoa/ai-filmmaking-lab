@@ -70,6 +70,13 @@
         "estimatedTime": {
           "type": "string"
         },
+        "template": {
+          "type": "string",
+          "enum": [
+            "composition",
+            "composition-cinematique"
+          ]
+        },
         "draft": {
           "type": "boolean",
           "default": false

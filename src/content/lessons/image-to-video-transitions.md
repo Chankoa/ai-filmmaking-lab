@@ -2,7 +2,7 @@
 title: "Image-to-video et transitions"
 description: "Transformer une image fixe en plan vidéo contrôlé, puis relier deux plans par une transition lisible."
 module: "Image-to-video et mouvements crédibles"
-order: 3
+order: 4
 stage: "animer"
 level: "intermediaire"
 tools: ["Kling", "Hailuo", "Runway", "Premiere"]

@@ -20,6 +20,7 @@ const promptCategoryLabels: Record<string, string> = {
   video: "Vidéo",
   character: "Personnage",
   camera: "Caméra",
+  composition: "Composition",
   transition: "Transition",
   workflow: "Workflow",
 };

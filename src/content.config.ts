@@ -37,6 +37,7 @@ const lessons = defineCollection({
     tags: z.array(z.string()).default([]),
     heroImage: z.string().optional(),
     estimatedTime: z.string().optional(),
+    template: z.enum(["composition", "composition-cinematique"]).optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -46,7 +47,7 @@ const prompts = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    category: z.enum(["image", "video", "character", "camera", "transition", "workflow"]),
+    category: z.enum(["image", "video", "character", "camera", "composition", "transition", "workflow"]),
     level: levelSchema,
     tool: toolSchema.default("Generic workflow"),
     prompt: z.string(),

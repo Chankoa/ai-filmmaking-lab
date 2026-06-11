@@ -1,0 +1,33 @@
+---
+import CodeBlock from "../code/CodeBlock.astro";
+import PromptBreakdown from "./PromptBreakdown.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  prompt: string;
+  negativePrompt?: string;
+  variables?: string[];
+  compact?: boolean;
+}
+
+const {
+  title,
+  description,
+  prompt,
+  negativePrompt,
+  variables = [],
+  compact = false,
+} = Astro.props;
+---
+
+<article class:list={["prompt-example-card", { "is-compact": compact }]}>
+  <header>
+    <span class="lesson-kicker">Exemple de production</span>
+    <h4>{title}</h4>
+    {description && <p>{description}</p>}
+  </header>
+  <PromptBreakdown variables={variables} label="Décisions de composition" />
+  <CodeBlock code={prompt} label="Prompt cinéma" />
+  {negativePrompt && <CodeBlock code={negativePrompt} label="Negative prompt" />}
+</article>

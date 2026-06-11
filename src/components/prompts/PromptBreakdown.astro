@@ -1,17 +1,21 @@
 ---
 interface Props {
-  variables: string[];
+  variables?: string[];
+  label?: string;
 }
 
-const { variables } = Astro.props;
+const { variables = [], label = "Variables du prompt" } = Astro.props;
 ---
 
 {
   variables.length > 0 && (
-    <ul class="prompt-breakdown" aria-label="Variables du prompt">
-      {variables.map((variable) => (
-        <li>{variable}</li>
-      ))}
-    </ul>
+    <div class="prompt-breakdown-block">
+      <strong>{label}</strong>
+      <ul class="prompt-breakdown" aria-label={label}>
+        {variables.map((variable, index) => (
+          <li><span>{String(index + 1).padStart(2, "0")}</span>{variable}</li>
+        ))}
+      </ul>
+    </div>
   )
 }

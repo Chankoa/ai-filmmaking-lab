@@ -1,0 +1,37 @@
+---
+import CodeBlock from "../code/CodeBlock.astro";
+
+interface Props {
+  before: string;
+  after: string;
+  title?: string;
+  analysis?: string;
+}
+
+const {
+  before,
+  after,
+  title = "Du prompt descriptif au prompt de mise en scène",
+  analysis,
+} = Astro.props;
+---
+
+<section class="prompt-comparison" aria-labelledby="prompt-comparison-title">
+  <header>
+    <span class="lesson-kicker">Comparaison</span>
+    <h2 id="prompt-comparison-title">{title}</h2>
+    {analysis && <p>{analysis}</p>}
+  </header>
+  <div class="prompt-comparison__grid">
+    <article>
+      <span class="prompt-comparison__status prompt-comparison__status--before">Avant</span>
+      <p>Le modèle reçoit une ambiance, mais aucune hiérarchie de cadre.</p>
+      <CodeBlock code={before} label="Prompt vague" />
+    </article>
+    <article>
+      <span class="prompt-comparison__status prompt-comparison__status--after">Après</span>
+      <p>Le placement, la profondeur et le point focal deviennent contrôlables.</p>
+      <CodeBlock code={after} label="Prompt composé" />
+    </article>
+  </div>
+</section>

@@ -2,7 +2,7 @@
 title: "Character consistency"
 description: "Méthode de base pour stabiliser un personnage IA entre portraits, plans larges, outfits et séquences vidéo."
 module: "Character consistency et reference boards"
-order: 2
+order: 3
 stage: "stabiliser"
 level: "intermediaire"
 tools: ["Adobe Firefly", "Photoshop", "Generic workflow"]

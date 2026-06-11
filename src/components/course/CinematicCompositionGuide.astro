@@ -1,0 +1,170 @@
+---
+import Callout from "../ui/Callout.astro";
+import CompositionPrincipleCard from "./CompositionPrincipleCard.astro";
+import PromptComparison from "../prompts/PromptComparison.astro";
+import PromptExampleCard from "../prompts/PromptExampleCard.astro";
+import {
+  compositionChecklist,
+  compositionNegativePrompt,
+  compositionPrinciples,
+  compositionPrompt,
+  promptLayers,
+} from "../../data/composition-principles";
+
+const vaguePrompt =
+  "Lyra Voss in a cyberpunk place at night, cinematic, rainy, dramatic lighting, high detail.";
+
+const methodSteps = [
+  ["Intention", "Formulez ce que le plan doit faire ressentir ou révéler."],
+  ["Poids", "Choisissez l'élément qui doit gagner la compétition visuelle."],
+  ["Structure", "Sélectionnez un principe dominant et un principe de soutien."],
+  ["Profondeur", "Répartissez premier plan, sujet et destination du regard."],
+  ["Contraintes", "Interdisez les dérives qui déplaceraient le point focal."],
+  ["Séquence", "Vérifiez le raccord avec le plan précédent et le mouvement suivant."],
+];
+---
+
+<div class="cinematic-composition">
+  <section class="composition-master-hero" aria-labelledby="composition-master-title">
+    <div>
+      <span class="lesson-kicker">Vertical Silence · Grammaire du cadre</span>
+      <h2 id="composition-master-title">La composition transforme une génération en plan de cinéma.</h2>
+      <p>
+        Un prompt efficace ne décrit pas seulement Lyra Voss et son univers. Il décide qui domine
+        le cadre, où circule le regard, comment la profondeur prépare le mouvement et quelle
+        information survivra au raccord suivant.
+      </p>
+      <div class="composition-master-hero__actions">
+        <a class="button primary" href="#principes-composition">Explorer les 18 principes</a>
+        <a class="button secondary" href="/resources/composition-cheat-sheet/">Ouvrir la cheat sheet</a>
+      </div>
+    </div>
+    <div class="composition-master-frame" aria-label="Cadre abstrait Vertical Silence">
+      <span class="composition-master-frame__tower"></span>
+      <span class="composition-master-frame__subject"></span>
+      <span class="composition-master-frame__rain"></span>
+      <span class="composition-master-frame__look"></span>
+      <span class="composition-master-frame__label">Lyra Voss</span>
+    </div>
+  </section>
+
+  <section class="composition-foundation" aria-labelledby="foundation-title">
+    <div class="composition-section__heading">
+      <div>
+        <span class="lesson-kicker">Méthode de production</span>
+        <h2 id="foundation-title">Composer avant de styliser.</h2>
+      </div>
+      <p>
+        Le style ne corrige pas un cadre sans hiérarchie. Travaillez d'abord en masses, directions
+        et profondeur, puis ajoutez palette, texture et atmosphère.
+      </p>
+    </div>
+    <ol class="composition-workflow">
+      {
+        methodSteps.map(([title, description], index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <strong>{title}</strong>
+              <p>{description}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <PromptComparison
+    before={vaguePrompt}
+    after={compositionPrompt}
+    analysis="Le second prompt verrouille une position, une direction de regard, une masse architecturale, une zone vide et une lumière motivée. Ces décisions sont observables et comparables entre deux générations."
+  />
+
+  <section class="prompt-anatomy" aria-labelledby="anatomy-title">
+    <div>
+      <span class="lesson-kicker">Anatomie</span>
+      <h2 id="anatomy-title">Huit couches pour décrire un cadre.</h2>
+      <p>
+        L'ordre n'est pas une syntaxe obligatoire. Il sert de checklist pour ne pas oublier la
+        fonction narrative derrière les mots de style.
+      </p>
+    </div>
+    <ol>
+      {
+        promptLayers.map((part, index) => (
+          <li>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div>
+              <strong>{part.label}</strong>
+              <p>{part.value}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+
+  <Callout title="Règle de combinaison" tone="method">
+    <p>
+      Utilisez un principe dominant pour la lecture du plan et, au maximum, un principe secondaire
+      pour la profondeur ou l'équilibre. Au-delà, les instructions commencent souvent à se concurrencer.
+    </p>
+  </Callout>
+
+  <section class="composition-catalogue" id="principes-composition" aria-labelledby="catalogue-title">
+    <div class="composition-section__heading">
+      <div>
+        <span class="lesson-kicker">18 principes</span>
+        <h2 id="catalogue-title">Une boîte à outils narrative, pas une liste de recettes.</h2>
+      </div>
+      <p>
+        Chaque fiche relie une construction de cadre à un effet dramatique, un usage en génération
+        et un prompt complet dans l'univers Vertical Silence.
+      </p>
+    </div>
+
+    <nav class="composition-index" aria-label="Index des principes de composition">
+      {
+        compositionPrinciples.map((principle) => (
+          <a href={`#${principle.id}`}>
+            <span>{principle.number}</span>
+            {principle.title}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="composition-principles composition-principles--complete">
+      {
+        compositionPrinciples.map((principle) => (
+          <CompositionPrincipleCard principle={principle} showPrompt />
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="composition-production-test" aria-labelledby="production-test-title">
+    <div>
+      <span class="lesson-kicker">Test de production</span>
+      <h2 id="production-test-title">Valider une frame avant de l'animer.</h2>
+      <p>
+        Faites trois générations en ne changeant que le principe de composition. Gardez identité,
+        décor, focale et lumière constants. La meilleure frame est celle dont l'intention reste
+        lisible à taille de vignette et dont les couches supportent le mouvement prévu.
+      </p>
+      <PromptExampleCard
+        title="Lyra Voss · Règle des tiers"
+        description="Exemple de référence intégré au cours."
+        prompt={compositionPrompt}
+        negativePrompt={compositionNegativePrompt}
+        variables={["right third", "look room", "negative space", "35mm", "restrained cyan light"]}
+      />
+    </div>
+    <aside>
+      <strong>Checklist de validation</strong>
+      <ul>
+        {compositionChecklist.map((item) => <li>{item}</li>)}
+      </ul>
+    </aside>
+  </section>
+</div>

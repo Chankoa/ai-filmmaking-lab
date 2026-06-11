@@ -1,6 +1,7 @@
 /* Utilities: lightweight helper classes for accessibility and quick tweaks. */
 
-.u-sr-only {
+.u-sr-only,
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;

@@ -1,0 +1,42 @@
+---
+import CodeBlock from "../code/CodeBlock.astro";
+
+interface Layer {
+  label: string;
+  value: string;
+}
+
+interface Props {
+  layers: Layer[];
+  prompt: string;
+}
+
+const { layers, prompt } = Astro.props;
+---
+
+<section class="prompt-recipe" aria-labelledby="prompt-recipe-title">
+  <div class="prompt-recipe__intro">
+    <span class="lesson-kicker">Anatomie du prompt</span>
+    <h2 id="prompt-recipe-title">Décrire des décisions, pas empiler des adjectifs.</h2>
+    <p>
+      Un prompt de composition suit l'ordre de lecture de l'image. Chaque bloc répond à une
+      question de mise en scène et peut être modifié sans réécrire toute la scène.
+    </p>
+  </div>
+
+  <ol class="prompt-recipe__layers">
+    {
+      layers.map((layer, index) => (
+        <li>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <strong>{layer.label}</strong>
+            <p>{layer.value}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <CodeBlock code={prompt} label="Prompt composé" />
+</section>

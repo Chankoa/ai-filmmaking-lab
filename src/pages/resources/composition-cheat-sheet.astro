@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import CompositionDiagram from "../../components/course/CompositionDiagram.astro";
+import CodeBlock from "../../components/code/CodeBlock.astro";
+import {
+  compositionChecklist,
+  compositionNegativePrompt,
+  compositionPrinciples,
+  compositionPrompt,
+} from "../../data/composition-principles";
+---
+
+<BaseLayout
+  title="Composition cinématique — Cheat sheet"
+  description="Cheat sheet de composition cinématique pour générer des frames IA lisibles, cohérentes et prêtes à animer."
+>
+  <CourseHero
+    eyebrow="Ressource de production"
+    title="Composition cinématique · Cheat sheet"
+    description="18 structures de cadre traduites en effets narratifs et patterns de prompt pour Lyra Voss / Vertical Silence."
+    actions={[
+      { label: "Voir le cours complet", href: "/formation/composition-cinematique/", variant: "primary" },
+      { label: "Explorer les prompts", href: "/prompts/", variant: "secondary" },
+    ]}
+    stats={[
+      { label: "Principes", value: "18" },
+      { label: "Univers", value: "Vertical Silence" },
+      { label: "Format", value: "Référence rapide" },
+    ]}
+  />
+
+  <section class="cheat-sheet-intro" aria-labelledby="cheat-sheet-method-title">
+    <div>
+      <span class="lesson-kicker">Mode d'emploi</span>
+      <h2 id="cheat-sheet-method-title">Un principe dominant, une fonction précise.</h2>
+      <p>
+        Choisissez d'abord l'effet narratif, puis la structure du cadre. Ajoutez la focale, la
+        lumière et le style seulement lorsque la hiérarchie visuelle est claire.
+      </p>
+    </div>
+    <ol>
+      <li><span>01</span>Nommer l'intention du plan.</li>
+      <li><span>02</span>Choisir un principe dominant.</li>
+      <li><span>03</span>Définir le point focal et le vide utile.</li>
+      <li><span>04</span>Préparer la profondeur et le mouvement.</li>
+      <li><span>05</span>Écrire les contraintes négatives.</li>
+    </ol>
+  </section>
+
+  <section class="cheat-sheet-grid" aria-label="18 principes de composition">
+    {
+      compositionPrinciples.map((principle) => (
+        <article class="cheat-sheet-card">
+          <CompositionDiagram type={principle.diagram} title={principle.title} compact />
+          <div>
+            <div class="cheat-sheet-card__meta">
+              <span>{principle.number}</span>
+              <span>{principle.englishName}</span>
+            </div>
+            <h2>{principle.title}</h2>
+            <p>{principle.narrativeEffect}</p>
+            <code>{principle.promptPattern}</code>
+            <a href={`/formation/composition-cinematique/#${principle.id}`}>
+              Voir la fiche et le prompt <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </section>
+
+  <section class="cheat-sheet-example" aria-labelledby="cheat-sheet-example-title">
+    <div>
+      <span class="lesson-kicker">Exemple de référence</span>
+      <h2 id="cheat-sheet-example-title">Règle des tiers · Lyra Voss</h2>
+      <p>
+        Le placement, le regard, l'espace négatif et la lumière sont décrits comme des décisions
+        visibles. Le negative prompt protège ces décisions.
+      </p>
+      <ul>
+        {compositionChecklist.map((item) => <li>{item}</li>)}
+      </ul>
+    </div>
+    <div class="cheat-sheet-example__prompts">
+      <CodeBlock code={compositionPrompt} label="Prompt cinéma" />
+      <CodeBlock code={compositionNegativePrompt} label="Negative prompt" />
+    </div>
+  </section>
+</BaseLayout>

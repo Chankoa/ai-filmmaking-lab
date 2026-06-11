@@ -7,16 +7,67 @@ interface Props {
 const { text, label = "Copier" } = Astro.props;
 ---
 
-<button type="button" class="copy-button" data-copy-text={text} aria-label={label} title={label}>
-  <svg viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M8 8h10v12H8z" fill="none" stroke="currentColor" stroke-width="2" />
-    <path d="M6 16H4V4h12v2" fill="none" stroke="currentColor" stroke-width="2" />
-  </svg>
-  <span class="sr-only">{label}</span>
+<button
+  type="button"
+  class="copy-button"
+  data-copy-text={text}
+  data-copy-label={label}
+  aria-label={label}
+  title={label}
+>
+  <span class="copy-button__icon" aria-hidden="true">
+    <svg class="copy-button__icon-state copy-button__icon-state--default" viewBox="0 0 24 24">
+      <path d="M8 8h10v12H8z" />
+      <path d="M6 16H4V4h12v2" />
+    </svg>
+    <svg class="copy-button__icon-state copy-button__icon-state--success" viewBox="0 0 24 24">
+      <path d="M5.5 12.5 9.5 16.5 18.5 7.5" />
+    </svg>
+    <svg class="copy-button__icon-state copy-button__icon-state--error" viewBox="0 0 24 24">
+      <path d="M8 8 16 16" />
+      <path d="M16 8 8 16" />
+    </svg>
+  </span>
+  <span class="copy-button__label" aria-hidden="true">
+    <span class="copy-button__label-state copy-button__label-state--default">Copier</span>
+    <span class="copy-button__label-state copy-button__label-state--success">Copié</span>
+    <span class="copy-button__label-state copy-button__label-state--error">Échec</span>
+  </span>
+  <span class="sr-only copy-button__live" aria-live="polite">{label}</span>
 </button>
 
 <script>
   const copyWindow = window as Window & { __aiFilmCopyButtonsReady?: boolean };
+  type CopyState = "copied" | "error";
+  type CopyButtonElement = HTMLButtonElement & { __copyFeedbackTimer?: number };
+
+  const resetFeedback = (button: CopyButtonElement) => {
+    delete button.dataset.copyState;
+
+    const liveRegion = button.querySelector<HTMLElement>(".copy-button__live");
+    if (liveRegion) {
+      liveRegion.textContent = button.dataset.copyLabel || button.ariaLabel || "Copier";
+    }
+  };
+
+  const setFeedback = (button: CopyButtonElement, state: CopyState) => {
+    if (button.__copyFeedbackTimer) {
+      window.clearTimeout(button.__copyFeedbackTimer);
+    }
+
+    button.dataset.copyState = state;
+
+    const liveRegion = button.querySelector<HTMLElement>(".copy-button__live");
+    if (liveRegion) {
+      const baseLabel = button.dataset.copyLabel || button.ariaLabel || "Copier";
+      liveRegion.textContent =
+        state === "copied" ? `${baseLabel} copié` : `${baseLabel} impossible, réessayez`;
+    }
+
+    button.__copyFeedbackTimer = window.setTimeout(() => {
+      resetFeedback(button);
+    }, 1500);
+  };
 
   if (!copyWindow.__aiFilmCopyButtonsReady) {
     copyWindow.__aiFilmCopyButtonsReady = true;
@@ -25,18 +76,13 @@ const { text, label = "Copier" } = Astro.props;
       const target = event.target instanceof Element ? event.target.closest("[data-copy-text]") : null;
       if (!(target instanceof HTMLButtonElement)) return;
 
-      const text = target.dataset.copyText || "";
+      const button = target as CopyButtonElement;
+      const text = button.dataset.copyText || "";
       try {
         await navigator.clipboard.writeText(text);
-        target.dataset.copied = "true";
-        window.setTimeout(() => {
-          delete target.dataset.copied;
-        }, 1300);
+        setFeedback(button, "copied");
       } catch {
-        target.dataset.copyError = "true";
-        window.setTimeout(() => {
-          delete target.dataset.copyError;
-        }, 1300);
+        setFeedback(button, "error");
       }
     });
   }

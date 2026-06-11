@@ -1,0 +1,267 @@
+---
+import type { CompositionDiagramType } from "../../data/composition-principles";
+
+interface Props {
+  type: CompositionDiagramType;
+  title: string;
+  compact?: boolean;
+}
+
+const { type, title, compact = false } = Astro.props;
+---
+
+<figure class:list={["composition-diagram", `composition-diagram--${type}`, { "is-compact": compact }]}>
+  <svg viewBox="0 0 480 300" role="img" aria-label={`Schéma de composition : ${title}`}>
+    <defs>
+      <linearGradient id={`sky-${type}`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#1b1931" />
+        <stop offset="1" stop-color="#0c252b" />
+      </linearGradient>
+      <linearGradient id={`accent-${type}`} x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#a77bff" />
+        <stop offset="1" stop-color="#55dbc5" />
+      </linearGradient>
+      <filter id={`soft-${type}`}>
+        <feGaussianBlur stdDeviation="9" />
+      </filter>
+    </defs>
+
+    <rect width="480" height="300" rx="18" fill={`url(#sky-${type})`} />
+    <path d="M0 228 92 185l98 31 103-62 187 65v81H0Z" fill="#141626" />
+    <path d="M0 255 124 215l91 27 108-48 157 42v64H0Z" fill="#090b14" opacity=".94" />
+
+    {
+      type === "thirds" && (
+        <>
+          <g stroke="#fff" stroke-opacity=".22">
+            <path d="M160 0v300M320 0v300M0 100h480M0 200h480" />
+          </g>
+          <circle cx="320" cy="100" r="8" fill="#a77bff" />
+          <path d="M310 129c0-15 20-15 20 0v60h-20Z" fill="#f5f1ff" />
+          <path d="M292 207h59" stroke="#55dbc5" stroke-width="3" stroke-linecap="round" />
+        </>
+      )
+    }
+
+    {
+      type === "centered" && (
+        <>
+          <path d="M240 25v250" stroke="#fff" stroke-opacity=".24" stroke-dasharray="7 7" />
+          <path d="M57 262 224 104M423 262 256 104" stroke="#a77bff" stroke-opacity=".42" stroke-width="3" />
+          <circle cx="240" cy="99" r="17" fill="#ddd2fa" />
+          <path d="M225 120h30l11 91h-52Z" fill="#f5f1ff" />
+          <circle cx="240" cy="135" r="60" fill="#55dbc5" opacity=".12" filter={`url(#soft-${type})`} />
+        </>
+      )
+    }
+
+    {
+      type === "leading-lines" && (
+        <>
+          <path d="M0 300 225 116M480 300 255 116M78 300 232 116M402 300 248 116" stroke="#a77bff" stroke-opacity=".58" stroke-width="3" />
+          <circle cx="240" cy="102" r="15" fill="#ddd2fa" />
+          <path d="M228 123h24l9 66h-42Z" fill="#f5f1ff" />
+          <circle cx="240" cy="104" r="37" fill="none" stroke="#55dbc5" stroke-opacity=".42" stroke-width="2" />
+        </>
+      )
+    }
+
+    {
+      type === "symmetry" && (
+        <>
+          <path d="M240 18v264" stroke="#55dbc5" stroke-opacity=".5" stroke-dasharray="7 7" />
+          <g fill="#2d2948" stroke="#a77bff" stroke-opacity=".48">
+            <rect x="55" y="42" width="72" height="196" rx="4" />
+            <rect x="353" y="42" width="72" height="196" rx="4" />
+            <rect x="145" y="70" width="48" height="154" rx="4" />
+            <rect x="287" y="70" width="48" height="154" rx="4" />
+          </g>
+          <circle cx="240" cy="128" r="13" fill="#ddd2fa" />
+          <path d="M230 146h20l8 59h-36Z" fill="#f5f1ff" />
+        </>
+      )
+    }
+
+    {
+      type === "framing" && (
+        <>
+          <path d="M58 251V43h364v208" fill="none" stroke="#060711" stroke-width="46" />
+          <path d="M113 245V96h254v149" fill="none" stroke="#a77bff" stroke-opacity=".5" stroke-width="3" />
+          <circle cx="257" cy="127" r="15" fill="#ddd2fa" />
+          <path d="M244 148h26l9 70h-44Z" fill="#f5f1ff" />
+          <path d="M208 230h99" stroke="#55dbc5" stroke-width="3" stroke-linecap="round" />
+        </>
+      )
+    }
+
+    {
+      type === "negative-space" && (
+        <>
+          <circle cx="387" cy="111" r="14" fill="#ddd2fa" />
+          <path d="M373 132h28l10 77h-48Z" fill="#f5f1ff" />
+          <path d="M345 222h88" stroke="#a77bff" stroke-width="3" stroke-linecap="round" />
+          <path d="M341 111H78" stroke="#55dbc5" stroke-width="2" stroke-dasharray="8 8" />
+          <path d="m91 102-13 9 13 9" fill="none" stroke="#55dbc5" stroke-width="2" />
+        </>
+      )
+    }
+
+    {
+      type === "fill-frame" && (
+        <>
+          <ellipse cx="244" cy="150" rx="138" ry="127" fill="#27233e" stroke="#a77bff" stroke-opacity=".46" stroke-width="3" />
+          <path d="M137 134c41-49 76-72 110-72 44 0 78 29 111 82-47-27-81-37-112-37-35 0-70 9-109 27Z" fill="#090b14" />
+          <ellipse cx="282" cy="145" rx="39" ry="22" fill="#d9d0ef" />
+          <circle cx="286" cy="145" r="10" fill="#55dbc5" />
+          <path d="M200 212c31 16 59 16 88 0" fill="none" stroke="#c8bddf" stroke-width="4" stroke-linecap="round" />
+        </>
+      )
+    }
+
+    {
+      type === "diagonal" && (
+        <>
+          <path d="M-15 257 415 38" stroke="#a77bff" stroke-opacity=".68" stroke-width="58" />
+          <path d="M-20 277 420 52" stroke="#55dbc5" stroke-opacity=".35" stroke-width="3" />
+          <circle cx="283" cy="110" r="14" fill="#ddd2fa" />
+          <path d="M271 130h24l8 68h-40Z" fill="#f5f1ff" />
+          <path d="M258 213h69" stroke="#fff" stroke-opacity=".36" stroke-width="3" />
+        </>
+      )
+    }
+
+    {
+      type === "patterns" && (
+        <>
+          <g fill="#302a4b" stroke="#a77bff" stroke-opacity=".38">
+            <rect x="35" y="48" width="58" height="181" rx="5" />
+            <rect x="111" y="48" width="58" height="181" rx="5" />
+            <rect x="187" y="48" width="58" height="181" rx="5" />
+            <rect x="263" y="48" width="58" height="181" rx="5" />
+            <rect x="339" y="48" width="58" height="181" rx="5" />
+          </g>
+          <rect x="263" y="48" width="58" height="181" rx="5" fill="#0a0c15" stroke="#55dbc5" stroke-opacity=".8" />
+          <circle cx="292" cy="137" r="13" fill="#ddd2fa" />
+          <path d="M281 154h22l8 59h-38Z" fill="#f5f1ff" />
+        </>
+      )
+    }
+
+    {
+      type === "layers" && (
+        <>
+          <path d="M0 0h81l54 300H0Z" fill="#05060e" opacity=".94" />
+          <path d="M480 0h-50l-57 300h107Z" fill="#05060e" opacity=".77" />
+          <circle cx="256" cy="86" r="15" fill="#ddd2fa" />
+          <path d="M244 105h24l9 81h-42Z" fill="#f5f1ff" />
+          <path d="M207 211h99" stroke="#55dbc5" stroke-width="3" />
+          <g fill="none" stroke-width="2">
+            <rect x="20" y="22" width="105" height="35" rx="17" stroke="#a77bff" />
+            <rect x="198" y="129" width="116" height="35" rx="17" stroke="#55dbc5" />
+            <rect x="347" y="35" width="111" height="35" rx="17" stroke="#eabf72" />
+          </g>
+        </>
+      )
+    }
+
+    {
+      type === "golden-ratio" && (
+        <>
+          <path d="M52 244c0-113 88-188 193-188 100 0 171 58 171 133 0 61-45 96-96 96-47 0-78-28-78-63 0-31 23-50 48-50 22 0 36 13 36 29 0 13-9 21-20 21" fill="none" stroke="#a77bff" stroke-width="4" stroke-linecap="round" />
+          <circle cx="306" cy="222" r="8" fill="#55dbc5" />
+          <circle cx="306" cy="175" r="13" fill="#ddd2fa" />
+          <path d="M295 192h22l7 55h-36Z" fill="#f5f1ff" />
+        </>
+      )
+    }
+
+    {
+      type === "triangle" && (
+        <>
+          <path d="M240 47 77 239h326Z" fill="#a77bff" fill-opacity=".09" stroke="#a77bff" stroke-opacity=".6" stroke-width="3" />
+          <circle cx="240" cy="47" r="12" fill="#55dbc5" />
+          <circle cx="77" cy="239" r="12" fill="#d9c9ff" />
+          <circle cx="403" cy="239" r="12" fill="#eabf72" />
+          <circle cx="240" cy="157" r="14" fill="#ddd2fa" />
+          <path d="M228 176h24l9 63h-42Z" fill="#f5f1ff" />
+        </>
+      )
+    }
+
+    {
+      type === "odds" && (
+        <>
+          <g fill="#302a4b" stroke="#a77bff" stroke-opacity=".52">
+            <rect x="79" y="86" width="72" height="137" rx="7" />
+            <rect x="204" y="52" width="72" height="171" rx="7" />
+            <rect x="329" y="86" width="72" height="137" rx="7" />
+          </g>
+          <rect x="204" y="52" width="72" height="171" rx="7" fill="#10131f" stroke="#55dbc5" />
+          <path d="M64 243h352" stroke="#fff" stroke-opacity=".22" />
+        </>
+      )
+    }
+
+    {
+      type === "balance" && (
+        <>
+          <rect x="52" y="69" width="151" height="159" rx="10" fill="#a77bff" opacity=".75" />
+          <circle cx="349" cy="100" r="28" fill="#55dbc5" opacity=".9" />
+          <circle cx="400" cy="158" r="18" fill="#eabf72" opacity=".9" />
+          <circle cx="334" cy="207" r="13" fill="#d9c9ff" opacity=".9" />
+          <path d="M36 244h408" stroke="#fff" stroke-opacity=".22" />
+          <path d="M240 48v196" stroke="#fff" stroke-opacity=".13" stroke-dasharray="6 6" />
+        </>
+      )
+    }
+
+    {
+      type === "s-curve" && (
+        <>
+          <path d="M92 282c218-18 255-67 128-113C105 127 134 58 382 25" fill="none" stroke="#55dbc5" stroke-opacity=".7" stroke-width="16" stroke-linecap="round" />
+          <path d="M92 282c218-18 255-67 128-113C105 127 134 58 382 25" fill="none" stroke="#d9c9ff" stroke-opacity=".75" stroke-width="3" />
+          <circle cx="238" cy="166" r="14" fill="#ddd2fa" />
+          <path d="M227 184h22l8 58h-38Z" fill="#f5f1ff" />
+        </>
+      )
+    }
+
+    {
+      type === "asymmetry" && (
+        <>
+          <rect x="275" y="27" width="151" height="213" rx="8" fill="#2d2948" stroke="#a77bff" stroke-opacity=".52" />
+          <circle cx="114" cy="157" r="14" fill="#ddd2fa" />
+          <path d="M102 175h24l8 63H94Z" fill="#f5f1ff" />
+          <circle cx="182" cy="224" r="9" fill="#55dbc5" />
+          <path d="M50 248h386" stroke="#fff" stroke-opacity=".2" />
+        </>
+      )
+    }
+
+    {
+      type === "minimalism" && (
+        <>
+          <rect x="49" y="57" width="172" height="172" rx="5" fill="#292542" />
+          <circle cx="348" cy="147" r="14" fill="#ddd2fa" />
+          <path d="M336 165h24l8 62h-40Z" fill="#f5f1ff" />
+          <path d="M297 239h112" stroke="#55dbc5" stroke-width="3" />
+        </>
+      )
+    }
+
+    {
+      type === "visual-weight" && (
+        <>
+          <circle cx="145" cy="144" r="91" fill="#28233f" stroke="#a77bff" stroke-opacity=".34" stroke-width="3" />
+          <circle cx="345" cy="145" r="42" fill="#55dbc5" opacity=".22" />
+          <circle cx="345" cy="133" r="15" fill="#f5f1ff" />
+          <path d="M332 153h26l10 71h-46Z" fill="#f5f1ff" />
+          <circle cx="345" cy="165" r="73" fill="#55dbc5" opacity=".12" filter={`url(#soft-${type})`} />
+          <path d="M28 246h424" stroke="#fff" stroke-opacity=".2" />
+        </>
+      )
+    }
+
+    <rect x="1" y="1" width="478" height="298" rx="17" fill="none" stroke="#fff" stroke-opacity=".12" />
+  </svg>
+</figure>

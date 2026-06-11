@@ -1,26 +1,29 @@
 ---
 title: "Voir, composer, générer"
-description: "Le point de départ du parcours : observer une image, identifier sa structure puis transformer cette lecture en prompt."
+description: "Lire une image, organiser son cadre et traduire une intention visuelle en prompt exploitable pour une séquence."
 module: "Fondations de l'AI Filmmaking"
 order: 1
-stage: "voir"
+stage: "composer"
 level: "debutant"
 tools: ["Adobe Firefly", "Generic workflow"]
 tags: ["composition", "prompt", "image"]
 heroImage: "/assets/visuals/pipeline-board.svg"
-estimatedTime: "20 min"
+estimatedTime: "45 min"
+template: "composition"
 ---
 
-Cette page sert de modèle pour les futures leçons. Elle relie l'analyse visuelle à la génération d'image : sujet, cadre, lumière, couleur, profondeur et contraintes.
+Cette leçon relie l'analyse visuelle à la génération d'image : sujet, cadre, lumière, couleur, profondeur et contraintes. L'objectif n'est pas de produire une belle image isolée, mais une frame qui prépare déjà le plan suivant.
 
 ## Objectif
 
-Savoir transformer une intention visuelle en structure de prompt reproductible.
+Savoir transformer une intention visuelle en structure de prompt reproductible, lisible au premier regard et assez stable pour être animée.
 
 ## Cadence
 
-1. Observer l'image ou la reference.
+1. Observer l'image ou la référence.
 2. Nommer les couches visuelles.
-3. Écrire une première version du prompt.
-4. Isoler les variables utiles.
-5. Documenter les dérives et corrections.
+3. Décider où placer le regard du spectateur.
+4. Écrire une première version du prompt.
+5. Isoler les variables utiles.
+6. Tester la frame dans une continuité de plans.
+7. Documenter les dérives et corrections.
