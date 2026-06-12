@@ -1,11 +1,15 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
+import CinematicImagePlaceholder from "../components/media/CinematicImagePlaceholder.astro";
 import LessonNav from "../components/course/LessonNav.astro";
 import CompositionGuide from "../components/course/CompositionGuide.astro";
 import CinematicCompositionGuide from "../components/course/CinematicCompositionGuide.astro";
+import LearningPathGuide from "../components/course/LearningPathGuide.astro";
+import LessonPager from "../components/course/LessonPager.astro";
 import ToolBadge from "../components/ui/ToolBadge.astro";
 import { formatStageLabel } from "../data/content-labels";
+import { getLearningPath } from "../data/learning-paths";
 
 interface Props {
   lesson: CollectionEntry<"lessons">;
@@ -14,6 +18,20 @@ interface Props {
 
 const { lesson, lessons } = Astro.props;
 const { data } = lesson;
+const learningPath = getLearningPath(lesson.id);
+
+const lessonVisualVariant: Record<string, "urban" | "board" | "portrait" | "storyboard" | "depth" | "light" | "composition"> = {
+  "creation-visuelle": "board",
+  cinematographie: "urban",
+  "composition-cinematique": "composition",
+  "lumiere-couleur": "light",
+  "profondeur-de-champ": "depth",
+  "storyboard-shotlist": "storyboard",
+  stabiliser: "portrait",
+  "production-ia": "board",
+  animer: "urban",
+  "mettre-en-scene": "urban",
+};
 ---
 
 <BaseLayout title={`${data.title} - Formation`} description={data.description}>
@@ -28,12 +46,26 @@ const { data } = lesson;
           {data.tools.map((tool) => <ToolBadge tool={tool} />)}
         </div>
       </header>
-      {data.heroImage && <img class="lesson-visual" src={data.heroImage} alt="" />}
+      {
+        data.heroImage ? (
+          <img class="lesson-visual" src={data.heroImage} alt={`Illustration pour ${data.title}`} />
+        ) : (
+          <CinematicImagePlaceholder
+            variant={lessonVisualVariant[lesson.id] ?? "board"}
+            label={formatStageLabel(data.stage)}
+            title={data.title}
+            caption={data.description}
+            aspect="16 / 8"
+          />
+        )
+      }
       <div class="prose">
         <slot />
       </div>
       {data.template === "composition" && <CompositionGuide />}
       {data.template === "composition-cinematique" && <CinematicCompositionGuide />}
+      {data.template === "learning-path" && learningPath && <LearningPathGuide path={learningPath} />}
+      <LessonPager lesson={lesson} lessons={lessons} />
     </article>
   </div>
 </BaseLayout>

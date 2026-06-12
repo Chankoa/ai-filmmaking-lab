@@ -2,7 +2,7 @@
 title: "Composition cinématique"
 description: "18 principes pour organiser le regard, la profondeur et la tension d'une frame IA avant de la mettre en mouvement."
 module: "Composition, cadrage et langage des plans"
-order: 2
+order: 3
 stage: "composer"
 level: "intermediaire"
 tools: ["Adobe Firefly", "Midjourney", "Generic workflow"]

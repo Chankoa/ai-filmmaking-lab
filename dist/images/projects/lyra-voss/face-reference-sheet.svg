@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Lyra Voss face reference sheet</title>
+  <desc id="desc">Abstract face hero and rotation grid on a neutral production background.</desc>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#171522"/><stop offset="1" stop-color="#202b32"/></linearGradient></defs>
+  <rect width="960" height="600" rx="24" fill="url(#bg)"/>
+  <g stroke="#fff" stroke-opacity=".12" fill="#fff" fill-opacity=".035">
+    <rect x="38" y="70" width="380" height="486" rx="18"/>
+    <rect x="442" y="70" width="218" height="224" rx="18"/>
+    <rect x="684" y="70" width="238" height="224" rx="18"/>
+    <rect x="442" y="318" width="218" height="238" rx="18"/>
+    <rect x="684" y="318" width="238" height="238" rx="18"/>
+  </g>
+  <g fill="#ac8978" stroke="#d8b19d" stroke-width="4">
+    <ellipse cx="228" cy="282" rx="116" ry="148"/>
+    <ellipse cx="551" cy="183" rx="57" ry="76"/>
+    <ellipse cx="799" cy="183" rx="50" ry="76"/>
+    <ellipse cx="551" cy="430" rx="54" ry="78"/>
+    <ellipse cx="799" cy="430" rx="60" ry="78"/>
+  </g>
+  <g stroke="#322637" stroke-width="18" fill="none" stroke-linecap="round">
+    <path d="M118 242q110-154 220 0M492 161q59-80 118 0M754 158q45-70 92 2M498 410q54-83 108 0M736 407q63-88 126 0"/>
+  </g>
+  <g fill="#35c7d8">
+    <circle cx="190" cy="278" r="9"/><circle cx="264" cy="278" r="9"/>
+    <circle cx="533" cy="184" r="5"/><circle cx="568" cy="184" r="5"/>
+    <circle cx="785" cy="184" r="5"/><circle cx="816" cy="184" r="5"/>
+    <circle cx="535" cy="430" r="5"/><circle cx="568" cy="430" r="5"/>
+    <circle cx="778" cy="430" r="5"/><circle cx="817" cy="430" r="5"/>
+  </g>
+  <text x="42" y="42" fill="#a875ff" font-family="Arial, sans-serif" font-size="17" font-weight="700">FACE REFERENCE / HERO + ROTATIONS</text>
+</svg>

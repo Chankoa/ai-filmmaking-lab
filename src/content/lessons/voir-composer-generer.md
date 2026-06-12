@@ -3,7 +3,7 @@ title: "Voir, composer, générer"
 description: "Lire une image, organiser son cadre et traduire une intention visuelle en prompt exploitable pour une séquence."
 module: "Fondations de l'AI Filmmaking"
 order: 1
-stage: "composer"
+stage: "voir"
 level: "debutant"
 tools: ["Adobe Firefly", "Generic workflow"]
 tags: ["composition", "prompt", "image"]

@@ -12,7 +12,7 @@ const pageTitle = title ? `${title} | ${siteConfig.name}` : siteConfig.name;
 const currentPath = Astro.url.pathname;
 
 function isActive(href: string) {
-  if (href === "/") return currentPath === "/" || currentPath.startsWith("/formation/");
+  if (href === "/") return currentPath === "/";
   return currentPath.startsWith(href);
 }
 ---
@@ -23,7 +23,7 @@ function isActive(href: string) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta id="meta-theme-color" name="theme-color" content="#fbfaff" />
+    <meta id="meta-theme-color" name="theme-color" content="#eef2f5" />
     <script is:inline>
       (() => {
         const storageKey = "afl-theme";
@@ -86,7 +86,7 @@ function isActive(href: string) {
                 <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path>
               </svg>
             </button>
-            <a class="site-header__cta" href="/#parcours">Commencer</a>
+            <a class="site-header__cta" href="/formation/#parcours">Commencer</a>
             <button
               class="menu-toggle"
               type="button"
@@ -130,7 +130,7 @@ function isActive(href: string) {
             }
           </nav>
 
-          <a class="button primary" href="/#parcours" data-menu-link>Commencer le parcours</a>
+          <a class="button primary" href="/formation/#parcours" data-menu-link>Commencer le parcours</a>
         </div>
       </div>
 
@@ -163,12 +163,12 @@ function isActive(href: string) {
           <div class="site-footer__cta">
             <strong>Prêt à créer ?</strong>
             <p>Commencez par les fondations, puis avancez à votre rythme.</p>
-            <a class="button primary" href="/#parcours">Voir le parcours</a>
+            <a class="button primary" href="/formation/#parcours">Voir le parcours</a>
           </div>
         </div>
         <div class="site-footer__bottom">
           <span>© {new Date().getFullYear()} {siteConfig.name}</span>
-          <span>Creative Production Wiki</span>
+          <span>{siteConfig.baseline}</span>
         </div>
       </footer>
     </div>
@@ -192,7 +192,7 @@ function isActive(href: string) {
             toggle.setAttribute("aria-pressed", String(nextTheme === "dark"));
           });
           if (meta instanceof HTMLMetaElement) {
-            meta.content = nextTheme === "dark" ? "#0f1020" : "#fbfaff";
+            meta.content = nextTheme === "dark" ? "#09111b" : "#eef2f5";
           }
           if (persist) window.localStorage.setItem(storageKey, nextTheme);
         };

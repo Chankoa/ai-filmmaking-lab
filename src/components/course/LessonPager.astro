@@ -1,0 +1,43 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { formatStageLabel } from "../../data/content-labels";
+
+interface Props {
+  lesson: CollectionEntry<"lessons">;
+  lessons: CollectionEntry<"lessons">[];
+}
+
+const { lesson, lessons } = Astro.props;
+const sortedLessons = [...lessons].sort((a, b) => a.data.order - b.data.order);
+const currentIndex = sortedLessons.findIndex((entry) => entry.id === lesson.id);
+const previous = currentIndex > 0 ? sortedLessons[currentIndex - 1] : undefined;
+const next = currentIndex >= 0 && currentIndex < sortedLessons.length - 1
+  ? sortedLessons[currentIndex + 1]
+  : undefined;
+---
+
+<nav class="lesson-pager" aria-label="Navigation entre les parcours">
+  {
+    previous ? (
+      <a class="lesson-pager__previous" href={`/formation/${previous.id}/`}>
+        <span>← Parcours précédent · {formatStageLabel(previous.data.stage)}</span>
+        <strong>{previous.data.title}</strong>
+      </a>
+    ) : (
+      <span class="lesson-pager__empty"></span>
+    )
+  }
+  {
+    next ? (
+      <a class="lesson-pager__next" href={`/formation/${next.id}/`}>
+        <span>Parcours suivant · {formatStageLabel(next.data.stage)} →</span>
+        <strong>{next.data.title}</strong>
+      </a>
+    ) : (
+      <a class="lesson-pager__next" href="/projects/">
+        <span>Mettre en application →</span>
+        <strong>Explorer les projets</strong>
+      </a>
+    )
+  }
+</nav>

@@ -6,6 +6,9 @@ level: "debutant"
 tool: "Generic workflow"
 prompt: "cinematic wide shot of Lyra Voss standing on the right third of the frame, looking toward a massive abandoned vertical structure in the distance, rain-soaked concrete foreground, vast negative space on the left, blue-grey night atmosphere, faint cyan rim light, 35mm film still, realistic cinematic lighting, subtle haze, grounded cyberpunk mood"
 negativePrompt: "centered subject, flat composition, oversaturated neon, plastic skin, text, watermark"
+whyItWorks: "Le sujet, le regard et le vide sont décrits séparément. La composition reste donc lisible avant l’ajout du style."
+variants: ["Passer Lyra sur le tiers gauche", "Remplacer le wide shot par un medium-wide", "Réserver le vide à une entrée de personnage"]
+lessonHref: "/formation/composition-cinematique/#rule-of-thirds"
 variables: ["shot scale", "subject position", "look direction", "negative space", "focal length"]
 tags: ["composition", "rule of thirds", "Vertical Silence"]
 ---

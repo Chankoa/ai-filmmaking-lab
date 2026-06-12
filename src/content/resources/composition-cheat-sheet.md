@@ -2,6 +2,7 @@
 title: "Composition cinématique — Cheat sheet"
 description: "18 structures de cadre, patterns de prompt et contrôles rapides pour préparer des frames IA lisibles et animables."
 type: "reference"
+href: "/resources/composition-cheat-sheet/"
 tools: ["Generic workflow"]
 tags: ["composition", "cinema", "prompt", "Vertical Silence"]
 status: "ready"

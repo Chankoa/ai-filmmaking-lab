@@ -6,6 +6,9 @@ level: "intermediaire"
 tool: "Midjourney"
 prompt: "symmetrical cinematic long shot inside the Vertical Silence transit hall, Lyra Voss on the central axis, mirrored concrete pillars and dark doorways, precise level horizon, one failing cyan lamp on the left breaking the order, rain blown through the abandoned hall, 35mm lens, controlled institutional tension, grounded physical realism"
 negativePrompt: "uneven pillars, asymmetrical crop, dutch angle, decorative cyberpunk clutter, crowds, glossy surfaces, oversaturated lighting, text"
+whyItWorks: "L’axe, l’horizon et les répétitions architecturales sont verrouillés, puis une seule anomalie empêche le cadre de devenir décoratif."
+variants: ["Retirer Lyra pour un establishing shot", "Briser la symétrie avec une porte ouverte", "Ajouter un lent push-in frontal"]
+lessonHref: "/formation/composition-cinematique/#symmetry"
 variables: ["central axis", "mirrored architecture", "controlled anomaly", "level horizon", "locked camera"]
 tags: ["composition", "symmetry", "centered", "architecture"]
 ---

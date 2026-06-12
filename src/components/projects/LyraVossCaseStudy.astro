@@ -1,0 +1,150 @@
+---
+import CharacterBoard from "./CharacterBoard.astro";
+import CodeBlock from "../code/CodeBlock.astro";
+import {
+  lyraAnalysisChecklist,
+  lyraBoards,
+  lyraMasterBlocks,
+  lyraMasterPrompt,
+  lyraProfile,
+  lyraShotVariations,
+} from "../../data/lyra-voss";
+---
+
+<div class="lyra-case-study">
+  <nav class="lyra-section-nav" aria-label="Sections de l’étude de cas">
+    <a href="#brief">Brief</a>
+    <a href="#boards">Boards personnage</a>
+    <a href="#master-prompt">Prompt maître</a>
+    <a href="#shots">Variations</a>
+    <a href="#image-to-video">Animer</a>
+    <a href="#analysis">Analyse</a>
+  </nav>
+
+  <section id="brief" class="lyra-section">
+    <div class="lyra-section__heading">
+      <span class="eyebrow">01 · Brief personnage</span>
+      <h2>Définir Lyra avant de varier les plans.</h2>
+      <p>Les descriptions suivantes sont des constantes de production, pas des suggestions stylistiques.</p>
+    </div>
+    <div class="lyra-profile-grid">
+      {
+        lyraProfile.map((group) => (
+          <article>
+            <h3>{group.title}</h3>
+            <dl>
+              {group.items.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
+            </dl>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="boards" class="lyra-section">
+    <div class="lyra-section__heading">
+      <span class="eyebrow">02 · Boards personnage</span>
+      <h2>Comparer une caractéristique à la fois.</h2>
+      <p>Ces placeholders indiquent la structure attendue avant l’intégration de vraies images générées.</p>
+    </div>
+    <CharacterBoard boards={lyraBoards} />
+  </section>
+
+  <section id="master-prompt" class="lyra-section lyra-master-prompt">
+    <div class="lyra-section__heading">
+      <span class="eyebrow">03 · Prompt maître</span>
+      <h2>Des blocs stables, puis une variable de plan.</h2>
+      <p>Chaque bloc peut être contrôlé séparément dans la bible et réutilisé dans les prompts de frame.</p>
+    </div>
+    <div class="lyra-master-prompt__layout">
+      <div class="lyra-master-blocks">
+        {lyraMasterBlocks.map((block) => <article><strong>{block.label}</strong><p>{block.value}</p></article>)}
+      </div>
+      <CodeBlock code={lyraMasterPrompt} label="Prompt maître Lyra Voss" />
+    </div>
+  </section>
+
+  <section id="shots" class="lyra-section">
+    <div class="lyra-section__heading">
+      <span class="eyebrow">04 · Variations de plans</span>
+      <h2>Changer le cadre sans réinventer le personnage.</h2>
+      <p>Les huit plans partagent les mêmes constantes et modifient seulement distance, angle, action ou fonction.</p>
+    </div>
+    <div class="lyra-shot-grid">
+      {
+        lyraShotVariations.map((shot) => (
+          <article class="lyra-shot-card">
+            <div class="lyra-shot-card__frame" data-shot={shot.title}>
+              <span>{shot.id}</span>
+              <i aria-hidden="true"></i>
+            </div>
+            <div class="lyra-shot-card__body">
+              <h3>{shot.title}</h3>
+              <p>{shot.intention}</p>
+              <CodeBlock code={shot.imagePrompt} label="Prompt image" />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="image-to-video" class="lyra-section">
+    <div class="lyra-section__heading">
+      <span class="eyebrow">05 · Animer la frame</span>
+      <h2>Une consigne Kling par plan approuvé.</h2>
+      <p>Le mouvement décrit uniquement ce qui change entre le début et la fin du clip.</p>
+    </div>
+    <div class="lyra-motion-list">
+      {
+        lyraShotVariations.map((shot) => (
+          <article>
+            <header>
+              <div><span>{shot.id}</span><h3>{shot.title}</h3></div>
+              <dl>
+                <div><dt>Caméra</dt><dd>{shot.cameraMovement}</dd></div>
+                <div><dt>Intensité</dt><dd>{shot.intensity}</dd></div>
+              </dl>
+            </header>
+            <CodeBlock code={shot.klingPrompt} label="Prompt Kling" />
+            <div class="lyra-motion-list__checks">
+              <div><strong>Erreurs à éviter</strong><ul>{shot.avoid.map((item) => <li>{item}</li>)}</ul></div>
+              <CodeBlock code={shot.videoNegativePrompt} label="Negative prompt vidéo" />
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section id="analysis" class="lyra-section">
+    <div class="lyra-section__heading">
+      <span class="eyebrow">06 · Analyse critique</span>
+      <h2>Garder, corriger ou rejeter avec des preuves visibles.</h2>
+      <p>La qualité ne se résume pas à une belle frame : le plan doit rester cohérent et utile dans la séquence.</p>
+    </div>
+    <div class="lyra-analysis-grid">
+      {
+        lyraAnalysisChecklist.map((item, index) => (
+          <article>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{item.label}</h3>
+            <p>{item.check}</p>
+            <div aria-label="Décisions possibles"><b>Garder</b><b>Corriger</b><b>Rejeter</b></div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <aside class="lyra-related">
+    <div>
+      <span class="eyebrow">Continuer</span>
+      <h2>Réutiliser le cas dans le parcours.</h2>
+    </div>
+    <a href="/formation/character-consistency/">Stabiliser le personnage</a>
+    <a href="/formation/image-to-video-transitions/">Animer sans dérive</a>
+    <a href="/resources/production-bible-template/">Bible de production</a>
+    <a href="/prompts/?category=reference-sheet">Prompts Lyra</a>
+  </aside>
+</div>

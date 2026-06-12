@@ -4,24 +4,47 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import CourseHero from "../../components/course/CourseHero.astro";
 import PromptCard from "../../components/prompts/PromptCard.astro";
 import { formatPromptCategoryLabel } from "../../data/content-labels";
+import { promptCategories } from "../../data/prompt-categories";
 
 const prompts = await getCollection("prompts");
-const categories = [...new Set(prompts.map((entry) => entry.data.category))];
+const categories = promptCategories.filter((category) =>
+  prompts.some((prompt) => prompt.data.category === category.id)
+);
 ---
 
 <BaseLayout title="Prompts" description="Bibliothèque de prompts filtrable et réutilisable pour images, personnages et vidéos IA.">
   <CourseHero
-    eyebrow="Prompt Library"
+    eyebrow="Bibliothèque de prompts"
     title="Prompts comme fiches de production"
     description="Chaque prompt documente une intention, un outil, des variables, des contraintes négatives et un usage pédagogique."
-    image="/assets/visuals/product-layers.svg"
+    image="/images/prompts/prompt-library-board.svg"
     imageAlt="Composition visuelle en couches pour construire un prompt"
     stats={[
       { label: "Prompts", value: String(prompts.length) },
-      { label: "Catégories", value: String(categories.length) },
-      { label: "Usage", value: "Copiable" },
+      { label: "Familles", value: String(categories.length) },
+      { label: "Usage", value: "Réutilisable" },
     ]}
   />
+
+  <section class="prompt-family-index" aria-labelledby="prompt-family-title">
+    <div class="section-heading">
+      <span class="eyebrow">13 familles de production</span>
+      <h2 id="prompt-family-title">Partir d’une compétence, pas d’une formule magique.</h2>
+      <p>Chaque famille relie une intention de mise en scène à un prompt, des contraintes et une leçon.</p>
+    </div>
+    <div class="prompt-family-grid">
+      {
+        categories.map((category) => (
+          <button type="button" data-prompt-family={category.id}>
+            <span>{category.number}</span>
+            <strong>{category.title}</strong>
+            <small>{category.description}</small>
+            <b>{prompts.filter((prompt) => prompt.data.category === category.id).length} fiche(s)</b>
+          </button>
+        ))
+      }
+    </div>
+  </section>
 
   <section class="prompt-category-feature" aria-labelledby="composition-prompts-title">
     <div>
@@ -44,7 +67,7 @@ const categories = [...new Set(prompts.map((entry) => entry.data.category))];
     </div>
     <div class="segmented-control" aria-label="Filtrer les prompts">
       <button type="button" class="is-active" data-prompt-filter="all">Tous</button>
-      {categories.map((category) => <button type="button" data-prompt-filter={category}>{formatPromptCategoryLabel(category)}</button>)}
+      {categories.map((category) => <button type="button" data-prompt-filter={category.id}>{formatPromptCategoryLabel(category.id)}</button>)}
     </div>
     <div class="prompt-grid">
       {prompts.map((prompt) => <PromptCard prompt={prompt} />)}
@@ -53,18 +76,44 @@ const categories = [...new Set(prompts.map((entry) => entry.data.category))];
 
   <script>
     const promptFilterButtons = document.querySelectorAll("[data-prompt-filter]");
+    const promptFamilyButtons = document.querySelectorAll("[data-prompt-family]");
     const promptCards = document.querySelectorAll("[data-prompt-card]");
+
+    const applyPromptFilter = (filter: string) => {
+      promptFilterButtons.forEach((item) => {
+        item.classList.toggle("is-active", item.getAttribute("data-prompt-filter") === filter);
+      });
+      promptCards.forEach((card) => {
+        const category = card.getAttribute("data-category");
+        card.toggleAttribute("hidden", filter !== "all" && category !== filter);
+      });
+    };
 
     promptFilterButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const filter = button.getAttribute("data-prompt-filter");
-        promptFilterButtons.forEach((item) => item.classList.remove("is-active"));
-        button.classList.add("is-active");
-        promptCards.forEach((card) => {
-          const category = card.getAttribute("data-category");
-          card.toggleAttribute("hidden", filter !== "all" && category !== filter);
-        });
+        if (filter) applyPromptFilter(filter);
       });
     });
+
+    promptFamilyButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const filter = button.getAttribute("data-prompt-family");
+        if (filter) {
+          applyPromptFilter(filter);
+          document.querySelector("#prompt-list-title")?.scrollIntoView({ behavior: "smooth" });
+        }
+      });
+    });
+
+    const requestedCategory = new URLSearchParams(window.location.search).get("category");
+    if (
+      requestedCategory &&
+      [...promptFilterButtons].some(
+        (button) => button.getAttribute("data-prompt-filter") === requestedCategory
+      )
+    ) {
+      applyPromptFilter(requestedCategory);
+    }
   </script>
 </BaseLayout>

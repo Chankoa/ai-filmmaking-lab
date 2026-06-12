@@ -1,3 +1,11 @@
 ---
-return Astro.redirect("/", 301);
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import FormationHub from "../../components/course/FormationHub.astro";
 ---
+
+<BaseLayout
+	title="Formation"
+	description="Parcours, familles de compétences, prompts reliés et études de cas pour structurer votre apprentissage de l’AI filmmaking."
+>
+	<FormationHub />
+</BaseLayout>

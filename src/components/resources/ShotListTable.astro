@@ -1,0 +1,99 @@
+---
+interface ShotListRow {
+  id: string;
+  intention: string;
+  frame: string;
+  movement: string;
+  continuity: string;
+  sound: string;
+  control: string;
+}
+
+interface Props {
+  rows: ShotListRow[];
+}
+
+const { rows } = Astro.props;
+---
+
+<div class="shot-list-table-wrap">
+  <table class="shot-list-table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Intention</th>
+        <th scope="col">Frame</th>
+        <th scope="col">Mouvement</th>
+        <th scope="col">Continuité</th>
+        <th scope="col">Son</th>
+        <th scope="col">Contrôle</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr>
+            <th scope="row">{row.id}</th>
+            <td>{row.intention}</td>
+            <td>{row.frame}</td>
+            <td>{row.movement}</td>
+            <td>{row.continuity}</td>
+            <td>{row.sound}</td>
+            <td>{row.control}</td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .shot-list-table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .shot-list-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 860px;
+  }
+
+  .shot-list-table th,
+  .shot-list-table td {
+    border-bottom: 1px solid var(--line);
+    padding: 0.95rem 1rem;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .shot-list-table thead th {
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: color-mix(in srgb, var(--surface-muted) 90%, transparent);
+  }
+
+  .shot-list-table tbody th {
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .shot-list-table tbody td {
+    color: var(--text-muted);
+    font-size: 0.84rem;
+    line-height: 1.55;
+  }
+
+  .shot-list-table tbody tr:last-child th,
+  .shot-list-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+</style>

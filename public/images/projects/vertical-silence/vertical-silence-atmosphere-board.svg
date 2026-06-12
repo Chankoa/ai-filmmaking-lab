@@ -1,0 +1,39 @@
+<svg width="1600" height="960" viewBox="0 0 1600 960" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Vertical Silence atmosphere board</title>
+  <desc id="desc">Atmosphere board for Vertical Silence with wet concrete, cyan light and monolithic voids.</desc>
+  <defs>
+    <linearGradient id="bg" x1="118" y1="84" x2="1454" y2="926" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#121B29"/>
+      <stop offset="0.48" stop-color="#0F1723"/>
+      <stop offset="1" stop-color="#070D15"/>
+    </linearGradient>
+    <radialGradient id="cyan" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1120 210) rotate(118) scale(350 250)">
+      <stop stop-color="#6FB3C6" stop-opacity="0.6"/>
+      <stop offset="1" stop-color="#6FB3C6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="violet" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(360 180) rotate(25) scale(300 220)">
+      <stop stop-color="#916791" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#916791" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1600" height="960" rx="40" fill="url(#bg)"/>
+  <rect width="1600" height="960" rx="40" fill="url(#cyan)"/>
+  <rect width="1600" height="960" rx="40" fill="url(#violet)"/>
+  <rect x="140" y="74" width="1320" height="812" rx="36" fill="#0B1119" stroke="#243244"/>
+  <path d="M252 886V196H392V886" fill="#161F2C"/>
+  <path d="M476 886V132H662V886" fill="#131B27"/>
+  <path d="M770 886V92H988V886" fill="#101824"/>
+  <path d="M1088 886V162H1280V886" fill="#131B27"/>
+  <path d="M1336 886V236H1426V886" fill="#182230"/>
+  <rect x="820" y="92" width="118" height="794" fill="#080E15"/>
+  <rect x="846" y="114" width="20" height="728" rx="10" fill="#6FB3C6" opacity="0.55"/>
+  <path d="M882 138V776" stroke="#87D1DD" stroke-width="4" stroke-linecap="round" opacity="0.45"/>
+  <path d="M212 796C412 742 562 734 722 736C956 740 1186 768 1396 828" stroke="#E7EDF4" stroke-opacity="0.14" stroke-width="12" stroke-linecap="round"/>
+  <path d="M210 842C430 800 632 798 824 806C1038 816 1220 834 1396 876" stroke="#6FB3C6" stroke-opacity="0.2" stroke-width="10" stroke-linecap="round"/>
+  <ellipse cx="738" cy="760" rx="44" ry="54" fill="#0E1520"/>
+  <path d="M708 806C722 760 744 736 770 736C792 736 814 758 824 806" stroke="#E7EDF4" stroke-width="8" stroke-linecap="round" opacity="0.54"/>
+  <path d="M734 710C748 690 774 690 786 712" stroke="#243244" stroke-width="10" stroke-linecap="round"/>
+  <path d="M186 246H1414" stroke="#E7EDF4" stroke-opacity="0.08" stroke-width="2" stroke-dasharray="6 10"/>
+  <path d="M186 438H1414" stroke="#E7EDF4" stroke-opacity="0.08" stroke-width="2" stroke-dasharray="6 10"/>
+  <path d="M186 630H1414" stroke="#E7EDF4" stroke-opacity="0.08" stroke-width="2" stroke-dasharray="6 10"/>
+</svg>

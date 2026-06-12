@@ -1,77 +1,139 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import ToolBadge from "../components/ui/ToolBadge.astro";
-import { formatLevelLabel, formatStageLabel, formatStatusLabel } from "../data/content-labels";
+import SkillFamilyCard from "../components/course/SkillFamilyCard.astro";
+import PathStepCard from "../components/course/PathStepCard.astro";
+import ResourceCard from "../components/resources/ResourceCard.astro";
+import CinematicImagePlaceholder from "../components/media/CinematicImagePlaceholder.astro";
 
-const [lessonEntries, prompts, projects, shots, resources] = await Promise.all([
+const [lessons, prompts, resources, projects, glossary] = await Promise.all([
   getCollection("lessons"),
   getCollection("prompts"),
-  getCollection("projects"),
-  getCollection("camera-shots"),
   getCollection("resources"),
+  getCollection("projects"),
+  getCollection("glossary"),
 ]);
 
-const lessons = lessonEntries.sort((a, b) => a.data.order - b.data.order);
-const featuredLesson = lessons[0];
+const featuredProject = projects.find((project) => project.id === "lyra-voss") ?? projects[0];
 
-const domains = [
+const skillFamilies = [
   {
     label: "Création visuelle",
-    title: "Images et direction artistique",
-    description: "Composition, lumière, style, références et prompts reproductibles.",
-    href: "/prompts/",
-    icon: "✦",
+    title: "Voir le monde avant de le styliser",
+    description: "Palette, matières, composition et profondeur forment un système stable avant toute génération en série.",
+    href: "/formation/creation-visuelle/",
+    focus: "Passer d’une intention visuelle à des décisions reproductibles.",
+    resourceLabel: "Cheat sheet de composition",
+    projectLabel: "Lyra Voss / Vertical Silence",
+    variant: "composition" as const,
   },
   {
     label: "Cinématographie",
-    title: "Plans et mouvements caméra",
-    description: "Cadres, angles, focales et intentions narratives pour chaque séquence.",
-    href: "/references/camera-shots/",
-    icon: "◫",
+    title: "Choisir le plan pour son effet dramatique",
+    description: "Échelles, angles, mouvements et storyboard servent la lecture de la scène avant l’ornement visuel.",
+    href: "/formation/cinematographie/",
+    focus: "Transformer une scène en séquence lisible et raccordable.",
+    resourceLabel: "Référentiel plans caméra",
+    projectLabel: "Storyboard Neon Samurai",
+    variant: "urban" as const,
   },
   {
     label: "Production IA",
-    title: "Personnages et vidéo",
-    description: "Continuité visuelle, image-to-video, transitions et montage.",
-    href: "/projects/",
-    icon: "◇",
+    title: "Stabiliser, animer, documenter",
+    description: "Frames validées, prompts versionnés, clips contrôlés et bible de production deviennent un pipeline au lieu d’essais isolés.",
+    href: "/formation/production-ia/",
+    focus: "Conserver les décisions utiles d’un plan jusqu’au montage.",
+    resourceLabel: "Bible de production",
+    projectLabel: "Étude de cas Lyra Voss",
+    variant: "portrait" as const,
   },
 ];
 
-const highlights = [
+const workflowSteps = [
   {
-    value: String(lessons.length),
-    label: "leçons structurées",
-    description: "Un parcours court, progressif et directement applicable.",
+    number: "01",
+    verb: "Voir",
+    title: "Nommer le cadre et l’intention",
+    description: "Lire un plan, un angle et une fonction narrative avant d’écrire un prompt.",
+    href: "/references/camera-shots/",
+    status: "Prêt",
   },
   {
-    value: String(prompts.length + resources.length),
-    label: "ressources pratiques",
-    description: "Prompts, checklists et supports à réutiliser en production.",
+    number: "02",
+    verb: "Composer",
+    title: "Organiser le regard et le vide",
+    description: "Construire un cadre lisible, stable et exploitable pour le mouvement.",
+    href: "/formation/composition-cinematique/",
+    status: "Prêt",
   },
   {
-    value: String(shots.length),
-    label: "références caméra",
-    description: "Un vocabulaire visuel pour cadrer chaque intention.",
+    number: "03",
+    verb: "Générer",
+    title: "Fixer lumière, palette et matière",
+    description: "Motiver les sources et limiter la palette pour éviter les dérives.",
+    href: "/formation/lumiere-couleur/",
+    status: "Prêt",
+  },
+  {
+    number: "04",
+    verb: "Stabiliser",
+    title: "Conserver identité et décor",
+    description: "Séparer constantes, variables autorisées et références dédiées.",
+    href: "/formation/stabiliser/",
+    status: "Prêt",
+  },
+  {
+    number: "05",
+    verb: "Mettre en scène",
+    title: "Bloquer l’action dans l’espace",
+    description: "Définir regard, trajectoire et fonction du plan avant la caméra.",
+    href: "/formation/mettre-en-scene/",
+    status: "Prêt",
+  },
+  {
+    number: "06",
+    verb: "Animer",
+    title: "Décrire un mouvement plausible",
+    description: "Limiter les variations et préserver visage, tenue et architecture.",
+    href: "/formation/animer/",
+    status: "Prêt",
+  },
+  {
+    number: "07",
+    verb: "Monter",
+    title: "Assembler pour l’intention",
+    description: "Contrôler raccords, rythme et transitions avant l’effet spectaculaire.",
+    href: "/formation/monter-documenter/",
+    status: "Prêt",
+  },
+  {
+    number: "08",
+    verb: "Documenter",
+    title: "Conserver les décisions réutilisables",
+    description: "Prompt, frame source, clip validé et correction doivent rester traçables.",
+    href: "/resources/production-bible-template/",
+    status: "Prêt",
   },
 ];
 ---
 
 <BaseLayout
-  title="Hub de formation"
-  description="Le hub de formation AI Filmmaking Lab pour apprendre à concevoir, générer et produire des séquences audiovisuelles avec l’IA."
+  title="Accueil"
+  description="AI Filmmaking Lab rassemble formation, prompts, références, ressources et études de cas pour produire des séquences audiovisuelles avec l’IA."
 >
-  <section class="hub-hero" aria-labelledby="hub-title">
-    <div class="hub-hero__content">
-      <span class="eyebrow">Hub de formation</span>
-      <h1 id="hub-title">Passez de l’idée à une séquence maîtrisée.</h1>
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero__content">
+      <span class="eyebrow">AI Filmmaking Lab</span>
+      <h1 id="home-title">Une ressource de production cinématographique pour travailler l’IA sérieusement.</h1>
       <p>
-        Explorez un parcours progressif pour composer vos images, stabiliser vos personnages,
-        préparer vos plans vidéo et documenter une production audiovisuelle assistée par l’IA.
+        À mi-chemin entre documentation pédagogique, wiki créatif, bibliothèque de prompts et laboratoire visuel,
+        le site relie méthode, cadres, références et études de cas autour de Lyra Voss et de l’univers Vertical Silence.
       </p>
-
-      <dl class="hub-metrics" aria-label="Contenu disponible">
+      <div class="hero-actions">
+        <a class="button primary" href="/formation/">Entrer dans la formation</a>
+        <a class="button secondary" href="/projects/lyra-voss/">Voir Lyra Voss</a>
+      </div>
+      <dl class="home-hero__stats" aria-label="Vue d’ensemble du site">
         <div>
           <dt>{lessons.length}</dt>
           <dd>leçons</dd>
@@ -81,176 +143,270 @@ const highlights = [
           <dd>prompts</dd>
         </div>
         <div>
-          <dt>{projects.length}</dt>
-          <dd>projets</dd>
+          <dt>{resources.length}</dt>
+          <dd>ressources</dd>
+        </div>
+        <div>
+          <dt>{glossary.length}</dt>
+          <dd>termes</dd>
         </div>
       </dl>
-
-      <div class="hero-actions">
-        <a class="button primary" href="#parcours">Explorer la formation</a>
-        <a class="button secondary" href="#domaines">Voir les domaines</a>
-      </div>
     </div>
 
-    <aside class="hub-feature" aria-label="Parcours recommandé">
-      <div class="hub-feature__top">
-        <span>Parcours recommandé</span>
-        <span>01</span>
-      </div>
-      <div>
-        <span class="card-kicker">Commencez ici</span>
-        <h2>{featuredLesson.data.title}</h2>
-        <p>{featuredLesson.data.description}</p>
-      </div>
-      <div class="hub-feature__visual" aria-hidden="true">
-        <img src={featuredLesson.data.heroImage} alt="" />
-      </div>
-      <div class="hub-feature__meta">
-        <span>{featuredLesson.data.estimatedTime}</span>
-        <span>{formatLevelLabel(featuredLesson.data.level)}</span>
-        <span>{formatStageLabel(featuredLesson.data.stage)}</span>
-      </div>
-      <a class="button primary" href={`/formation/${featuredLesson.id}/`}>
-        Démarrer la première leçon
-      </a>
-    </aside>
-  </section>
-
-  <div class="container">
-  <section class="hub-section" aria-labelledby="approach-title">
-    <div class="hub-section__intro">
-      <div>
-        <span class="eyebrow">Une méthode concrète</span>
-        <h2 id="approach-title">Des repères clairs pour produire, pas seulement expérimenter.</h2>
-      </div>
-      <p>
-        Chaque contenu relie une intention créative, une méthode de travail et un livrable.
-        Vous pouvez suivre le parcours dans l’ordre ou ouvrir directement le sujet utile à votre projet.
-      </p>
-    </div>
-
-    <div class="highlight-grid">
-      {
-        highlights.map((item) => (
-          <article class="highlight-card">
-            <strong>{item.value}</strong>
-            <h3>{item.label}</h3>
-            <p>{item.description}</p>
-          </article>
-        ))
-      }
+    <div class="home-hero__visual">
+      <CinematicImagePlaceholder
+        src={featuredProject?.data.heroImage}
+        alt="Lyra Voss dans Vertical Silence"
+        variant="portrait"
+        label="Étude de cas active"
+        title="Lyra Voss dans Vertical Silence"
+        caption="Personnage, bible visuelle, variations de plans et animation contrôlée."
+        aspect="5 / 4"
+      />
     </div>
   </section>
 
-  <section class="hub-section" id="domaines" aria-labelledby="domains-title">
+  <section class="home-band" aria-labelledby="workflow-title">
+    <div class="section-heading">
+      <span class="eyebrow">Parcours</span>
+      <h2 id="workflow-title">Un workflow lisible de la lecture du cadre jusqu’à la documentation.</h2>
+      <p>Les verbes du site suivent la chaîne réelle de travail: voir, composer, générer, stabiliser, mettre en scène, animer, monter, documenter.</p>
+    </div>
+    <div class="workflow-grid">
+      {workflowSteps.map((step) => <PathStepCard {...step} />)}
+    </div>
+  </section>
+
+  <section class="home-band" aria-labelledby="families-title">
+    <div class="section-heading">
+      <span class="eyebrow">Familles de compétences</span>
+      <h2 id="families-title">Trois portes d’entrée, un même standard de production.</h2>
+      <p>Chaque famille relie une leçon d’entrée, des ressources de support et un projet qui montre l’usage concret.</p>
+    </div>
+    <div class="skill-grid">
+      {skillFamilies.map((family) => <SkillFamilyCard {...family} />)}
+    </div>
+  </section>
+
+  <section class="home-band home-band--library" aria-labelledby="library-title">
     <div class="section-heading section-heading--center">
-      <span class="eyebrow">Domaines</span>
-      <h2 id="domains-title">Explorez les familles de compétences.</h2>
-      <p>Choisissez une porte d’entrée selon votre besoin du moment.</p>
-    </div>
-
-    <div class="domain-grid">
-      {
-        domains.map((domain) => (
-          <a class="domain-card" href={domain.href}>
-            <span class="domain-card__icon" aria-hidden="true">{domain.icon}</span>
-            <span class="card-kicker">{domain.label}</span>
-            <h3>{domain.title}</h3>
-            <p>{domain.description}</p>
-            <span class="text-link">Explorer <span aria-hidden="true">→</span></span>
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section" id="parcours" aria-labelledby="lessons-title">
-    <div class="hub-section__intro hub-section__intro--aligned">
-      <div>
-        <span class="eyebrow">Catalogue</span>
-        <h2 id="lessons-title">Le parcours de formation.</h2>
-      </div>
-      <p>{lessons.length} leçons disponibles, de l’analyse visuelle à la mise en mouvement.</p>
-    </div>
-
-    <div class="lesson-catalogue">
-      {
-        lessons.map((lesson, index) => (
-          <a class="catalogue-card" href={`/formation/${lesson.id}/`}>
-            <div class="catalogue-card__number">{String(index + 1).padStart(2, "0")}</div>
-            <div class="catalogue-card__content">
-              <div class="card-meta">
-                <span>{formatStageLabel(lesson.data.stage)}</span>
-                <span>{formatLevelLabel(lesson.data.level)}</span>
-              </div>
-              <h3>{lesson.data.title}</h3>
-              <p>{lesson.data.description}</p>
-              <div class="tool-row">
-                {lesson.data.tools.map((tool) => <ToolBadge tool={tool} />)}
-              </div>
-            </div>
-            <div class="catalogue-card__aside">
-              <span>{lesson.data.estimatedTime ?? "À votre rythme"}</span>
-              <span class="catalogue-card__arrow" aria-hidden="true">→</span>
-            </div>
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section hub-section--split" aria-labelledby="resources-title">
-    <div class="hub-panel hub-panel--violet">
       <span class="eyebrow">Bibliothèque</span>
-      <h2 id="resources-title">Des outils prêts pour vos productions.</h2>
+      <h2 id="library-title">Prompts, références, glossaire et ressources documentées.</h2>
+      <p>Chaque bibliothèque sert une tâche précise au lieu de répéter les mêmes contenus sous plusieurs noms.</p>
+    </div>
+
+    <div class="home-shelf-grid">
+      <ResourceCard
+        eyebrow="Prompts"
+        title="Bibliothèque de prompts"
+        description="Des fiches reliées à une intention, un outil, une leçon et des contraintes négatives observables."
+        href="/prompts/"
+        status="Prêt"
+        meta={`${prompts.length} fiches`}
+        variant="composition"
+        badges={["Composition", "Storyboard", "Animer"]}
+        actionLabel="Ouvrir les prompts"
+      />
+      <ResourceCard
+        eyebrow="Références"
+        title="Voir avant de générer"
+        description="Plans caméra, boards visuels et repères de cadrage pour choisir un cadre au lieu d’improviser."
+        href="/references/"
+        status="Prêt"
+        meta="Guides visuels"
+        variant="urban"
+        badges={["Plans caméra", "Angles", "Usage narratif"]}
+        actionLabel="Ouvrir les références"
+      />
+      <ResourceCard
+        eyebrow="Ressources"
+        title="Templates de production"
+        description="Checklist shot-list, bible de production et cheat sheets pour conserver ce qui doit rester stable."
+        href="/resources/"
+        status="Prêt"
+        meta={`${resources.length} ressources`}
+        variant="storyboard"
+        badges={["Checklist", "Template", "Cheat sheet"]}
+        actionLabel="Ouvrir les ressources"
+      />
+      <ResourceCard
+        eyebrow="Glossaire"
+        title="Vocabulaire de production"
+        description="Un référentiel pour aligner cadrage, lumière, prompts et workflow sans flottement de termes."
+        href="/glossary/"
+        status="Prêt"
+        meta={`${glossary.length} termes`}
+        variant="depth"
+        badges={["Cinéma", "Vidéo", "Prompt"]}
+        actionLabel="Ouvrir le glossaire"
+      />
+    </div>
+  </section>
+
+  <section class="home-case-study" aria-labelledby="case-study-title">
+    <div class="home-case-study__copy">
+      <span class="eyebrow">Étude de cas centrale</span>
+      <h2 id="case-study-title">Lyra Voss sert de fil rouge pour éprouver méthode, cohérence et documentation.</h2>
       <p>
-        Retrouvez les prompts, références caméra et ressources qui accompagnent chaque étape.
+        Le site ne présente pas seulement des prompts isolés. Il montre comment une bible visuelle,
+        des boards, des frames approuvées et des clips contrôlés se répondent dans un même univers.
       </p>
-      <div class="hub-panel__links">
-        <a href="/prompts/">
-          <strong>{prompts.length} prompts</strong>
-          <span>Image, vidéo, personnage et transition</span>
-        </a>
-        <a href="/references/">
-          <strong>{shots.length} références</strong>
-          <span>Plans, angles et usages narratifs</span>
-        </a>
-        <a href="/resources/">
-          <strong>{resources.length} ressources</strong>
-          <span>Templates et checklists de production</span>
-        </a>
+      <div class="home-case-study__actions">
+        <a class="button primary" href="/projects/lyra-voss/">Ouvrir le projet</a>
+        <a class="button secondary" href="/resources/composition-cheat-sheet/">Ouvrir le guide de composition</a>
       </div>
     </div>
 
-    <div class="hub-panel">
-      <span class="eyebrow">Études de cas</span>
-      <h2>Apprenez à partir de projets documentés.</h2>
-      <p>Chaque projet rassemble brief, références, prompts, pipeline et analyse critique.</p>
-      <div class="project-preview-grid">
-        {
-          projects.slice(0, 2).map((project) => (
-            <a class="project-preview" href={`/projects/${project.id}/`}>
-              {project.data.heroImage && <img src={project.data.heroImage} alt="" loading="lazy" />}
-              <div>
-                <span class="card-kicker">{formatStatusLabel(project.data.status)}</span>
-                <h3>{project.data.title}</h3>
-                <span class="text-link">Voir le projet →</span>
-              </div>
-            </a>
-          ))
-        }
-      </div>
+    <div class="home-case-study__note">
+      <strong>Vertical Silence</strong>
+      <p>Univers en cours de consolidation comme surface autonome. Pour ce sprint, il structure surtout les leçons, prompts et cas Lyra Voss.</p>
     </div>
   </section>
 
-  <section class="hub-cta" aria-labelledby="cta-title">
-    <span class="eyebrow">Votre prochain plan commence ici</span>
-    <h2 id="cta-title">Construisez une méthode créative que vous pourrez répéter.</h2>
-    <p>Commencez par observer, composer et générer, puis développez votre propre pipeline.</p>
-    <div class="hero-actions">
-      <a class="button primary" href={`/formation/${featuredLesson.id}/`}>Commencer maintenant</a>
-      <a class="button secondary" href="/projects/">Explorer les projets</a>
-    </div>
-  </section>
-  </div>
+  <style>
+    .home-hero,
+    .home-case-study {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(300px, 0.95fr);
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .home-hero {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 14% 18%, color-mix(in srgb, var(--danger) 20%, transparent), transparent 28%),
+        radial-gradient(circle at 82% 24%, color-mix(in srgb, var(--mint) 18%, transparent), transparent 26%),
+        linear-gradient(145deg, color-mix(in srgb, var(--surface) 84%, #09111d 16%), color-mix(in srgb, var(--surface-muted) 82%, #05080f 18%));
+      padding: clamp(1.5rem, 4vw, 3rem);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .home-hero__content,
+    .home-case-study__copy {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .home-hero__content h1,
+    .home-case-study__copy h2 {
+      margin: 0;
+    }
+
+    .home-hero__stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0.75rem;
+      margin: 0;
+    }
+
+    .home-hero__stats div {
+      border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+      border-radius: 14px;
+      background: color-mix(in srgb, var(--surface) 88%, transparent);
+      padding: 0.9rem 0.95rem;
+    }
+
+    .home-hero__stats dt {
+      color: var(--text);
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .home-hero__stats dd {
+      margin: 0.45rem 0 0;
+      color: var(--text-soft);
+      font-size: 0.75rem;
+    }
+
+    .home-band {
+      padding: 5.25rem 0;
+    }
+
+    .workflow-grid,
+    .skill-grid,
+    .home-shelf-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .workflow-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .skill-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .home-shelf-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .home-band--library {
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .home-case-study {
+      gap: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background:
+        linear-gradient(180deg, color-mix(in srgb, var(--surface) 94%, transparent), color-mix(in srgb, var(--surface-muted) 84%, transparent));
+      padding: clamp(1.5rem, 3vw, 2.5rem);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .home-case-study__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .home-case-study__note {
+      display: grid;
+      gap: 0.65rem;
+      align-content: start;
+      border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+      border-radius: 18px;
+      background: color-mix(in srgb, var(--surface-muted) 88%, transparent);
+      padding: 1rem;
+    }
+
+    .home-case-study__note strong,
+    .home-case-study__note p {
+      margin: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .workflow-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 920px) {
+      .home-hero,
+      .home-case-study,
+      .skill-grid,
+      .home-shelf-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .workflow-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 640px) {
+      .home-hero__stats,
+      .workflow-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
 </BaseLayout>

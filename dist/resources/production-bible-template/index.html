@@ -1,0 +1,118 @@
+<!DOCTYPE html><html lang="fr" data-theme="light"> <head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Template complet pour documenter direction artistique, continuité, prompts, plans, animation, son et analyse critique."><meta id="meta-theme-color" name="theme-color" content="#eef2f5"><script>
+      (() => {
+        const storageKey = "afl-theme";
+        try {
+          const saved = window.localStorage.getItem(storageKey);
+          const theme =
+            saved === "dark" || saved === "light"
+              ? saved
+              : window.matchMedia?.("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.style.colorScheme = theme;
+        } catch {
+          document.documentElement.dataset.theme = "light";
+        }
+      })();
+    </script><title>Template de bible de production | AI Filmmaking Lab</title><link rel="stylesheet" href="/_astro/_slug_.cGIcYskp.css"></head> <body> <a class="skip-link" href="#main-content">Aller au contenu</a> <div class="site-shell"> <header class="site-header"> <div class="site-header__inner"> <a class="brand" href="/" aria-label="AI Filmmaking Lab, accueil"> <span class="brand-mark" aria-hidden="true"> <span></span> </span> <span class="brand-copy"> <strong>AI Filmmaking Lab</strong> <small>Laboratoire de production cinematographique</small> </span> </a> <nav class="main-nav" aria-label="Navigation principale"> <a class href="/formation/"> Formation </a><a class href="/prompts/"> Prompts </a><a class href="/references/"> Références </a><a class href="/projects/"> Projets </a><a class href="/glossary/"> Glossaire </a><a class="is-active" href="/resources/"> Ressources </a> </nav> <div class="site-header__actions"> <button class="theme-switch" type="button" aria-label="Basculer le mode clair ou sombre" aria-pressed="false" data-theme-toggle> <svg class="theme-switch__sun" viewBox="0 0 24 24" aria-hidden="true"> <circle cx="12" cy="12" r="4"></circle> <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path> </svg> <svg class="theme-switch__moon" viewBox="0 0 24 24" aria-hidden="true"> <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"></path> </svg> </button> <a class="site-header__cta" href="/formation/#parcours">Commencer</a> <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle> <span></span> <span></span> <span></span> </button> </div> </div> </header> <div class="mobile-menu" id="mobile-menu" hidden data-mobile-menu> <div class="mobile-menu__panel"> <div class="mobile-menu__top"> <a class="brand" href="/" data-menu-link> <span class="brand-mark" aria-hidden="true"><span></span></span> <span class="brand-copy"> <strong>AI Filmmaking Lab</strong> <small>Laboratoire de production cinematographique</small> </span> </a> <button class="mobile-menu__close" type="button" aria-label="Fermer le menu" data-menu-close> <svg viewBox="0 0 24 24" aria-hidden="true"> <path d="M6 6 18 18M18 6 6 18"></path> </svg> </button> </div> <nav class="mobile-menu__nav" aria-label="Navigation mobile"> <a class href="/formation/" data-menu-link> Formation </a><a class href="/prompts/" data-menu-link> Prompts </a><a class href="/references/" data-menu-link> Références </a><a class href="/projects/" data-menu-link> Projets </a><a class href="/glossary/" data-menu-link> Glossaire </a><a class="is-active" href="/resources/" data-menu-link> Ressources </a> </nav> <a class="button primary" href="/formation/#parcours" data-menu-link>Commencer le parcours</a> </div> </div> <main id="main-content">  <section class="course-hero"> <div class="course-hero__content"> <span class="eyebrow">Ressource prête</span> <h1>Template de bible de production</h1> <p>Un document maître pour relier l’intention artistique aux décisions vérifiables de chaque image et de chaque clip.</p> <div class="hero-actions" aria-label="Actions principales"> <a class="button primary" href="/projects/lyra-voss/"> Voir Lyra Voss </a><a class="button secondary" href="/formation/monter-documenter/"> Étape Documenter </a> </div> </div> <div class="course-hero__visual"> <img src="/images/references/production-bible-board.svg" alt="Mockup abstrait d’une bible de production AI filmmaking"> </div> <dl class="hero-stats"> <div> <dt>Sections</dt> <dd>13</dd> </div><div> <dt>Usage</dt> <dd>Projet complet</dd> </div><div> <dt>Statut</dt> <dd>Prêt</dd> </div> </dl> </section> <section class="resource-method" aria-labelledby="bible-method-title"> <div> <span class="eyebrow">Principe</span> <h2 id="bible-method-title">Une bible ne stocke pas seulement des images.</h2> <p>
+Elle enregistre les constantes, les variables autorisées, les versions testées et les
+        corrections. Chaque plan doit pouvoir être relié à une intention, une frame source et une décision.
+</p> </div> <ol> <li><span>01</span>Écrire les constantes avant les prompts.</li> <li><span>02</span>Versionner les frames et les clips.</li> <li><span>03</span>Documenter les échecs utiles.</li> <li><span>04</span>Mettre à jour la bible après le montage.</li> </ol> </section> <div class="resource-template-grid" aria-label="Sections de la bible de production"> <article id="project-sheet" class="resource-template-card"> <header> <span>01</span> <h2>Fiche projet</h2> </header> <p>Donner un cadre commun avant toute génération.</p> <ul> <li>Titre et version</li><li>Format et durée</li><li>Public</li><li>Pitch en une phrase</li><li>Livrable final</li><li>Responsable</li> </ul> <div class="resource-template-card__example">Vertical Silence v1.2, séquence de 45 secondes, étude de tension calme dans une structure abandonnée.</div> </article><article id="artistic-intent" class="resource-template-card"> <header> <span>02</span> <h2>Intention artistique</h2> </header> <p>Traduire le récit en décisions visuelles vérifiables.</p> <ul> <li>Émotion dominante</li><li>Contraste</li><li>Rythme</li><li>Densité visuelle</li><li>Réalisme attendu</li><li>Éléments à exclure</li> </ul> <div class="resource-template-card__example">Cyberpunk sobre, réalisme physique, pluie froide, néons rares, tension sans agitation.</div> </article><article id="references" class="resource-template-card"> <header> <span>03</span> <h2>Références</h2> </header> <p>Nommer ce qui est repris dans chaque référence, sans copier une image entière.</p> <ul> <li>Référence</li><li>Élément observé</li><li>Décision retenue</li><li>Décision rejetée</li><li>Source et droits</li><li>Date</li> </ul>  </article><article id="character" class="resource-template-card"> <header> <span>04</span> <h2>Personnage</h2> </header> <p>Stabiliser l’identité avant les variations de plans.</p> <ul> <li>Identité</li><li>Visage</li><li>Cheveux</li><li>Silhouette</li><li>Posture</li><li>Tenue</li><li>Expressions</li><li>Interdits</li> </ul> <div class="resource-template-card__example">Lyra Voss : visage fin, yeux verts calmes, cheveux brun miel humides, combinaison noire mate sans LED.</div> </article><article id="locations" class="resource-template-card"> <header> <span>05</span> <h2>Lieux</h2> </header> <p>Conserver la géographie, les matières et les sources de lumière.</p> <ul> <li>Nom du lieu</li><li>Fonction narrative</li><li>Plan au sol</li><li>Matières</li><li>Échelle</li><li>Accès</li><li>Lumières fixes</li><li>Éléments stables</li> </ul>  </article><article id="objects" class="resource-template-card"> <header> <span>06</span> <h2>Objets</h2> </header> <p>Identifier les accessoires qui portent une action ou un raccord.</p> <ul> <li>Nom</li><li>Fonction</li><li>Dimensions</li><li>Matière</li><li>État</li><li>Main associée</li><li>Plan d’apparition</li><li>Continuité</li> </ul>  </article><article id="palette" class="resource-template-card"> <header> <span>07</span> <h2>Palette</h2> </header> <p>Limiter les dérives de couleur entre images et clips.</p> <ul> <li>Dominante</li><li>Accent</li><li>Tons de peau</li><li>Noirs</li><li>Hautes lumières</li><li>Saturation maximale</li><li>Couleurs interdites</li> </ul> <div class="resource-template-card__example">Bleu-gris et béton humide, cyan discret, peau naturelle, aucun bain magenta.</div> </article><article id="master-prompts" class="resource-template-card"> <header> <span>08</span> <h2>Prompts maîtres</h2> </header> <p>Séparer les blocs stables des variables de plan.</p> <ul> <li>Identité</li><li>Monde</li><li>Style</li><li>Lumière</li><li>Optique</li><li>Variables autorisées</li><li>Version</li><li>Frame validée</li> </ul>  </article><article id="negative-prompts" class="resource-template-card"> <header> <span>09</span> <h2>Negative prompts</h2> </header> <p>Protéger les constantes et documenter les dérives récurrentes.</p> <ul> <li>Identité</li><li>Anatomie</li><li>Tenue</li><li>Décor</li><li>Couleur</li><li>Caméra</li><li>Mouvement</li><li>Artefacts</li> </ul>  </article><article id="shot-list" class="resource-template-card"> <header> <span>10</span> <h2>Shot list</h2> </header> <p>Relier chaque plan à sa fonction dans le récit.</p> <ul> <li>ID plan</li><li>Beat</li><li>Valeur</li><li>Angle</li><li>Focale</li><li>Mouvement</li><li>Durée</li><li>Frame source</li><li>Statut</li> </ul>  </article><article id="image-to-video" class="resource-template-card"> <header> <span>11</span> <h2>Animation image vers vidéo</h2> </header> <p>Décrire un mouvement limité qui respecte la frame approuvée.</p> <ul> <li>Outil</li><li>Image source</li><li>État initial</li><li>État final</li><li>Caméra</li><li>Mouvement sujet</li><li>Intensité</li><li>Erreurs à éviter</li> </ul>  </article><article id="sound-design" class="resource-template-card"> <header> <span>12</span> <h2>Design sonore</h2> </header> <p>Faire exister le lieu et le hors-champ avant la musique.</p> <ul> <li>Ambiance</li><li>Proximité</li><li>Événement</li><li>Texture</li><li>Perspective</li><li>Silence</li><li>Transition</li><li>Niveau</li> </ul>  </article><article id="critical-analysis" class="resource-template-card"> <header> <span>13</span> <h2>Analyse critique</h2> </header> <p>Transformer chaque échec en décision exploitable.</p> <ul> <li>Résultat</li><li>Écart observé</li><li>Cause probable</li><li>Correction</li><li>Version comparée</li><li>Décision</li><li>Plan impacté</li><li>À réutiliser</li> </ul>  </article> </div> <section class="resource-code-example" aria-labelledby="bible-starter-title"> <div> <span class="eyebrow">Point de départ</span> <h2 id="bible-starter-title">Structure minimale copiable</h2> <p>Utilisez ce bloc dans Notion, un document Markdown ou le dossier de production du projet.</p> </div> <figure class="code-block"> <figcaption> <span>Template de bible</span> <button type="button" class="copy-button" data-copy-text="[PROJECT]
+title:
+version:
+format:
+pitch:
+
+[ART DIRECTION]
+emotion:
+palette:
+materials:
+visual constraints:
+
+[CONTINUITY]
+character constants:
+location constants:
+objects:
+forbidden changes:
+
+[PRODUCTION]
+master prompts:
+negative prompts:
+shot list:
+animation tests:
+design sonore:
+critical notes:" data-copy-label="Copier Template de bible" aria-label="Copier Template de bible" title="Copier Template de bible"> <span class="copy-button__icon" aria-hidden="true"> <svg class="copy-button__icon-state copy-button__icon-state--default" viewBox="0 0 24 24"> <path d="M8 8h10v12H8z"></path> <path d="M6 16H4V4h12v2"></path> </svg> <svg class="copy-button__icon-state copy-button__icon-state--success" viewBox="0 0 24 24"> <path d="M5.5 12.5 9.5 16.5 18.5 7.5"></path> </svg> <svg class="copy-button__icon-state copy-button__icon-state--error" viewBox="0 0 24 24"> <path d="M8 8 16 16"></path> <path d="M16 8 8 16"></path> </svg> </span> <span class="copy-button__label" aria-hidden="true"> <span class="copy-button__label-state copy-button__label-state--default">Copier</span> <span class="copy-button__label-state copy-button__label-state--success">Copié</span> <span class="copy-button__label-state copy-button__label-state--error">Échec</span> </span> <span class="sr-only copy-button__live" aria-live="polite">Copier Template de bible</span> </button> <script type="module">const c=window,s=e=>{delete e.dataset.copyState;const t=e.querySelector(".copy-button__live");t&&(t.textContent=e.dataset.copyLabel||e.ariaLabel||"Copier")},i=(e,t)=>{e.__copyFeedbackTimer&&window.clearTimeout(e.__copyFeedbackTimer),e.dataset.copyState=t;const a=e.querySelector(".copy-button__live");if(a){const o=e.dataset.copyLabel||e.ariaLabel||"Copier";a.textContent=t==="copied"?`${o} copié`:`${o} impossible, réessayez`}e.__copyFeedbackTimer=window.setTimeout(()=>{s(e)},1500)};c.__aiFilmCopyButtonsReady||(c.__aiFilmCopyButtonsReady=!0,document.addEventListener("click",async e=>{const t=e.target instanceof Element?e.target.closest("[data-copy-text]"):null;if(!(t instanceof HTMLButtonElement))return;const a=t,o=a.dataset.copyText||"";try{await navigator.clipboard.writeText(o),i(a,"copied")}catch{i(a,"error")}}));</script> </figcaption> <pre><code class="language-text">[PROJECT]
+title:
+version:
+format:
+pitch:
+
+[ART DIRECTION]
+emotion:
+palette:
+materials:
+visual constraints:
+
+[CONTINUITY]
+character constants:
+location constants:
+objects:
+forbidden changes:
+
+[PRODUCTION]
+master prompts:
+negative prompts:
+shot list:
+animation tests:
+design sonore:
+critical notes:</code></pre> </figure> </section>  </main> <footer class="site-footer"> <div class="site-footer__inner"> <div class="site-footer__brand"> <a class="brand brand--footer" href="/"> <span class="brand-mark" aria-hidden="true"><span></span></span> <span class="brand-copy"> <strong>AI Filmmaking Lab</strong> <small>Laboratoire de production cinematographique</small> </span> </a> <p>
+Apprenez à concevoir, produire et documenter des séquences audiovisuelles avec l’IA.
+</p> </div> <div class="site-footer__nav"> <strong>Explorer</strong> <nav aria-label="Navigation de pied de page"> <a href="/formation/">Formation</a><a href="/prompts/">Prompts</a><a href="/references/">Références</a><a href="/projects/">Projets</a><a href="/glossary/">Glossaire</a><a href="/resources/">Ressources</a> </nav> </div> <div class="site-footer__cta"> <strong>Prêt à créer ?</strong> <p>Commencez par les fondations, puis avancez à votre rythme.</p> <a class="button primary" href="/formation/#parcours">Voir le parcours</a> </div> </div> <div class="site-footer__bottom"> <span>© 2026 AI Filmmaking Lab</span> <span>Laboratoire de production cinematographique</span> </div> </footer> </div> <script>
+      (() => {
+        const root = document.documentElement;
+        const storageKey = "afl-theme";
+        const toggles = document.querySelectorAll("[data-theme-toggle]");
+        const menu = document.querySelector("[data-mobile-menu]");
+        const menuToggle = document.querySelector("[data-menu-toggle]");
+        const menuClose = document.querySelector("[data-menu-close]");
+        const menuLinks = document.querySelectorAll("[data-menu-link]");
+        const meta = document.getElementById("meta-theme-color");
+
+        const applyTheme = (theme, persist = true) => {
+          const nextTheme = theme === "dark" ? "dark" : "light";
+          root.dataset.theme = nextTheme;
+          root.style.colorScheme = nextTheme;
+          toggles.forEach((toggle) => {
+            toggle.setAttribute("aria-pressed", String(nextTheme === "dark"));
+          });
+          if (meta instanceof HTMLMetaElement) {
+            meta.content = nextTheme === "dark" ? "#09111b" : "#eef2f5";
+          }
+          if (persist) window.localStorage.setItem(storageKey, nextTheme);
+        };
+
+        applyTheme(root.dataset.theme || "light", false);
+        toggles.forEach((toggle) => {
+          toggle.addEventListener("click", () => {
+            applyTheme(root.dataset.theme === "dark" ? "light" : "dark");
+          });
+        });
+
+        const setMenuOpen = (open) => {
+          if (!(menu instanceof HTMLElement) || !(menuToggle instanceof HTMLButtonElement)) return;
+          menu.hidden = !open;
+          document.body.classList.toggle("menu-open", open);
+          menuToggle.setAttribute("aria-expanded", String(open));
+        };
+
+        menuToggle?.addEventListener("click", () => {
+          setMenuOpen(menu instanceof HTMLElement ? menu.hidden : false);
+        });
+        menuClose?.addEventListener("click", () => setMenuOpen(false));
+        menuLinks.forEach((link) => link.addEventListener("click", () => setMenuOpen(false)));
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") setMenuOpen(false);
+        });
+      })();
+    </script> </body> </html>

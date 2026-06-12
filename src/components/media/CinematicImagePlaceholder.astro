@@ -1,0 +1,352 @@
+---
+interface Props {
+  src?: string;
+  alt?: string;
+  label?: string;
+  title?: string;
+  caption?: string;
+  variant?:
+    | "urban"
+    | "board"
+    | "portrait"
+    | "storyboard"
+    | "depth"
+    | "light"
+    | "composition";
+  aspect?: string;
+  compact?: boolean;
+}
+
+const {
+  src,
+  alt = "",
+  label,
+  title,
+  caption,
+  variant = "urban",
+  aspect = "16 / 10",
+  compact = false,
+} = Astro.props;
+
+const accessibleLabel = alt || title || label || "Illustration cinématographique";
+---
+
+<figure
+  class:list={[
+    "cinematic-placeholder",
+    `cinematic-placeholder--${variant}`,
+    {
+      "cinematic-placeholder--compact": compact,
+      "cinematic-placeholder--media": Boolean(src),
+    },
+  ]}
+  style={`--placeholder-aspect:${aspect};`}
+>
+  <div class="cinematic-placeholder__frame" role={!src ? "img" : undefined} aria-label={!src ? accessibleLabel : undefined}>
+    {
+      src ? (
+        <img src={src} alt={alt} loading="lazy" />
+      ) : (
+        <>
+          <span class="cinematic-placeholder__grid" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__glow cinematic-placeholder__glow--top" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__glow cinematic-placeholder__glow--side" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__mist" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__plane cinematic-placeholder__plane--back" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__plane cinematic-placeholder__plane--mid" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__plane cinematic-placeholder__plane--front" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__beam" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__subject" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__frame-line cinematic-placeholder__frame-line--h" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__frame-line cinematic-placeholder__frame-line--v" aria-hidden="true"></span>
+          <span class="cinematic-placeholder__storyboard" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+          <span class="cinematic-placeholder__slate" aria-hidden="true"></span>
+        </>
+      )
+    }
+  </div>
+
+  {
+    (label || title || caption) && (
+      <figcaption class="cinematic-placeholder__caption">
+        {label && <span>{label}</span>}
+        {title && <strong>{title}</strong>}
+        {caption && <p>{caption}</p>}
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .cinematic-placeholder {
+    display: grid;
+    gap: 0.9rem;
+    margin: 0;
+  }
+
+  .cinematic-placeholder__frame {
+    position: relative;
+    overflow: hidden;
+    min-height: 100%;
+    border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
+    border-radius: 16px;
+    aspect-ratio: var(--placeholder-aspect);
+    background:
+      radial-gradient(circle at 18% 18%, rgba(175, 87, 166, 0.24), transparent 28%),
+      radial-gradient(circle at 83% 28%, rgba(78, 184, 212, 0.18), transparent 24%),
+      linear-gradient(180deg, rgba(13, 20, 32, 0.96) 0%, rgba(11, 17, 27, 0.96) 38%, rgba(6, 10, 16, 0.98) 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.05),
+      0 24px 54px rgba(4, 8, 14, 0.22);
+    isolation: isolate;
+  }
+
+  .cinematic-placeholder--compact .cinematic-placeholder__frame {
+    border-radius: 12px;
+  }
+
+  .cinematic-placeholder__frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cinematic-placeholder__grid,
+  .cinematic-placeholder__glow,
+  .cinematic-placeholder__mist,
+  .cinematic-placeholder__plane,
+  .cinematic-placeholder__beam,
+  .cinematic-placeholder__subject,
+  .cinematic-placeholder__frame-line,
+  .cinematic-placeholder__storyboard,
+  .cinematic-placeholder__slate {
+    position: absolute;
+    inset: 0;
+  }
+
+  .cinematic-placeholder__grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px;
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.55), transparent 92%);
+  }
+
+  .cinematic-placeholder__glow {
+    filter: blur(20px);
+    opacity: 0.75;
+  }
+
+  .cinematic-placeholder__glow--top {
+    inset: 0 auto auto 12%;
+    width: 38%;
+    height: 42%;
+    background: radial-gradient(circle, rgba(191, 92, 150, 0.9), transparent 68%);
+  }
+
+  .cinematic-placeholder__glow--side {
+    inset: 24% 7% auto auto;
+    width: 28%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(72, 194, 216, 0.88), transparent 70%);
+  }
+
+  .cinematic-placeholder__mist {
+    background:
+      linear-gradient(180deg, transparent 0%, rgba(10, 16, 25, 0.22) 36%, rgba(10, 16, 25, 0.88) 100%),
+      repeating-linear-gradient(105deg, rgba(255, 255, 255, 0.06) 0, rgba(255, 255, 255, 0.06) 1px, transparent 1px, transparent 15px);
+    opacity: 0.55;
+    mix-blend-mode: screen;
+  }
+
+  .cinematic-placeholder__plane {
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgba(17, 24, 35, 0.25), rgba(17, 24, 35, 0.85));
+  }
+
+  .cinematic-placeholder__plane--back {
+    inset: auto 6% 15% 12%;
+    height: 22%;
+    transform: skewX(-22deg);
+    opacity: 0.62;
+  }
+
+  .cinematic-placeholder__plane--mid {
+    inset: auto 12% 9% 32%;
+    height: 18%;
+    transform: skewX(-24deg);
+    opacity: 0.76;
+  }
+
+  .cinematic-placeholder__plane--front {
+    inset: auto -2% 0 18%;
+    height: 22%;
+    transform: skewX(-28deg);
+    background: linear-gradient(90deg, rgba(22, 29, 43, 0.24), rgba(22, 29, 43, 0.96));
+  }
+
+  .cinematic-placeholder__beam {
+    inset: 10% auto auto 50%;
+    width: 18%;
+    height: 72%;
+    transform: rotate(6deg);
+    background: linear-gradient(180deg, rgba(107, 222, 236, 0.28), transparent 80%);
+    filter: blur(3px);
+    opacity: 0.55;
+  }
+
+  .cinematic-placeholder__subject {
+    inset: auto auto 13% 48%;
+    width: 11%;
+    height: 42%;
+    border-radius: 48% 48% 20% 20%;
+    background:
+      radial-gradient(circle at 52% 20%, rgba(216, 220, 228, 0.84), rgba(216, 220, 228, 0.16) 30%, transparent 32%),
+      linear-gradient(180deg, rgba(15, 19, 28, 0.1) 0%, rgba(9, 11, 18, 0.95) 36%, rgba(9, 11, 18, 0.98) 100%);
+    box-shadow:
+      0 0 0 1px rgba(255, 255, 255, 0.08),
+      28px 0 26px rgba(98, 211, 231, 0.18);
+  }
+
+  .cinematic-placeholder__frame-line {
+    opacity: 0.5;
+  }
+
+  .cinematic-placeholder__frame-line--h {
+    inset: 38% 12% auto;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .cinematic-placeholder__frame-line--v {
+    inset: 12% auto 12% 62%;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.14);
+  }
+
+  .cinematic-placeholder__storyboard {
+    display: none;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 10px;
+    inset: auto 5% 8% 5%;
+    height: 28%;
+  }
+
+  .cinematic-placeholder__storyboard span {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(14, 19, 28, 0.54), rgba(7, 10, 16, 0.88)),
+      radial-gradient(circle at 70% 34%, rgba(81, 195, 218, 0.18), transparent 36%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  }
+
+  .cinematic-placeholder__slate {
+    inset: 8% auto auto 8%;
+    width: 28%;
+    height: 10%;
+    border: 1px solid rgba(255, 255, 255, 0.11);
+    border-radius: 999px;
+    background: rgba(4, 8, 14, 0.48);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  .cinematic-placeholder--portrait .cinematic-placeholder__subject {
+    inset: auto auto 8% 42%;
+    width: 16%;
+    height: 56%;
+  }
+
+  .cinematic-placeholder--portrait .cinematic-placeholder__plane--back {
+    inset: auto 8% 10% 10%;
+    height: 34%;
+  }
+
+  .cinematic-placeholder--board .cinematic-placeholder__storyboard,
+  .cinematic-placeholder--storyboard .cinematic-placeholder__storyboard {
+    display: grid;
+  }
+
+  .cinematic-placeholder--board .cinematic-placeholder__subject,
+  .cinematic-placeholder--storyboard .cinematic-placeholder__subject {
+    inset: 22% auto auto 72%;
+    width: 8%;
+    height: 28%;
+    opacity: 0.55;
+  }
+
+  .cinematic-placeholder--storyboard .cinematic-placeholder__beam {
+    opacity: 0.25;
+  }
+
+  .cinematic-placeholder--depth .cinematic-placeholder__plane--front {
+    inset: auto -4% -2% 6%;
+    height: 28%;
+  }
+
+  .cinematic-placeholder--depth .cinematic-placeholder__plane--mid {
+    inset: auto 18% 15% 22%;
+    height: 22%;
+  }
+
+  .cinematic-placeholder--depth .cinematic-placeholder__subject {
+    inset: auto auto 16% 56%;
+  }
+
+  .cinematic-placeholder--light .cinematic-placeholder__beam {
+    inset: 6% 12% auto auto;
+    width: 26%;
+    height: 86%;
+    transform: rotate(0deg);
+    background: linear-gradient(180deg, rgba(98, 228, 243, 0.36), transparent 84%);
+    opacity: 0.78;
+  }
+
+  .cinematic-placeholder--light .cinematic-placeholder__glow--top {
+    background: radial-gradient(circle, rgba(206, 82, 114, 0.68), transparent 68%);
+  }
+
+  .cinematic-placeholder--composition .cinematic-placeholder__frame-line--h {
+    inset: 36% 8% auto;
+  }
+
+  .cinematic-placeholder--composition .cinematic-placeholder__frame-line--v {
+    inset: 9% auto 9% 38%;
+  }
+
+  .cinematic-placeholder__caption {
+    display: grid;
+    gap: 0.3rem;
+  }
+
+  .cinematic-placeholder__caption span {
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .cinematic-placeholder__caption strong {
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .cinematic-placeholder__caption p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.86rem;
+  }
+
+  @media (max-width: 720px) {
+    .cinematic-placeholder__caption strong {
+      font-size: 0.95rem;
+    }
+  }
+</style>

@@ -16,13 +16,19 @@ const stageLabels: Record<string, string> = {
 };
 
 const promptCategoryLabels: Record<string, string> = {
-  image: "Image",
-  video: "Vidéo",
-  character: "Personnage",
-  camera: "Caméra",
   composition: "Composition",
-  transition: "Transition",
-  workflow: "Workflow",
+  lighting: "Lumière",
+  color: "Couleur",
+  "depth-of-field": "Profondeur de champ",
+  "character-consistency": "Cohérence personnage",
+  "reference-sheet": "Fiches de référence",
+  storyboard: "Storyboard",
+  "shot-list": "Shot-list",
+  "camera-movement": "Mouvement caméra",
+  "image-to-video": "Animation image vers vidéo",
+  transition: "Transitions",
+  "sound-design": "Design sonore",
+  "critical-analysis": "Analyse critique",
 };
 
 const glossaryCategoryLabels: Record<string, string> = {

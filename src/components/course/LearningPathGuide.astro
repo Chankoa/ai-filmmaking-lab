@@ -1,0 +1,151 @@
+---
+import type { LearningPath } from "../../data/learning-paths";
+import PromptExampleCard from "../prompts/PromptExampleCard.astro";
+
+interface Props {
+  path: LearningPath;
+}
+
+const { path } = Astro.props;
+---
+
+<div class="learning-path-guide">
+  <section class="learning-path-hero" aria-labelledby="learning-path-intention">
+    <div class="learning-path-hero__copy">
+      <span class="lesson-kicker">{path.family} · {path.eyebrow}</span>
+      <h2 id="learning-path-intention">{path.intention}</h2>
+      <p>{path.why}</p>
+    </div>
+    <div class="learning-path-hero__map" aria-label="Méthode AI Filmmaking Lab">
+      <span>Voir</span>
+      <span>Composer</span>
+      <span>Générer</span>
+      <span>Stabiliser</span>
+      <span>Mettre en scène</span>
+      <span>Animer</span>
+      <span>Monter</span>
+      <span>Documenter</span>
+    </div>
+  </section>
+
+  <section class="learning-applications" aria-labelledby="applications-title">
+    <div class="learning-section-heading">
+      <span class="lesson-kicker">Double application</span>
+      <h2 id="applications-title">De la frame au plan animé.</h2>
+      <p>La compétence doit rester utile avant et après le passage à la vidéo.</p>
+    </div>
+    <div class="learning-applications__grid">
+      <article>
+        <span class="learning-card-index">Image IA</span>
+        <h3>Construire une frame exploitable</h3>
+        <p>{path.imageApplication}</p>
+      </article>
+      <article>
+        <span class="learning-card-index">Vidéo IA</span>
+        <h3>Préparer le mouvement et le raccord</h3>
+        <p>{path.videoApplication}</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="learning-concepts" aria-labelledby="concepts-title">
+    <div class="learning-section-heading">
+      <span class="lesson-kicker">Notions clés</span>
+      <h2 id="concepts-title">Les décisions à rendre observables.</h2>
+    </div>
+    <div class="learning-concepts__grid">
+      {
+        path.concepts.map((concept, index) => (
+          <article>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h3>{concept.title}</h3>
+            <p>{concept.description}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="learning-prompt" aria-labelledby="learning-prompt-title">
+    <div class="learning-prompt__intro">
+      <span class="lesson-kicker">Exemple de production</span>
+      <h2 id="learning-prompt-title">Transformer la notion en instructions vérifiables.</h2>
+      <p>
+        L'exemple décrit des décisions de plan et des contraintes de continuité. Il peut être
+        adapté à l'outil utilisé sans perdre son intention.
+      </p>
+    </div>
+    <PromptExampleCard
+      title={path.promptTitle}
+      prompt={path.prompt}
+      negativePrompt={path.negativePrompt}
+      variables={path.concepts.map((concept) => concept.title)}
+    />
+  </section>
+
+  <section class="learning-practice" aria-labelledby="practice-title">
+    <div>
+      <span class="lesson-kicker">Mise en pratique</span>
+      <h2 id="practice-title">Appliquer la compétence dans un projet concret.</h2>
+      <ol>
+        {
+          path.practice.map((step, index) => (
+            <li>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <p>{step}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+    <aside>
+      <span class="lesson-kicker">Erreurs à éviter</span>
+      <ul>
+        {path.errors.map((error) => <li>{error}</li>)}
+      </ul>
+    </aside>
+  </section>
+
+  <section class="learning-links" aria-labelledby="learning-links-title">
+    <div class="learning-section-heading">
+      <span class="lesson-kicker">Passer à la production</span>
+      <h2 id="learning-links-title">Ressources, prompts et cas d'application.</h2>
+    </div>
+    <div class="learning-links__grid">
+      <article>
+        <span class="learning-card-index">Ressources associées</span>
+        <div>
+          {
+            path.resources.map((resource) => (
+              <a href={resource.href}>
+                <strong>{resource.label}</strong>
+                {resource.note && <span>{resource.note}</span>}
+              </a>
+            ))
+          }
+        </div>
+      </article>
+      <article>
+        <span class="learning-card-index">Prompts associés</span>
+        <div>
+          {
+            path.prompts.map((prompt) => (
+              <a href={prompt.href}>
+                <strong>{prompt.label}</strong>
+                {prompt.note && <span>{prompt.note}</span>}
+              </a>
+            ))
+          }
+        </div>
+      </article>
+      <article class="learning-links__project">
+        <span class="learning-card-index">Projet d'application</span>
+        <a href={path.project.href}>
+          <strong>{path.project.label}</strong>
+          {path.project.note && <span>{path.project.note}</span>}
+          <em>Ouvrir le cas pratique →</em>
+        </a>
+      </article>
+    </div>
+  </section>
+</div>

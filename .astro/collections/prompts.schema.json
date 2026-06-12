@@ -13,13 +13,19 @@
         "category": {
           "type": "string",
           "enum": [
-            "image",
-            "video",
-            "character",
-            "camera",
             "composition",
+            "lighting",
+            "color",
+            "depth-of-field",
+            "character-consistency",
+            "reference-sheet",
+            "storyboard",
+            "shot-list",
+            "camera-movement",
+            "image-to-video",
             "transition",
-            "workflow"
+            "sound-design",
+            "critical-analysis"
           ]
         },
         "level": {
@@ -51,6 +57,22 @@
         "negativePrompt": {
           "type": "string"
         },
+        "whyItWorks": {
+          "type": "string"
+        },
+        "variants": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "lessonHref": {
+          "type": "string"
+        },
+        "visual": {
+          "type": "string"
+        },
         "variables": {
           "type": "array",
           "items": {
@@ -74,7 +96,11 @@
         "description",
         "category",
         "level",
-        "prompt"
+        "prompt",
+        "negativePrompt",
+        "whyItWorks",
+        "variants",
+        "lessonHref"
       ],
       "additionalProperties": false
     }

@@ -8,17 +8,17 @@ import { formatStatusLabel } from "../../data/content-labels";
 const projects = await getCollection("projects");
 ---
 
-<BaseLayout title="Projects" description="Études de cas de production IA : personnages, univers, prompts, vidéos et documentation.">
+<BaseLayout title="Projets" description="Études de cas de production IA : personnages, univers, prompts, vidéos et documentation.">
   <CourseHero
-    eyebrow="Case Studies"
+    eyebrow="Études de cas"
     title="Projets documentés"
     description="Les projets transforment les exercices en études de production : brief, références, prompt maître, frames, animation, montage et critique."
-    image="/assets/visuals/production-board.svg"
+    image="/images/ui/projects-hero-board.svg"
     imageAlt="Board de production créative"
     stats={[
       { label: "Projets", value: String(projects.length) },
-      { label: "Statut", value: "V1" },
-      { label: "Sortie", value: "Production bible" },
+      { label: "Statuts", value: "Prêt + brouillon" },
+      { label: "Sortie", value: "Pipeline documenté" },
     ]}
   />
 

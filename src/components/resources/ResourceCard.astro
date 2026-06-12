@@ -1,0 +1,164 @@
+---
+import CinematicImagePlaceholder from "../media/CinematicImagePlaceholder.astro";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  href?: string;
+  status?: string;
+  meta?: string;
+  badges?: string[];
+  image?: string;
+  imageAlt?: string;
+  actionLabel?: string;
+  variant?: "urban" | "board" | "portrait" | "storyboard" | "depth" | "light" | "composition";
+}
+
+const {
+  eyebrow,
+  title,
+  description,
+  href,
+  status,
+  meta,
+  badges = [],
+  image,
+  imageAlt = "",
+  actionLabel = "Ouvrir la ressource",
+  variant = "board",
+} = Astro.props;
+
+const Tag = href ? "a" : "article";
+---
+
+<Tag class="resource-card-extended" href={href}>
+  <div class="resource-card-extended__head">
+    <span>{eyebrow}</span>
+    {(status || meta) && (
+      <div>
+        {status && <b>{status}</b>}
+        {meta && <small>{meta}</small>}
+      </div>
+    )}
+  </div>
+
+  <CinematicImagePlaceholder
+    src={image}
+    alt={imageAlt}
+    variant={variant}
+    compact={true}
+    aspect="16 / 9"
+  />
+
+  <div class="resource-card-extended__body">
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+
+  {
+    badges.length > 0 && (
+      <ul class="resource-card-extended__badges">
+        {badges.map((badge) => <li>{badge}</li>)}
+      </ul>
+    )
+  }
+
+  {href && <span class="resource-card-extended__link">{actionLabel} <span aria-hidden="true">→</span></span>}
+</Tag>
+
+<style>
+  .resource-card-extended {
+    display: grid;
+    gap: 1rem;
+    min-height: 100%;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--surface) 96%, transparent), color-mix(in srgb, var(--surface-muted) 84%, transparent));
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  a.resource-card-extended:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+    box-shadow: var(--shadow-md);
+  }
+
+  .resource-card-extended__head,
+  .resource-card-extended__head div,
+  .resource-card-extended__body {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .resource-card-extended__head {
+    grid-template-columns: auto auto;
+    align-items: start;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .resource-card-extended__head span,
+  .resource-card-extended__head b,
+  .resource-card-extended__head small {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .resource-card-extended__head span,
+  .resource-card-extended__head b {
+    color: var(--accent);
+  }
+
+  .resource-card-extended__head b {
+    width: max-content;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    padding: 0.28rem 0.55rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .resource-card-extended__head small {
+    color: var(--text-soft);
+  }
+
+  .resource-card-extended__body h3,
+  .resource-card-extended__body p {
+    margin: 0;
+  }
+
+  .resource-card-extended__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .resource-card-extended__badges li {
+    border: 1px solid color-mix(in srgb, var(--accent) 14%, var(--line));
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface-muted) 76%, transparent);
+    color: var(--text-muted);
+    padding: 0.35rem 0.55rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+  }
+
+  .resource-card-extended__link {
+    margin-top: auto;
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import CinematicImagePlaceholder from "../media/CinematicImagePlaceholder.astro";
+
+interface CharacterBoardItem {
+  title: string;
+  description: string;
+  image: string;
+  checks: string[];
+}
+
+interface Props {
+  boards: CharacterBoardItem[];
+}
+
+const { boards } = Astro.props;
+---
+
+<div class="character-board-grid">
+  {
+    boards.map((board) => (
+      <figure class="character-board-card">
+        <CinematicImagePlaceholder
+          src={board.image}
+          alt={`Board ${board.title}`}
+          variant="portrait"
+          compact={true}
+          aspect="5 / 4"
+        />
+        <figcaption>
+          <h3>{board.title}</h3>
+          <p>{board.description}</p>
+          <ul>{board.checks.map((check) => <li>{check}</li>)}</ul>
+        </figcaption>
+      </figure>
+    ))
+  }
+</div>
+
+<style>
+  .character-board-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .character-board-card {
+    display: grid;
+    gap: 0.9rem;
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: color-mix(in srgb, var(--surface) 96%, transparent);
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .character-board-card figcaption {
+    display: grid;
+    gap: 0.7rem;
+  }
+
+  .character-board-card h3,
+  .character-board-card p,
+  .character-board-card ul {
+    margin: 0;
+  }
+
+  .character-board-card ul {
+    display: grid;
+    gap: 0.4rem;
+    padding-left: 1rem;
+    color: var(--text-muted);
+    font-size: 0.82rem;
+  }
+
+  @media (max-width: 760px) {
+    .character-board-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

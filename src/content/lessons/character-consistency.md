@@ -1,12 +1,12 @@
 ---
-title: "Character consistency"
-description: "Méthode de base pour stabiliser un personnage IA entre portraits, plans larges, outfits et séquences vidéo."
-module: "Character consistency et reference boards"
-order: 3
+title: "Cohérence personnage"
+description: "Méthode de base pour stabiliser un personnage IA entre portraits, plans larges, tenues et séquences vidéo."
+module: "Stabilisation du personnage et planches de référence"
+order: 7
 stage: "stabiliser"
 level: "intermediaire"
 tools: ["Adobe Firefly", "Photoshop", "Generic workflow"]
-tags: ["personnage", "reference board", "continuité"]
+tags: ["personnage", "planches de référence", "continuité"]
 heroImage: "/assets/visuals/lyra-board.svg"
 estimatedTime: "35 min"
 ---
@@ -18,5 +18,5 @@ La consistance d'un personnage ne repose pas sur un prompt long. Elle repose sur
 - Prompt personnage stable.
 - Prompt de scène séparé.
 - Contraintes négatives explicites.
-- Reference board lisible.
+- Planche de référence lisible.
 - Journal des erreurs récurrentes.

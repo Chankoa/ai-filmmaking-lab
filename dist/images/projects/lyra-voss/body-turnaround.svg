@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Lyra Voss body turnaround</title>
+  <desc id="desc">Abstract front, three-quarter, profile and back full-body views.</desc>
+  <rect width="960" height="600" rx="24" fill="#141a28"/>
+  <g stroke="#fff" stroke-opacity=".08"><path d="M240 70v480M480 70v480M720 70v480"/><path d="M40 520h880"/></g>
+  <g fill="#201d2c" stroke="#8a6cb6" stroke-width="5">
+    <g transform="translate(120 90)"><ellipse cx="0" cy="48" rx="32" ry="42"/><path d="M-38 92q38-24 76 0l24 180-38 62-8 140h-32l-8-140-38-62z"/></g>
+    <g transform="translate(360 90)"><ellipse cx="0" cy="48" rx="30" ry="42"/><path d="M-34 92q38-20 72 5l20 175-30 62-4 140h-31l-16-140-42-55z"/></g>
+    <g transform="translate(600 90)"><ellipse cx="0" cy="48" rx="23" ry="42"/><path d="M-20 92q28-18 45 4l16 178-24 60 7 140h-27l-12-140-24-60z"/></g>
+    <g transform="translate(840 90)"><ellipse cx="0" cy="48" rx="32" ry="42"/><path d="M-38 92q38-24 76 0l24 180-38 62-8 140h-32l-8-140-38-62z"/></g>
+  </g>
+  <g fill="#35c7d8" font-family="Arial, sans-serif" font-size="15" font-weight="700" text-anchor="middle">
+    <text x="120" y="570">FRONT</text><text x="360" y="570">3/4</text><text x="600" y="570">SIDE</text><text x="840" y="570">BACK</text>
+  </g>
+  <text x="40" y="42" fill="#a875ff" font-family="Arial, sans-serif" font-size="17" font-weight="700">BODY TURNAROUND / PROPORTION LOCK</text>
+</svg>

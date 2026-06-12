@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Lyra Voss pose board</title>
+  <desc id="desc">Five stylized production poses including observation, walking and back view.</desc>
+  <rect width="960" height="600" rx="24" fill="#111925"/>
+  <path d="M40 516h880" stroke="#35c7d8" stroke-opacity=".3" stroke-width="3"/>
+  <g fill="#211f2d" stroke="#8d70b2" stroke-width="5">
+    <g transform="translate(105 100)"><circle cx="0" cy="38" r="28"/><path d="M-32 78h64l28 166-38 46-8 120h-28l-8-120-38-46z"/></g>
+    <g transform="translate(290 100) rotate(-4)"><circle cx="0" cy="38" r="28"/><path d="M-32 78h64l38 154-30 56 22 120H32L0 300l-28 108h-30l20-122-30-54z"/></g>
+    <g transform="translate(480 100) rotate(6)"><circle cx="0" cy="38" r="28"/><path d="M-32 78h64l18 160-24 56 42 112H38L0 314l-45 94h-30l38-122-26-48z"/></g>
+    <g transform="translate(665 100)"><circle cx="0" cy="38" r="28"/><path d="M-32 78h64l28 166-38 46-8 120h-28l-8-120-38-46z"/><rect x="38" y="176" width="54" height="72" rx="10"/></g>
+    <g transform="translate(850 100)"><circle cx="0" cy="38" r="28"/><path d="M-32 78h64l28 166-38 46-8 120h-28l-8-120-38-46z"/></g>
+  </g>
+  <g fill="#35c7d8" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+    <text x="105" y="558">REST</text><text x="290" y="558">OBSERVE</text><text x="480" y="558">WALK</text><text x="665" y="558">HANDLE</text><text x="850" y="558">BACK</text>
+  </g>
+  <text x="40" y="42" fill="#a875ff" font-family="Arial, sans-serif" font-size="17" font-weight="700">POSE BOARD / CENTER OF GRAVITY</text>
+</svg>

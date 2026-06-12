@@ -2,18 +2,26 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CourseHero from "../../components/course/CourseHero.astro";
-import ToolBadge from "../../components/ui/ToolBadge.astro";
+import ResourceCard from "../../components/resources/ResourceCard.astro";
 import { formatResourceTypeLabel, formatStatusLabel } from "../../data/content-labels";
 
 const resources = await getCollection("resources");
+
+const resourceVariantByType: Record<string, "urban" | "board" | "portrait" | "storyboard" | "depth" | "light" | "composition"> = {
+  guide: "composition",
+  template: "board",
+  checklist: "storyboard",
+  reference: "depth",
+  external: "urban",
+};
 ---
 
-<BaseLayout title="Resources" description="Templates, checklists et ressources pour documenter les productions AI filmmaking.">
+<BaseLayout title="Ressources" description="Templates, checklists et ressources pour documenter les productions AI filmmaking.">
   <CourseHero
-    eyebrow="Resources"
-    title="Templates et checklists"
-    description="La section ressources préparera les supports réutilisables : production bible, shot-list, prompt packs, grilles d'analyse et workflows."
-    image="/assets/visuals/pipeline-board.svg"
+    eyebrow="Ressources"
+    title="Guides, templates et checklists"
+    description="Des supports réutilisables pour cadrer la composition, documenter une production et contrôler chaque plan avant génération."
+    image="/images/resources/resource-pipeline-board.svg"
     imageAlt="Pipeline de ressources de production"
     stats={[
       { label: "Ressources", value: String(resources.length) },
@@ -30,23 +38,21 @@ const resources = await getCollection("resources");
         18 structures de cadre, leurs effets narratifs et des patterns de prompt orientés AI filmmaking.
       </p>
     </div>
-    <a class="button primary" href="/resources/composition-cheat-sheet/">Ouvrir la cheat sheet</a>
+    <a class="button primary" href="/resources/composition-cheat-sheet/">Ouvrir le guide</a>
   </section>
 
   <section class="content-grid" aria-label="Ressources">
     {
       resources.map((resource) => (
-        <article class="resource-card">
-          <div class="card-meta">
-            <span>{formatResourceTypeLabel(resource.data.type)}</span>
-            <span>{formatStatusLabel(resource.data.status)}</span>
-          </div>
-          <h3>{resource.data.title}</h3>
-          <p>{resource.data.description}</p>
-          <div class="tool-row">
-            {resource.data.tools.map((tool) => <ToolBadge tool={tool} />)}
-          </div>
-        </article>
+        <ResourceCard
+          eyebrow={formatResourceTypeLabel(resource.data.type)}
+          title={resource.data.title}
+          description={resource.data.description}
+          href={resource.data.href}
+          status={formatStatusLabel(resource.data.status)}
+          badges={resource.data.tools}
+          variant={resourceVariantByType[resource.data.type] ?? "board"}
+        />
       ))
     }
   </section>

@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="title desc">
+  <title id="title">Prompt anatomy</title>
+  <desc id="desc">Abstract prompt blocks connecting subject, frame, light, movement and constraints.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#171329"/>
+      <stop offset="1" stop-color="#0e232c"/>
+    </linearGradient>
+    <linearGradient id="a" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#8a3ffc"/>
+      <stop offset="1" stop-color="#35c7d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="480" rx="24" fill="url(#bg)"/>
+  <g fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".12">
+    <rect x="52" y="74" width="174" height="94" rx="14"/>
+    <rect x="248" y="74" width="174" height="94" rx="14"/>
+    <rect x="444" y="74" width="174" height="94" rx="14"/>
+    <rect x="640" y="74" width="268" height="94" rx="14"/>
+    <rect x="52" y="218" width="268" height="184" rx="14"/>
+    <rect x="342" y="218" width="566" height="184" rx="14"/>
+  </g>
+  <g fill="none" stroke="url(#a)" stroke-width="5" stroke-linecap="round">
+    <path d="M82 112h114M278 112h114M474 112h114M670 112h208"/>
+    <path d="M82 138h78M278 138h86M474 138h94M670 138h146"/>
+    <path d="M88 258h196M88 288h156M88 318h180M88 348h120"/>
+    <path d="M382 258h486M382 288h404M382 318h450M382 348h338"/>
+  </g>
+  <g fill="#35c7d8">
+    <circle cx="139" cy="190" r="7"/><circle cx="335" cy="190" r="7"/><circle cx="531" cy="190" r="7"/><circle cx="774" cy="190" r="7"/>
+  </g>
+</svg>

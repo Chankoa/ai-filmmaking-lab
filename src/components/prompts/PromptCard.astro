@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import CodeBlock from "../code/CodeBlock.astro";
+import CinematicImagePlaceholder from "../media/CinematicImagePlaceholder.astro";
 import ToolBadge from "../ui/ToolBadge.astro";
 import PromptBreakdown from "./PromptBreakdown.astro";
 import { formatLevelLabel, formatPromptCategoryLabel } from "../../data/content-labels";
@@ -11,9 +12,38 @@ interface Props {
 
 const { prompt } = Astro.props;
 const { data } = prompt;
+
+const visualVariantByCategory: Record<string, "urban" | "board" | "portrait" | "storyboard" | "depth" | "light" | "composition"> = {
+  composition: "composition",
+  lighting: "light",
+  color: "light",
+  "depth-of-field": "depth",
+  "character-consistency": "portrait",
+  "reference-sheet": "board",
+  storyboard: "storyboard",
+  "shot-list": "storyboard",
+  "camera-movement": "urban",
+  "image-to-video": "urban",
+  transition: "urban",
+  "sound-design": "depth",
+  "critical-analysis": "board",
+};
 ---
 
 <article class="prompt-card" data-prompt-card data-category={data.category} data-tool={data.tool}>
+  {
+    data.visual ? (
+      <img class="prompt-card__visual" src={data.visual} alt="" loading="lazy" />
+    ) : (
+      <CinematicImagePlaceholder
+        variant={visualVariantByCategory[data.category] ?? "board"}
+        title={data.title}
+        caption={formatPromptCategoryLabel(data.category)}
+        compact={true}
+        aspect="16 / 8"
+      />
+    )
+  }
   <div class="card-meta">
     <span>{formatPromptCategoryLabel(data.category)}</span>
     <span>{formatLevelLabel(data.level)}</span>
@@ -25,12 +55,21 @@ const { data } = prompt;
   <p>{data.description}</p>
   <PromptBreakdown variables={data.variables} />
   <CodeBlock code={data.prompt} label="Prompt" />
-  {
-    data.negativePrompt && (
-      <details>
-        <summary>Contraintes négatives</summary>
-        <CodeBlock code={data.negativePrompt} label="Negative prompt" />
-      </details>
-    )
-  }
+  <details>
+    <summary>Contraintes négatives</summary>
+    <CodeBlock code={data.negativePrompt} label="Negative prompt" />
+  </details>
+  <div class="prompt-card__reason">
+    <strong>Pourquoi ça marche</strong>
+    <p>{data.whyItWorks}</p>
+  </div>
+  <div class="prompt-card__variants">
+    <strong>Variantes possibles</strong>
+    <ul>
+      {data.variants.map((variant) => <li>{variant}</li>)}
+    </ul>
+  </div>
+  <a class="prompt-card__lesson" href={data.lessonHref}>
+    Voir la leçon associée <span aria-hidden="true">→</span>
+  </a>
 </article>

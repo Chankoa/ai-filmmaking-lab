@@ -74,7 +74,8 @@
           "type": "string",
           "enum": [
             "composition",
-            "composition-cinematique"
+            "composition-cinematique",
+            "learning-path"
           ]
         },
         "draft": {

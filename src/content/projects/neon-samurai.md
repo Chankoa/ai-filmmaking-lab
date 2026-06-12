@@ -5,9 +5,9 @@ status: "draft"
 level: "avance"
 tools: ["Adobe Firefly", "Kling", "Premiere"]
 heroImage: "/assets/visuals/neon-samurai.svg"
-pipeline: ["Direction artistique", "Moodboard", "Plans clés", "Prompts image", "Mouvements caméra", "Transitions"]
-outputs: ["Moodboard", "Shot list", "Séquence test"]
-tags: ["silhouette", "moodboard", "mise en scène"]
+pipeline: ["Direction artistique", "Planche d'ambiance", "Plans clés", "Prompts image", "Mouvements caméra", "Transitions"]
+outputs: ["Planche d'ambiance", "Shot-list", "Séquence test"]
+tags: ["silhouette", "ambiance", "mise en scène"]
 ---
 
 Ce projet permettra de documenter un univers visuel cohérent avant de produire une séquence courte.

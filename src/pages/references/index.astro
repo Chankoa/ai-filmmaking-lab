@@ -12,36 +12,36 @@ const shots = await getCollection("camera-shots");
     eyebrow="Références visuelles"
     title="Guides pour voir et cadrer"
     description="Cette section regroupe les références qui aident à nommer un plan, choisir une intention et préparer une génération plus contrôlée."
-    image="/assets/visuals/camera-shots.svg"
+    image="/images/references/reference-atlas-board.svg"
     imageAlt="Guide visuel des plans caméra"
     stats={[
       { label: "Plans", value: String(shots.length) },
-      { label: "Familles", value: "Scale / Angle" },
-      { label: "Usage", value: "Prompt-ready" },
+      { label: "Familles", value: "Échelles / angles" },
+      { label: "Usage", value: "Réutilisable" },
     ]}
   />
 
   <section class="content-grid content-grid--three" aria-label="Boards de référence">
     <MediaCard
-      title="Camera Shots"
+      title="Plans caméra"
       description="Types de plans, angles, usages narratifs, mouvements et prompts types."
-      image="/assets/visuals/camera-shots.svg"
+      image="/images/references/reference-atlas-board.svg"
       href="/references/camera-shots/"
       meta="Guide prioritaire"
     />
     <MediaCard
-      title="Moodboards"
-      description="Structure future pour univers, palettes, lieux, outfits et références style."
-      image="/assets/visuals/production-board.svg"
-      href="/resources/"
-      meta="À construire"
+      title="Univers et palettes"
+      description="Atmosphères, lieux, matières et densité visuelle pour préparer Vertical Silence et ses variations."
+      image="/images/projects/vertical-silence/vertical-silence-atmosphere-board.svg"
+      href="/formation/lumiere-couleur/"
+      meta="Planifié"
     />
     <MediaCard
-      title="Reference Boards"
-      description="Support futur pour personnages, objets, décors et continuity checks."
-      image="/assets/visuals/lyra-board.svg"
+      title="Boards personnage"
+      description="Planches de référence pour identité, tenue, poses, objets et continuité visuelle."
+      image="/images/projects/lyra-voss/face-reference-sheet.svg"
       href="/projects/lyra-voss/"
-      meta="Case study"
+      meta="Étude de cas"
     />
   </section>
 </BaseLayout>

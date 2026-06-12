@@ -1,0 +1,83 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import ResourceTemplateGrid from "../../components/resources/ResourceTemplateGrid.astro";
+import CodeBlock from "../../components/code/CodeBlock.astro";
+import { productionBibleSections } from "../../data/production-resources";
+
+const starterTemplate = `[PROJECT]
+title:
+version:
+format:
+pitch:
+
+[ART DIRECTION]
+emotion:
+palette:
+materials:
+visual constraints:
+
+[CONTINUITY]
+character constants:
+location constants:
+objects:
+forbidden changes:
+
+[PRODUCTION]
+master prompts:
+negative prompts:
+shot list:
+animation tests:
+design sonore:
+critical notes:`;
+---
+
+<BaseLayout
+  title="Template de bible de production"
+  description="Template complet pour documenter direction artistique, continuité, prompts, plans, animation, son et analyse critique."
+>
+  <CourseHero
+    eyebrow="Ressource prête"
+    title="Template de bible de production"
+    description="Un document maître pour relier l’intention artistique aux décisions vérifiables de chaque image et de chaque clip."
+    image="/images/references/production-bible-board.svg"
+    imageAlt="Mockup abstrait d’une bible de production AI filmmaking"
+    actions={[
+      { label: "Voir Lyra Voss", href: "/projects/lyra-voss/", variant: "primary" },
+      { label: "Étape Documenter", href: "/formation/monter-documenter/", variant: "secondary" },
+    ]}
+    stats={[
+      { label: "Sections", value: "13" },
+      { label: "Usage", value: "Projet complet" },
+      { label: "Statut", value: "Prêt" },
+    ]}
+  />
+
+  <section class="resource-method" aria-labelledby="bible-method-title">
+    <div>
+      <span class="eyebrow">Principe</span>
+      <h2 id="bible-method-title">Une bible ne stocke pas seulement des images.</h2>
+      <p>
+        Elle enregistre les constantes, les variables autorisées, les versions testées et les
+        corrections. Chaque plan doit pouvoir être relié à une intention, une frame source et une décision.
+      </p>
+    </div>
+    <ol>
+      <li><span>01</span>Écrire les constantes avant les prompts.</li>
+      <li><span>02</span>Versionner les frames et les clips.</li>
+      <li><span>03</span>Documenter les échecs utiles.</li>
+      <li><span>04</span>Mettre à jour la bible après le montage.</li>
+    </ol>
+  </section>
+
+  <ResourceTemplateGrid sections={productionBibleSections} label="Sections de la bible de production" />
+
+  <section class="resource-code-example" aria-labelledby="bible-starter-title">
+    <div>
+      <span class="eyebrow">Point de départ</span>
+      <h2 id="bible-starter-title">Structure minimale copiable</h2>
+      <p>Utilisez ce bloc dans Notion, un document Markdown ou le dossier de production du projet.</p>
+    </div>
+    <CodeBlock code={starterTemplate} label="Template de bible" language="text" />
+  </section>
+</BaseLayout>

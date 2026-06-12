@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" role="img" aria-labelledby="title desc">
+  <title id="title">Composition grid placeholder</title>
+  <desc id="desc">Abstract cinematic frame showing thirds, visual weight and negative space.</desc>
+  <rect width="960" height="540" rx="24" fill="#101525"/>
+  <g stroke="#ffffff" stroke-opacity=".18" stroke-width="2">
+    <path d="M320 0v540M640 0v540M0 180h960M0 360h960"/>
+  </g>
+  <rect x="0" y="0" width="610" height="540" fill="#35c7d8" fill-opacity=".04"/>
+  <circle cx="742" cy="270" r="78" fill="#8a3ffc" fill-opacity=".5"/>
+  <path d="M742 190v160M688 350h108" stroke="#f1f4ff" stroke-width="14" stroke-linecap="round"/>
+  <path d="M96 420C250 300 382 250 610 240" fill="none" stroke="#35c7d8" stroke-width="8" stroke-linecap="round"/>
+</svg>

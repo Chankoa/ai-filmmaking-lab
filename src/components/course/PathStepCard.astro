@@ -1,0 +1,100 @@
+---
+interface Props {
+  number: string;
+  verb: string;
+  title: string;
+  description: string;
+  href: string;
+  status: string;
+}
+
+const { number, verb, title, description, href, status } = Astro.props;
+---
+
+<a class="path-step-card" href={href}>
+  <div class="path-step-card__top">
+    <span>{number}</span>
+    <b>{status}</b>
+  </div>
+  <div class="path-step-card__body">
+    <small>{verb}</small>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </div>
+  <span class="path-step-card__link">Continuer <span aria-hidden="true">→</span></span>
+</a>
+
+<style>
+  .path-step-card {
+    display: grid;
+    gap: 1.1rem;
+    min-height: 100%;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--surface) 96%, transparent), color-mix(in srgb, var(--surface-muted) 88%, transparent));
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .path-step-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--line));
+    box-shadow: var(--shadow-md);
+  }
+
+  .path-step-card__top,
+  .path-step-card__body {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .path-step-card__top {
+    grid-template-columns: auto auto;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .path-step-card__top span,
+  .path-step-card__top b,
+  .path-step-card__body small {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .path-step-card__top span {
+    color: var(--accent);
+  }
+
+  .path-step-card__top b {
+    width: max-content;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 16%, transparent);
+    color: var(--accent);
+    padding: 0.28rem 0.55rem;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  .path-step-card__body small {
+    color: var(--text-soft);
+  }
+
+  .path-step-card__body h3,
+  .path-step-card__body p {
+    margin: 0;
+  }
+
+  .path-step-card__link {
+    margin-top: auto;
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+</style>

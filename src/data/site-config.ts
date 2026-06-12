@@ -1,11 +1,11 @@
 export const siteConfig = {
   name: "AI Filmmaking Lab",
-  baseline: "Creative Production Wiki",
+  baseline: "Laboratoire de production cinematographique",
   lang: "fr",
   url: "https://master-ai-filmmaking.local",
   meta: {
     description:
-      "Documentation créative pour apprendre à concevoir, générer, stabiliser et monter des images et vidéos avec l'IA.",
+      "Ressource de production pour concevoir, generer, stabiliser, animer et documenter des images et videos avec l'IA.",
   },
   contact: {
     phone: "",
@@ -18,7 +18,7 @@ export const siteConfig = {
     linkedin: "",
   },
   navigation: [
-    { label: "Formation", href: "/" },
+    { label: "Formation", href: "/formation/" },
     { label: "Prompts", href: "/prompts/" },
     { label: "Références", href: "/references/" },
     { label: "Projets", href: "/projects/" },

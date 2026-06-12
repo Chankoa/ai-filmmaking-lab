@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Lyra Voss cinematic shot board</title>
+  <desc id="desc">Eight abstract cinematic frames showing shot scales and angles.</desc>
+  <defs><linearGradient id="frame" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#22183b"/><stop offset="1" stop-color="#0d2b33"/></linearGradient></defs>
+  <rect width="960" height="600" rx="24" fill="#101622"/>
+  <g fill="url(#frame)" stroke="#fff" stroke-opacity=".12">
+    <rect x="36" y="82" width="210" height="194" rx="14"/><rect x="262" y="82" width="210" height="194" rx="14"/>
+    <rect x="488" y="82" width="210" height="194" rx="14"/><rect x="714" y="82" width="210" height="194" rx="14"/>
+    <rect x="36" y="306" width="210" height="194" rx="14"/><rect x="262" y="306" width="210" height="194" rx="14"/>
+    <rect x="488" y="306" width="210" height="194" rx="14"/><rect x="714" y="306" width="210" height="194" rx="14"/>
+  </g>
+  <g fill="#8a6cb6" stroke="#35c7d8" stroke-width="3">
+    <ellipse cx="141" cy="168" rx="52" ry="66"/><path d="M110 230h62l18 38H92z"/>
+    <ellipse cx="367" cy="142" rx="32" ry="40"/><path d="M332 184h70l20 84h-110z"/>
+    <circle cx="593" cy="206" r="18"/><path d="M572 226h42l16 42h-74z"/>
+    <path d="M738 250h58l24-130h-56z"/><circle cx="850" cy="186" r="20"/>
+    <circle cx="141" cy="390" r="22"/><path d="M112 416h58l26 78H88z"/>
+    <circle cx="367" cy="386" r="22"/><path d="M338 412h58l24 82h-106z"/>
+    <circle cx="593" cy="388" r="20"/><path d="M566 412h54l42 82h-130z"/>
+    <ellipse cx="819" cy="402" rx="58" ry="44"/>
+  </g>
+  <g fill="#a875ff" font-family="Arial, sans-serif" font-size="12" font-weight="700">
+    <text x="48" y="262">CLOSE-UP</text><text x="274" y="262">MEDIUM</text><text x="500" y="262">WIDE</text><text x="726" y="262">OTS</text>
+    <text x="48" y="486">LOW ANGLE</text><text x="274" y="486">BACK</text><text x="500" y="486">WALKING</text><text x="726" y="486">EXTREME CU</text>
+  </g>
+  <text x="40" y="42" fill="#a875ff" font-family="Arial, sans-serif" font-size="17" font-weight="700">CINEMATIC SHOT BOARD / 8 VARIATIONS</text>
+</svg>

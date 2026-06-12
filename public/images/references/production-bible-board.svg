@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" role="img" aria-labelledby="title desc">
+  <title id="title">Production bible board</title>
+  <desc id="desc">Abstract production bible with project, character, palette and shot list panels.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#171329"/>
+      <stop offset="1" stop-color="#0c1d28"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#8a3ffc"/>
+      <stop offset="1" stop-color="#35c7d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="620" rx="28" fill="url(#bg)"/>
+  <g stroke="#ffffff" stroke-opacity=".08">
+    <path d="M0 80h960M0 160h960M0 240h960M0 320h960M0 400h960M0 480h960M0 560h960"/>
+    <path d="M80 0v620M160 0v620M240 0v620M320 0v620M400 0v620M480 0v620M560 0v620M640 0v620M720 0v620M800 0v620M880 0v620"/>
+  </g>
+  <rect x="54" y="54" width="852" height="54" rx="12" fill="#ffffff" fill-opacity=".08"/>
+  <rect x="78" y="75" width="260" height="12" rx="6" fill="url(#accent)"/>
+  <g fill="#ffffff" fill-opacity=".07" stroke="#ffffff" stroke-opacity=".12">
+    <rect x="54" y="136" width="266" height="204" rx="16"/>
+    <rect x="340" y="136" width="566" height="96" rx="16"/>
+    <rect x="340" y="252" width="272" height="190" rx="16"/>
+    <rect x="632" y="252" width="274" height="190" rx="16"/>
+    <rect x="54" y="360" width="266" height="206" rx="16"/>
+    <rect x="340" y="462" width="566" height="104" rx="16"/>
+  </g>
+  <g fill="none" stroke="url(#accent)" stroke-width="4">
+    <ellipse cx="187" cy="222" rx="54" ry="68"/>
+    <path d="M146 304c16-37 66-37 82 0M392 180h198M392 198h360M392 216h260"/>
+    <path d="M382 302h188M382 328h150M382 354h205M382 380h130"/>
+    <path d="M674 302h188M674 328h146M674 354h174M674 380h118"/>
+    <path d="M96 410h180M96 438h136M96 466h164M96 494h112M96 522h150"/>
+    <path d="M388 502h470M388 530h380"/>
+  </g>
+  <g fill="#35c7d8">
+    <circle cx="686" cy="184" r="15"/><circle cx="730" cy="184" r="15"/><circle cx="774" cy="184" r="15"/>
+  </g>
+</svg>

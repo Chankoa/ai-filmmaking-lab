@@ -1,0 +1,87 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import ResourceTemplateGrid from "../../components/resources/ResourceTemplateGrid.astro";
+import ShotListTable from "../../components/resources/ShotListTable.astro";
+import CodeBlock from "../../components/code/CodeBlock.astro";
+import { shotListExample, shotListFields } from "../../data/production-resources";
+
+const shotListRows = [
+  {
+    id: shotListExample.id,
+    intention: shotListExample.intention,
+    frame: "OTS medium shot, 50 mm, marqueur net, puits en arrière-plan",
+    movement: "Caméra verrouillée, léger push-in, respiration et pluie seulement.",
+    continuity: "Visage, tenue, axe de regard, architecture et lumière inchangés.",
+    sound: shotListExample.sound,
+    control: "Pas de reverse eyeline, pas de camera shake, pas de mutation décor.",
+  },
+];
+---
+
+<BaseLayout
+  title="Checklist shot-list IA"
+  description="Checklist détaillée pour préparer chaque plan, son prompt image, son animation, son son et ses critères de rejet."
+>
+  <CourseHero
+    eyebrow="Ressource prête"
+    title="Checklist shot-list IA"
+    description="Une ligne de production par plan : intention, cadre, continuités, génération, animation, son et contrôle qualité."
+    image="/images/references/shot-list-board.svg"
+    imageAlt="Mockup abstrait d’une shot-list pour une séquence IA"
+    actions={[
+      { label: "Voir le cours storyboard", href: "/formation/storyboard-shotlist/", variant: "primary" },
+      { label: "Voir Lyra Voss", href: "/projects/lyra-voss/", variant: "secondary" },
+    ]}
+    stats={[
+      { label: "Contrôles", value: "15" },
+      { label: "Échelle", value: "1 ligne / plan" },
+      { label: "Statut", value: "Prêt" },
+    ]}
+  />
+
+  <section class="resource-method" aria-labelledby="shot-list-method-title">
+    <div>
+      <span class="eyebrow">Avant de générer</span>
+      <h2 id="shot-list-method-title">Un plan doit avoir une fonction et un état final.</h2>
+      <p>
+        Si l’intention, le point de départ ou le changement attendu restent vagues, le modèle inventera
+        le mouvement, la caméra ou la continuité à votre place.
+      </p>
+    </div>
+    <ol>
+      <li><span>01</span>Valider l’utilité narrative.</li>
+      <li><span>02</span>Approuver la frame source.</li>
+      <li><span>03</span>Limiter le mouvement.</li>
+      <li><span>04</span>Définir les critères de rejet.</li>
+    </ol>
+  </section>
+
+  <ResourceTemplateGrid sections={shotListFields} label="Champs de la checklist shot-list" />
+
+  <section class="section-band" aria-labelledby="shot-list-table-title">
+    <div class="section-heading">
+      <span class="eyebrow">Lecture rapide</span>
+      <h2 id="shot-list-table-title">La fiche-plan dans un format exploitable au montage.</h2>
+      <p>Une vue synthétique pour contrôler l’intention, le cadre, la continuité et le son avant génération.</p>
+    </div>
+    <ShotListTable rows={shotListRows} />
+  </section>
+
+  <section class="shot-list-example" aria-labelledby="shot-list-example-title">
+    <div class="shot-list-example__heading">
+      <span class="eyebrow">Exemple rempli</span>
+      <h2 id="shot-list-example-title">{shotListExample.id}</h2>
+      <p>{shotListExample.intention}</p>
+    </div>
+    <div class="shot-list-example__prompts">
+      <CodeBlock code={shotListExample.imagePrompt} label="Prompt image" />
+      <CodeBlock code={shotListExample.videoPrompt} label="Prompt Kling" />
+      <CodeBlock code={shotListExample.negativePrompt} label="Negative prompt" />
+    </div>
+    <div class="shot-list-example__sound">
+      <strong>Son</strong>
+      <p>{shotListExample.sound}</p>
+    </div>
+  </section>
+</BaseLayout>

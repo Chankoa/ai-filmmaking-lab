@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" role="img" aria-labelledby="title desc">
+  <title id="title">Lyra Voss case study board</title>
+  <desc id="desc">Abstract character production board with portrait, full body views and cinematic frames.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#171329"/><stop offset="1" stop-color="#0b252d"/></linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8a3ffc"/><stop offset="1" stop-color="#35c7d8"/></linearGradient>
+  </defs>
+  <rect width="960" height="620" rx="28" fill="url(#bg)"/>
+  <g stroke="#fff" stroke-opacity=".1" fill="#fff" fill-opacity=".04">
+    <rect x="48" y="48" width="330" height="524" rx="18"/>
+    <rect x="400" y="48" width="512" height="246" rx="18"/>
+    <rect x="400" y="316" width="246" height="256" rx="18"/>
+    <rect x="666" y="316" width="246" height="256" rx="18"/>
+  </g>
+  <g fill="none" stroke="url(#cyan)" stroke-width="7" stroke-linecap="round">
+    <ellipse cx="213" cy="210" rx="82" ry="104"/>
+    <path d="M158 180q55-52 110 0M169 222h30M227 222h30M190 266q23 18 46 0"/>
+    <path d="M133 472q20-138 80-138t80 138M172 520l10-122M254 520l-10-122"/>
+    <path d="M446 96h420M446 128h260M446 170h360M446 202h290M446 244h400"/>
+    <path d="M438 534l58-110 54 44 58-118"/>
+    <path d="M704 520V392M742 520V360M780 520V414M818 520V344M856 520V388"/>
+  </g>
+  <circle cx="213" cy="222" r="8" fill="#35c7d8"/><circle cx="247" cy="222" r="8" fill="#35c7d8"/>
+  <text x="72" y="88" fill="#a875ff" font-family="Arial, sans-serif" font-size="18" font-weight="700">LYRA VOSS / CHARACTER BIBLE</text>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Lyra Voss expression board</title>
+  <desc id="desc">Five abstract facial expressions for restrained cinematic acting.</desc>
+  <rect width="960" height="600" rx="24" fill="#151a27"/>
+  <g fill="#fff" fill-opacity=".035" stroke="#fff" stroke-opacity=".11">
+    <rect x="38" y="90" width="166" height="414" rx="18"/><rect x="218" y="90" width="166" height="414" rx="18"/>
+    <rect x="398" y="90" width="166" height="414" rx="18"/><rect x="578" y="90" width="166" height="414" rx="18"/>
+    <rect x="758" y="90" width="164" height="414" rx="18"/>
+  </g>
+  <g fill="#ac8978" stroke="#d8b19d" stroke-width="3">
+    <ellipse cx="121" cy="280" rx="60" ry="82"/><ellipse cx="301" cy="280" rx="60" ry="82"/><ellipse cx="481" cy="280" rx="60" ry="82"/>
+    <ellipse cx="661" cy="280" rx="60" ry="82"/><ellipse cx="840" cy="280" rx="60" ry="82"/>
+  </g>
+  <g stroke="#332738" stroke-width="12" fill="none" stroke-linecap="round">
+    <path d="M67 252q54-76 108 0M247 252q54-76 108 0M427 252q54-76 108 0M607 252q54-76 108 0M786 252q54-76 108 0"/>
+  </g>
+  <g stroke="#35c7d8" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M94 282h20M130 282h20M274 280h20M310 278h20M454 276h20M490 276h20M634 286h20M670 282h20M813 288h20M849 288h20"/>
+    <path d="M102 328h38M280 330q21 8 42 0M461 324q20-8 40 0M642 330q20-6 40 0M820 334h38"/>
+  </g>
+  <g fill="#a875ff" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle">
+    <text x="121" y="466">NEUTRAL</text><text x="301" y="466">ATTENTION</text><text x="481" y="466">DECISION</text><text x="661" y="466">DOUBT</text><text x="840" y="466">FATIGUE</text>
+  </g>
+  <text x="40" y="42" fill="#a875ff" font-family="Arial, sans-serif" font-size="17" font-weight="700">EXPRESSION BOARD / RESTRAINED ACTING</text>
+</svg>

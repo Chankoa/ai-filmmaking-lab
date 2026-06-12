@@ -1,0 +1,28 @@
+---
+import type { ResourceTemplateSection } from "../../data/production-resources";
+
+interface Props {
+  sections: ResourceTemplateSection[];
+  label?: string;
+}
+
+const { sections, label = "Champs du template" } = Astro.props;
+---
+
+<div class="resource-template-grid" aria-label={label}>
+  {
+    sections.map((section) => (
+      <article id={section.id} class="resource-template-card">
+        <header>
+          <span>{section.number}</span>
+          <h2>{section.title}</h2>
+        </header>
+        <p>{section.purpose}</p>
+        <ul>
+          {section.fields.map((field) => <li>{field}</li>)}
+        </ul>
+        {section.example && <div class="resource-template-card__example">{section.example}</div>}
+      </article>
+    ))
+  }
+</div>

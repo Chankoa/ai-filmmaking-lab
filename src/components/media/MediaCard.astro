@@ -1,18 +1,27 @@
 ---
+import CinematicImagePlaceholder from "./CinematicImagePlaceholder.astro";
+
 interface Props {
   title: string;
   description: string;
   image?: string;
   href?: string;
   meta?: string;
+  variant?: "urban" | "board" | "portrait" | "storyboard" | "depth" | "light" | "composition";
 }
 
-const { title, description, image, href, meta } = Astro.props;
+const { title, description, image, href, meta, variant = "board" } = Astro.props;
 const Tag = href ? "a" : "article";
 ---
 
 <Tag class="media-card" href={href}>
-  {image && <img src={image} alt="" loading="lazy" />}
+  {
+    image ? (
+      <img src={image} alt="" loading="lazy" />
+    ) : (
+      <CinematicImagePlaceholder variant={variant} title={title} caption={meta} compact={true} aspect="16 / 10" />
+    )
+  }
   <div>
     {meta && <span class="card-kicker">{meta}</span>}
     <h3>{title}</h3>

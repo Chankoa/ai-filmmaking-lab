@@ -1,0 +1,93 @@
+---
+import CinematicImagePlaceholder from "../media/CinematicImagePlaceholder.astro";
+
+interface Props {
+  label: string;
+  title: string;
+  description: string;
+  href: string;
+  focus: string;
+  resourceLabel: string;
+  projectLabel: string;
+  variant?: "urban" | "board" | "portrait" | "storyboard" | "depth" | "light" | "composition";
+}
+
+const {
+  label,
+  title,
+  description,
+  href,
+  focus,
+  resourceLabel,
+  projectLabel,
+  variant = "urban",
+} = Astro.props;
+---
+
+<a class="skill-family-card" href={href}>
+  <CinematicImagePlaceholder
+    variant={variant}
+    label={label}
+    title={title}
+    caption={focus}
+    compact={true}
+    aspect="16 / 9"
+  />
+
+  <div class="skill-family-card__body">
+    <p>{description}</p>
+    <ul>
+      <li>Ressource clé: {resourceLabel}</li>
+      <li>Projet support: {projectLabel}</li>
+    </ul>
+  </div>
+
+  <span class="skill-family-card__link">Ouvrir la famille <span aria-hidden="true">→</span></span>
+</a>
+
+<style>
+  .skill-family-card {
+    display: grid;
+    gap: 1rem;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background:
+      linear-gradient(180deg, color-mix(in srgb, var(--surface) 96%, transparent), color-mix(in srgb, var(--surface-muted) 84%, transparent));
+    padding: 1rem;
+    box-shadow: var(--shadow-sm);
+    transition:
+      transform 180ms ease,
+      border-color 180ms ease,
+      box-shadow 180ms ease;
+  }
+
+  .skill-family-card:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--accent) 32%, var(--line));
+    box-shadow: var(--shadow-md);
+  }
+
+  .skill-family-card__body {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .skill-family-card__body p,
+  .skill-family-card__body ul {
+    margin: 0;
+  }
+
+  .skill-family-card__body ul {
+    display: grid;
+    gap: 0.45rem;
+    padding-left: 1rem;
+    color: var(--text-muted);
+    font-size: 0.84rem;
+  }
+
+  .skill-family-card__link {
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+</style>
