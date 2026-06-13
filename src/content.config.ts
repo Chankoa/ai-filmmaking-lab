@@ -25,6 +25,7 @@ const lessons = defineCollection({
     stage: z.enum([
       "voir",
       "composer",
+      "ambiance",
       "generer",
       "stabiliser",
       "mettre-en-scene",
@@ -37,7 +38,7 @@ const lessons = defineCollection({
     tags: z.array(z.string()).default([]),
     heroImage: z.string().optional(),
     estimatedTime: z.string().optional(),
-    template: z.enum(["composition", "composition-cinematique", "learning-path"]).optional(),
+    template: z.enum(["composition", "composition-cinematique", "learning-path", "ambiance-realism"]).optional(),
     draft: z.boolean().default(false),
   }),
 });
@@ -61,6 +62,7 @@ const prompts = defineCollection({
       "transition",
       "sound-design",
       "critical-analysis",
+      "cinematic-realism",
     ]),
     level: levelSchema,
     tool: toolSchema.default("Generic workflow"),

@@ -1,0 +1,90 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import CodeBlock from "../../components/code/CodeBlock.astro";
+import {
+  ambianceDimensions,
+  ambiancePatterns,
+  beforeGenerationChecklist,
+  beforeVideoChecklist,
+} from "../../data/ambiance-realism";
+---
+
+<BaseLayout title="Checklist ambiance, réalisme et texture" description="Fiche mémo pour contrôler atmosphère, matières, peau, lumière, profondeur et mouvement avant génération.">
+  <CourseHero
+    eyebrow="Ressource de production"
+    title="Checklist ambiance, réalisme et texture"
+    description="Les contrôles essentiels pour donner une présence physique à une frame et préserver cette matière en image-to-video."
+    image="/images/projects/lyra-voss/frames/lyra-wet-corridor.png"
+    imageAlt="Silhouette dans un corridor humide avec brume et lumière cyan"
+    actions={[
+      { label: "Voir le cours complet", href: "/formation/ambiance-realisme-texture/", variant: "primary" },
+      { label: "Explorer les prompts", href: "/prompts/?category=cinematic-realism", variant: "secondary" },
+    ]}
+    stats={[
+      { label: "Dimensions", value: "8" },
+      { label: "Contrôles", value: "14" },
+      { label: "Usage", value: "Image + vidéo" },
+    ]}
+  />
+
+  <section class="ambiance-memo" aria-labelledby="memo-title">
+    <div class="section-heading">
+      <span class="eyebrow">Fiche mémo</span>
+      <h2 id="memo-title">Les 8 dimensions à garder dans le même monde physique.</h2>
+      <p>Une dimension n'est utile que si elle reste cohérente avec les autres et sert l'intention du plan.</p>
+    </div>
+    <div class="ambiance-memo__grid">
+      {ambianceDimensions.map((item, index) => (
+        <article>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <h3>{item.title}</h3>
+          <p>{item.definition}</p>
+          <code>{item.promptPhrase}</code>
+          <small>À éviter : {item.commonError}</small>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="ambiance-memo ambiance-memo--patterns" aria-labelledby="phrases-title">
+    <div class="section-heading">
+      <span class="eyebrow">Prompt phrases</span>
+      <h2 id="phrases-title">Six blocs prêts à adapter.</h2>
+    </div>
+    <div class="ambiance-memo__patterns">
+      {ambiancePatterns.map((pattern) => <CodeBlock code={pattern.prompt} label={pattern.title} />)}
+    </div>
+  </section>
+
+  <section class="ambiance-checks" aria-labelledby="generation-checks-title">
+    <article>
+      <span class="eyebrow">Avant génération</span>
+      <h2 id="generation-checks-title">La frame est-elle physiquement définie ?</h2>
+      <ol>{beforeGenerationChecklist.map((item, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}</ol>
+    </article>
+    <article>
+      <span class="eyebrow">Avant image-to-video</span>
+      <h2>La matière peut-elle rester stable en mouvement ?</h2>
+      <ol>{beforeVideoChecklist.map((item, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}</ol>
+    </article>
+  </section>
+
+  <style>
+    .ambiance-memo { display: grid; gap: 1.5rem; padding: 4.5rem 0 1rem; }
+    .ambiance-memo__grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .8rem; }
+    .ambiance-memo__grid article { display: grid; gap: .65rem; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 1.2rem; box-shadow: var(--shadow-sm); }
+    .ambiance-memo__grid h3, .ambiance-memo__grid p { margin: 0; }
+    .ambiance-memo__grid article > span { color: var(--accent); font-size: .68rem; font-weight: 800; }
+    .ambiance-memo__grid code { color: var(--accent); font-size: .74rem; overflow-wrap: anywhere; }
+    .ambiance-memo__grid small { border-left: 2px solid var(--danger); color: var(--text-muted); padding-left: .65rem; }
+    .ambiance-memo__patterns { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: .8rem; }
+    .ambiance-checks { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; padding-top: 4rem; }
+    .ambiance-checks article { border: 1px solid var(--line); border-radius: 16px; background: var(--panel-gradient); padding: clamp(1.3rem,3vw,2rem); }
+    .ambiance-checks h2 { font-size: clamp(1.5rem,3vw,2.1rem); }
+    .ambiance-checks ol { display: grid; gap: .55rem; margin: 0; padding: 0; list-style: none; }
+    .ambiance-checks li { display: flex; gap: .65rem; border-top: 1px solid var(--line); color: var(--text-muted); padding-top: .55rem; font-size: .82rem; }
+    .ambiance-checks li span { color: var(--accent); font-size: .65rem; font-weight: 800; }
+    @media (max-width:760px) { .ambiance-memo__grid, .ambiance-memo__patterns, .ambiance-checks { grid-template-columns: 1fr; } }
+  </style>
+</BaseLayout>

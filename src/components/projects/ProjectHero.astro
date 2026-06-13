@@ -19,5 +19,5 @@ const { data } = project;
       {data.tools.map((tool) => <ToolBadge tool={tool} />)}
     </div>
   </div>
-  {data.heroImage && <img src={data.heroImage} alt="" />}
+  {data.heroImage && <img src={data.heroImage} alt={`Visuel du projet ${data.title}`} />}
 </header>

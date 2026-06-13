@@ -4,9 +4,9 @@ description: "Étude de cas centrale pour stabiliser un personnage, créer une b
 status: "active"
 level: "intermediaire"
 tools: ["Adobe Firefly", "Photoshop", "Kling", "Premiere"]
-heroImage: "/images/projects/lyra-voss/hero-board.svg"
-pipeline: ["Brief personnage", "Planches de référence", "Prompt maître", "Variations de plans", "Animation", "Analyse critique"]
-outputs: ["Bible personnage", "6 planches de référence", "8 variations de plans", "8 prompts Kling", "Grille critique"]
+heroImage: "/images/projects/lyra-voss/frames/vertical-silence-wide.png"
+pipeline: ["Brief personnage", "Planches de référence", "Ambiance bible", "Prompt maître", "Variations de plans", "Animation", "Analyse critique"]
+outputs: ["Bible personnage", "Ambiance bible", "3 frames validées", "6 planches de référence", "8 variations de plans", "8 prompts Kling", "Grille critique"]
 tags: ["personnage", "cyberpunk", "continuité"]
 ---
 

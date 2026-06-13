@@ -23,3 +23,7 @@ La composition est le lien entre une intention dramatique et une image exploitab
 ## Univers de référence
 
 Tous les exemples utilisent un cyberpunk sobre : pluie, béton humide, structure verticale abandonnée, néons retenus, tension calme et réalisme physique. Le style reste secondaire face à la lisibilité du plan.
+
+## Étape suivante
+
+Une fois le cadre organisé, poursuivez avec [Ambiance, réalisme et texture](/formation/ambiance-realisme-texture/) pour donner une température, une matière et une densité physique au plan.

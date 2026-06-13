@@ -16,3 +16,5 @@ La lumière ne sert pas seulement à embellir une image. Elle révèle les volum
 ## Résultat attendu
 
 Une palette courte, des sources identifiables et trois frames dont la lumière peut être raccordée.
+
+Reliez ces décisions à [Ambiance, réalisme et texture](/formation/ambiance-realisme-texture/) : une source crédible doit aussi expliquer les reflets, l'humidité et la réponse des matières.

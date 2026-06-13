@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-labelledby="title desc">
+  <title id="title">Ambiance, réalisme et texture</title>
+  <desc id="desc">Silhouette dans un corridor humide, éclairage cyan discret, brume et reflets.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#171526"/><stop offset=".5" stop-color="#0d1c26"/><stop offset="1" stop-color="#060b11"/></linearGradient>
+    <linearGradient id="floor" x1="0" x2="1"><stop stop-color="#111721"/><stop offset=".55" stop-color="#15323b"/><stop offset="1" stop-color="#241526"/></linearGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
+    <pattern id="rain" width="34" height="34" patternUnits="userSpaceOnUse" patternTransform="rotate(14)"><path d="M2 0v18" stroke="#d7edf0" stroke-opacity=".13" stroke-width="2"/></pattern>
+  </defs>
+  <rect width="1200" height="600" fill="url(#bg)"/><path d="M0 86h410l170 514H0z" fill="#070a10"/><path d="M1200 35H845L700 600h500z" fill="#10151e"/>
+  <path d="M0 445l1200-72v227H0z" fill="url(#floor)"/><ellipse cx="760" cy="480" rx="250" ry="55" fill="#5bc6d5" opacity=".12" filter="url(#blur)"/>
+  <ellipse cx="980" cy="492" rx="180" ry="42" fill="#a74779" opacity=".11" filter="url(#blur)"/><rect x="772" y="176" width="74" height="256" rx="34" fill="#080b10"/>
+  <circle cx="809" cy="151" r="34" fill="#10141a"/><path d="M840 168c44 36 54 135 28 265" fill="none" stroke="#65c9d5" stroke-opacity=".35" stroke-width="9"/>
+  <rect width="1200" height="600" fill="url(#rain)"/><path d="M360 0h520l-95 600H470z" fill="#93d4da" opacity=".045"/>
+  <text x="72" y="510" fill="#eef4f5" font-family="Arial, sans-serif" font-size="35" font-weight="700">AMBIANCE · RÉALISME · TEXTURE</text>
+  <text x="74" y="548" fill="#8eb0b7" font-family="Arial, sans-serif" font-size="19">air · matière · imperfections · lumière · profondeur · mouvement</text>
+</svg>

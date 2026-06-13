@@ -5,6 +5,7 @@ import SkillFamilyCard from "../components/course/SkillFamilyCard.astro";
 import PathStepCard from "../components/course/PathStepCard.astro";
 import ResourceCard from "../components/resources/ResourceCard.astro";
 import CinematicImagePlaceholder from "../components/media/CinematicImagePlaceholder.astro";
+import { filmmakingProcess } from "../data/filmmaking-process";
 
 const [lessons, prompts, resources, projects, glossary] = await Promise.all([
   getCollection("lessons"),
@@ -49,72 +50,7 @@ const skillFamilies = [
   },
 ];
 
-const workflowSteps = [
-  {
-    number: "01",
-    verb: "Voir",
-    title: "Nommer le cadre et l’intention",
-    description: "Lire un plan, un angle et une fonction narrative avant d’écrire un prompt.",
-    href: "/references/camera-shots/",
-    status: "Prêt",
-  },
-  {
-    number: "02",
-    verb: "Composer",
-    title: "Organiser le regard et le vide",
-    description: "Construire un cadre lisible, stable et exploitable pour le mouvement.",
-    href: "/formation/composition-cinematique/",
-    status: "Prêt",
-  },
-  {
-    number: "03",
-    verb: "Générer",
-    title: "Fixer lumière, palette et matière",
-    description: "Motiver les sources et limiter la palette pour éviter les dérives.",
-    href: "/formation/lumiere-couleur/",
-    status: "Prêt",
-  },
-  {
-    number: "04",
-    verb: "Stabiliser",
-    title: "Conserver identité et décor",
-    description: "Séparer constantes, variables autorisées et références dédiées.",
-    href: "/formation/stabiliser/",
-    status: "Prêt",
-  },
-  {
-    number: "05",
-    verb: "Mettre en scène",
-    title: "Bloquer l’action dans l’espace",
-    description: "Définir regard, trajectoire et fonction du plan avant la caméra.",
-    href: "/formation/mettre-en-scene/",
-    status: "Prêt",
-  },
-  {
-    number: "06",
-    verb: "Animer",
-    title: "Décrire un mouvement plausible",
-    description: "Limiter les variations et préserver visage, tenue et architecture.",
-    href: "/formation/animer/",
-    status: "Prêt",
-  },
-  {
-    number: "07",
-    verb: "Monter",
-    title: "Assembler pour l’intention",
-    description: "Contrôler raccords, rythme et transitions avant l’effet spectaculaire.",
-    href: "/formation/monter-documenter/",
-    status: "Prêt",
-  },
-  {
-    number: "08",
-    verb: "Documenter",
-    title: "Conserver les décisions réutilisables",
-    description: "Prompt, frame source, clip validé et correction doivent rester traçables.",
-    href: "/resources/production-bible-template/",
-    status: "Prêt",
-  },
-];
+const workflowSteps = filmmakingProcess;
 ---
 
 <BaseLayout
@@ -170,7 +106,7 @@ const workflowSteps = [
     <div class="section-heading">
       <span class="eyebrow">Parcours</span>
       <h2 id="workflow-title">Un workflow lisible de la lecture du cadre jusqu’à la documentation.</h2>
-      <p>Les verbes du site suivent la chaîne réelle de travail: voir, composer, générer, stabiliser, mettre en scène, animer, monter, documenter.</p>
+      <p>Les verbes du site suivent la chaîne réelle de travail : voir, composer, créer l'ambiance, générer, stabiliser, mettre en scène, animer, monter, documenter.</p>
     </div>
     <div class="workflow-grid">
       {workflowSteps.map((step) => <PathStepCard {...step} />)}
@@ -336,7 +272,7 @@ const workflowSteps = [
     }
 
     .workflow-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .skill-grid {

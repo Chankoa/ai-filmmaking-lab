@@ -22,6 +22,21 @@ export interface LyraShotVariation {
   videoNegativePrompt: string;
 }
 
+export interface LyraAmbianceRule {
+  title: string;
+  intention: string;
+  constants: string[];
+  promptTerms: string;
+}
+
+export interface LyraAmbianceFrame {
+  title: string;
+  role: string;
+  image: string;
+  alt: string;
+  checks: string[];
+}
+
 const identity =
   "Lyra Voss, original cyberpunk female character, slender athletic feminine build, elongated fine face, high cheekbones, defined jawline, straight fine nose, calm intense green eyes, dark honey-brown shoulder-length slightly wet hair, subtle freckles, visible natural skin texture, matte black tactical bodysuit with subtle panel details, no LED, no glowing armor, no high heels";
 
@@ -104,6 +119,88 @@ export const lyraBoards: LyraBoard[] = [
     image: "/images/projects/lyra-voss/cinematic-shot-board.svg",
     checks: ["Close-up", "Medium", "Wide", "OTS", "Low angle", "Back", "Walk", "Extreme close-up"],
   },
+];
+
+export const lyraAmbiancePalette = [
+  { name: "Noir bleuté", value: "#09111B", role: "Ombres, tenue et profondeur." },
+  { name: "Gris béton", value: "#66727A", role: "Architecture humide et tons moyens." },
+  { name: "Cyan pratique", value: "#6FB3C6", role: "Source technique rare et directionnelle." },
+  { name: "Magenta retenu", value: "#7D496D", role: "Reflet secondaire, jamais bain de couleur." },
+  { name: "Rouge signal", value: "#A94B57", role: "Accent lointain réservé à l'information." },
+];
+
+export const lyraAmbianceRules: LyraAmbianceRule[] = [
+  {
+    title: "Atmosphère",
+    intention: "Faire sentir un volume froid, humide et presque silencieux.",
+    constants: ["Pluie fine ou humidité résiduelle", "Brume plus dense dans les plans lointains", "Air jamais parfaitement transparent"],
+    promptTerms: "rain mist, suspended moisture, distant architecture fading into blue-grey haze",
+  },
+  {
+    title: "Matières",
+    intention: "Donner au lieu un âge et une logique d'entretien abandonnée.",
+    constants: ["Béton sombre et poreux", "Métal noir rayé ou oxydé", "Tissu mat qui absorbe la lumière", "Sol humide, jamais miroir parfait"],
+    promptTerms: "wet porous concrete, scratched black metal, worn seals, matte technical fabric",
+  },
+  {
+    title: "Peau et cheveux",
+    intention: "Conserver une présence humaine naturelle dans un décor très graphique.",
+    constants: ["Pores et taches de rousseur visibles", "Aucune retouche beauté", "Cheveux brun miel foncé, humides et lourds", "Gouttes petites et irrégulières"],
+    promptTerms: "visible pores, subtle freckles, peach fuzz, wet dark honey-brown hair, no beauty retouch",
+  },
+  {
+    title: "Lumière",
+    intention: "Expliquer les volumes par quelques sources crédibles.",
+    constants: ["Cyan provenant d'un luminaire technique", "Magenta limité à un reflet lointain", "Visage exposé par lumière réfléchie", "Rouge réservé au signal"],
+    promptTerms: "weak cyan practical light, soft reflected floor light, rare muted magenta reflection",
+  },
+  {
+    title: "Caméra et profondeur",
+    intention: "Faire croire à une caméra lourde placée dans un espace construit.",
+    constants: ["Focales 28 à 50 mm pour le décor", "85 mm réservé aux détails", "Premier plan utile au parallaxe", "Mouvement unique, lent et pondéré"],
+    promptTerms: "physical 35mm camera, layered depth, restrained parallax, slow weighted movement",
+  },
+  {
+    title: "Son implicite",
+    intention: "Étendre Vertical Silence hors du cadre.",
+    constants: ["Pluie filtrée par l'architecture", "Bourdonnement électrique distant", "Gouttes isolées proches", "Silence lourd entre les événements"],
+    promptTerms: "quiet visual tension, distant electrical hum implied, isolated water drops, heavy silence",
+  },
+];
+
+export const lyraAmbianceFrames: LyraAmbianceFrame[] = [
+  {
+    title: "Identité et peau",
+    role: "Frame étalon pour le visage, l'humidité et l'exposition naturelle.",
+    image: "/images/projects/lyra-voss/frames/lyra-rain-close-up.png",
+    alt: "Gros plan de Lyra Voss sous une faible lumière cyan dans un corridor humide",
+    checks: ["Yeux verts", "Cheveux brun miel", "Pores visibles", "Cyan motivé", "Magenta très faible"],
+  },
+  {
+    title: "Matière et profondeur",
+    role: "Frame étalon pour les couches, le béton, le métal et les reflets.",
+    image: "/images/projects/lyra-voss/frames/lyra-wet-corridor.png",
+    alt: "Lyra Voss dans un corridor en béton humide avec câbles au premier plan",
+    checks: ["Premier plan", "Tissu mat", "Sol humide", "Métal usé", "Fond atmosphérique"],
+  },
+  {
+    title: "Échelle du monde",
+    role: "Frame étalon pour la mégastructure, le vide et la densité de l'air.",
+    image: "/images/projects/lyra-voss/frames/vertical-silence-wide.png",
+    alt: "Lyra Voss au pied de la mégastructure Vertical Silence sous la pluie",
+    checks: ["Échelle humaine", "Espace négatif", "Brume progressive", "Rouge signal rare", "Architecture stable"],
+  },
+];
+
+export const lyraAmbianceContinuity = [
+  "La pluie et l'humidité évoluent sans disparaître entre deux plans voisins.",
+  "Le béton reste sombre, poreux et peu réfléchissant, sauf dans les flaques.",
+  "La tenue absorbe la lumière et ne devient jamais une armure brillante.",
+  "Le cyan conserve une source identifiable et une direction stable.",
+  "Le magenta et le rouge restent des accents rares, jamais une dominante.",
+  "La peau garde pores, taches de rousseur et exposition naturelle en gros plan.",
+  "La brume augmente avec la distance et ne recouvre pas uniformément le cadre.",
+  "La caméra conserve une trajectoire lente, une inertie et une focale plausibles.",
 ];
 
 export const lyraMasterBlocks = [

@@ -27,10 +27,17 @@ const visualVariantByCategory: Record<string, "urban" | "board" | "portrait" | "
   transition: "urban",
   "sound-design": "depth",
   "critical-analysis": "board",
+  "cinematic-realism": "depth",
 };
 ---
 
-<article class="prompt-card" data-prompt-card data-category={data.category} data-tool={data.tool}>
+<article
+  class="prompt-card"
+  data-prompt-card
+  data-category={data.category}
+  data-tool={data.tool}
+  data-tags={JSON.stringify(data.tags)}
+>
   {
     data.visual ? (
       <img class="prompt-card__visual" src={data.visual} alt="" loading="lazy" />

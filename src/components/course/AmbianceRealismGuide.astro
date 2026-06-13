@@ -1,0 +1,137 @@
+---
+import CodeBlock from "../code/CodeBlock.astro";
+import PromptComparison from "../prompts/PromptComparison.astro";
+import {
+  ambianceContinuityChecklist,
+  ambianceDimensions,
+  ambianceNegativePrompt,
+  ambiancePatterns,
+  improvedAmbiancePrompt,
+  lyraAmbianceExamples,
+  promptAnatomy,
+  weakAmbiancePrompt,
+} from "../../data/ambiance-realism";
+import { filmmakingProcess } from "../../data/filmmaking-process";
+---
+
+<div class="ambiance-guide">
+  <section class="ambiance-intro" aria-labelledby="ambiance-intro-title">
+    <div>
+      <span class="lesson-kicker">Présence physique</span>
+      <h2 id="ambiance-intro-title">Le réalisme n'est pas un niveau de détail.</h2>
+      <p>Une image devient crédible lorsque la peau, l'air, les surfaces, la lumière et la caméra semblent appartenir au même espace. Le grain et la pluie ne compensent jamais une physique incohérente.</p>
+      <nav aria-label="Leçons associées">
+        <a href="/formation/composition-cinematique/">Composition cinématographique</a>
+        <a href="/formation/lumiere-couleur/">Lumière et couleur</a>
+        <a href="/formation/profondeur-de-champ/">Profondeur de champ</a>
+        <a href="/formation/image-to-video-transitions/">Image-to-video</a>
+      </nav>
+    </div>
+    <div class="ambiance-intro__frame" aria-label="Plan abstrait montrant pluie, profondeur et lumière physique">
+      <span class="ambiance-intro__architecture"></span><span class="ambiance-intro__subject"></span>
+      <span class="ambiance-intro__rain"></span><span class="ambiance-intro__haze"></span>
+      <span class="ambiance-intro__reflection"></span>
+    </div>
+  </section>
+
+  <section class="ambiance-process" aria-labelledby="ambiance-process-title">
+    <div class="ambiance-heading">
+      <span class="lesson-kicker">Position dans le process</span>
+      <h2 id="ambiance-process-title">Entre la structure du cadre et sa traduction en prompt.</h2>
+      <p>Composer organise le regard. Créer l'ambiance donne une température, une matière et une densité au plan. Générer traduit ensuite ces décisions en prompt.</p>
+    </div>
+    <ol>
+      {filmmakingProcess.map((step) => (
+        <li class={step.verb === "Créer l'ambiance" ? "is-current" : ""}>
+          <span>{step.number}</span><strong>{step.verb}</strong>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="ambiance-section" aria-labelledby="dimensions-title">
+    <div class="ambiance-heading">
+      <span class="lesson-kicker">8 dimensions</span>
+      <h2 id="dimensions-title">Construire un monde, pas appliquer une finition.</h2>
+      <p>Chaque carte relie une propriété visible à une fonction narrative et à une formulation exploitable.</p>
+    </div>
+    <div class="ambiance-dimensions">
+      {ambianceDimensions.map((item, index) => (
+        <article>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <h3>{item.title}</h3><p>{item.definition}</p>
+          <dl>
+            <div><dt>Rôle narratif</dt><dd>{item.narrativeRole}</dd></div>
+            <div><dt>Prompt phrase</dt><dd><code>{item.promptPhrase}</code></dd></div>
+            <div class="is-error"><dt>Erreur fréquente</dt><dd>{item.commonError}</dd></div>
+          </dl>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="ambiance-anatomy" aria-labelledby="anatomy-title">
+    <div>
+      <span class="lesson-kicker">Prompt anatomy</span>
+      <h2 id="anatomy-title">Ambiance réaliste</h2>
+      <p>Partez du corps et du lieu, puis rendez observables l'air, les surfaces et la caméra.</p>
+      <ol>{promptAnatomy.map((layer, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><code>{layer}</code></li>)}</ol>
+    </div>
+    <CodeBlock code={ambianceNegativePrompt} label="Negative prompt de base" />
+  </section>
+
+  <PromptComparison
+    title="Du mot-clé photoréaliste à un espace physique"
+    before={weakAmbiancePrompt}
+    after={improvedAmbiancePrompt}
+    analysis="Le second prompt ne réclame pas seulement du réalisme : il décrit les causes visibles qui le produisent."
+  />
+
+  <section class="ambiance-section" aria-labelledby="patterns-title">
+    <div class="ambiance-heading">
+      <span class="lesson-kicker">Patterns réutilisables</span>
+      <h2 id="patterns-title">Ajouter une couche précise sans réécrire tout le prompt.</h2>
+    </div>
+    <div class="ambiance-patterns">
+      {ambiancePatterns.map((pattern) => <article><h3>{pattern.title}</h3><CodeBlock code={pattern.prompt} label="Pattern" /></article>)}
+    </div>
+  </section>
+
+  <section class="ambiance-section" aria-labelledby="lyra-application-title">
+    <div class="ambiance-heading">
+      <span class="lesson-kicker">Application · Lyra Voss</span>
+      <h2 id="lyra-application-title">Faire varier l'échelle sans perdre la matière du monde.</h2>
+      <p>Le visage, le corridor, la mégastructure et le clip partagent une palette, une humidité et une lumière retenues.</p>
+    </div>
+    <div class="ambiance-examples">
+      {lyraAmbianceExamples.map((example, index) => (
+        <article>
+          <header><span>{String(index + 1).padStart(2, "0")} · {example.tool}</span><h3>{example.title}</h3></header>
+          <CodeBlock code={example.prompt} label={example.tool === "Kling" ? "Prompt Kling" : "Prompt image"} />
+          <CodeBlock code={example.negative} label="Negative prompt" />
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="ambiance-continuity" aria-labelledby="continuity-title">
+    <div>
+      <span class="lesson-kicker">Application à un projet film</span>
+      <h2 id="continuity-title">Ambiance continuity checklist</h2>
+      <p>La continuité maintient les mêmes lois de matière, de météo, de lumière, de caméra et de son.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="/resources/ambiance-realisme-texture-checklist/">Ouvrir la fiche mémo</a>
+        <a class="button secondary" href="/prompts/?category=cinematic-realism">Explorer les prompts</a>
+      </div>
+    </div>
+    <ol>{ambianceContinuityChecklist.map((item, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}</ol>
+  </section>
+
+  <aside class="ambiance-related">
+    <div><span class="lesson-kicker">Relier la méthode</span><h2>Continuer dans le projet.</h2></div>
+    <a href="/formation/character-consistency/"><strong>Character consistency</strong><span>Préserver la peau, les cheveux et la tenue.</span></a>
+    <a href="/projects/lyra-voss/"><strong>Lyra Voss Case Study</strong><span>Tester la continuité sur huit valeurs de plans.</span></a>
+    <a href="/prompts/?category=cinematic-realism"><strong>Prompt Library</strong><span>Réutiliser les patterns de texture et d'atmosphère.</span></a>
+    <a href="/resources/"><strong>Ressources</strong><span>Passer des principes aux contrôles de production.</span></a>
+  </aside>
+</div>

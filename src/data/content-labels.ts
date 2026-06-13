@@ -7,6 +7,7 @@ const levelLabels: Record<string, string> = {
 const stageLabels: Record<string, string> = {
   voir: "Voir",
   composer: "Composer",
+  ambiance: "Créer l'ambiance",
   generer: "Générer",
   stabiliser: "Stabiliser",
   "mettre-en-scene": "Mettre en scène",
@@ -29,6 +30,7 @@ const promptCategoryLabels: Record<string, string> = {
   transition: "Transitions",
   "sound-design": "Design sonore",
   "critical-analysis": "Analyse critique",
+  "cinematic-realism": "Ambiance et réalisme",
 };
 
 const glossaryCategoryLabels: Record<string, string> = {

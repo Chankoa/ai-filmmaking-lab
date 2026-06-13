@@ -6,6 +6,7 @@ import LessonNav from "../components/course/LessonNav.astro";
 import CompositionGuide from "../components/course/CompositionGuide.astro";
 import CinematicCompositionGuide from "../components/course/CinematicCompositionGuide.astro";
 import LearningPathGuide from "../components/course/LearningPathGuide.astro";
+import AmbianceRealismGuide from "../components/course/AmbianceRealismGuide.astro";
 import LessonPager from "../components/course/LessonPager.astro";
 import ToolBadge from "../components/ui/ToolBadge.astro";
 import { formatStageLabel } from "../data/content-labels";
@@ -26,6 +27,7 @@ const lessonVisualVariant: Record<string, "urban" | "board" | "portrait" | "stor
   "composition-cinematique": "composition",
   "lumiere-couleur": "light",
   "profondeur-de-champ": "depth",
+  "ambiance-realisme-texture": "depth",
   "storyboard-shotlist": "storyboard",
   stabiliser: "portrait",
   "production-ia": "board",
@@ -65,6 +67,7 @@ const lessonVisualVariant: Record<string, "urban" | "board" | "portrait" | "stor
       {data.template === "composition" && <CompositionGuide />}
       {data.template === "composition-cinematique" && <CinematicCompositionGuide />}
       {data.template === "learning-path" && learningPath && <LearningPathGuide path={learningPath} />}
+      {data.template === "ambiance-realism" && <AmbianceRealismGuide />}
       <LessonPager lesson={lesson} lessons={lessons} />
     </article>
   </div>

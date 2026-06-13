@@ -1,6 +1,7 @@
 ---
 import type { LearningPath } from "../../data/learning-paths";
 import PromptExampleCard from "../prompts/PromptExampleCard.astro";
+import { filmmakingProcess } from "../../data/filmmaking-process";
 
 interface Props {
   path: LearningPath;
@@ -17,14 +18,7 @@ const { path } = Astro.props;
       <p>{path.why}</p>
     </div>
     <div class="learning-path-hero__map" aria-label="Méthode AI Filmmaking Lab">
-      <span>Voir</span>
-      <span>Composer</span>
-      <span>Générer</span>
-      <span>Stabiliser</span>
-      <span>Mettre en scène</span>
-      <span>Animer</span>
-      <span>Monter</span>
-      <span>Documenter</span>
+      {filmmakingProcess.map((step) => <span>{step.verb}</span>)}
     </div>
   </section>
 

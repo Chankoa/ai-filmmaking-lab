@@ -10,6 +10,8 @@ const prompts = await getCollection("prompts");
 const categories = promptCategories.filter((category) =>
   prompts.some((prompt) => prompt.data.category === category.id)
 );
+const tags = [...new Set(prompts.flatMap((prompt) => prompt.data.tags))]
+  .sort((a, b) => a.localeCompare(b, "fr"));
 ---
 
 <BaseLayout title="Prompts" description="Bibliothèque de prompts filtrable et réutilisable pour images, personnages et vidéos IA.">
@@ -28,7 +30,7 @@ const categories = promptCategories.filter((category) =>
 
   <section class="prompt-family-index" aria-labelledby="prompt-family-title">
     <div class="section-heading">
-      <span class="eyebrow">13 familles de production</span>
+      <span class="eyebrow">{categories.length} familles de production</span>
       <h2 id="prompt-family-title">Partir d’une compétence, pas d’une formule magique.</h2>
       <p>Chaque famille relie une intention de mise en scène à un prompt, des contraintes et une leçon.</p>
     </div>
@@ -48,15 +50,14 @@ const categories = promptCategories.filter((category) =>
 
   <section class="prompt-category-feature" aria-labelledby="composition-prompts-title">
     <div>
-      <span class="eyebrow">Catégorie Composition</span>
-      <h2 id="composition-prompts-title">Des prompts qui décrivent un cadre, pas seulement une ambiance.</h2>
+      <span class="eyebrow">Nouvelle catégorie · Ambiance et réalisme</span>
+      <h2 id="composition-prompts-title">Décrire les causes physiques du réalisme.</h2>
       <p>
-        Les nouvelles fiches Vertical Silence explicitent placement, poids visuel, profondeur,
-        espace négatif et contraintes de continuité.
+        Huit fiches relient atmosphère, peau, matières, humidité, profondeur et continuité image-to-video.
       </p>
     </div>
-    <a class="button primary" href="/formation/composition-cinematique/">
-      Étudier les 18 principes
+    <a class="button primary" href="/formation/ambiance-realisme-texture/">
+      Ouvrir la leçon
     </a>
   </section>
 
@@ -69,6 +70,16 @@ const categories = promptCategories.filter((category) =>
       <button type="button" class="is-active" data-prompt-filter="all">Tous</button>
       {categories.map((category) => <button type="button" data-prompt-filter={category.id}>{formatPromptCategoryLabel(category.id)}</button>)}
     </div>
+    <div class="prompt-tag-filter" aria-labelledby="prompt-tag-filter-title">
+      <div>
+        <span class="eyebrow" id="prompt-tag-filter-title">Affiner par tag</span>
+        <button type="button" class="is-active" data-prompt-tag="all">Tous les tags</button>
+      </div>
+      <div class="prompt-tag-filter__list">
+        {tags.map((tag) => <button type="button" data-prompt-tag={tag}>{tag}</button>)}
+      </div>
+    </div>
+    <p class="prompt-filter-status" data-prompt-filter-status aria-live="polite"></p>
     <div class="prompt-grid">
       {prompts.map((prompt) => <PromptCard prompt={prompt} />)}
     </div>
@@ -77,22 +88,58 @@ const categories = promptCategories.filter((category) =>
   <script>
     const promptFilterButtons = document.querySelectorAll("[data-prompt-filter]");
     const promptFamilyButtons = document.querySelectorAll("[data-prompt-family]");
+    const promptTagButtons = document.querySelectorAll("[data-prompt-tag]");
     const promptCards = document.querySelectorAll("[data-prompt-card]");
+    const promptFilterStatus = document.querySelector("[data-prompt-filter-status]");
+    let activeCategory = "all";
+    let activeTag = "all";
 
-    const applyPromptFilter = (filter: string) => {
+    const applyPromptFilters = () => {
       promptFilterButtons.forEach((item) => {
-        item.classList.toggle("is-active", item.getAttribute("data-prompt-filter") === filter);
+        item.classList.toggle("is-active", item.getAttribute("data-prompt-filter") === activeCategory);
       });
+      promptTagButtons.forEach((item) => {
+        item.classList.toggle("is-active", item.getAttribute("data-prompt-tag") === activeTag);
+      });
+
+      let visibleCount = 0;
       promptCards.forEach((card) => {
         const category = card.getAttribute("data-category");
-        card.toggleAttribute("hidden", filter !== "all" && category !== filter);
+        const tags = JSON.parse(card.getAttribute("data-tags") ?? "[]");
+        const categoryMatches = activeCategory === "all" || category === activeCategory;
+        const tagMatches = activeTag === "all" || tags.includes(activeTag);
+        const isVisible = categoryMatches && tagMatches;
+        card.toggleAttribute("hidden", !isVisible);
+        if (isVisible) visibleCount += 1;
       });
+
+      if (promptFilterStatus) {
+        promptFilterStatus.textContent = `${visibleCount} prompt${visibleCount > 1 ? "s" : ""} affiché${visibleCount > 1 ? "s" : ""}.`;
+      }
+
+      const url = new URL(window.location.href);
+      activeCategory === "all" ? url.searchParams.delete("category") : url.searchParams.set("category", activeCategory);
+      activeTag === "all" ? url.searchParams.delete("tag") : url.searchParams.set("tag", activeTag);
+      window.history.replaceState({}, "", url);
     };
 
     promptFilterButtons.forEach((button) => {
       button.addEventListener("click", () => {
         const filter = button.getAttribute("data-prompt-filter");
-        if (filter) applyPromptFilter(filter);
+        if (filter) {
+          activeCategory = filter;
+          applyPromptFilters();
+        }
+      });
+    });
+
+    promptTagButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const tag = button.getAttribute("data-prompt-tag");
+        if (tag) {
+          activeTag = tag;
+          applyPromptFilters();
+        }
       });
     });
 
@@ -100,20 +147,30 @@ const categories = promptCategories.filter((category) =>
       button.addEventListener("click", () => {
         const filter = button.getAttribute("data-prompt-family");
         if (filter) {
-          applyPromptFilter(filter);
+          activeCategory = filter;
+          applyPromptFilters();
           document.querySelector("#prompt-list-title")?.scrollIntoView({ behavior: "smooth" });
         }
       });
     });
 
-    const requestedCategory = new URLSearchParams(window.location.search).get("category");
+    const requestedParams = new URLSearchParams(window.location.search);
+    const requestedCategory = requestedParams.get("category");
+    const requestedTag = requestedParams.get("tag");
     if (
       requestedCategory &&
       [...promptFilterButtons].some(
         (button) => button.getAttribute("data-prompt-filter") === requestedCategory
       )
     ) {
-      applyPromptFilter(requestedCategory);
+      activeCategory = requestedCategory;
     }
+    if (
+      requestedTag &&
+      [...promptTagButtons].some((button) => button.getAttribute("data-prompt-tag") === requestedTag)
+    ) {
+      activeTag = requestedTag;
+    }
+    applyPromptFilters();
   </script>
 </BaseLayout>

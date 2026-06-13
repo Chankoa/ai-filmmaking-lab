@@ -16,3 +16,5 @@ La profondeur de champ est une décision narrative : elle choisit l'information 
 ## Résultat attendu
 
 Une série de frames avec plans de netteté identifiés et un rack focus préparé pour l'image-to-video.
+
+La profondeur devient plus crédible lorsque l'air sépare aussi les couches. Voir [Ambiance, réalisme et texture](/formation/ambiance-realisme-texture/).

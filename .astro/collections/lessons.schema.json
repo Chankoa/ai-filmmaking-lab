@@ -21,6 +21,7 @@
           "enum": [
             "voir",
             "composer",
+            "ambiance",
             "generer",
             "stabiliser",
             "mettre-en-scene",
@@ -75,7 +76,8 @@
           "enum": [
             "composition",
             "composition-cinematique",
-            "learning-path"
+            "learning-path",
+            "ambiance-realism"
           ]
         },
         "draft": {
