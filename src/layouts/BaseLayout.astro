@@ -23,7 +23,7 @@ function isActive(href: string) {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta id="meta-theme-color" name="theme-color" content="#eef2f5" />
+    <meta id="meta-theme-color" name="theme-color" content="#f5f7fa" />
     <script is:inline>
       (() => {
         const storageKey = "afl-theme";
@@ -192,7 +192,7 @@ function isActive(href: string) {
             toggle.setAttribute("aria-pressed", String(nextTheme === "dark"));
           });
           if (meta instanceof HTMLMetaElement) {
-            meta.content = nextTheme === "dark" ? "#09111b" : "#eef2f5";
+            meta.content = nextTheme === "dark" ? "#07101a" : "#f5f7fa";
           }
           if (persist) window.localStorage.setItem(storageKey, nextTheme);
         };

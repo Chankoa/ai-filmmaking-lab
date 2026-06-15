@@ -15,9 +15,9 @@
   border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
   border-radius: 16px;
   background:
-    radial-gradient(circle at 90% 15%, rgba(65, 217, 170, 0.14), transparent 28%),
-    radial-gradient(circle at 8% 10%, rgba(155, 108, 255, 0.2), transparent 34%),
-    #111326;
+    radial-gradient(circle at 90% 15%, rgba(60, 218, 239, 0.2), transparent 29%),
+    radial-gradient(circle at 8% 10%, rgba(229, 70, 147, 0.24), transparent 35%),
+    #0a1220;
   padding: clamp(26px, 5vw, 48px);
   color: #f7f5ff;
   box-shadow: var(--shadow-lg);
@@ -80,7 +80,7 @@
 
     span::before {
       content: counter(stage, decimal-leading-zero);
-      color: #9b7aff;
+      color: #55dff1;
       font-size: 0.61rem;
       font-weight: 800;
     }

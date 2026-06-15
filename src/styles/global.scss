@@ -9,28 +9,32 @@
 
 :root,
 :root[data-theme="light"] {
-  --bg: #eef2f5;
-  --bg-soft: #e5ebf1;
-  --surface: #fbfcfd;
+  --bg: #f5f7fa;
+  --bg-soft: #edf1f5;
+  --surface: #fcfdff;
   --surface-raised: #ffffff;
-  --surface-muted: #e8edf3;
-  --text: #121924;
-  --text-muted: #586476;
-  --text-soft: #7b8697;
-  --line: #d0d8e2;
-  --line-strong: #bbc5d1;
-  --accent: #4d8fa7;
-  --accent-strong: #7d5d89;
-  --accent-soft: #dde8ee;
-  --accent-pale: #edf2f5;
-  --mint: #76c1cc;
+  --surface-muted: #e8eef4;
+  --text: #111823;
+  --text-muted: #4e5c6e;
+  --text-soft: #718095;
+  --line: #d4dde7;
+  --line-strong: #b9c6d4;
+  --neon-cyan: #0aa6c6;
+  --neon-magenta: #d54491;
+  --accent: #087f9d;
+  --accent-strong: #a03d78;
+  --accent-soft: #d9f0f5;
+  --accent-pale: #eef8fa;
+  --mint: #19c4d1;
   --warning: #c89457;
-  --danger: #b75460;
+  --danger: #c44d68;
   --hero-gradient:
-    radial-gradient(circle at 10% 10%, rgba(125, 93, 137, 0.16), transparent 32%),
-    radial-gradient(circle at 90% 18%, rgba(77, 143, 167, 0.16), transparent 28%),
-    linear-gradient(145deg, #eff3f6 0%, #f7f8f8 45%, #dce4eb 100%);
-  --panel-gradient: linear-gradient(145deg, #eff3f6 0%, #edf0f4 44%, #dbe2e9 100%);
+    radial-gradient(circle at 10% 10%, rgba(213, 68, 145, 0.18), transparent 32%),
+    radial-gradient(circle at 90% 18%, rgba(10, 166, 198, 0.2), transparent 29%),
+    linear-gradient(145deg, #f8fafc 0%, #ffffff 46%, #e5edf4 100%);
+  --panel-gradient:
+    radial-gradient(circle at 90% 10%, rgba(10, 166, 198, 0.1), transparent 30%),
+    linear-gradient(145deg, #f7f9fc 0%, #f1f4f8 48%, #e4eaf1 100%);
   --shadow-sm: 0 10px 24px rgba(8, 14, 24, 0.08);
   --shadow-md: 0 22px 52px rgba(8, 14, 24, 0.12);
   --shadow-lg: 0 34px 84px rgba(8, 14, 24, 0.16);
@@ -39,33 +43,38 @@
   --radius-md: 18px;
   --radius-lg: 24px;
   --radius-pill: 999px;
-  --max-page: 1120px;
+  --max-page: 1280px;
+  --max-reading: 78ch;
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: #09111b;
-  --bg-soft: #101a28;
-  --surface: #101926;
-  --surface-raised: #162131;
-  --surface-muted: #1a2637;
-  --text: #eef3f8;
-  --text-muted: #aab4c1;
-  --text-soft: #7f8c9d;
-  --line: #233243;
-  --line-strong: #34455a;
-  --accent: #6fb3c6;
-  --accent-strong: #916791;
-  --accent-soft: #132536;
-  --accent-pale: #0f1b29;
-  --mint: #88ced6;
+  --bg: #07101a;
+  --bg-soft: #0d1825;
+  --surface: #0e1926;
+  --surface-raised: #142233;
+  --surface-muted: #172638;
+  --text: #f2f7fb;
+  --text-muted: #b3bfcc;
+  --text-soft: #8291a4;
+  --line: #22364a;
+  --line-strong: #35516a;
+  --neon-cyan: #55dff1;
+  --neon-magenta: #f06ab2;
+  --accent: #55dff1;
+  --accent-strong: #f06ab2;
+  --accent-soft: #123242;
+  --accent-pale: #0d2331;
+  --mint: #57dce5;
   --warning: #dfb173;
-  --danger: #d46a71;
+  --danger: #f07191;
   --hero-gradient:
-    radial-gradient(circle at 12% 12%, rgba(145, 103, 145, 0.2), transparent 34%),
-    radial-gradient(circle at 90% 18%, rgba(111, 179, 198, 0.16), transparent 30%),
-    linear-gradient(145deg, #121b29 0%, #0d1621 44%, #182333 100%);
-  --panel-gradient: linear-gradient(145deg, #121b29 0%, #111d2b 48%, #1a2433 100%);
+    radial-gradient(circle at 12% 12%, rgba(240, 106, 178, 0.23), transparent 34%),
+    radial-gradient(circle at 90% 18%, rgba(85, 223, 241, 0.19), transparent 30%),
+    linear-gradient(145deg, #101c2a 0%, #09131f 44%, #142536 100%);
+  --panel-gradient:
+    radial-gradient(circle at 88% 12%, rgba(85, 223, 241, 0.1), transparent 30%),
+    linear-gradient(145deg, #101d2b 0%, #0c1723 48%, #172737 100%);
   --shadow-sm: 0 10px 24px rgba(0, 0, 0, 0.18);
   --shadow-md: 0 22px 52px rgba(0, 0, 0, 0.26);
   --shadow-lg: 0 34px 84px rgba(0, 0, 0, 0.34);
@@ -85,8 +94,8 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at 18% -10%, color-mix(in srgb, var(--accent-strong) 10%, transparent), transparent 30%),
-    radial-gradient(circle at 84% 0%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 26%),
+    radial-gradient(circle at 16% -10%, color-mix(in srgb, var(--neon-magenta) 8%, transparent), transparent 31%),
+    radial-gradient(circle at 86% 0%, color-mix(in srgb, var(--neon-cyan) 8%, transparent), transparent 28%),
     var(--bg);
   color: var(--text);
   font-family: "DM Sans", "Segoe UI", sans-serif;
@@ -239,7 +248,7 @@ main {
     flex: 0 0 auto;
     place-items: center;
     border-radius: 10px;
-    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 82%, white 18%), var(--accent-strong) 58%, color-mix(in srgb, var(--danger) 72%, var(--accent-strong) 28%));
+    background: linear-gradient(135deg, color-mix(in srgb, var(--neon-cyan) 82%, white 18%), var(--accent) 44%, var(--neon-magenta));
     box-shadow: 0 12px 26px rgba(38, 69, 94, 0.22);
 
     span {
@@ -387,13 +396,13 @@ main {
 .site-header__cta,
 .button.primary {
   border-color: var(--accent);
-  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 88%, white 12%), var(--accent-strong) 60%, color-mix(in srgb, var(--danger) 72%, var(--accent-strong) 28%));
+  background: linear-gradient(135deg, color-mix(in srgb, var(--neon-cyan) 84%, white 16%), var(--accent) 43%, var(--neon-magenta));
   color: white;
   box-shadow: 0 12px 26px rgba(30, 56, 77, 0.2);
 
   &:hover {
     border-color: var(--accent-strong);
-    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 94%, white 6%), color-mix(in srgb, var(--accent-strong) 86%, var(--danger) 14%));
+    background: linear-gradient(135deg, var(--neon-cyan), color-mix(in srgb, var(--neon-magenta) 88%, var(--accent) 12%));
     box-shadow: 0 16px 34px rgba(30, 56, 77, 0.26);
   }
 }
@@ -489,8 +498,8 @@ main {
 .site-footer {
   margin-top: auto;
   background:
-    radial-gradient(circle at 18% 0%, rgba(111, 179, 198, 0.16), transparent 24%),
-    radial-gradient(circle at 88% 18%, rgba(145, 103, 145, 0.18), transparent 26%),
+    radial-gradient(circle at 18% 0%, rgba(49, 211, 239, 0.17), transparent 25%),
+    radial-gradient(circle at 88% 18%, rgba(222, 72, 151, 0.2), transparent 27%),
     linear-gradient(180deg, #0c141f 0%, #09111b 58%, #070d15 100%);
   color: #edf3f8;
   padding: 58px 16px 24px;
@@ -573,8 +582,7 @@ main {
 .card-kicker,
 .card-meta,
 .hero-stats dt,
-.project-pipeline span,
-.lesson-nav > strong {
+.project-pipeline span {
   color: var(--accent);
   font-size: 0.72rem;
   font-weight: 800;
@@ -1233,8 +1241,8 @@ summary {
 
 .lesson-shell {
   display: grid;
-  grid-template-columns: 255px minmax(0, 1fr);
-  gap: 22px;
+  grid-template-columns: 242px minmax(0, 1fr);
+  gap: 28px;
   align-items: start;
 }
 
@@ -1245,39 +1253,76 @@ summary {
   overflow-y: auto;
   padding: 16px;
 
-  > strong {
-    display: block;
-    padding: 4px 8px 12px;
+  &__intro {
+    display: grid;
+    gap: 2px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 11px;
+    padding: 4px 8px 13px;
+
+    span {
+      color: var(--text-soft);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    strong {
+      color: var(--accent);
+      font-family: "Manrope", "Segoe UI", sans-serif;
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
   }
 
-  ol {
+  &__stages {
     display: grid;
-    gap: 5px;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__group {
+    display: grid;
+    gap: 4px;
+  }
+
+  &__stage {
+    color: var(--text-soft);
+    padding: 0 11px;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+  }
+
+  &__links {
+    display: grid;
+    gap: 4px;
     margin: 0;
     padding: 0;
     list-style: none;
   }
 
   a {
-    display: grid;
-    gap: 3px;
+    display: block;
     border-radius: 9px;
     color: var(--text-muted);
     padding: 10px 11px;
     font-size: 0.84rem;
     font-weight: 700;
 
-    span {
-      color: var(--text-soft);
-      font-size: 0.64rem;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-    }
-
     &:hover,
     &.is-active {
-      background: var(--accent-soft);
+      background:
+        linear-gradient(90deg, color-mix(in srgb, var(--neon-cyan) 13%, var(--accent-soft)), color-mix(in srgb, var(--neon-magenta) 7%, var(--accent-soft)));
       color: var(--accent);
+    }
+
+    &.is-active {
+      box-shadow: inset 3px 0 var(--neon-cyan);
     }
   }
 }
@@ -1299,6 +1344,7 @@ summary {
   }
 
   p {
+    max-width: var(--max-reading);
     font-size: 1.02rem;
   }
 }
@@ -1313,6 +1359,7 @@ summary {
 .prose {
   display: grid;
   gap: 18px;
+  max-width: var(--max-reading);
 
   h2,
   h3 {
@@ -1767,24 +1814,31 @@ summary {
     padding: 12px;
     overscroll-behavior-inline: contain;
 
-    > strong {
+    &__intro {
       position: sticky;
       left: 0;
-      padding: 4px 8px 10px;
+      z-index: 1;
+      width: max-content;
+      min-width: 160px;
+      margin: 0;
+      border: 0;
+      background: var(--surface);
+      padding: 4px 12px 8px 8px;
     }
 
-    ol {
+    &__stages {
       display: flex;
       width: max-content;
+      align-items: flex-start;
+      gap: 8px;
     }
 
-    li {
-      width: min(190px, 48vw);
+    &__group {
+      width: min(210px, 52vw);
+      border-left: 1px solid var(--line);
+      padding-left: 8px;
     }
 
-    a {
-      height: 100%;
-    }
   }
 
   .lesson-shell {

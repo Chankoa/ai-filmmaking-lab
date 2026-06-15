@@ -9,18 +9,46 @@ interface Props {
 
 const { lessons, currentId } = Astro.props;
 const sortedLessons = [...lessons].sort((a, b) => a.data.order - b.data.order);
+const groupedLessons = sortedLessons.reduce<
+  Array<{ stage: CollectionEntry<"lessons">["data"]["stage"]; lessons: CollectionEntry<"lessons">[] }>
+>((groups, lesson) => {
+  const currentGroup = groups.at(-1);
+
+  if (!currentGroup || currentGroup.stage !== lesson.data.stage) {
+    groups.push({ stage: lesson.data.stage, lessons: [lesson] });
+  } else {
+    currentGroup.lessons.push(lesson);
+  }
+
+  return groups;
+}, []);
 ---
 
 <nav class="lesson-nav" aria-label="Navigation des leçons">
-  <strong>Voir → Documenter</strong>
-  <ol>
+  <div class="lesson-nav__intro">
+    <span>Parcours de production</span>
+    <strong>Voir → Documenter</strong>
+  </div>
+  <ol class="lesson-nav__stages">
     {
-      sortedLessons.map((lesson) => (
-        <li>
-          <a class={lesson.id === currentId ? "is-active" : ""} href={`/formation/${lesson.id}/`}>
-            <span>{formatStageLabel(lesson.data.stage)}</span>
-            {lesson.data.title}
-          </a>
+      groupedLessons.map((group) => (
+        <li class:list={["lesson-nav__group", { "is-current-stage": group.lessons.some((lesson) => lesson.id === currentId) }]}>
+          <span class="lesson-nav__stage">{formatStageLabel(group.stage)}</span>
+          <ol class="lesson-nav__links">
+            {
+              group.lessons.map((lesson) => (
+                <li>
+                  <a
+                    aria-current={lesson.id === currentId ? "page" : undefined}
+                    class={lesson.id === currentId ? "is-active" : ""}
+                    href={`/formation/${lesson.id}/`}
+                  >
+                    {lesson.data.title}
+                  </a>
+                </li>
+              ))
+            }
+          </ol>
         </li>
       ))
     }

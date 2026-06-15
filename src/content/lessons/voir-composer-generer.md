@@ -1,5 +1,5 @@
 ---
-title: "Voir, composer, générer"
+title: "Fondations du regard"
 description: "Lire une image, organiser son cadre et traduire une intention visuelle en prompt exploitable pour une séquence."
 module: "Fondations de l'AI Filmmaking"
 order: 1
