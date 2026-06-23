@@ -1,0 +1,352 @@
+.language-page {
+  h1,
+  h2,
+  h3 {
+    letter-spacing: 0;
+  }
+}
+
+.language-reference {
+  display: grid;
+  gap: 72px;
+  margin-top: 72px;
+}
+
+.language-reference__intro,
+.language-section__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 0.8fr);
+  gap: clamp(24px, 5vw, 56px);
+  align-items: start;
+}
+
+.language-flow,
+.prompt-pipeline {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.language-flow a,
+.prompt-pipeline li {
+  display: grid;
+  gap: 8px;
+  min-height: 86px;
+  align-content: space-between;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  padding: 15px;
+  color: var(--text);
+  font-weight: 800;
+  box-shadow: var(--shadow-sm);
+}
+
+.language-flow span,
+.prompt-pipeline span {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.language-controls {
+  display: grid;
+  grid-template-columns: minmax(240px, 1fr) minmax(220px, 0.45fr) auto;
+  gap: 14px;
+  align-items: end;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.language-controls div {
+  display: grid;
+  gap: 7px;
+}
+
+.language-controls label {
+  color: var(--text-soft);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.language-controls input,
+.language-controls select {
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface-raised);
+  color: var(--text);
+  padding: 10px 12px;
+}
+
+.language-controls p {
+  min-width: 140px;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-align: right;
+}
+
+.language-category-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: -42px;
+}
+
+.language-category-tabs button {
+  min-height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--surface);
+  color: var(--text-muted);
+  padding: 9px 13px;
+  cursor: pointer;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.language-category-tabs button.is-active {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+}
+
+.language-section,
+.language-prompt-builder,
+.language-related-modules {
+  display: grid;
+  gap: 28px;
+  scroll-margin-top: 92px;
+}
+
+.language-section__header aside {
+  display: grid;
+  gap: 9px;
+  border: 1px solid color-mix(in srgb, var(--accent) 16%, var(--line));
+  border-radius: 10px;
+  background: var(--panel-gradient);
+  padding: 18px;
+  box-shadow: var(--shadow-sm);
+}
+
+.language-section__header aside strong {
+  color: var(--text);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+}
+
+.language-section__header aside small {
+  color: var(--text-soft);
+  font-size: 0.78rem;
+}
+
+.language-card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.language-card,
+.prompt-builder-card,
+.language-related-grid a,
+.language-related-grid article {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.language-card {
+  display: grid;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.language-card__visual {
+  margin: 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--surface-muted);
+}
+
+.language-card__visual > img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.language-card__body {
+  display: grid;
+  gap: 16px;
+  padding: 20px;
+}
+
+.language-card__body h3,
+.prompt-builder-card h3 {
+  margin-bottom: 0;
+  font-size: 1.18rem;
+}
+
+.language-card__facts {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+}
+
+.language-card__facts div {
+  display: grid;
+  gap: 4px;
+}
+
+.language-card__facts dt,
+.language-card__links strong {
+  color: var(--text-soft);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.language-card__facts dd {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.language-card__prompts {
+  display: grid;
+  gap: 10px;
+}
+
+.language-card__prompts details {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--bg-soft);
+  padding: 0;
+}
+
+.language-card__prompts summary {
+  padding: 12px 14px;
+}
+
+.language-card__prompts .code-block {
+  border-right: 0;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: 0 0 10px 10px;
+}
+
+.language-card__links {
+  display: grid;
+  gap: 12px;
+}
+
+.language-card__links > div {
+  display: grid;
+  gap: 8px;
+}
+
+.language-card .tag-list li {
+  max-width: 100%;
+}
+
+.language-card .tag-list a,
+.language-card .tag-list span {
+  overflow-wrap: anywhere;
+}
+
+.language-prompt-builder {
+  border-top: 1px solid var(--line);
+  padding-top: 72px;
+}
+
+.prompt-example-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.prompt-builder-card {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+  padding: 20px;
+}
+
+.language-related-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.language-related-grid a,
+.language-related-grid article {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.language-related-grid a:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--accent) 24%, var(--line));
+  box-shadow: var(--shadow-md);
+}
+
+.language-related-grid strong {
+  color: var(--text);
+  font-family: "Manrope", "Segoe UI", sans-serif;
+}
+
+.language-related-grid span {
+  color: var(--text-soft);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+@media (max-width: 980px) {
+  .language-reference__intro,
+  .language-section__header {
+    grid-template-columns: 1fr;
+  }
+
+  .language-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .language-controls p {
+    text-align: left;
+  }
+
+  .language-related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .language-reference {
+    gap: 54px;
+    margin-top: 54px;
+  }
+
+  .language-card-grid,
+  .prompt-example-grid,
+  .language-related-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .language-category-tabs {
+    margin-top: -28px;
+  }
+}

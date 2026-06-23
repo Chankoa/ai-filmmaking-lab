@@ -1,0 +1,32 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import CourseHero from "../components/course/CourseHero.astro";
+import FilmmakingLanguageBoard from "../components/filmmaking-language/FilmmakingLanguageBoard.astro";
+import { filmmakingLanguageCategories, filmmakingLanguageItems, promptBuilderExamples } from "../data/filmmakingLanguage";
+---
+
+<BaseLayout
+  title="Filmmaking Language"
+  description="Bibliotheque centrale de langage cinematographique pour construire des prompts image et video IA."
+>
+  <div class="language-page">
+    <CourseHero
+      eyebrow="Filmmaking Language Library"
+      title="Le manuel rapide du plan cinematographique IA."
+      description="Une reference centrale pour relier intention narrative, cadrage, composition, angle, focale, mouvement, lumiere, couleur et construction de prompt."
+      image="/images/references/reference-atlas-board.svg"
+      imageAlt="Atlas visuel des decisions de mise en scene"
+      actions={[
+        { label: "Explorer les fiches", href: "#language-reference-title", variant: "primary" },
+        { label: "Construire un prompt", href: "#ai-prompt-builder", variant: "secondary" },
+      ]}
+      stats={[
+        { label: "Categories", value: String(filmmakingLanguageCategories.length) },
+        { label: "Fiches", value: String(filmmakingLanguageItems.length) },
+        { label: "Prompts complets", value: String(promptBuilderExamples.length) },
+      ]}
+    />
+
+    <FilmmakingLanguageBoard />
+  </div>
+</BaseLayout>

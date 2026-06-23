@@ -16,3 +16,5 @@ Le storyboard protège l'intention de la séquence ; la shot-list transforme cet
 ## Résultat attendu
 
 Un storyboard de six vignettes et une shot-list précisant fonction, action, caméra, durée et continuité.
+
+Avant de remplir la shot-list, choisissez les termes de plan, angle, focale, mouvement, lumiere et couleur dans la [bibliotheque Filmmaking Language](/filmmaking-language/).

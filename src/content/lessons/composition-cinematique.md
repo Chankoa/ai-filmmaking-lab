@@ -27,3 +27,5 @@ Tous les exemples utilisent un cyberpunk sobre : pluie, béton humide, structure
 ## Étape suivante
 
 Une fois le cadre organisé, poursuivez avec [Ambiance, réalisme et texture](/formation/ambiance-realisme-texture/) pour donner une température, une matière et une densité physique au plan.
+
+Cette lecon reste la source detaillee des principes de composition ; la [bibliotheque Filmmaking Language](/filmmaking-language/#composition) les reutilise comme reference centrale et les relie aux angles, focales, mouvements et prompts.

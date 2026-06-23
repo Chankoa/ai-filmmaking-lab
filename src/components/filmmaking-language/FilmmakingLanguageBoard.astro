@@ -1,0 +1,336 @@
+---
+import CodeBlock from "../code/CodeBlock.astro";
+import CinematicImagePlaceholder from "../media/CinematicImagePlaceholder.astro";
+import {
+  filmmakingLanguageCategories,
+  filmmakingLanguageItems,
+  filmmakingLanguageRelatedModules,
+  promptBuilderExamples,
+  promptBuilderPipeline,
+  type FilmmakingLanguageItem,
+} from "../../data/filmmakingLanguage";
+
+const itemsByCategory = new Map(
+  filmmakingLanguageCategories.map((category) => [
+    category.id,
+    filmmakingLanguageItems.filter((item) => item.category === category.id),
+  ])
+);
+
+const itemIds = new Set(filmmakingLanguageItems.map((item) => item.id));
+const allTags = [...new Set(filmmakingLanguageItems.flatMap((item) => item.tags))].sort((a, b) =>
+  a.localeCompare(b)
+);
+
+const pageLabels: Record<string, string> = {
+  "/prompts/": "Prompt Builder",
+  "/formation/storyboard-shotlist/": "Storyboard / Shot-list",
+  "/resources/shot-list-checklist/": "Shot List Builder",
+  "/references/camera-shots/": "Camera shots reference",
+  "/formation/mettre-en-scene/": "Scene Construction",
+  "/formation/cinematographie/": "Camera Motion Library",
+  "/formation/composition-cinematique/": "Composition course",
+  "/resources/composition-cheat-sheet/": "Composition cheat sheet",
+  "/formation/lumiere-couleur/": "Lighting and color",
+  "/formation/voir-composer-generer/": "Prompt method",
+  "/formation/animer/": "Animation",
+  "/formation/ambiance-realisme-texture/": "Ambiance and realism",
+  "/resources/production-bible-template/": "Production Bible",
+};
+
+const getPageLabel = (page: string) => pageLabels[page] ?? page;
+
+const getCategoryTitle = (item: FilmmakingLanguageItem) =>
+  filmmakingLanguageCategories.find((category) => category.id === item.category)?.shortTitle ?? item.category;
+---
+
+<section class="language-reference" aria-labelledby="language-reference-title">
+  <div class="language-reference__intro">
+    <div class="section-heading">
+      <span class="eyebrow">Reference centrale</span>
+      <h2 id="language-reference-title">Du sens du plan au prompt IA.</h2>
+      <p>
+        Cette bibliotheque rassemble les decisions de realisation dans un ordre de travail unique :
+        intention, distance, composition, angle, focale, mouvement, lumiere, couleur, puis prompt.
+      </p>
+    </div>
+
+    <ol class="language-flow" aria-label="Pipeline de navigation">
+      {filmmakingLanguageCategories.map((category, index) => (
+        <li>
+          <a href={`#${category.id}`}>
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            {category.shortTitle}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a href="#ai-prompt-builder">
+          <span>09</span>
+          AI Prompt
+        </a>
+      </li>
+    </ol>
+  </div>
+
+  <section class="language-controls" aria-label="Filtres de la bibliotheque">
+    <div>
+      <label for="language-search">Rechercher une notion</label>
+      <input id="language-search" type="search" placeholder="Ex: low angle, 85mm, low key..." data-language-search />
+    </div>
+    <div>
+      <label for="language-tag">Filtrer par tag</label>
+      <select id="language-tag" data-language-tag>
+        <option value="all">Tous les tags</option>
+        {allTags.map((tag) => <option value={tag}>{tag}</option>)}
+      </select>
+    </div>
+    <p data-language-status aria-live="polite"></p>
+  </section>
+
+  <div class="language-category-tabs" aria-label="Categories">
+    <button type="button" class="is-active" data-language-category="all">Toutes</button>
+    {filmmakingLanguageCategories.map((category) => (
+      <button type="button" data-language-category={category.id}>{category.shortTitle}</button>
+    ))}
+  </div>
+
+  {
+    filmmakingLanguageCategories.map((category) => {
+      const items = itemsByCategory.get(category.id) ?? [];
+      return (
+        <section
+          id={category.id}
+          class="language-section"
+          data-language-section
+          data-category={category.id}
+          aria-labelledby={`${category.id}-title`}
+        >
+          <div class="language-section__header">
+            <div>
+              <span class="eyebrow">{String(items.length).padStart(2, "0")} fiches</span>
+              <h2 id={`${category.id}-title`}>{category.title}</h2>
+              <p>{category.description}</p>
+            </div>
+            <aside>
+              <strong>Regle de prompt</strong>
+              <p>{category.promptRule}</p>
+              {category.comparisonSubject && <small>Sujet constant : {category.comparisonSubject}</small>}
+            </aside>
+          </div>
+
+          <div class="language-card-grid">
+            {items.map((item) => (
+              <article
+                class="language-card"
+                id={item.id}
+                data-language-card
+                data-category={item.category}
+                data-tags={JSON.stringify(item.tags)}
+                data-search={`${item.title} ${item.description} ${item.effect} ${item.tags.join(" ")}`.toLowerCase()}
+              >
+                <div class="language-card__visual">
+                  {item.imagePath ? (
+                    <img src={item.imagePath} alt={`Exemple visuel : ${item.title}`} loading="lazy" />
+                  ) : (
+                    <CinematicImagePlaceholder
+                      variant={item.visualVariant ?? "composition"}
+                      title={item.title}
+                      caption={item.visualCue ?? getCategoryTitle(item)}
+                      compact
+                      aspect="16 / 9"
+                    />
+                  )}
+                </div>
+
+                <div class="language-card__body">
+                  <div class="card-meta">
+                    <span>{getCategoryTitle(item)}</span>
+                    <span>{item.tags[0]}</span>
+                  </div>
+                  <h3>{item.title}</h3>
+                  <p>{item.description}</p>
+
+                  <dl class="language-card__facts">
+                    <div>
+                      <dt>Effet</dt>
+                      <dd>{item.effect}</dd>
+                    </div>
+                    <div>
+                      <dt>Usage</dt>
+                      <dd>{item.bestFor.join(" / ")}</dd>
+                    </div>
+                  </dl>
+
+                  <div class="language-card__prompts">
+                    <details>
+                      <summary>Image prompt</summary>
+                      <CodeBlock code={item.imagePrompt} label={`${item.title} image`} />
+                    </details>
+                    <details>
+                      <summary>Video prompt</summary>
+                      <CodeBlock code={item.videoPrompt} label={`${item.title} video`} />
+                    </details>
+                  </div>
+
+                  {(item.relatedItems?.length || item.relatedPages?.length) && (
+                    <div class="language-card__links">
+                      {item.relatedItems?.length && (
+                        <div>
+                          <strong>Notions liees</strong>
+                          <ul class="tag-list">
+                            {item.relatedItems.map((related) => (
+                              <li>
+                                {itemIds.has(related) ? <a href={`#${related}`}>{related}</a> : <span>{related}</span>}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                      {item.relatedPages?.length && (
+                        <div>
+                          <strong>Modules relies</strong>
+                          <ul class="tag-list">
+                            {item.relatedPages.map((relatedPage) => (
+                              <li>
+                                {relatedPage.startsWith("/") ? (
+                                  <a href={relatedPage}>{getPageLabel(relatedPage)}</a>
+                                ) : (
+                                  <span>{relatedPage}</span>
+                                )}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {item.source && <p class="fine-note">{item.source}</p>}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <section id="ai-prompt-builder" class="language-prompt-builder" aria-labelledby="prompt-builder-title">
+    <div class="language-section__header">
+      <div>
+        <span class="eyebrow">Module final</span>
+        <h2 id="prompt-builder-title">From Cinematic Intention to AI Prompt</h2>
+        <p>
+          Le prompt final doit etre une chaine de decisions observables. Chaque couche doit servir
+          l'intention, pas seulement ajouter du style.
+        </p>
+      </div>
+      <aside>
+        <strong>Ordre recommande</strong>
+        <p>Emotion -> Shot Size -> Lens -> Composition -> Angle -> Movement -> Lighting -> Color -> Style Reference -> Technical Constraints</p>
+      </aside>
+    </div>
+
+    <ol class="prompt-pipeline" aria-label="Pipeline de construction du prompt">
+      {promptBuilderPipeline.map((step, index) => (
+        <li>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          {step}
+        </li>
+      ))}
+    </ol>
+
+    <div class="prompt-example-grid">
+      {promptBuilderExamples.map((example) => (
+        <article class="prompt-builder-card">
+          <div class="card-meta">
+            <span>{example.theme}</span>
+            <span>{example.format}</span>
+          </div>
+          <h3>{example.title}</h3>
+          <ul class="tag-list">
+            {example.decisions.map((decision) => <li>{decision}</li>)}
+          </ul>
+          <CodeBlock code={example.prompt} label={example.title} />
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="language-related-modules" aria-labelledby="related-modules-title">
+    <div class="section-heading">
+      <span class="eyebrow">Liens croises</span>
+      <h2 id="related-modules-title">Modules qui peuvent s'appuyer sur cette bibliotheque.</h2>
+    </div>
+    <div class="language-related-grid">
+      {filmmakingLanguageRelatedModules.map((module) => (
+        module.href.startsWith("/") ? (
+          <a href={module.href}>
+            <strong>{module.title}</strong>
+            <p>{module.description}</p>
+          </a>
+        ) : (
+          <article>
+            <strong>{module.title}</strong>
+            <p>{module.description}</p>
+            <span>{module.href}</span>
+          </article>
+        )
+      ))}
+    </div>
+  </section>
+</section>
+
+<script>
+  const categoryButtons = document.querySelectorAll<HTMLButtonElement>("[data-language-category]");
+  const searchInput = document.querySelector<HTMLInputElement>("[data-language-search]");
+  const tagSelect = document.querySelector<HTMLSelectElement>("[data-language-tag]");
+  const cards = document.querySelectorAll<HTMLElement>("[data-language-card]");
+  const sections = document.querySelectorAll<HTMLElement>("[data-language-section]");
+  const status = document.querySelector<HTMLElement>("[data-language-status]");
+
+  let activeCategory = "all";
+
+  const updateLanguageFilters = () => {
+    const query = (searchInput?.value ?? "").trim().toLowerCase();
+    const tag = tagSelect?.value ?? "all";
+    let visibleCount = 0;
+
+    categoryButtons.forEach((button) => {
+      button.classList.toggle("is-active", button.dataset.languageCategory === activeCategory);
+    });
+
+    cards.forEach((card) => {
+      const category = card.dataset.category ?? "";
+      const tags = JSON.parse(card.dataset.tags ?? "[]") as string[];
+      const searchText = card.dataset.search ?? "";
+      const categoryMatch = activeCategory === "all" || category === activeCategory;
+      const tagMatch = tag === "all" || tags.includes(tag);
+      const searchMatch = !query || searchText.includes(query);
+      const isVisible = categoryMatch && tagMatch && searchMatch;
+      card.toggleAttribute("hidden", !isVisible);
+      if (isVisible) visibleCount += 1;
+    });
+
+    sections.forEach((section) => {
+      const hasVisibleCards = Boolean(section.querySelector("[data-language-card]:not([hidden])"));
+      section.toggleAttribute("hidden", !hasVisibleCards);
+    });
+
+    if (status) {
+      status.textContent = `${visibleCount} fiche${visibleCount > 1 ? "s" : ""} affichee${visibleCount > 1 ? "s" : ""}.`;
+    }
+  };
+
+  categoryButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      activeCategory = button.dataset.languageCategory ?? "all";
+      updateLanguageFilters();
+    });
+  });
+
+  searchInput?.addEventListener("input", updateLanguageFilters);
+  tagSelect?.addEventListener("change", updateLanguageFilters);
+  updateLanguageFilters();
+</script>

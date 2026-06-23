@@ -14,6 +14,10 @@ const shots = await getCollection("camera-shots");
     description="Chaque fiche relie une échelle ou un angle à son effet narratif, son mouvement vidéo et un prompt type."
     image="/images/references/reference-atlas-board.svg"
     imageAlt="Grille illustrée des cadrages caméra"
+    actions={[
+      { label: "Ouvrir la bibliotheque centrale", href: "/filmmaking-language/#shot-sizes", variant: "primary" },
+      { label: "Voir les angles", href: "/filmmaking-language/#camera-angles", variant: "secondary" },
+    ]}
     stats={[
       { label: "Plans", value: String(shots.length) },
       { label: "Usage", value: "Image + vidéo" },

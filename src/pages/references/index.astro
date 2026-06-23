@@ -3,6 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CourseHero from "../../components/course/CourseHero.astro";
 import MediaCard from "../../components/media/MediaCard.astro";
+import { filmmakingLanguageItems } from "../../data/filmmakingLanguage";
 
 const shots = await getCollection("camera-shots");
 ---
@@ -16,12 +17,19 @@ const shots = await getCollection("camera-shots");
     imageAlt="Guide visuel des plans caméra"
     stats={[
       { label: "Plans", value: String(shots.length) },
-      { label: "Familles", value: "Échelles / angles" },
+      { label: "Langage", value: String(filmmakingLanguageItems.length) },
       { label: "Usage", value: "Réutilisable" },
     ]}
   />
 
   <section class="content-grid content-grid--three" aria-label="Boards de référence">
+    <MediaCard
+      title="Filmmaking Language"
+      description="Bibliotheque centrale : intention, cadrage, composition, angle, focale, mouvement, lumiere, couleur et prompts."
+      image="/images/references/reference-atlas-board.svg"
+      href="/filmmaking-language/"
+      meta="Reference centrale"
+    />
     <MediaCard
       title="Plans caméra"
       description="Types de plans, angles, usages narratifs, mouvements et prompts types."

@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import ToolBadge from "../ui/ToolBadge.astro";
 import { formatLevelLabel, formatStageLabel, formatStatusLabel } from "../../data/content-labels";
+import { filmmakingLanguageItems } from "../../data/filmmakingLanguage";
 
 const [lessonEntries, prompts, projects, shots, resources] = await Promise.all([
   getCollection("lessons"),
@@ -50,9 +51,9 @@ const highlights = [
     description: "Prompts, checklists et supports à réutiliser en production.",
   },
   {
-    value: String(shots.length),
-    label: "références caméra",
-    description: "Un vocabulaire visuel pour cadrer chaque intention.",
+    value: String(filmmakingLanguageItems.length),
+    label: "fiches de langage",
+    description: "Une reference centrale pour cadrage, angle, focale, mouvement, lumiere et couleur.",
   },
 ];
 ---
@@ -202,6 +203,10 @@ const highlights = [
         Retrouvez les prompts, références caméra et ressources qui accompagnent chaque étape.
       </p>
       <div class="hub-panel__links">
+        <a href="/filmmaking-language/">
+          <strong>{filmmakingLanguageItems.length} fiches de langage</strong>
+          <span>Intention, cadrage, angle, focale, mouvement, lumiere et couleur</span>
+        </a>
         <a href="/prompts/">
           <strong>{prompts.length} prompts</strong>
           <span>Image, vidéo, personnage et transition</span>

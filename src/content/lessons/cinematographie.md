@@ -16,3 +16,5 @@ La caméra définit la place du spectateur. Chaque distance, angle et mouvement 
 ## Résultat attendu
 
 Une proposition de découpage cohérente avec trois échelles de plan et un mouvement motivé.
+
+Pour choisir le vocabulaire exact, utilisez la [bibliotheque Filmmaking Language](/filmmaking-language/) : elle centralise shot sizes, angles, focales et mouvements camera avant leur traduction en prompt.

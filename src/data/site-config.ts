@@ -19,6 +19,7 @@ export const siteConfig = {
   },
   navigation: [
     { label: "Formation", href: "/formation/" },
+    { label: "Langage cinema", href: "/filmmaking-language/" },
     { label: "Prompts", href: "/prompts/" },
     { label: "Références", href: "/references/" },
     { label: "Projets", href: "/projects/" },

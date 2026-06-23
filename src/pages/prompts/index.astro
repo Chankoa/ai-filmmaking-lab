@@ -5,6 +5,7 @@ import CourseHero from "../../components/course/CourseHero.astro";
 import PromptCard from "../../components/prompts/PromptCard.astro";
 import { formatPromptCategoryLabel } from "../../data/content-labels";
 import { promptCategories } from "../../data/prompt-categories";
+import { promptBuilderPipeline } from "../../data/filmmakingLanguage";
 
 const prompts = await getCollection("prompts");
 const categories = promptCategories.filter((category) =>
@@ -27,6 +28,25 @@ const tags = [...new Set(prompts.flatMap((prompt) => prompt.data.tags))]
       { label: "Usage", value: "Réutilisable" },
     ]}
   />
+
+  <section class="prompt-category-feature" aria-labelledby="language-prompt-bridge-title">
+    <div>
+      <span class="eyebrow">Base de construction</span>
+      <h2 id="language-prompt-bridge-title">Construire le prompt depuis le langage du film.</h2>
+      <p>
+        La bibliotheque centrale relie emotion, cadrage, focale, composition, mouvement, lumiere
+        et couleur avant l'ecriture du prompt final.
+      </p>
+      <ol class="prompt-pipeline" aria-label="Pipeline prompt cinema">
+        {promptBuilderPipeline.map((step, index) => (
+          <li><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>
+        ))}
+      </ol>
+    </div>
+    <a class="button primary" href="/filmmaking-language/#ai-prompt-builder">
+      Ouvrir le module AI Prompt Builder
+    </a>
+  </section>
 
   <section class="prompt-family-index" aria-labelledby="prompt-family-title">
     <div class="section-heading">
