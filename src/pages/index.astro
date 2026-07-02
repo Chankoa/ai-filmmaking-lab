@@ -225,33 +225,41 @@ const workflowSteps = filmmakingProcess;
     .home-hero__visual,
     .home-case-study__copy {
       display: grid;
+      width: 100%;
       min-width: 0;
+      max-width: 100%;
       gap: 1rem;
     }
 
     .home-hero__content h1,
     .home-case-study__copy h2 {
       margin: 0;
+      max-width: 100%;
     }
 
     .home-hero__content h1 {
-      max-width: 10.5em;
+      max-width: min(10.5em, 100%);
       font-size: clamp(3.15rem, 5vw, 4.5rem);
-      overflow-wrap: break-word;
+      overflow-wrap: anywhere;
     }
 
     .home-hero__content > p {
-      max-width: 62ch;
+      max-width: min(62ch, 100%);
+      overflow-wrap: anywhere;
     }
 
     .home-hero__stats {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
+      width: 100%;
+      min-width: 0;
+      max-width: 100%;
       gap: 0.75rem;
       margin: 0;
     }
 
     .home-hero__stats div {
+      min-width: 0;
       border: 1px solid color-mix(in srgb, var(--line) 82%, transparent);
       border-radius: 14px;
       background: color-mix(in srgb, var(--surface) 88%, transparent);
@@ -313,6 +321,8 @@ const workflowSteps = filmmakingProcess;
     .home-case-study__actions {
       display: flex;
       flex-wrap: wrap;
+      min-width: 0;
+      max-width: 100%;
       gap: 0.75rem;
     }
 

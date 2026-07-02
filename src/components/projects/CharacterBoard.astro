@@ -47,11 +47,22 @@ const { boards } = Astro.props;
     display: grid;
     gap: 0.9rem;
     margin: 0;
+    overflow: hidden;
     border: 1px solid var(--line);
     border-radius: 18px;
     background: color-mix(in srgb, var(--surface) 96%, transparent);
     padding: 1rem;
     box-shadow: var(--shadow-sm);
+  }
+
+  .character-board-card :global(.cinematic-placeholder) {
+    width: 100%;
+    min-width: 0;
+    align-self: start;
+  }
+
+  .character-board-card :global(.cinematic-placeholder__frame) {
+    width: 100%;
   }
 
   .character-board-card figcaption {

@@ -93,7 +93,6 @@ html {
 }
 
 body {
-  margin: 0;
   background:
     radial-gradient(circle at 16% -10%, color-mix(in srgb, var(--neon-magenta) 8%, transparent), transparent 31%),
     radial-gradient(circle at 86% 0%, color-mix(in srgb, var(--neon-cyan) 8%, transparent), transparent 28%),
@@ -373,6 +372,7 @@ main {
 .site-header__cta,
 .button {
   display: inline-flex;
+  max-width: 100%;
   min-height: 44px;
   align-items: center;
   justify-content: center;
@@ -382,6 +382,8 @@ main {
   font-size: 0.88rem;
   font-weight: 800;
   line-height: 1.15;
+  text-align: center;
+  white-space: normal;
   transition:
     transform 160ms ease,
     box-shadow 160ms ease,
@@ -617,6 +619,8 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 9px;
+  min-width: 0;
+  max-width: 100%;
 }
 
 .tag-list,
@@ -783,16 +787,21 @@ main {
   > * {
     position: relative;
     z-index: 1;
+    min-width: 0;
+    max-width: 100%;
   }
 
   h1 {
     margin: 15px 0 16px;
     font-size: clamp(2.6rem, 5vw, 4.6rem);
+    max-width: 100%;
+    overflow-wrap: anywhere;
   }
 
   p {
-    max-width: 680px;
+    max-width: min(680px, 100%);
     font-size: 1.02rem;
+    overflow-wrap: anywhere;
   }
 
   img {
@@ -812,9 +821,15 @@ main {
   &__content {
     display: grid;
     gap: 16px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
   }
 
   &__visual {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     align-self: stretch;
 
     img {
@@ -899,16 +914,22 @@ main {
 
   pre {
     margin: 0;
-    overflow: auto;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
     padding: 15px;
     white-space: pre-wrap;
     color: var(--text);
+    overflow-wrap: anywhere;
   }
 
   code {
+    max-width: 100%;
     font-family: "SFMono-Regular", Consolas, monospace;
     font-size: 0.82rem;
     line-height: 1.6;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 }
 

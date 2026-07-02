@@ -130,13 +130,16 @@ const getCategoryTitle = (item: FilmmakingLanguageItem) =>
                 data-search={`${item.title} ${item.description} ${item.effect} ${item.tags.join(" ")}`.toLowerCase()}
               >
                 <div class="language-card__visual">
+                  <div class="language-card__scene-meta" aria-hidden="true">
+                    <span>{getCategoryTitle(item)}</span>
+                    <small>{item.visualCue ?? item.tags[0]}</small>
+                  </div>
                   {item.imagePath ? (
                     <img src={item.imagePath} alt={`Exemple visuel : ${item.title}`} loading="lazy" />
                   ) : (
                     <CinematicImagePlaceholder
                       variant={item.visualVariant ?? "composition"}
-                      title={item.title}
-                      caption={item.visualCue ?? getCategoryTitle(item)}
+                      alt={`Exemple visuel : ${item.title}`}
                       compact
                       aspect="16 / 9"
                     />
