@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { promptCategories } from "../../data/prompt-categories";
+---
+
+<BaseLayout title="Expérimenter" description="Prompts, protocoles et comparaisons contextualisés pour observer les comportements des modèles d’image et de vidéo.">
+  <section class="pillar-hero" aria-labelledby="experiment-title">
+    <span class="eyebrow">Expérimenter</span>
+    <h1 id="experiment-title">Formuler une hypothèse, modifier une variable, observer l’écart.</h1>
+    <p>
+      Les prompts du Lab sont des points de départ contextualisés. Leur intérêt vient moins de leur formulation isolée
+      que de la référence utilisée, de l’outil ciblé, des variables modifiées et des limites relevées après génération.
+    </p>
+    <div class="hero-actions">
+      <a class="button primary" href="/prompts/">Ouvrir les fiches de prompts</a>
+      <a class="button secondary" href="/projects/lyra-voss/#experiments">Voir les protocoles Lyra</a>
+    </div>
+  </section>
+
+  <section class="pillar-section" aria-labelledby="record-title">
+    <div class="section-heading">
+      <span class="eyebrow">Anatomie d’un essai</span>
+      <h2 id="record-title">Conserver assez de contexte pour comprendre le résultat.</h2>
+      <p>Lorsque les données existent, chaque essai peut renseigner les éléments suivants.</p>
+    </div>
+    <div class="record-grid">
+      {[
+        ["Intention", "Ce que le test cherche à vérifier."],
+        ["Outil", "Le modèle, sa version si elle est connue et son rôle dans le test."],
+        ["Références", "Les images ou documents réellement fournis au modèle."],
+        ["Variables", "Le cadrage, la lumière, la focale ou le mouvement modifié."],
+        ["Résultat observé", "Ce qui est conservé, transformé ou perdu."],
+        ["Suite", "La limite principale et la prochaine itération envisagée."],
+      ].map(([title, description], index) => (
+        <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{title}</h3><p>{description}</p></article>
+      ))}
+    </div>
+  </section>
+
+  <section class="pillar-section" aria-labelledby="families-title">
+    <div class="section-heading">
+      <span class="eyebrow">Champs d’essai</span>
+      <h2 id="families-title">Parcourir les fiches par intention.</h2>
+      <p>La disponibilité d’une fiche indique qu’un protocole est documenté, pas qu’il fonctionnera de la même manière dans chaque outil.</p>
+    </div>
+    <div class="family-grid">
+      {promptCategories.map((category) => (
+        <a href={`/prompts/?category=${category.id}`}>
+          <span>{category.number}</span>
+          <h3>{category.title}</h3>
+          <p>{category.description}</p>
+          <strong>Consulter les fiches <span aria-hidden="true">→</span></strong>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <style>
+    .pillar-hero,
+    .pillar-section { display: grid; gap: 1.25rem; }
+    .pillar-hero { max-width: 980px; border: 1px solid var(--line); border-radius: 24px; background: var(--hero-gradient); padding: clamp(1.5rem, 4vw, 3rem); box-shadow: var(--shadow-lg); }
+    .pillar-hero h1, .pillar-hero p { margin: 0; }
+    .pillar-section { padding: 4.5rem 0; }
+    .pillar-section + .pillar-section { border-top: 1px solid var(--line); }
+    .record-grid, .family-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+    .record-grid article, .family-grid a { display: grid; min-height: 100%; gap: .75rem; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); padding: 1.15rem; box-shadow: var(--shadow-sm); }
+    .record-grid span, .family-grid span, .family-grid strong { color: var(--accent); font-size: .72rem; font-weight: 800; }
+    .record-grid h3, .record-grid p, .family-grid h3, .family-grid p { margin: 0; }
+    .family-grid strong { margin-top: auto; padding-top: .5rem; }
+    @media (max-width: 900px) { .record-grid, .family-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .record-grid, .family-grid { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</BaseLayout>
+

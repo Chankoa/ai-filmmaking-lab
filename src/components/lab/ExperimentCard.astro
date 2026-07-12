@@ -1,0 +1,28 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  objective: string;
+  variables: string[];
+  fixedElements: string[];
+  nextIteration: string;
+}
+
+const { id, title, objective, variables, fixedElements, nextIteration } = Astro.props;
+---
+
+<article class="experiment-card">
+  <header>
+    <span>{id}</span>
+    <b>À tester</b>
+  </header>
+  <h3>{title}</h3>
+  <p>{objective}</p>
+  <dl>
+    <div><dt>Variables</dt><dd>{variables.join(" · ")}</dd></div>
+    <div><dt>Éléments fixes</dt><dd>{fixedElements.join(" · ")}</dd></div>
+    <div><dt>Prochaine étape</dt><dd>{nextIteration}</dd></div>
+  </dl>
+  <div class="experiment-card__empty">Aucun résultat qualifié n’est encore associé à ce protocole.</div>
+</article>
+

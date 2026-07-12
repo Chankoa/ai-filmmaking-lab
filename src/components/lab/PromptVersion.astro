@@ -1,0 +1,31 @@
+---
+import CodeBlock from "../code/CodeBlock.astro";
+
+interface Props {
+  version: string;
+  tool: string;
+  date: string;
+  expected: string;
+  limits: string;
+  changes: string;
+  code: string;
+}
+
+const { version, tool, date, expected, limits, changes, code } = Astro.props;
+---
+
+<article class="prompt-version">
+  <header>
+    <div><span class="eyebrow">Prompt documenté</span><h3>Version {version}</h3></div>
+    <span class="research-status research-status--pending">À tester</span>
+  </header>
+  <dl>
+    <div><dt>Outil ciblé</dt><dd>{tool}</dd></div>
+    <div><dt>Date</dt><dd>{date}</dd></div>
+    <div><dt>Résultat attendu</dt><dd>{expected}</dd></div>
+    <div><dt>Limites observées</dt><dd>{limits}</dd></div>
+    <div><dt>Évolution</dt><dd>{changes}</dd></div>
+  </dl>
+  <CodeBlock code={code} label={`Prompt Lyra Voss ${version}`} />
+</article>
+

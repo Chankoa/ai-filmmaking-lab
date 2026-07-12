@@ -1,0 +1,19 @@
+---
+interface Props {
+  tool: string;
+  references: string;
+  note: string;
+}
+
+const { tool, references, note } = Astro.props;
+---
+
+<aside class="tool-context">
+  <span class="eyebrow">Contexte outil</span>
+  <dl>
+    <div><dt>Outil ciblé</dt><dd>{tool}</dd></div>
+    <div><dt>Références</dt><dd>{references}</dd></div>
+    <div><dt>Portée</dt><dd>{note}</dd></div>
+  </dl>
+</aside>
+

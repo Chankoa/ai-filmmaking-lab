@@ -59,10 +59,10 @@ const cameraShotFamilyLabels: Record<string, string> = {
 
 const statusLabels: Record<string, string> = {
   draft: "Brouillon",
-  active: "Actif",
-  reference: "Référence",
-  ready: "Prêt",
-  planned: "Planifié",
+  active: "Recherche active",
+  reference: "Documenté",
+  ready: "Documenté",
+  planned: "À tester",
 };
 
 function formatLabel(value: string, labels: Record<string, string>) {

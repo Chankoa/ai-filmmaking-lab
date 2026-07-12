@@ -1,0 +1,279 @@
+.lab-section {
+  display: grid;
+  gap: 28px;
+  scroll-margin-top: 150px;
+}
+
+.lab-section__heading {
+  display: grid;
+  max-width: 800px;
+  gap: 12px;
+}
+
+.lab-section__heading h2,
+.lab-section__heading p {
+  margin: 0;
+}
+
+.research-status {
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, var(--line));
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--accent) 11%, var(--surface));
+  color: var(--accent);
+  padding: 0.38rem 0.68rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.research-status--pending {
+  border-color: color-mix(in srgb, var(--warning) 34%, var(--line));
+  background: color-mix(in srgb, var(--warning) 11%, var(--surface));
+  color: color-mix(in srgb, var(--warning) 80%, var(--text));
+}
+
+.research-status--documented {
+  border-color: color-mix(in srgb, var(--mint) 32%, var(--line));
+  background: color-mix(in srgb, var(--mint) 10%, var(--surface));
+  color: color-mix(in srgb, var(--mint) 72%, var(--text));
+}
+
+.reference-image {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  margin: 0;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.reference-image__media {
+  display: grid;
+  min-height: 250px;
+  place-items: center;
+  overflow: hidden;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-soft);
+}
+
+.reference-image__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 720px;
+  object-fit: var(--reference-fit, cover);
+  object-position: var(--reference-position);
+}
+
+.reference-image__media p {
+  margin: 0;
+  padding: 2rem;
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.reference-image figcaption {
+  display: grid;
+  gap: 8px;
+  padding: 18px;
+}
+
+.reference-image figcaption > span {
+  color: var(--accent);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.reference-image figcaption > strong {
+  color: var(--text);
+  line-height: 1.35;
+}
+
+.reference-image figcaption p,
+.reference-image figcaption ul {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.reference-image--approved figcaption > span {
+  color: color-mix(in srgb, var(--mint) 70%, var(--text));
+}
+
+.reference-image--rejected figcaption > span {
+  color: var(--danger);
+}
+
+.reference-image--waiting {
+  border-style: dashed;
+}
+
+.experiment-card,
+.tool-context,
+.prompt-version,
+.observation-note,
+.iteration-log li {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+}
+
+.experiment-card {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 20px;
+}
+
+.experiment-card header,
+.prompt-version header {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: start;
+}
+
+.experiment-card header span,
+.experiment-card header b {
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-weight: 800;
+}
+
+.experiment-card header b {
+  border-radius: var(--radius-pill);
+  background: var(--accent-pale);
+  padding: 4px 8px;
+}
+
+.experiment-card h3,
+.experiment-card p,
+.experiment-card dl,
+.experiment-card dd,
+.prompt-version h3,
+.prompt-version dl,
+.prompt-version dd,
+.observation-note h3,
+.observation-note p,
+.iteration-log p {
+  margin: 0;
+}
+
+.experiment-card dl,
+.prompt-version dl,
+.tool-context dl {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+}
+
+.experiment-card dl div,
+.prompt-version dl div,
+.tool-context dl div {
+  display: grid;
+  gap: 4px;
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+}
+
+.experiment-card dt,
+.prompt-version dt,
+.tool-context dt {
+  color: var(--text-soft);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.experiment-card dd,
+.prompt-version dd,
+.tool-context dd {
+  color: var(--text-muted);
+  font-size: 0.78rem;
+}
+
+.experiment-card__empty {
+  border: 1px dashed var(--line-strong);
+  border-radius: 10px;
+  background: var(--bg-soft);
+  padding: 12px;
+  color: var(--text-soft);
+  font-size: 0.75rem;
+}
+
+.tool-context,
+.observation-note {
+  display: grid;
+  gap: 12px;
+  padding: 20px;
+}
+
+.prompt-version {
+  display: grid;
+  gap: 18px;
+  padding: clamp(20px, 3vw, 30px);
+}
+
+.prompt-version header > div {
+  display: grid;
+  gap: 7px;
+}
+
+.observation-note > span {
+  color: var(--accent);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.observation-note--uncertain {
+  border-color: color-mix(in srgb, var(--warning) 40%, var(--line));
+}
+
+.iteration-log {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.iteration-log li {
+  display: grid;
+  grid-template-columns: 90px 160px minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+  padding: 16px;
+}
+
+.iteration-log span {
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.iteration-log strong {
+  color: var(--text);
+  font-size: 0.78rem;
+}
+
+.iteration-log p {
+  font-size: 0.78rem;
+}
+
+@media (max-width: 700px) {
+  .iteration-log li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

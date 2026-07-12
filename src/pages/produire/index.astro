@@ -1,0 +1,65 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PathStepCard from "../../components/course/PathStepCard.astro";
+import { filmmakingProcess } from "../../data/filmmaking-process";
+
+const productionDocuments = [
+  { title: "Brief et références", text: "Décrire l’intention, les contraintes et la fonction de chaque référence avant de générer.", href: "/formation/creation-visuelle/" },
+  { title: "Storyboard et shot-list", text: "Donner une fonction aux plans et préparer les raccords avant l’animation.", href: "/formation/storyboard-shotlist/" },
+  { title: "Continuité", text: "Identifier ce qui doit rester fixe entre les cadres, les outils et les versions.", href: "/formation/stabiliser/" },
+  { title: "Bible de production", text: "Relier fichiers, références, prompts, décisions et statuts de validation.", href: "/resources/production-bible-template/" },
+];
+---
+
+<BaseLayout title="Produire" description="Méthodes pour organiser les essais en plans, séquences et documents de production réutilisables.">
+  <section class="pillar-hero" aria-labelledby="produce-title">
+    <span class="eyebrow">Produire</span>
+    <h1 id="produce-title">Passer d’un essai isolé à une séquence suivie.</h1>
+    <p>
+      Produire consiste ici à organiser les décisions : brief, références, storyboard, shot-list, continuité,
+      animation, montage et classement des fichiers. Le workflow ci-dessous est un repère de travail, à adapter
+      au projet et aux outils disponibles.
+    </p>
+    <div class="hero-actions">
+      <a class="button primary" href="#workflow">Voir le workflow</a>
+      <a class="button secondary" href="/resources/">Ouvrir les ressources</a>
+    </div>
+  </section>
+
+  <section class="pillar-section" aria-labelledby="documents-title">
+    <div class="section-heading">
+      <span class="eyebrow">Documents de passage</span>
+      <h2 id="documents-title">Rendre les décisions visibles entre deux étapes.</h2>
+      <p>Ces documents servent à reprendre un test sans dépendre uniquement de la mémoire ou du dernier résultat obtenu.</p>
+    </div>
+    <div class="document-grid">
+      {productionDocuments.map((document) => (
+        <a href={document.href}><h3>{document.title}</h3><p>{document.text}</p><strong>Consulter <span aria-hidden="true">→</span></strong></a>
+      ))}
+    </div>
+  </section>
+
+  <section class="pillar-section" id="workflow" aria-labelledby="workflow-title">
+    <div class="section-heading">
+      <span class="eyebrow">Du premier regard au retour d’expérience</span>
+      <h2 id="workflow-title">Un chemin possible, avec des statuts révisables.</h2>
+      <p>Les statuts décrivent l’état actuel de la documentation du Lab, pas la maturité universelle d’une méthode.</p>
+    </div>
+    <div class="workflow-grid">{filmmakingProcess.map((step) => <PathStepCard {...step} />)}</div>
+  </section>
+
+  <style>
+    .pillar-hero, .pillar-section { display: grid; gap: 1.25rem; }
+    .pillar-hero { border: 1px solid var(--line); border-radius: 24px; background: var(--hero-gradient); padding: clamp(1.5rem, 4vw, 3rem); box-shadow: var(--shadow-lg); }
+    .pillar-hero h1, .pillar-hero p { margin: 0; max-width: 900px; }
+    .pillar-section { padding: 4.5rem 0; }
+    .pillar-section + .pillar-section { border-top: 1px solid var(--line); }
+    .document-grid, .workflow-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    .document-grid a { display: grid; min-height: 100%; gap: .8rem; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); padding: 1.2rem; box-shadow: var(--shadow-sm); }
+    .document-grid h3, .document-grid p { margin: 0; }
+    .document-grid strong { margin-top: auto; color: var(--accent); font-size: .75rem; }
+    @media (max-width: 1100px) { .document-grid, .workflow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .document-grid, .workflow-grid { grid-template-columns: minmax(0, 1fr); } }
+  </style>
+</BaseLayout>
+

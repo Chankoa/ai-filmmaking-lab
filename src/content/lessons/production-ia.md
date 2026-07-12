@@ -11,7 +11,7 @@ estimatedTime: "75 min"
 template: "learning-path"
 ---
 
-La production IA coordonne les compétences du parcours et garantit qu'une décision peut être retrouvée, comparée et corrigée.
+La production IA coordonne les compétences du parcours afin qu’une décision puisse être retrouvée, comparée et corrigée.
 
 ## Résultat attendu
 

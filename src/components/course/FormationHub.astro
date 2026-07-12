@@ -1,255 +1,256 @@
 ---
 import { getCollection } from "astro:content";
 import ToolBadge from "../ui/ToolBadge.astro";
-import { formatLevelLabel, formatStageLabel, formatStatusLabel } from "../../data/content-labels";
-import { filmmakingLanguageItems } from "../../data/filmmakingLanguage";
+import { formatLevelLabel, formatStageLabel } from "../../data/content-labels";
 
-const [lessonEntries, prompts, projects, shots, resources] = await Promise.all([
-  getCollection("lessons"),
-  getCollection("prompts"),
-  getCollection("projects"),
-  getCollection("camera-shots"),
-  getCollection("resources"),
-]);
+const lessonEntries = await getCollection("lessons");
+const lessonsById = new Map(lessonEntries.map((lesson) => [lesson.id, lesson]));
 
-const lessons = lessonEntries.sort((a, b) => a.data.order - b.data.order);
-const featuredLesson = lessons[0];
-
-const domains = [
+const paths = [
   {
-    label: "Création visuelle",
-    title: "Images et direction artistique",
-    description: "Composition, lumière, style, références et prompts reproductibles.",
-    href: "/formation/creation-visuelle/",
-    icon: "✦",
+    id: "regarder-composer",
+    label: "Parcours A",
+    title: "Regarder et composer",
+    description: "Décrire ce qui organise une image avant d’interroger le modèle.",
+    lessons: ["voir-composer-generer", "composition-cinematique", "lumiere-couleur", "profondeur-de-champ"],
   },
   {
-    label: "Cinématographie",
-    title: "Plans et mouvements caméra",
-    description: "Cadres, angles, focales et intentions narratives pour chaque séquence.",
-    href: "/formation/cinematographie/",
-    icon: "◫",
+    id: "stabiliser-intention",
+    label: "Parcours B",
+    title: "Stabiliser une intention",
+    description: "Séparer direction artistique, constantes du personnage et variables autorisées.",
+    lessons: ["creation-visuelle", "ambiance-realisme-texture", "character-consistency", "stabiliser"],
   },
   {
-    label: "Production IA",
-    title: "Personnages et vidéo",
-    description: "Continuité visuelle, image-to-video, transitions et montage.",
-    href: "/formation/production-ia/",
-    icon: "◇",
-  },
-];
-
-const highlights = [
-  {
-    value: String(lessons.length),
-    label: "leçons structurées",
-    description: "Un parcours court, progressif et directement applicable.",
+    id: "construire-sequence",
+    label: "Parcours C",
+    title: "Construire une séquence",
+    description: "Passer de l’intention au découpage, puis vérifier la fonction de chaque plan.",
+    lessons: ["ecriture-scenaristique", "cinematographie", "storyboard-shotlist", "mettre-en-scene"],
   },
   {
-    value: String(prompts.length + resources.length),
-    label: "ressources pratiques",
-    description: "Prompts, checklists et supports à réutiliser en production.",
+    id: "passer-mouvement",
+    label: "Parcours D",
+    title: "Passer au mouvement",
+    description: "Préparer l’animation, les transitions, le montage et la mémoire du pipeline.",
+    lessons: ["animer", "image-to-video-transitions", "monter-documenter", "production-ia"],
   },
-  {
-    value: String(filmmakingLanguageItems.length),
-    label: "fiches de langage",
-    description: "Une reference centrale pour cadrage, angle, focale, mouvement, lumiere et couleur.",
-  },
-];
+].map((path) => ({ ...path, entries: path.lessons.map((id) => lessonsById.get(id)).filter(Boolean) }));
 ---
 
-<section class="hub-hero" aria-labelledby="hub-title">
-  <div class="hub-hero__content">
-    <span class="eyebrow">Hub de formation</span>
-    <h1 id="hub-title">Passez de l’idée à une séquence maîtrisée.</h1>
+<section class="learning-hero" aria-labelledby="learning-title">
+  <div>
+    <span class="eyebrow">Apprendre</span>
+    <h1 id="learning-title">Des repères pour regarder, décrire et construire des images.</h1>
     <p>
-      Explorez un parcours progressif pour composer vos images, stabiliser vos personnages,
-      préparer vos plans vidéo et documenter une production audiovisuelle assistée par l’IA.
+      Cette partie rassemble les notions utiles avant et pendant la génération : composition, lumière, focale,
+      direction artistique, continuité et mise en scène. Chaque fiche propose un point de départ à éprouver,
+      pas une méthode définitive.
     </p>
-
-    <dl class="hub-metrics" aria-label="Contenu disponible">
-      <div>
-        <dt>{lessons.length}</dt>
-        <dd>leçons</dd>
-      </div>
-      <div>
-        <dt>{prompts.length}</dt>
-        <dd>prompts</dd>
-      </div>
-      <div>
-        <dt>{projects.length}</dt>
-        <dd>projets</dd>
-      </div>
-    </dl>
-
     <div class="hero-actions">
-      <a class="button primary" href="#parcours">Explorer la formation</a>
-      <a class="button secondary" href="#domaines">Voir les domaines</a>
+      <a class="button primary" href="#parcours">Voir les parcours</a>
+      <a class="button secondary" href="/filmmaking-language/">Consulter le langage cinéma</a>
     </div>
   </div>
-
-  <aside class="hub-feature" aria-label="Parcours recommandé">
-    <div class="hub-feature__top">
-      <span>Parcours recommandé</span>
-      <span>01</span>
-    </div>
-    <div>
-      <span class="card-kicker">Commencez ici</span>
-      <h2>{featuredLesson.data.title}</h2>
-      <p>{featuredLesson.data.description}</p>
-    </div>
-    <div class="hub-feature__visual" aria-hidden="true">
-      <img src={featuredLesson.data.heroImage} alt="" />
-    </div>
-    <div class="hub-feature__meta">
-      <span>{featuredLesson.data.estimatedTime}</span>
-      <span>{formatLevelLabel(featuredLesson.data.level)}</span>
-      <span>{formatStageLabel(featuredLesson.data.stage)}</span>
-    </div>
-    <a class="button primary" href={`/formation/${featuredLesson.id}/`}>
-      Démarrer la première leçon
-    </a>
+  <aside>
+    <span class="eyebrow">Mode d’emploi</span>
+    <h2>Entrer par la question du moment.</h2>
+    <p>Les parcours donnent un ordre de lecture possible. Une fiche peut aussi être ouverte seule depuis un essai ou une étude de cas.</p>
   </aside>
 </section>
 
-<div class="container">
-  <section class="hub-section" aria-labelledby="approach-title">
-    <div class="hub-section__intro">
-      <div>
-        <span class="eyebrow">Une méthode concrète</span>
-        <h2 id="approach-title">Des repères clairs pour produire, pas seulement expérimenter.</h2>
-      </div>
-      <p>
-        Chaque contenu relie une intention créative, une méthode de travail et un livrable.
-        Vous pouvez suivre le parcours dans l’ordre ou ouvrir directement le sujet utile à votre projet.
-      </p>
-    </div>
-
-    <div class="highlight-grid">
-      {
-        highlights.map((item) => (
-          <article class="highlight-card">
-            <strong>{item.value}</strong>
-            <h3>{item.label}</h3>
-            <p>{item.description}</p>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section" id="domaines" aria-labelledby="domains-title">
-    <div class="section-heading section-heading--center">
-      <span class="eyebrow">Domaines</span>
-      <h2 id="domains-title">Explorez les familles de compétences.</h2>
-      <p>Choisissez une porte d’entrée selon votre besoin du moment.</p>
-    </div>
-
-    <div class="domain-grid">
-      {
-        domains.map((domain) => (
-          <a class="domain-card" href={domain.href}>
-            <span class="domain-card__icon" aria-hidden="true">{domain.icon}</span>
-            <span class="card-kicker">{domain.label}</span>
-            <h3>{domain.title}</h3>
-            <p>{domain.description}</p>
-            <span class="text-link">Explorer <span aria-hidden="true">→</span></span>
-          </a>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section" id="parcours" aria-labelledby="lessons-title">
-    <div class="hub-section__intro hub-section__intro--aligned">
-      <div>
-        <span class="eyebrow">Catalogue</span>
-        <h2 id="lessons-title">Le parcours de formation.</h2>
-      </div>
-      <p>{lessons.length} leçons disponibles, de l’analyse visuelle à la mise en mouvement.</p>
-    </div>
-
-    <div class="lesson-catalogue">
-      {
-        lessons.map((lesson, index) => (
-          <a class="catalogue-card" href={`/formation/${lesson.id}/`}>
-            <div class="catalogue-card__number">{String(index + 1).padStart(2, "0")}</div>
-            <div class="catalogue-card__content">
-              <div class="card-meta">
-                <span>{formatStageLabel(lesson.data.stage)}</span>
-                <span>{formatLevelLabel(lesson.data.level)}</span>
-              </div>
-              <h3>{lesson.data.title}</h3>
-              <p>{lesson.data.description}</p>
-              <div class="tool-row">
-                {lesson.data.tools.map((tool) => <ToolBadge tool={tool} />)}
-              </div>
+<div class="container" id="parcours">
+  {paths.map((path) => (
+    <section class="learning-path-group" id={path.id} aria-labelledby={`${path.id}-title`}>
+      <header>
+        <span class="eyebrow">{path.label}</span>
+        <h2 id={`${path.id}-title`}>{path.title}</h2>
+        <p>{path.description}</p>
+      </header>
+      <div class="learning-path-lessons">
+        {path.entries.map((lesson, index) => lesson && (
+          <a href={`/formation/${lesson.id}/`} class="learning-lesson-card">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <div class="card-meta">
+              <b>{formatStageLabel(lesson.data.stage)}</b>
+              <b>{formatLevelLabel(lesson.data.level)}</b>
             </div>
-            <div class="catalogue-card__aside">
-              <span>{lesson.data.estimatedTime ?? "À votre rythme"}</span>
-              <span class="catalogue-card__arrow" aria-hidden="true">→</span>
-            </div>
+            <h3>{lesson.data.title}</h3>
+            <p>{lesson.data.description}</p>
+            <div class="tool-row">{lesson.data.tools.map((tool) => <ToolBadge tool={tool} />)}</div>
+            <strong>Ouvrir la fiche <span aria-hidden="true">→</span></strong>
           </a>
-        ))
-      }
-    </div>
-  </section>
-
-  <section class="hub-section hub-section--split" aria-labelledby="resources-title">
-    <div class="hub-panel hub-panel--violet">
-      <span class="eyebrow">Bibliothèque</span>
-      <h2 id="resources-title">Des outils prêts pour vos productions.</h2>
-      <p>
-        Retrouvez les prompts, références caméra et ressources qui accompagnent chaque étape.
-      </p>
-      <div class="hub-panel__links">
-        <a href="/filmmaking-language/">
-          <strong>{filmmakingLanguageItems.length} fiches de langage</strong>
-          <span>Intention, cadrage, angle, focale, mouvement, lumiere et couleur</span>
-        </a>
-        <a href="/prompts/">
-          <strong>{prompts.length} prompts</strong>
-          <span>Image, vidéo, personnage et transition</span>
-        </a>
-        <a href="/references/">
-          <strong>{shots.length} références</strong>
-          <span>Plans, angles et usages narratifs</span>
-        </a>
-        <a href="/resources/">
-          <strong>{resources.length} ressources</strong>
-          <span>Templates et checklists de production</span>
-        </a>
+        ))}
       </div>
-    </div>
+    </section>
+  ))}
 
-    <div class="hub-panel">
-      <span class="eyebrow">Études de cas</span>
-      <h2>Apprenez à partir de projets documentés.</h2>
-      <p>Chaque projet rassemble brief, références, prompts, pipeline et analyse critique.</p>
-      <div class="project-preview-grid">
-        {
-          projects.slice(0, 2).map((project) => (
-            <a class="project-preview" href={`/projects/${project.id}/`}>
-              {project.data.heroImage && <img src={project.data.heroImage} alt="" loading="lazy" />}
-              <div>
-                <span class="card-kicker">{formatStatusLabel(project.data.status)}</span>
-                <h3>{project.data.title}</h3>
-                <span class="text-link">Voir le projet →</span>
-              </div>
-            </a>
-          ))
-        }
-      </div>
+  <section class="learning-bridges" aria-labelledby="bridges-title">
+    <div>
+      <span class="eyebrow">Poursuivre</span>
+      <h2 id="bridges-title">Relier les repères à un essai réel.</h2>
+      <p>Les prompts sont conservés avec leur contexte. Les études de cas montrent ensuite ce qui a été fixé, testé ou laissé en suspens.</p>
     </div>
-  </section>
-
-  <section class="hub-cta" aria-labelledby="cta-title">
-    <span class="eyebrow">Votre prochain plan commence ici</span>
-    <h2 id="cta-title">Construisez une méthode créative que vous pourrez répéter.</h2>
-    <p>Commencez par observer, composer et générer, puis développez votre propre pipeline.</p>
-    <div class="hero-actions">
-      <a class="button primary" href={`/formation/${featuredLesson.id}/`}>Commencer maintenant</a>
-      <a class="button secondary" href="/projects/">Explorer les projets</a>
-    </div>
+    <nav aria-label="Ressources liées">
+      <a href="/experimenter/">Expérimenter <span aria-hidden="true">→</span></a>
+      <a href="/projects/lyra-voss/">Étude Lyra Voss <span aria-hidden="true">→</span></a>
+      <a href="/resources/">Ressources <span aria-hidden="true">→</span></a>
+    </nav>
   </section>
 </div>
+
+<style>
+  .learning-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: center;
+    border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--line));
+    border-radius: 24px;
+    background: var(--hero-gradient);
+    padding: clamp(1.5rem, 4vw, 3rem);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .learning-hero > div,
+  .learning-hero aside {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .learning-hero h1,
+  .learning-hero h2,
+  .learning-hero p {
+    margin: 0;
+  }
+
+  .learning-hero h1 {
+    max-width: 12em;
+  }
+
+  .learning-hero aside {
+    border-left: 3px solid var(--accent);
+    background: color-mix(in srgb, var(--surface) 82%, transparent);
+    padding: 1.4rem;
+  }
+
+  .learning-path-group {
+    display: grid;
+    gap: 1.5rem;
+    padding: 4.5rem 0;
+    scroll-margin-top: 110px;
+  }
+
+  .learning-path-group + .learning-path-group {
+    border-top: 1px solid var(--line);
+  }
+
+  .learning-path-group > header {
+    display: grid;
+    max-width: 760px;
+    gap: 0.75rem;
+  }
+
+  .learning-path-group h2,
+  .learning-path-group p {
+    margin: 0;
+  }
+
+  .learning-path-lessons {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .learning-lesson-card {
+    display: grid;
+    min-height: 100%;
+    gap: 0.8rem;
+    border: 1px solid var(--line);
+    border-radius: 15px;
+    background: var(--surface);
+    padding: 1.15rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .learning-lesson-card > span,
+  .learning-lesson-card > strong {
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+
+  .learning-lesson-card h3,
+  .learning-lesson-card p {
+    margin: 0;
+  }
+
+  .learning-lesson-card p {
+    font-size: 0.8rem;
+  }
+
+  .learning-lesson-card > strong {
+    margin-top: auto;
+    padding-top: 0.5rem;
+  }
+
+  .card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .card-meta b {
+    border-radius: var(--radius-pill);
+    background: var(--bg-soft);
+    color: var(--text-soft);
+    padding: 0.28rem 0.5rem;
+    font-size: 0.62rem;
+  }
+
+  .learning-bridges {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 2rem;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: var(--panel-gradient);
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+  }
+
+  .learning-bridges > div,
+  .learning-bridges nav {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .learning-bridges h2,
+  .learning-bridges p {
+    margin: 0;
+  }
+
+  .learning-bridges nav a {
+    color: var(--accent);
+    font-weight: 800;
+  }
+
+  @media (max-width: 1100px) {
+    .learning-path-lessons {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 760px) {
+    .learning-hero,
+    .learning-bridges {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+
+  @media (max-width: 560px) {
+    .learning-path-lessons {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+</style>

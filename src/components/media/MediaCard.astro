@@ -5,19 +5,22 @@ interface Props {
   title: string;
   description: string;
   image?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   href?: string;
   meta?: string;
   variant?: "urban" | "board" | "portrait" | "storyboard" | "depth" | "light" | "composition";
 }
 
-const { title, description, image, href, meta, variant = "board" } = Astro.props;
+const { title, description, image, imageAlt = "", imageWidth, imageHeight, href, meta, variant = "board" } = Astro.props;
 const Tag = href ? "a" : "article";
 ---
 
 <Tag class="media-card" href={href}>
   {
     image ? (
-      <img src={image} alt="" loading="lazy" />
+      <img src={image} alt={imageAlt} width={imageWidth} height={imageHeight} loading="lazy" decoding="async" />
     ) : (
       <CinematicImagePlaceholder variant={variant} title={title} caption={meta} compact={true} aspect="16 / 10" />
     )

@@ -1,13 +1,13 @@
 ---
-title: "Étude de cas Lyra Voss"
-description: "Étude de cas centrale pour stabiliser un personnage, créer une bible visuelle et préparer des plans vidéo."
+title: "Lyra Voss — journal de recherche"
+description: "Personnage-test utilisé pour étudier la cohérence d’identité, les variations de cadrage et le passage de l’image fixe au plan animé."
 status: "active"
 level: "intermediaire"
 tools: ["Adobe Firefly", "Photoshop", "Kling", "Premiere"]
-heroImage: "/images/projects/lyra-voss/frames/vertical-silence-wide.png"
-pipeline: ["Brief personnage", "Planches de référence", "Ambiance bible", "Prompt maître", "Variations de plans", "Animation", "Analyse critique"]
-outputs: ["Bible personnage", "Ambiance bible", "3 frames validées", "6 planches de référence", "8 variations de plans", "8 prompts Kling", "Grille critique"]
+heroImage: "/images/lyra-voss/references/lyra-reference-body.webp"
+pipeline: ["Question de recherche", "Références canoniques", "Constantes et variables", "Protocole", "Qualification", "Itération"]
+outputs: ["Deux références canoniques", "Une planche de continuité", "Protocoles de cadrage à tester", "Grille de qualification"]
 tags: ["personnage", "cyberpunk", "continuité"]
 ---
 
-Lyra Voss sert de personnage original de référence pour tester la stabilité du visage, de la silhouette, de la tenue et de l'atmosphère.
+Lyra Voss sert de personnage-test pour observer la stabilité du visage, de la silhouette, de la tenue et de l’atmosphère. Les résultats restent à qualifier par outil et par cadrage.

@@ -330,7 +330,7 @@ export const learningPaths: Record<string, LearningPath> = {
     concepts: [
       { title: "Fonction du plan", description: "Situer, orienter, révéler, rapprocher ou conclure." },
       { title: "Raccord", description: "Préserver regard, mouvement, lumière, décor et position." },
-      { title: "Couverture", description: "Prévoir les plans indispensables sans multiplier les variantes inutiles." },
+      { title: "Couverture", description: "Prévoir les plans nécessaires sans multiplier les variantes inutiles." },
       { title: "Critère de validation", description: "Définir ce qui doit rester stable avant de lancer la génération." },
     ],
     errors: [

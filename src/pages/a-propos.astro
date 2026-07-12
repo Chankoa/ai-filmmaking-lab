@@ -2,13 +2,53 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Archive À propos">
-  <section class="section-band">
-    <div class="section-heading">
-      <span class="eyebrow">Archive</span>
-      <h1>À propos du template</h1>
-      <p>Cette ancienne page est conservée comme alias pendant la migration du projet vers AI Filmmaking Lab.</p>
-      <div class="hero-actions"><a class="button primary" href="/">Retour au hub</a></div>
-    </div>
-  </section>
+<BaseLayout title="À propos du Lab" description="La posture, les sources et le mode de travail d’AI Filmmaking Lab.">
+  <article class="about-lab">
+    <header>
+      <span class="eyebrow">À propos du Lab</span>
+      <h1>Un espace personnel de recherche, de pratique et de transmission.</h1>
+      <p>
+        AI Filmmaking Lab est un espace de recherche consacré aux relations entre langage cinématographique,
+        génération d’images et fabrication de séquences. J’y rassemble ce que j’apprends, ce que je teste et ce que
+        les résultats obligent à revoir. Le projet avance par versions : une méthode peut être utile aujourd’hui,
+        limitée demain, puis remplacée par une approche plus simple ou plus juste.
+      </p>
+    </header>
+
+    <section aria-labelledby="sources-title">
+      <span class="eyebrow">Sources de travail</span>
+      <h2 id="sources-title">Construire depuis des essais, des lectures et des références situées.</h2>
+      <p>
+        Les contenus viennent d’essais réels, de lectures, de références cinématographiques et de documents de
+        production. Lorsqu’un résultat n’a pas encore été obtenu ou qualifié, la page doit le signaler au lieu de
+        compléter artificiellement le récit.
+      </p>
+    </section>
+
+    <section aria-labelledby="limits-title">
+      <span class="eyebrow">Limites et révisions</span>
+      <h2 id="limits-title">Rendre les méthodes lisibles sans les présenter comme universelles.</h2>
+      <p>
+        Un protocole peut dépendre fortement d’un modèle, d’une version, d’une image de référence ou d’un réglage.
+        Le Lab distingue donc ce qui est observé, ce qui semble fonctionner dans un contexte précis et ce qui reste
+        à tester. Les erreurs et les essais non concluants font partie de la documentation lorsqu’ils aident à mieux
+        formuler l’itération suivante.
+      </p>
+    </section>
+
+    <aside>
+      <strong>Intention</strong>
+      <p>L’objectif est de rendre les essais lisibles et réutilisables, non de vendre une vérité sur l’IA.</p>
+      <a class="button primary" href="/projects/lyra-voss/">Voir la recherche Lyra Voss</a>
+    </aside>
+  </article>
+
+  <style>
+    .about-lab { display: grid; max-width: 920px; gap: 4rem; margin: 0 auto; }
+    .about-lab header, .about-lab section, .about-lab aside { display: grid; gap: 1rem; }
+    .about-lab header { border: 1px solid var(--line); border-radius: 24px; background: var(--hero-gradient); padding: clamp(1.5rem, 4vw, 3rem); box-shadow: var(--shadow-lg); }
+    .about-lab h1, .about-lab h2, .about-lab p { margin: 0; }
+    .about-lab section { border-top: 1px solid var(--line); padding-top: 3rem; }
+    .about-lab aside { border-left: 3px solid var(--accent); background: var(--panel-gradient); padding: 1.5rem; }
+  </style>
 </BaseLayout>

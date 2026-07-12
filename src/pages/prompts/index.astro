@@ -22,11 +22,6 @@ const tags = [...new Set(prompts.flatMap((prompt) => prompt.data.tags))]
     description="Chaque prompt documente une intention, un outil, des variables, des contraintes négatives et un usage pédagogique."
     image="/images/prompts/prompt-library-board.svg"
     imageAlt="Composition visuelle en couches pour construire un prompt"
-    stats={[
-      { label: "Prompts", value: String(prompts.length) },
-      { label: "Familles", value: String(categories.length) },
-      { label: "Usage", value: "Réutilisable" },
-    ]}
   />
 
   <section class="prompt-category-feature" aria-labelledby="language-prompt-bridge-title">
@@ -34,8 +29,8 @@ const tags = [...new Set(prompts.flatMap((prompt) => prompt.data.tags))]
       <span class="eyebrow">Base de construction</span>
       <h2 id="language-prompt-bridge-title">Construire le prompt depuis le langage du film.</h2>
       <p>
-        La bibliotheque centrale relie emotion, cadrage, focale, composition, mouvement, lumiere
-        et couleur avant l'ecriture du prompt final.
+        La bibliothèque centrale relie émotion, cadrage, focale, composition, mouvement, lumière
+        et couleur avant l’écriture du prompt final.
       </p>
       <ol class="prompt-pipeline" aria-label="Pipeline prompt cinema">
         {promptBuilderPipeline.map((step, index) => (
@@ -73,7 +68,7 @@ const tags = [...new Set(prompts.flatMap((prompt) => prompt.data.tags))]
       <span class="eyebrow">Nouvelle catégorie · Ambiance et réalisme</span>
       <h2 id="composition-prompts-title">Décrire les causes physiques du réalisme.</h2>
       <p>
-        Huit fiches relient atmosphère, peau, matières, humidité, profondeur et continuité image-to-video.
+        Des fiches relient atmosphère, peau, matières, humidité, profondeur et continuité image-to-video.
       </p>
     </div>
     <a class="button primary" href="/formation/ambiance-realisme-texture/">

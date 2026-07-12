@@ -1,207 +1,316 @@
 ---
-import CharacterBoard from "./CharacterBoard.astro";
 import CodeBlock from "../code/CodeBlock.astro";
+import ExperimentCard from "../lab/ExperimentCard.astro";
+import IterationLog from "../lab/IterationLog.astro";
+import LabSection from "../lab/LabSection.astro";
+import ObservationNote from "../lab/ObservationNote.astro";
+import PromptVersion from "../lab/PromptVersion.astro";
+import ReferenceImage from "../lab/ReferenceImage.astro";
+import ResearchStatus from "../lab/ResearchStatus.astro";
+import ToolContext from "../lab/ToolContext.astro";
+import {
+  canonicalLyraReferences,
+  supportingLyraReferences,
+} from "../../content/lyra-voss/reference-manifest";
 import {
   lyraAnalysisChecklist,
-  lyraAmbianceContinuity,
-  lyraAmbianceFrames,
-  lyraAmbiancePalette,
-  lyraAmbianceRules,
-  lyraBoards,
-  lyraMasterBlocks,
   lyraMasterPrompt,
   lyraProfile,
   lyraShotVariations,
 } from "../../data/lyra-voss";
+
+const variables = [
+  "cadrage et échelle de plan",
+  "focale",
+  "posture et direction du regard",
+  "qualité et direction de la lumière",
+  "humidité des cheveux et du décor",
+  "outil de génération et ses réglages",
+];
+
+const experimentTitles: Record<string, string> = {
+  "LV-CU-01": "Gros plan — cohérence du visage",
+  "LV-MS-02": "Plan moyen — visage, main et accessoire",
+  "LV-WS-03": "Plan large — identité à petite échelle",
+  "LV-OTS-04": "Par-dessus l’épaule — continuité dos et cheveux",
+  "LV-LA-05": "Contre-plongée — proportions et perspective",
+  "LV-BS-06": "Plan de dos — silhouette et tenue",
+  "LV-WK-07": "Marche — équilibre et continuité corporelle",
+  "LV-ECU-08": "Très gros plan — œil, peau et couleur",
+};
+
+const iterationEntries = [
+  {
+    version: "État importé",
+    status: "Documentation existante",
+    note: "Profil, prompt de base, variations de cadrage et consignes d’animation regroupés sans résultats comparatifs qualifiés.",
+  },
+  {
+    version: "12 juillet 2026",
+    status: "Recentrage du cas",
+    note: "Deux références canoniques fournies, une planche classée comme support et des états d’attente explicites pour les résultats manquants.",
+  },
+];
 ---
 
 <div class="lyra-case-study">
   <nav class="lyra-section-nav" aria-label="Sections de l’étude de cas">
-    <a href="#brief">Brief</a>
-    <a href="#boards">Boards personnage</a>
-    <a href="#ambiance-bible">Ambiance bible</a>
-    <a href="#master-prompt">Prompt maître</a>
-    <a href="#shots">Variations</a>
-    <a href="#image-to-video">Animer</a>
-    <a href="#analysis">Analyse</a>
+    <a href="#research-question">Question</a>
+    <a href="#canonical-references">Références</a>
+    <a href="#constants">Constantes</a>
+    <a href="#variables">Variables</a>
+    <a href="#protocol">Protocole</a>
+    <a href="#experiments">Cadrages</a>
+    <a href="#approved-frames">Frames approuvées</a>
+    <a href="#rejected-tests">Dérives</a>
+    <a href="#animation-tests">Animation</a>
+    <a href="#observations">Observations</a>
+    <a href="#next-iteration">Suite</a>
+    <a href="#history">Historique</a>
   </nav>
 
-  <section id="brief" class="lyra-section">
-    <div class="lyra-section__heading">
-      <span class="eyebrow">01 · Brief personnage</span>
-      <h2>Définir Lyra avant de varier les plans.</h2>
-      <p>Les descriptions suivantes sont des constantes de production, pas des suggestions stylistiques.</p>
-    </div>
-    <div class="lyra-profile-grid">
-      {
-        lyraProfile.map((group) => (
-          <article>
-            <h3>{group.title}</h3>
-            <dl>
-              {group.items.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
-            </dl>
-          </article>
-        ))
-      }
-    </div>
-  </section>
-
-  <section id="boards" class="lyra-section">
-    <div class="lyra-section__heading">
-      <span class="eyebrow">02 · Boards personnage</span>
-      <h2>Comparer une caractéristique à la fois.</h2>
-      <p>Ces placeholders indiquent la structure attendue avant l’intégration de vraies images générées.</p>
-    </div>
-    <CharacterBoard boards={lyraBoards} />
-  </section>
-
-  <section id="ambiance-bible" class="lyra-section lyra-ambiance-bible">
-    <div class="lyra-section__heading">
-      <span class="eyebrow">03 · Ambiance bible</span>
-      <h2>Conserver les mêmes lois physiques d'un plan à l'autre.</h2>
-      <p>Cette vue fixe la palette, l'humidité, les matières, les sources, la profondeur et le son implicite de Vertical Silence.</p>
-    </div>
-
-    <div class="lyra-ambiance-frames">
-      {lyraAmbianceFrames.map((frame) => (
-        <figure>
-          <img src={frame.image} alt={frame.alt} loading="lazy" />
-          <figcaption>
-            <span>Frame validée</span>
-            <h3>{frame.title}</h3>
-            <p>{frame.role}</p>
-            <ul>{frame.checks.map((check) => <li>{check}</li>)}</ul>
-          </figcaption>
-        </figure>
-      ))}
-    </div>
-
-    <div class="lyra-ambiance-palette" aria-label="Palette de Vertical Silence">
-      {lyraAmbiancePalette.map((color) => (
-        <article style={`--swatch:${color.value}`}>
-          <span aria-hidden="true"></span>
-          <div><strong>{color.name}</strong><code>{color.value}</code><p>{color.role}</p></div>
-        </article>
-      ))}
-    </div>
-
-    <div class="lyra-ambiance-rules">
-      {lyraAmbianceRules.map((rule, index) => (
-        <article>
-          <span>{String(index + 1).padStart(2, "0")}</span>
-          <h3>{rule.title}</h3>
-          <p>{rule.intention}</p>
-          <ul>{rule.constants.map((item) => <li>{item}</li>)}</ul>
-          <code>{rule.promptTerms}</code>
-        </article>
-      ))}
-    </div>
-
-    <aside class="lyra-ambiance-continuity">
+  <LabSection
+    id="research-question"
+    eyebrow="01 · Question de recherche"
+    title="Tester ce que deux références peuvent réellement stabiliser."
+  >
+    <div class="lyra-question">
       <div>
-        <span class="eyebrow">Contrôle de continuité</span>
-        <h3>Avant d'approuver une nouvelle frame</h3>
+        <ResearchStatus status="Recherche active" />
+        <ResearchStatus status="Documentation en cours" />
       </div>
-      <ol>{lyraAmbianceContinuity.map((item, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{item}</li>)}</ol>
-    </aside>
-  </section>
-
-  <section id="master-prompt" class="lyra-section lyra-master-prompt">
-    <div class="lyra-section__heading">
-      <span class="eyebrow">04 · Prompt maître</span>
-      <h2>Des blocs stables, puis une variable de plan.</h2>
-      <p>Chaque bloc peut être contrôlé séparément dans la bible et réutilisé dans les prompts de frame.</p>
+      <blockquote>
+        Dans quelle mesure une ou deux images de référence permettent-elles de conserver l’identité de Lyra lorsque
+        changent le cadrage, la focale, la posture, la lumière et le modèle de génération ?
+      </blockquote>
+      <p>
+        Le cas ne cherche pas à démontrer une cohérence parfaite. Il prépare une comparaison contrôlée et sépare
+        les références, les protocoles, les résultats retenus et les dérives observées.
+      </p>
     </div>
-    <div class="lyra-master-prompt__layout">
-      <div class="lyra-master-blocks">
-        {lyraMasterBlocks.map((block) => <article><strong>{block.label}</strong><p>{block.value}</p></article>)}
+  </LabSection>
+
+  <LabSection
+    id="canonical-references"
+    eyebrow="02 · Références canoniques"
+    title="Identifier les sources avant d’évaluer les générations."
+    intro="Les deux fichiers ci-dessous ont été fournis comme références du personnage. Leur date d’approbation n’est pas renseignée ; la planche longue reste un support distinct."
+  >
+    <div class="lyra-reference-grid">
+      {canonicalLyraReferences.map((reference) => (
+        <ReferenceImage
+          src={reference.file}
+          alt={reference.alt}
+          width={reference.width}
+          height={reference.height}
+          caption={reference.caption}
+          status="Référence canonique"
+          objectFit="contain"
+          objectPosition={reference.role === "silhouette" ? "center 22%" : "center"}
+        >
+          <p>{reference.provenance}</p>
+          <ul>{reference.characteristicsToPreserve.map((item) => <li>{item}</li>)}</ul>
+        </ReferenceImage>
+      ))}
+    </div>
+    {supportingLyraReferences.map((reference) => (
+      <div class="lyra-supporting-reference">
+        <ReferenceImage
+          src={reference.file}
+          alt={reference.alt}
+          width={reference.width}
+          height={reference.height}
+          caption={reference.caption}
+          status="Support documentaire"
+          objectFit="contain"
+        >
+          <p>{reference.provenance}</p>
+        </ReferenceImage>
       </div>
-      <CodeBlock code={lyraMasterPrompt} label="Prompt maître Lyra Voss" />
-    </div>
-  </section>
+    ))}
+  </LabSection>
 
-  <section id="shots" class="lyra-section">
-    <div class="lyra-section__heading">
-      <span class="eyebrow">05 · Variations de plans</span>
-      <h2>Changer le cadre sans réinventer le personnage.</h2>
-      <p>Les huit plans partagent les mêmes constantes et modifient seulement distance, angle, action ou fonction.</p>
+  <LabSection
+    id="constants"
+    eyebrow="03 · Constantes du personnage"
+    title="Décrire ce qui doit rester comparable d’une image à l’autre."
+    intro="Ces constantes reprennent le profil déjà documenté. Elles constituent des critères de comparaison, pas la preuve que le modèle les conservera."
+  >
+    <div class="lyra-profile-grid">
+      {lyraProfile.map((group) => (
+        <article>
+          <h3>{group.title}</h3>
+          <dl>{group.items.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}</dl>
+        </article>
+      ))}
     </div>
-    <div class="lyra-shot-grid">
-      {
-        lyraShotVariations.map((shot) => (
-          <article class="lyra-shot-card">
-            <div class="lyra-shot-card__frame" data-shot={shot.title}>
-              <span>{shot.id}</span>
-              <i aria-hidden="true"></i>
-            </div>
-            <div class="lyra-shot-card__body">
-              <h3>{shot.title}</h3>
-              <p>{shot.intention}</p>
-              <CodeBlock code={shot.imagePrompt} label="Prompt image" />
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  </LabSection>
 
-  <section id="image-to-video" class="lyra-section">
-    <div class="lyra-section__heading">
-      <span class="eyebrow">06 · Animer la frame</span>
-      <h2>Une consigne Kling par plan approuvé.</h2>
-      <p>Le mouvement décrit uniquement ce qui change entre le début et la fin du clip.</p>
+  <LabSection
+    id="variables"
+    eyebrow="04 · Variables autorisées"
+    title="Faire varier le plan sans confondre variation et dérive."
+  >
+    <div class="lyra-variable-grid">
+      {variables.map((variable, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><p>{variable}</p></article>)}
     </div>
+    <ObservationNote title="Une variable principale par comparaison" tone="uncertain">
+      <p>Changer simultanément l’outil, la focale, la tenue et la lumière rendrait l’écart difficile à interpréter.</p>
+    </ObservationNote>
+  </LabSection>
+
+  <LabSection
+    id="protocol"
+    eyebrow="05 · Protocole de génération"
+    title="Préparer un essai reproductible avant de produire des images."
+    intro="Le protocole sera ajusté après les premiers lots comparables. Aucun résultat de génération n’est inféré à partir des seules références."
+  >
+    <ol class="lyra-protocol">
+      <li><span>01</span><div><h3>Associer les références</h3><p>Fournir le visage et la silhouette, puis noter si l’outil accepte une ou plusieurs images.</p></div></li>
+      <li><span>02</span><div><h3>Fixer les constantes</h3><p>Conserver identité, cheveux, proportions et tenue dans chaque variante.</p></div></li>
+      <li><span>03</span><div><h3>Modifier une variable</h3><p>Changer d’abord le cadrage ou la focale, sans modifier simultanément le reste du protocole.</p></div></li>
+      <li><span>04</span><div><h3>Qualifier le résultat</h3><p>Comparer avec les références et documenter les écarts visibles sans attribuer une cause certaine trop vite.</p></div></li>
+      <li><span>05</span><div><h3>Classer et itérer</h3><p>Placer le résultat parmi les frames approuvées, les essais à reprendre ou les dérives instructives.</p></div></li>
+    </ol>
+    <div class="lyra-prompt-layout">
+      <ToolContext
+        tool="Aucun outil unique — adaptation requise"
+        references="lyra-reference-face + lyra-reference-body"
+        note="Le prompt de base doit être reformulé selon les capacités et la syntaxe de chaque modèle."
+      />
+      <PromptVersion
+        version="historique non renseigné"
+        tool="Contexte générique ; adaptations Firefly, Midjourney ou autres non documentées"
+        date="Non renseignée"
+        expected="Maintenir le profil de Lyra tout en changeant une variable de plan."
+        limits="Aucun lot comparatif qualifié n’est encore associé à cette version."
+        changes="Version précédente non documentée ; prompt existant conservé comme base de travail."
+        code={lyraMasterPrompt}
+      />
+    </div>
+  </LabSection>
+
+  <LabSection
+    id="experiments"
+    eyebrow="06 · Expérimentations par cadrage"
+    title="Huit protocoles préparés, sans résultats attribués par défaut."
+    intro="Chaque carte décrit une intention et un prochain test. Une image ne sera ajoutée qu’après génération, conservation des paramètres et qualification du résultat."
+  >
+    <div class="lyra-experiment-grid">
+      {lyraShotVariations.map((shot) => (
+        <ExperimentCard
+          id={shot.id}
+          title={experimentTitles[shot.id] ?? shot.title}
+          objective={shot.intention}
+          variables={["cadrage", "focale ou perspective", "lumière"]}
+          fixedElements={["visage", "cheveux", "silhouette", "tenue"]}
+          nextIteration="Produire un premier lot comparable avec les deux références canoniques et consigner les paramètres."
+        />
+      ))}
+    </div>
+  </LabSection>
+
+  <LabSection
+    id="approved-frames"
+    eyebrow="07 · Frames approuvées"
+    title="Aucune frame n’est encore qualifiée comme approuvée."
+    intro="Les images secondaires présentes dans l’ancien projet ne sont pas promues automatiquement : leur provenance et leurs paramètres doivent d’abord être vérifiés."
+  >
+    <div class="lyra-state-grid">
+      <ReferenceImage
+        caption="Emplacement réservé aux résultats comparés aux références"
+        status="En attente de qualification"
+        tone="waiting"
+        emptyText="Frame approuvée en attente d’intégration"
+      />
+    </div>
+  </LabSection>
+
+  <LabSection
+    id="rejected-tests"
+    eyebrow="08 · Essais rejetés ou dérives"
+    title="Aucune dérive n’est documentée avec un asset vérifiable."
+    intro="Cette section accueillera les erreurs utiles — identité, mâchoire, cheveux, tenue, mains ou architecture — avec une légende factuelle et le contexte du test."
+  >
+    <div class="lyra-state-grid">
+      <ReferenceImage
+        caption="Emplacement réservé aux essais non retenus et à leur analyse"
+        status="Documentation à constituer"
+        tone="waiting"
+        emptyText="Essai rejeté en attente d’intégration"
+      />
+    </div>
+  </LabSection>
+
+  <LabSection
+    id="animation-tests"
+    eyebrow="09 · Tests d’animation"
+    title="Des consignes de mouvement préparées, pas encore validées par des clips."
+    intro="Les formulations existantes ciblent Kling. Elles restent des protocoles à tester à partir d’une frame préalablement approuvée."
+  >
     <div class="lyra-motion-list">
-      {
-        lyraShotVariations.map((shot) => (
-          <article>
-            <header>
-              <div><span>{shot.id}</span><h3>{shot.title}</h3></div>
-              <dl>
-                <div><dt>Caméra</dt><dd>{shot.cameraMovement}</dd></div>
-                <div><dt>Intensité</dt><dd>{shot.intensity}</dd></div>
-              </dl>
-            </header>
-            <CodeBlock code={shot.klingPrompt} label="Prompt Kling" />
-            <div class="lyra-motion-list__checks">
-              <div><strong>Erreurs à éviter</strong><ul>{shot.avoid.map((item) => <li>{item}</li>)}</ul></div>
-              <CodeBlock code={shot.videoNegativePrompt} label="Negative prompt vidéo" />
-            </div>
-          </article>
-        ))
-      }
+      {lyraShotVariations.map((shot) => (
+        <article>
+          <header><div><span>{shot.id}</span><h3>{experimentTitles[shot.id] ?? shot.title}</h3></div><ResearchStatus status="À tester" /></header>
+          <dl>
+            <div><dt>Caméra</dt><dd>{shot.cameraMovement}</dd></div>
+            <div><dt>Intensité prévue</dt><dd>{shot.intensity}</dd></div>
+          </dl>
+          <CodeBlock code={shot.klingPrompt} label={`Consigne Kling ${shot.id}`} />
+          <p><strong>Points de vigilance :</strong> {shot.avoid.join(" · ")}</p>
+        </article>
+      ))}
     </div>
-  </section>
+  </LabSection>
 
-  <section id="analysis" class="lyra-section">
-    <div class="lyra-section__heading">
-      <span class="eyebrow">07 · Analyse critique</span>
-      <h2>Garder, corriger ou rejeter avec des preuves visibles.</h2>
-      <p>La qualité ne se résume pas à une belle frame : le plan doit rester cohérent et utile dans la séquence.</p>
+  <LabSection
+    id="observations"
+    eyebrow="10 · Observations"
+    title="Distinguer ce que montrent les références de ce que les modèles feront."
+  >
+    <div class="lyra-observation-grid">
+      <ObservationNote title="Les références fixent deux échelles complémentaires">
+        <p>Le portrait détaille le visage et la couleur des cheveux ; la vue en pied donne la silhouette, les proportions et la tenue.</p>
+      </ObservationNote>
+      <ObservationNote title="La planche est utile mais ne fait pas foi seule" tone="uncertain">
+        <p>Elle rassemble plusieurs vues et des annotations, mais reste classée comme support tant que ses éléments n’ont pas été relus séparément.</p>
+      </ObservationNote>
+      <ObservationNote title="Les résultats restent inconnus" tone="uncertain">
+        <p>Aucune comparaison outillée ne permet encore d’affirmer quel cadrage ou quel modèle conserve le mieux l’identité.</p>
+      </ObservationNote>
     </div>
-    <div class="lyra-analysis-grid">
-      {
-        lyraAnalysisChecklist.map((item, index) => (
-          <article>
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            <h3>{item.label}</h3>
-            <p>{item.check}</p>
-            <div aria-label="Décisions possibles"><b>Garder</b><b>Corriger</b><b>Rejeter</b></div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+    <details class="lyra-checklist">
+      <summary>Afficher la grille de qualification préparée</summary>
+      <div>{lyraAnalysisChecklist.map((item, index) => <article><span>{String(index + 1).padStart(2, "0")}</span><h3>{item.label}</h3><p>{item.check}</p></article>)}</div>
+    </details>
+  </LabSection>
+
+  <LabSection
+    id="next-iteration"
+    eyebrow="11 · Prochaine itération"
+    title="Produire un premier lot comparable et conserver ses paramètres."
+  >
+    <ol class="lyra-next-steps">
+      <li>Choisir un outil et noter sa version ou son mode de génération lorsqu’ils sont disponibles.</li>
+      <li>Tester d’abord le gros plan et le plan en pied avec les deux références canoniques.</li>
+      <li>Conserver prompt, réglages, références envoyées et identifiant de chaque résultat.</li>
+      <li>Qualifier les images avec la grille, puis déplacer uniquement les résultats retenus vers les frames approuvées.</li>
+      <li>Préparer un test image-to-video seulement à partir d’une frame approuvée.</li>
+    </ol>
+  </LabSection>
+
+  <LabSection
+    id="history"
+    eyebrow="12 · Historique des mises à jour"
+    title="Conserver les changements de méthode et de statut."
+  >
+    <IterationLog entries={iterationEntries} />
+  </LabSection>
 
   <aside class="lyra-related">
-    <div>
-      <span class="eyebrow">Continuer</span>
-      <h2>Réutiliser le cas dans le parcours.</h2>
-    </div>
-    <a href="/formation/character-consistency/">Stabiliser le personnage</a>
-    <a href="/formation/ambiance-realisme-texture/">Créer l'ambiance et la matière</a>
-    <a href="/formation/image-to-video-transitions/">Animer sans dérive</a>
+    <div><span class="eyebrow">Continuer</span><h2>Relier cette étude aux repères du Lab.</h2></div>
+    <a href="/formation/character-consistency/">Cohérence personnage</a>
+    <a href="/experimenter/">Protocoles d’essai</a>
     <a href="/resources/production-bible-template/">Bible de production</a>
-    <a href="/prompts/?category=reference-sheet">Prompts Lyra</a>
   </aside>
 </div>

@@ -1,0 +1,17 @@
+---
+interface LogEntry {
+  version: string;
+  status: string;
+  note: string;
+}
+
+interface Props {
+  entries: LogEntry[];
+}
+
+const { entries } = Astro.props;
+---
+
+<ol class="iteration-log">
+  {entries.map((entry) => <li><span>{entry.version}</span><strong>{entry.status}</strong><p>{entry.note}</p></li>)}
+</ol>

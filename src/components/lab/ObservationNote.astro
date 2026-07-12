@@ -1,0 +1,15 @@
+---
+interface Props {
+  title: string;
+  tone?: "observation" | "uncertain";
+}
+
+const { title, tone = "observation" } = Astro.props;
+---
+
+<aside class:list={["observation-note", `observation-note--${tone}`]}>
+  <span>{tone === "uncertain" ? "Point à vérifier" : "Observation"}</span>
+  <h3>{title}</h3>
+  <slot />
+</aside>
+

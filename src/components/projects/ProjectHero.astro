@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import ToolBadge from "../ui/ToolBadge.astro";
+import ResearchStatus from "../lab/ResearchStatus.astro";
 
 interface Props {
   project: CollectionEntry<"projects">;
@@ -13,11 +14,35 @@ const { data } = project;
 <header class="project-hero">
   <div>
     <span class="eyebrow">Étude de cas</span>
+    {project.id === "lyra-voss" && <ResearchStatus status="Recherche active" />}
     <h1>{data.title}</h1>
     <p>{data.description}</p>
     <div class="tool-row">
       {data.tools.map((tool) => <ToolBadge tool={tool} />)}
     </div>
   </div>
-  {data.heroImage && <img src={data.heroImage} alt={`Visuel du projet ${data.title}`} />}
+  {data.heroImage && (
+    <img
+      src={data.heroImage}
+      alt={project.id === "lyra-voss" ? "Vue en pied de Lyra Voss, référence canonique de silhouette et de tenue" : `Visuel du projet ${data.title}`}
+      width={project.id === "lyra-voss" ? 768 : undefined}
+      height={project.id === "lyra-voss" ? 1376 : undefined}
+      loading="eager"
+      decoding="async"
+    />
+  )}
 </header>
+
+<style>
+  .project-hero > img {
+    max-height: 620px;
+    object-fit: cover;
+    object-position: center 22%;
+  }
+
+  @media (max-width: 700px) {
+    .project-hero > img {
+      max-height: 520px;
+    }
+  }
+</style>

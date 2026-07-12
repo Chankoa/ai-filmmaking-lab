@@ -1,26 +1,21 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import CourseHero from "../../components/course/CourseHero.astro";
 import MediaCard from "../../components/media/MediaCard.astro";
 import { formatStatusLabel } from "../../data/content-labels";
 
 const projects = await getCollection("projects");
 ---
 
-<BaseLayout title="Projets" description="Études de cas de production IA : personnages, univers, prompts, vidéos et documentation.">
-  <CourseHero
-    eyebrow="Études de cas"
-    title="Projets documentés"
-    description="Les projets transforment les exercices en études de production : brief, références, prompt maître, frames, animation, montage et critique."
-    image="/images/ui/projects-hero-board.svg"
-    imageAlt="Board de production créative"
-    stats={[
-      { label: "Projets", value: String(projects.length) },
-      { label: "Statuts", value: "Prêt + brouillon" },
-      { label: "Sortie", value: "Pipeline documenté" },
-    ]}
-  />
+<BaseLayout title="Études de cas" description="Journaux de recherche reliant questions, références, protocoles, résultats et limites observées.">
+  <section class="case-index-hero">
+    <span class="eyebrow">Études de cas</span>
+    <h1>Documenter le chemin suivi, y compris ce qui reste incertain.</h1>
+    <p>
+      Chaque étude relie une question de recherche, des références identifiées, un protocole, des résultats qualifiés
+      lorsqu’ils existent et une prochaine itération. Un statut décrit l’état de la documentation, pas une promesse de résultat.
+    </p>
+  </section>
 
   <section class="content-grid" aria-label="Études de cas">
     {
@@ -29,10 +24,18 @@ const projects = await getCollection("projects");
           title={project.data.title}
           description={project.data.description}
           image={project.data.heroImage}
+          imageAlt={project.id === "lyra-voss" ? "Vue en pied de Lyra Voss, référence canonique de silhouette" : ""}
+          imageWidth={project.id === "lyra-voss" ? 768 : undefined}
+          imageHeight={project.id === "lyra-voss" ? 1376 : undefined}
           href={`/projects/${project.id}/`}
           meta={formatStatusLabel(project.data.status)}
         />
       ))
     }
   </section>
+
+  <style>
+    .case-index-hero { display: grid; max-width: 940px; gap: 1rem; border: 1px solid var(--line); border-radius: 24px; background: var(--hero-gradient); padding: clamp(1.5rem, 4vw, 3rem); box-shadow: var(--shadow-lg); }
+    .case-index-hero h1, .case-index-hero p { margin: 0; }
+  </style>
 </BaseLayout>

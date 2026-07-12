@@ -1,7 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import CourseHero from "../../components/course/CourseHero.astro";
 import ResourceCard from "../../components/resources/ResourceCard.astro";
 import { formatResourceTypeLabel, formatStatusLabel } from "../../data/content-labels";
 
@@ -16,23 +15,24 @@ const resourceVariantByType: Record<string, "urban" | "board" | "portrait" | "st
 };
 ---
 
-<BaseLayout title="Ressources" description="Templates, checklists et ressources pour documenter les productions AI filmmaking.">
-  <CourseHero
-    eyebrow="Ressources"
-    title="Guides, templates et checklists"
-    description="Des supports réutilisables pour cadrer la composition, documenter une production et contrôler chaque plan avant génération."
-    image="/images/resources/resource-pipeline-board.svg"
-    imageAlt="Pipeline de ressources de production"
-    stats={[
-      { label: "Ressources", value: String(resources.length) },
-      { label: "Format", value: "Évolutif" },
-      { label: "Usage", value: "Documentation" },
-    ]}
-  />
+<BaseLayout title="Ressources" description="Guides, références, glossaire, templates et checklists conservés comme documents de travail.">
+  <section class="resource-index-hero">
+    <span class="eyebrow">Ressources</span>
+    <h1>Des repères et des documents à adapter au contexte.</h1>
+    <p>
+      Cette section rassemble les références de cadrage, le glossaire, les checklists et les templates utilisés dans le Lab.
+      Une fiche conserve ce qui mérite d’être réutilisé ; elle peut évoluer après de nouveaux essais.
+    </p>
+  </section>
+
+  <section class="resource-portals" aria-label="Sous-sections des ressources">
+    <a href="/references/"><span>Références</span><h2>Cadrages et documents visuels</h2><p>Plans, angles et usages narratifs reliés aux contenus concernés.</p></a>
+    <a href="/glossary/"><span>Glossaire</span><h2>Vocabulaire de travail</h2><p>Définitions courtes pour préciser les échanges entre cinéma, image, vidéo et prompt.</p></a>
+  </section>
 
   <section class="resource-feature" aria-labelledby="composition-resource-title">
     <div>
-      <span class="eyebrow">Nouvelle référence</span>
+      <span class="eyebrow">Checklist en cours d’usage</span>
       <h2 id="composition-resource-title">Checklist ambiance, réalisme et texture</h2>
       <p>
         8 dimensions, prompt phrases et contrôles avant génération ou image-to-video.
@@ -56,4 +56,14 @@ const resourceVariantByType: Record<string, "urban" | "board" | "portrait" | "st
       ))
     }
   </section>
+
+  <style>
+    .resource-index-hero { display: grid; max-width: 940px; gap: 1rem; border: 1px solid var(--line); border-radius: 24px; background: var(--hero-gradient); padding: clamp(1.5rem, 4vw, 3rem); box-shadow: var(--shadow-lg); }
+    .resource-index-hero h1, .resource-index-hero p { margin: 0; }
+    .resource-portals { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; padding: 4rem 0 1rem; }
+    .resource-portals a { display: grid; gap: .7rem; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); padding: 1.2rem; box-shadow: var(--shadow-sm); }
+    .resource-portals span { color: var(--accent); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+    .resource-portals h2, .resource-portals p { margin: 0; }
+    @media (max-width: 660px) { .resource-portals { grid-template-columns: minmax(0, 1fr); } }
+  </style>
 </BaseLayout>

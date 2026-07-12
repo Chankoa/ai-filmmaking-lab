@@ -1,11 +1,7 @@
 ---
-import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import CourseHero from "../../components/course/CourseHero.astro";
 import MediaCard from "../../components/media/MediaCard.astro";
-import { filmmakingLanguageItems } from "../../data/filmmakingLanguage";
-
-const shots = await getCollection("camera-shots");
 ---
 
 <BaseLayout title="Références" description="Boards, guides visuels et références de production pour l'AI filmmaking.">
@@ -15,27 +11,22 @@ const shots = await getCollection("camera-shots");
     description="Cette section regroupe les références qui aident à nommer un plan, choisir une intention et préparer une génération plus contrôlée."
     image="/images/references/reference-atlas-board.svg"
     imageAlt="Guide visuel des plans caméra"
-    stats={[
-      { label: "Plans", value: String(shots.length) },
-      { label: "Langage", value: String(filmmakingLanguageItems.length) },
-      { label: "Usage", value: "Réutilisable" },
-    ]}
   />
 
   <section class="content-grid content-grid--three" aria-label="Boards de référence">
     <MediaCard
-      title="Filmmaking Language"
-      description="Bibliotheque centrale : intention, cadrage, composition, angle, focale, mouvement, lumiere, couleur et prompts."
+      title="Langage cinématographique"
+      description="Bibliothèque de repères : intention, cadrage, composition, angle, focale, mouvement, lumière, couleur et prompts."
       image="/images/references/reference-atlas-board.svg"
       href="/filmmaking-language/"
-      meta="Reference centrale"
+      meta="Repères documentés"
     />
     <MediaCard
       title="Plans caméra"
       description="Types de plans, angles, usages narratifs, mouvements et prompts types."
       image="/images/references/reference-atlas-board.svg"
       href="/references/camera-shots/"
-      meta="Guide prioritaire"
+      meta="Guide documenté"
     />
     <MediaCard
       title="Univers et palettes"
@@ -45,11 +36,14 @@ const shots = await getCollection("camera-shots");
       meta="Planifié"
     />
     <MediaCard
-      title="Boards personnage"
-      description="Planches de référence pour identité, tenue, poses, objets et continuité visuelle."
-      image="/images/projects/lyra-voss/face-reference-sheet.svg"
+      title="Références Lyra Voss"
+      description="Deux images canoniques séparées des frames générées et des essais à qualifier."
+      image="/images/lyra-voss/references/lyra-reference-face.webp"
+      imageAlt="Portrait frontal de Lyra Voss, référence canonique du visage"
+      imageWidth={896}
+      imageHeight={1200}
       href="/projects/lyra-voss/"
-      meta="Étude de cas"
+      meta="Références canoniques"
     />
   </section>
 </BaseLayout>

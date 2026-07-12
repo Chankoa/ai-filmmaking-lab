@@ -19,13 +19,15 @@ const { Content } = await render(project);
 
 <BaseLayout title={project.data.title} description={project.data.description}>
   <ProjectHero project={project} />
-  <section class="section-band">
-    <div class="section-heading">
-      <span class="eyebrow">Pipeline</span>
-      <h2>Etapes de production</h2>
-    </div>
-    <ProjectPipeline steps={project.data.pipeline} />
-  </section>
+  {project.id !== "lyra-voss" && (
+    <section class="section-band">
+      <div class="section-heading">
+        <span class="eyebrow">Chemin documenté</span>
+        <h2>Étapes du projet</h2>
+      </div>
+      <ProjectPipeline steps={project.data.pipeline} />
+    </section>
+  )}
   {
     project.id === "lyra-voss" ? (
       <LyraVossCaseStudy />

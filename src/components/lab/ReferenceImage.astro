@@ -1,0 +1,53 @@
+---
+interface Props {
+  src?: string;
+  alt?: string;
+  width?: number;
+  height?: number;
+  caption: string;
+  status: string;
+  tone?: "reference" | "approved" | "rejected" | "waiting";
+  objectPosition?: string;
+  objectFit?: "cover" | "contain";
+  eager?: boolean;
+  emptyText?: string;
+}
+
+const {
+  src,
+  alt = "",
+  width,
+  height,
+  caption,
+  status,
+  tone = "reference",
+  objectPosition = "center",
+  objectFit = "cover",
+  eager = false,
+  emptyText = "Image de référence en attente d’intégration",
+} = Astro.props;
+---
+
+<figure class:list={["reference-image", `reference-image--${tone}`]}>
+  <div class="reference-image__media" style={`--reference-position:${objectPosition};--reference-fit:${objectFit}`}>
+    {
+      src ? (
+        <img
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          loading={eager ? "eager" : "lazy"}
+          decoding="async"
+        />
+      ) : (
+        <p>{emptyText}</p>
+      )
+    }
+  </div>
+  <figcaption>
+    <span>{status}</span>
+    <strong>{caption}</strong>
+    <slot />
+  </figcaption>
+</figure>

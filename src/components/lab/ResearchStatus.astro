@@ -1,0 +1,11 @@
+---
+interface Props {
+  status: "Recherche active" | "Documentation en cours" | "Documenté" | "À tester" | "À réviser" | "Archive";
+}
+
+const { status } = Astro.props;
+const tone = status === "Documenté" ? "documented" : status === "À tester" || status === "À réviser" ? "pending" : "active";
+---
+
+<span class:list={["research-status", `research-status--${tone}`]}>{status}</span>
+

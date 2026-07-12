@@ -330,7 +330,7 @@ export const compositionPrinciples: CompositionPrinciple[] = [
     number: "17",
     title: "Minimalisme",
     englishName: "Minimalism",
-    definition: "Réduit le cadre à quelques formes, couleurs et informations indispensables.",
+    definition: "Réduit le cadre à quelques formes, couleurs et informations nécessaires.",
     narrativeEffect: "Renforce silence, décision, solitude et précision du geste.",
     filmmakingUse:
       "Réduit les dérives de génération et fournit une frame stable pour les plans contemplatifs ou les transitions.",
@@ -419,4 +419,3 @@ export const compositionChecklist = [
   "La frame peut être reliée au plan précédent et au plan suivant.",
   "Le negative prompt interdit les ajouts qui cassent la composition.",
 ];
-
