@@ -33,13 +33,13 @@ const { rows } = Astro.props;
       {
         rows.map((row) => (
           <tr>
-            <th scope="row">{row.id}</th>
-            <td>{row.intention}</td>
-            <td>{row.frame}</td>
-            <td>{row.movement}</td>
-            <td>{row.continuity}</td>
-            <td>{row.sound}</td>
-            <td>{row.control}</td>
+            <th scope="row" data-label="ID">{row.id}</th>
+            <td data-label="Intention">{row.intention}</td>
+            <td data-label="Frame">{row.frame}</td>
+            <td data-label="Mouvement">{row.movement}</td>
+            <td data-label="Continuité">{row.continuity}</td>
+            <td data-label="Son">{row.sound}</td>
+            <td data-label="Contrôle">{row.control}</td>
           </tr>
         ))
       }
@@ -95,5 +95,60 @@ const { rows } = Astro.props;
   .shot-list-table tbody tr:last-child th,
   .shot-list-table tbody tr:last-child td {
     border-bottom: 0;
+  }
+
+  @media (max-width: 760px) {
+    .shot-list-table {
+      min-width: 0;
+      width: 100%;
+    }
+
+    .shot-list-table thead {
+      display: none;
+    }
+
+    .shot-list-table,
+    .shot-list-table tbody,
+    .shot-list-table tr,
+    .shot-list-table th,
+    .shot-list-table td {
+      display: block;
+      width: 100%;
+    }
+
+    .shot-list-table tr {
+      padding: 0.8rem 0.9rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .shot-list-table tbody tr:last-child {
+      border-bottom: 0;
+    }
+
+    .shot-list-table th,
+    .shot-list-table td {
+      display: grid;
+      grid-template-columns: minmax(78px, 92px) minmax(0, 1fr);
+      gap: 0.65rem;
+      align-items: start;
+      border-bottom: 0;
+      padding: 0.4rem 0;
+      font-size: 0.82rem;
+    }
+
+    .shot-list-table th::before,
+    .shot-list-table td::before {
+      content: attr(data-label);
+      color: var(--accent);
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1.4;
+    }
+
+    .shot-list-table tbody th {
+      white-space: normal;
+    }
   }
 </style>

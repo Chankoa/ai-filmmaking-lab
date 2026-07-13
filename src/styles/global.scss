@@ -284,7 +284,7 @@ main {
 }
 
 .main-nav {
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   gap: 22px;
@@ -424,7 +424,7 @@ main {
 
 .menu-toggle {
   position: relative;
-  display: none;
+  display: inline-grid;
 
   span {
     position: absolute;
@@ -682,6 +682,12 @@ main {
   }
 }
 
+.resource-index-hero h1,
+.case-index-hero h1,
+.pillar-hero h1 {
+  font-size: clamp(2.35rem, 4.6vw, 4.25rem);
+}
+
 .content-grid,
 .content-grid--three,
 .prompt-grid,
@@ -794,7 +800,7 @@ main {
 
   h1 {
     margin: 15px 0 16px;
-    font-size: clamp(2.6rem, 5vw, 4.6rem);
+    font-size: clamp(2.45rem, 4.8vw, 4.35rem);
     max-width: 100%;
     overflow-wrap: anywhere;
   }
@@ -925,10 +931,12 @@ main {
   }
 
   code {
+    display: block;
     max-width: 100%;
     font-family: "SFMono-Regular", Consolas, monospace;
     font-size: 0.82rem;
     line-height: 1.6;
+    white-space: pre-wrap;
     overflow-wrap: anywhere;
     word-break: break-word;
   }
@@ -1452,7 +1460,7 @@ summary {
     h1 {
       max-width: 720px;
       margin: 0;
-      font-size: clamp(3rem, 6vw, 5.4rem);
+      font-size: clamp(2.8rem, 5.5vw, 5rem);
     }
 
     > p {
@@ -1946,7 +1954,7 @@ summary {
   .course-hero h1,
   .project-hero h1,
   .lesson-header h1 {
-    font-size: clamp(2.5rem, 13vw, 3.7rem);
+    font-size: clamp(2.35rem, 12vw, 3.45rem);
   }
 
   .hub-metrics,
