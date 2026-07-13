@@ -6,6 +6,22 @@ import { formatResourceTypeLabel, formatStatusLabel } from "../../data/content-l
 
 const resources = await getCollection("resources");
 
+const stageOrder = ["composer", "ambiance", "generer", "stabiliser", "mettre-en-scene", "animer", "monter", "documenter"] as const;
+const stageLabels: Record<string, { title: string; description: string }> = {
+  composer: { title: "Composer", description: "Organiser le cadre, la hiérarchie et la profondeur avant de générer." },
+  ambiance: { title: "Donner une présence", description: "Relier lumière, matière, atmosphère et réalisme physique." },
+  generer: { title: "Générer", description: "Formuler des images contrôlables et comparer les variantes." },
+  stabiliser: { title: "Stabiliser", description: "Conserver les constantes du personnage et de l'univers." },
+  "mettre-en-scene": { title: "Mettre en scène", description: "Transformer le récit en poses, beats, plans et raccords." },
+  animer: { title: "Animer", description: "Décrire le mouvement sans perdre la frame et la continuité." },
+  monter: { title: "Monter", description: "Construire le rythme, le son et les transitions entre plans." },
+  documenter: { title: "Documenter", description: "Versionner les décisions et conserver une mémoire de production." },
+};
+
+const resourceGroups = stageOrder
+  .map((stage) => ({ stage, ...stageLabels[stage], resources: resources.filter((resource) => resource.data.stage === stage) }))
+  .filter((group) => group.resources.length > 0);
+
 const resourceVariantByType: Record<string, "urban" | "board" | "portrait" | "storyboard" | "depth" | "light" | "composition"> = {
   guide: "composition",
   template: "board",
@@ -41,21 +57,32 @@ const resourceVariantByType: Record<string, "urban" | "board" | "portrait" | "st
     <a class="button primary" href="/resources/ambiance-realisme-texture-checklist/">Ouvrir la checklist</a>
   </section>
 
-  <section class="content-grid" aria-label="Ressources">
+  <div class="resource-groups" aria-label="Ressources classées par étape du parcours">
     {
-      resources.map((resource) => (
-        <ResourceCard
-          eyebrow={formatResourceTypeLabel(resource.data.type)}
-          title={resource.data.title}
-          description={resource.data.description}
-          href={resource.data.href}
-          status={formatStatusLabel(resource.data.status)}
-          badges={resource.data.tools}
-          variant={resourceVariantByType[resource.data.type] ?? "board"}
-        />
+      resourceGroups.map((group) => (
+        <section class="resource-group" aria-labelledby={`resource-stage-${group.stage}`}>
+          <header>
+            <span class="eyebrow">Étape du parcours</span>
+            <h2 id={`resource-stage-${group.stage}`}>{group.title}</h2>
+            <p>{group.description}</p>
+          </header>
+          <div class="content-grid">
+            {group.resources.map((resource) => (
+              <ResourceCard
+                eyebrow={formatResourceTypeLabel(resource.data.type)}
+                title={resource.data.title}
+                description={resource.data.description}
+                href={resource.data.href}
+                status={formatStatusLabel(resource.data.status)}
+                badges={resource.data.tools}
+                variant={resourceVariantByType[resource.data.type] ?? "board"}
+              />
+            ))}
+          </div>
+        </section>
       ))
     }
-  </section>
+  </div>
 
   <style>
     .resource-index-hero { display: grid; max-width: 940px; gap: 1rem; border: 1px solid var(--line); border-radius: 24px; background: var(--hero-gradient); padding: clamp(1.5rem, 4vw, 3rem); box-shadow: var(--shadow-lg); }
@@ -64,6 +91,10 @@ const resourceVariantByType: Record<string, "urban" | "board" | "portrait" | "st
     .resource-portals a { display: grid; gap: .7rem; border: 1px solid var(--line); border-radius: 15px; background: var(--surface); padding: 1.2rem; box-shadow: var(--shadow-sm); }
     .resource-portals span { color: var(--accent); font-size: .7rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
     .resource-portals h2, .resource-portals p { margin: 0; }
+    .resource-groups { display: grid; gap: 4rem; padding: 4rem 0; }
+    .resource-group { display: grid; gap: 1.25rem; }
+    .resource-group > header { display: grid; max-width: 760px; gap: .45rem; }
+    .resource-group > header h2, .resource-group > header p { margin: 0; }
     @media (max-width: 660px) { .resource-portals { grid-template-columns: minmax(0, 1fr); } }
   </style>
 </BaseLayout>

@@ -63,6 +63,40 @@
           ],
           "default": "draft"
         },
+        "stage": {
+          "type": "string",
+          "enum": [
+            "voir",
+            "composer",
+            "ambiance",
+            "generer",
+            "stabiliser",
+            "mettre-en-scene",
+            "animer",
+            "monter",
+            "documenter"
+          ]
+        },
+        "sourceStatus": {
+          "type": "string",
+          "enum": [
+            "brute",
+            "a-verifier",
+            "synthetisee",
+            "integree",
+            "archivee"
+          ]
+        },
+        "lastReviewed": {
+          "type": "string"
+        },
+        "relatedLessons": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": []
+        },
         "$schema": {
           "type": "string"
         }
@@ -70,7 +104,10 @@
       "required": [
         "title",
         "description",
-        "type"
+        "type",
+        "stage",
+        "sourceStatus",
+        "lastReviewed"
       ],
       "additionalProperties": false
     }

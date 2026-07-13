@@ -6,6 +6,10 @@ href: "/resources/composition-cheat-sheet/"
 tools: ["Generic workflow"]
 tags: ["composition", "cinema", "prompt", "Vertical Silence"]
 status: "ready"
+stage: "composer"
+sourceStatus: "integree"
+lastReviewed: "2026-07-13"
+relatedLessons: ["/formation/composition-cinematique/"]
 ---
 
 Une référence compacte à garder ouverte pendant le découpage, la génération et la sélection des frames.

@@ -129,6 +129,20 @@ const resources = defineCollection({
     tools: z.array(toolSchema).default(["Generic workflow"]),
     tags: z.array(z.string()).default([]),
     status: z.enum(["draft", "ready", "planned"]).default("draft"),
+    stage: z.enum([
+      "voir",
+      "composer",
+      "ambiance",
+      "generer",
+      "stabiliser",
+      "mettre-en-scene",
+      "animer",
+      "monter",
+      "documenter",
+    ]),
+    sourceStatus: z.enum(["brute", "a-verifier", "synthetisee", "integree", "archivee"]),
+    lastReviewed: z.string(),
+    relatedLessons: z.array(z.string()).default([]),
   }),
 });
 

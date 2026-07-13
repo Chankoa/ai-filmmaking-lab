@@ -1,0 +1,135 @@
+---
+import type { GetStaticPaths } from "astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CourseHero from "../../components/course/CourseHero.astro";
+import CodeBlock from "../../components/code/CodeBlock.astro";
+import { resourceGuides, type ResourceGuide } from "../../data/resource-guides";
+
+export const getStaticPaths = (() =>
+  resourceGuides.map((guide) => ({ params: { slug: guide.slug }, props: { guide } }))) satisfies GetStaticPaths;
+
+interface Props {
+  guide: ResourceGuide;
+}
+
+const { guide } = Astro.props;
+---
+
+<BaseLayout title={guide.title} description={guide.description}>
+  <CourseHero
+    eyebrow={guide.eyebrow}
+    title={guide.title}
+    description={guide.description}
+    actions={[
+      { label: guide.lessonLabel, href: guide.lessonHref, variant: "primary" },
+      { label: "Toutes les ressources", href: "/resources/", variant: "secondary" },
+    ]}
+    stats={guide.stats}
+  />
+
+  <section class="resource-lead" aria-labelledby="resource-method-title">
+    <div>
+      <span class="lesson-kicker">Principe</span>
+      <h2 id="resource-method-title">Une méthode orientée décision.</h2>
+      <p>{guide.lead}</p>
+    </div>
+    <ol>
+      {guide.method.map((step, index) => <li><span>{String(index + 1).padStart(2, "0")}</span>{step}</li>)}
+    </ol>
+  </section>
+
+  <div class="resource-sections">
+    {
+      guide.sections.map((section) => (
+        <section id={section.id} class="resource-section" aria-labelledby={`${section.id}-title`}>
+          <header>
+            <span class="lesson-kicker">Repère opérationnel</span>
+            <h2 id={`${section.id}-title`}>{section.title}</h2>
+            <p>{section.intro}</p>
+          </header>
+          <div class="resource-item-grid">
+            {section.items.map((item) => (
+              <article>
+                <h3>{item.title}</h3>
+                <p>{item.detail}</p>
+                {item.example && <p class="resource-item__example"><strong>Formulation :</strong> {item.example}</p>}
+                {item.risk && <p class="resource-item__risk"><strong>Vigilance :</strong> {item.risk}</p>}
+              </article>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  {guide.prompt && <CodeBlock code={guide.prompt.code} label={guide.prompt.label} />}
+
+  <section class="resource-checklist" aria-labelledby="resource-checklist-title">
+    <div>
+      <span class="lesson-kicker">Contrôle qualité</span>
+      <h2 id="resource-checklist-title">Avant de valider</h2>
+      <p>Ces critères doivent pouvoir être vérifiés dans l'image, le clip ou le document de production.</p>
+    </div>
+    <ul>{guide.checklist.map((item) => <li>{item}</li>)}</ul>
+  </section>
+
+  <aside class="resource-source" aria-label="Note de synthèse">
+    <strong>Traçabilité éditoriale</strong>
+    <p>{guide.sourceNote}</p>
+  </aside>
+
+  <style>
+    .resource-lead,
+    .resource-checklist {
+      display: grid;
+      grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+      gap: clamp(1.5rem, 4vw, 3rem);
+      margin: 4rem 0;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+      padding: clamp(1.25rem, 4vw, 2.5rem);
+      box-shadow: var(--shadow-sm);
+    }
+    .resource-lead h2,
+    .resource-lead p,
+    .resource-checklist h2,
+    .resource-checklist p { margin: .55rem 0 0; }
+    .resource-lead ol,
+    .resource-checklist ul { display: grid; gap: .8rem; margin: 0; padding: 0; list-style: none; }
+    .resource-lead li,
+    .resource-checklist li { display: grid; grid-template-columns: auto 1fr; gap: .8rem; align-items: start; }
+    .resource-lead li span,
+    .resource-checklist li::before {
+      display: grid;
+      place-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: .72rem;
+      font-weight: 800;
+    }
+    .resource-checklist li::before { content: "✓"; }
+    .resource-sections { display: grid; gap: 1.25rem; margin: 3rem 0; }
+    .resource-section { border: 1px solid var(--line); border-radius: 20px; background: var(--surface); padding: clamp(1.25rem, 4vw, 2.25rem); }
+    .resource-section header { max-width: 760px; }
+    .resource-section h2,
+    .resource-section header p { margin: .55rem 0 0; }
+    .resource-item-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; margin-top: 1.5rem; }
+    .resource-item-grid article { border-top: 2px solid var(--accent); background: var(--surface-raised); padding: 1rem; }
+    .resource-item-grid h3,
+    .resource-item-grid p { margin: 0; }
+    .resource-item-grid p { margin-top: .6rem; }
+    .resource-item__example,
+    .resource-item__risk { color: var(--text-muted); font-size: .9rem; }
+    .resource-item__risk { border-left: 2px solid var(--warning, #d97706); padding-left: .7rem; }
+    .resource-source { margin: 2rem 0 4rem; border-left: 3px solid var(--accent); background: var(--accent-soft); padding: 1rem 1.2rem; }
+    .resource-source p { margin: .35rem 0 0; }
+    @media (max-width: 760px) {
+      .resource-lead,
+      .resource-checklist { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</BaseLayout>

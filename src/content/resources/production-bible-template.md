@@ -6,6 +6,10 @@ href: "/resources/production-bible-template/"
 tools: ["Notion", "Generic workflow"]
 tags: ["documentation", "workflow", "case study"]
 status: "ready"
+stage: "documenter"
+sourceStatus: "integree"
+lastReviewed: "2026-07-13"
+relatedLessons: ["/formation/production-ia/", "/formation/monter-documenter/"]
 ---
 
 Un document maître pour garder les intentions, références, contraintes et décisions de production alignées.
